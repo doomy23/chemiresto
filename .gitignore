@@ -1,4 +1,6 @@
 *.DS_Store
 *.pyc
+*.py~
+*.html~
 Thumbs.db
 env/*
