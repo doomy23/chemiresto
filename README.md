@@ -7,15 +7,16 @@
 
 ## Admin
 
-Aller sur http://localhost:8000/admin
-User : chemiresto
-Pass : chemiresto123
+Allez sur http://localhost:8000/admin
+
+- **User** : chemiresto
+- **Pass** : chemiresto123
 
 ## Dossiers manquants
 
-- env (à vous de le créer avec virtualenv)
-- applications (là où vont aller nos modules)
-- media (là où vont aller les uploads)
+- "env" (à vous de le créer avec virtualenv)
+- "applications" (là où vont aller nos modules)
+- "media" (là où vont aller les uploads)
 
 ## Commandes pratiques
 
@@ -43,5 +44,7 @@ pip install django-blablabla
 
 # Syncher la DB
 ./manage.py syncdb
-...
+
+# Cleaner tout les .pyc ou autre
+sudo find . -name \*.pyc -type f -delete
 ```
