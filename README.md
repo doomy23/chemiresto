@@ -5,10 +5,17 @@
 - Python 3 ou 2.7
 - virtualenv + pip
 
-## Dossiers vides hors du répo
+## Admin
 
-- media
-- env
+Aller sur http://localhost:8000/admin
+User : chemiresto
+Pass : chemiresto123
+
+## Dossiers manquants
+
+- env (à vous de le créer avec virtualenv)
+- applications (là où vont aller nos modules)
+- media (là où vont aller les uploads)
 
 ## Commandes pratiques
 
