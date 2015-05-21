@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>{% block title %}{% endblock %}</title>
+		{% block meta %}{% endblock %}
 		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 		<link href="{{ STATIC_URL }}font-awesome/css/font-awesome.css" rel="stylesheet"/>
 		<!--[if lt IE 9]>
@@ -18,8 +19,9 @@
 				<div class="col-md-8">
 					<h1>Chemiresto</h1>
 				</div>
+				{% block header-right %}
 				<div class="col-md-4">
-					<form id="login-form" method="post" onsubmit="return AppEvent.submitLoginForm()">
+					<form id="login-form" method="post" action="/account/login/">
 						{% csrf_token %}
 						<div class="form-group">
 							<label>Utilisateur</label>
@@ -32,6 +34,7 @@
 						<button type="submit" class="btn btn-primary">S'identifier</button>
 					</form>
 				</div>
+				{% endblock %}
 				<hr/>
 			</header>
 			<div id="content" class="row">

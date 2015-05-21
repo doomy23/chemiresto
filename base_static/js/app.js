@@ -4,6 +4,14 @@
  * Global Events that occurs in the application
  */
 var AppEvent = {
+	/**
+	 * Login form submit:
+	 * - _isSubmittingLoginForm
+	 * - _selectors.submitLoginForm
+	 * - submitLoginForm
+	 * 
+	 * Could be used for a totally ajax login with interface change !
+	 */
 	_isSubmittingLoginForm: false,
 	
 	_selectors: {

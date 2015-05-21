@@ -7,7 +7,11 @@ class RegisterView(View):
     template_name = 'register.html'
     
     def get(self, request, *args, **kwargs):
-        
-        
         return TemplateResponse(request, self.template_name)
         
+class LoginView(View):
+    template_name = 'login.html'
+    
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request, self.template_name)
+    
