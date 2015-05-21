@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
-{% block header-right %}{% endblock %}
+{% block header-login %}{% endblock %}
 
 {% block content %}
-Login
+<div class="col-md-12">
+	<form id="login-form" method="post" action="">
+		{% csrf_token %}
+		{{loginForm|crispy}}
+		<button type="submit" class="btn btn-primary">
+			<span class="fa fa-user"></span> Se connecter
+		</button>
+	</form>
+</div>
 {% endblock %}

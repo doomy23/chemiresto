@@ -4,5 +4,11 @@ from defaults import *
 from getenv import env
 
 INSTALLED_APPS += (
-  "account",
+    # 3rd parties
+    "crispy_forms",
+    
+    # Modules
+    "account",
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
