@@ -9,6 +9,7 @@ from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import urlparse
 
@@ -17,7 +18,7 @@ from forms import RegistrationForm
 # View used for
 # /account/register/
 class RegisterView(View):
-    template_name = 'account/register.html'
+    template_name = 'accounts/register.html'
     
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
@@ -45,7 +46,7 @@ class RegisterView(View):
 # View used for
 # /account/login/
 class LoginView(View):
-    template_name = 'account/login.html'
+    template_name = 'accounts/login.html'
     
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
@@ -92,7 +93,7 @@ class LoginView(View):
 def user_default_redirect(user):
     groupNames = [x.name for x in user.groups.all()]
     
-    if 'Client' in groupNames: return HttpResponseRedirect(reverse('home'))
+    if 'Client' in groupNames: return HttpResponseRedirect(reverse('manage_account'))
     elif 'Restaurateur' in groupNames: return HttpResponseRedirect('/admin/')
     else: return HttpResponseRedirect(reverse('home')) # Not supposed to happen
         
@@ -110,4 +111,11 @@ class LogoutView(View):
             else: return HttpResponseRedirect(redirect_to)
         
         return HttpResponseRedirect(reverse('login'))
-        
+
+# View used for
+# /account/manage/
+class ManagerView(View):
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request, 'index.html', {})
+    
