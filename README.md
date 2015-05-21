@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Python 3 ou 2.7
+- Python 2.7.8
 - virtualenv + pip
 
 ## Admin

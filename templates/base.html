@@ -14,8 +14,24 @@
 	</head>
 	<body>
 		<div class="container">
-			<header>
-				<h1>Chemiresto</h1>
+			<header class="row">
+				<div class="col-md-8">
+					<h1>Chemiresto</h1>
+				</div>
+				<div class="col-md-4">
+					<form id="login-form" method="post" onsubmit="return AppEvent.submitLoginForm()">
+						{% csrf_token %}
+						<div class="form-group">
+							<label>Utilisateur</label>
+							<input name="user" class="form-control" type="text"/>
+						</div>
+						<div class="form-group">
+							<label>Mot de passe</label>
+							<input name="pass" class="form-control" type="password"/>
+						</div>
+						<button type="submit" class="btn btn-primary">S'identifier</button>
+					</form>
+				</div>
 				<hr/>
 			</header>
 			<div id="content" class="row">
@@ -25,5 +41,6 @@
 		</div>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
 	</body>
 </html>

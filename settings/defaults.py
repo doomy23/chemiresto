@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os.path
+import sys
 from getenv import env
 
 ##
 ## Paths
 ##
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'modules'))
 
 ##
 ## Debug
