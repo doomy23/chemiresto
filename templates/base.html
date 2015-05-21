@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+{% load headerlogin %}<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8"/>
@@ -17,25 +17,9 @@
 		<div class="container">
 			<header class="row">
 				<div class="col-md-8">
-					<h1>Chemiresto</h1>
+					<h1><a href="{% url 'home' %}">Chemiresto</a></h1>
 				</div>
-				{% block header-login %}
-				<div class="col-md-4">
-					<form id="login-form" method="post" action="{% url 'login' %}?redirect_to={{request.path}}">
-						{% csrf_token %}
-						<div class="form-group">
-							<label>Utilisateur</label>
-							<input name="username" class="form-control" type="text"/>
-						</div>
-						<div class="form-group">
-							<label>Mot de passe</label>
-							<input name="password" class="form-control" type="password"/>
-						</div>
-						<button type="submit" class="btn btn-primary">S'identifier</button>
-						<a href="{% url 'register' %}">Créer un compte</a>
-					</form>
-				</div>
-				{% endblock %}
+				{% block header-login %}{% headerlogin request %}{% endblock %}
 				<hr/>
 			</header>
 			<div id="content" class="row">

@@ -1,0 +1,21 @@
+<div class="col-md-4">
+	{% if request.user.is_authenticated %}
+	Connecté avec <strong>{{ request.user.username }}</strong><br/>
+	{% if request.user.email %}{{ request.user.email }}<br/>{% endif %}
+	<a href="{% url 'logout' %}?redirect_to={{request.path}}">Se déconnecter</a>
+	{% else %}
+	<form id="login-form" method="post" action="{% url 'login' %}?redirect_to={{request.path}}">
+		{% csrf_token %}
+		<div class="form-group">
+			<label>Utilisateur</label>
+			<input name="username" class="form-control" type="text"/>
+		</div>
+		<div class="form-group">
+			<label>Mot de passe</label>
+			<input name="password" class="form-control" type="password"/>
+		</div>
+		<button type="submit" class="btn btn-primary"><span class="fa fa-user"></span> S'identifier</button>
+		<a href="{% url 'register' %}">Créer un compte</a>
+	</form>
+	{% endif %}
+</div>
