@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//modules/account/forms.py=utf-8
 encoding//modules/account/urls.py=utf-8
 encoding//modules/account/views.py=utf-8
 encoding//settings/defaults.py=utf-8

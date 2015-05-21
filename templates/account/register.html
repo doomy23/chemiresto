@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="col-md-12">
-	<p>Register</p>
+	<form id="register-form" method="post" action="">
+		{% if user.id %}
+		<div class="alert alert-block alert-success">
+			<ul>
+				<li>
+					Votre compte client a été enregistré, vous pouvez vous y connecter dès maintenant.
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+		{% csrf_token %}
+		{{registerForm|crispy}}
+		<button type="submit" class="btn btn-primary">
+			<span class="fa fa-check"></span> S'enregistrer
+		</button>
+	</form>
 </div>
 {% endblock %}

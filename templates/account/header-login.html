@@ -2,9 +2,9 @@
 	{% if request.user.is_authenticated %}
 	Connecté avec <strong>{{ request.user.username }}</strong><br/>
 	{% if request.user.email %}{{ request.user.email }}<br/>{% endif %}
-	<a href="{% url 'logout' %}?redirect_to={{request.path}}">Se déconnecter</a>
+	<a href="{% url 'logout' %}?next={{request.path}}">Se déconnecter</a>
 	{% else %}
-	<form id="login-form" method="post" action="{% url 'login' %}?redirect_to={{request.path}}">
+	<form id="login-form" method="post" action="{% url 'login' %}?next={{request.path}}">
 		{% csrf_token %}
 		<div class="form-group">
 			<label>Utilisateur</label>
