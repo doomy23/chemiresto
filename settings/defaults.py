@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'modules'))
 ##
 ## Debug
 ##
-DEBUG = env('DJANGO_DEBUG', True)
+DEBUG = env('DJANGO_DEBUG')
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = (env('DJANGO_DEBUG_TOOLBAR_INTERNAL_IP'),)
 

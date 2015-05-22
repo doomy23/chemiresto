@@ -16,7 +16,7 @@ import urlparse
 from forms import RegistrationForm
 
 # View used for
-# /account/register/
+# /accounts/register/
 class RegisterView(View):
     template_name = 'accounts/register.html'
     
@@ -44,7 +44,7 @@ class RegisterView(View):
                                                               'user': user})
 
 # View used for
-# /account/login/
+# /accounts/login/
 class LoginView(View):
     template_name = 'accounts/login.html'
     
@@ -98,7 +98,7 @@ def user_default_redirect(user):
     else: return HttpResponseRedirect(reverse('home')) # Not supposed to happen
         
 # View used for
-# /account/logout/
+# /accounts/logout/
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -113,9 +113,9 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse('login'))
 
 # View used for
-# /account/manage/
+# /accounts/manage/
 class ManagerView(View):
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        return TemplateResponse(request, 'index.html', {})
+        return TemplateResponse(request, 'accounts/index.html', {})
     
