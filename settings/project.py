@@ -8,7 +8,7 @@ INSTALLED_APPS += (
     "crispy_forms",
     
     # Modules
-    "account",
+    "accounts",
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

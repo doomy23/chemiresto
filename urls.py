@@ -6,11 +6,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
-import account
+import accounts
 
 urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls), name="admin"),
-	url(r'^accounts/', include(account.urls)),
+	url(r'^accounts/', include(accounts.urls)),
 	url(r'^$', TemplateView.as_view(template_name="index.html"), name="home")
 )
 

@@ -2,6 +2,8 @@
 *.pyc
 *.py~
 *.html~
-.project
 Thumbs.db
 env/*
+.settings/*
+.project
+.pydevproject
