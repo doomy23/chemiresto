@@ -15,6 +15,7 @@
 		{% else %}
 		{% csrf_token %}
 		{{registerForm|crispy}}
+		{% crispy registerDetailsForm %}
 		<button type="submit" class="btn btn-primary">
 			<span class="fa fa-check"></span> S'enregistrer
 		</button>

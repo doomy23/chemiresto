@@ -4,6 +4,7 @@
 *.html~
 Thumbs.db
 env/*
+chemiresto.sqlite
 .settings/*
 .project
 .pydevproject

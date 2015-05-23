@@ -6,6 +6,7 @@ from getenv import env
 INSTALLED_APPS += (
     # 3rd parties
     "crispy_forms",
+    "django_countries",
     
     # Modules
     "accounts",

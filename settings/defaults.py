@@ -34,7 +34,7 @@ DATABASES = {
 ##
 TIME_ZONE = 'America/Montreal'
 LANGUAGES = (
-  ('en', 'English'),
+  #('en', 'English'),
   ('fr', 'Français'),
 )
 USE_I18N = True

@@ -20,6 +20,7 @@
 					    {% csrf_token %}
 						<input type="hidden" name="form-name" value="informations"/>
 						{{editAccountForm|crispy}}
+						{% crispy editAccountDetailsForm %}
 						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
 	      				{% if formSuccess == "informations" %}
 	      					<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>

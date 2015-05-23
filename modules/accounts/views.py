@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import urlparse
 
-from forms import RegistrationForm, EditAccountForm
+from forms import *
 
 # View used for
 # /accounts/register/
@@ -25,22 +25,30 @@ class RegisterView(View):
         
         user = None
         form = RegistrationForm()
+        detailsForm = RegistrationDetailsForm()
         
         return TemplateResponse(request, self.template_name, {'registerForm': form,
+                                                              'registerDetailsForm': detailsForm,
                                                               'user': user})
     
     def post(self, request, *args, **kwargs):
         user = None
         form = RegistrationForm(data=request.POST)
+        detailsForm = RegistrationDetailsForm(data=request.POST)
         
-        if form.is_valid():
+        if form.is_valid() and detailsForm.is_valid():
             user = form.save()
             group = Group.objects.get(id=1)
             user.groups.add(group)
             
+            clientDetails = detailsForm.save(commit=False)
+            clientDetails.user = user
+            clientDetails.save()
+            
             form = RegistrationForm()
         
         return TemplateResponse(request, self.template_name, {'registerForm': form,
+                                                              'registerDetailsForm': detailsForm,
                                                               'user': user})
 
 # View used for
@@ -119,28 +127,47 @@ class ManagerView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
+        try: userDetails = UserDetails.objects.get(user=request.user)
+        except UserDetails.DoesNotExist: userDetails = None
+        
         editAccountForm = EditAccountForm(instance=request.user)
+        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
         passwordChangeForm = PasswordChangeForm(user=request.user)
         
         return TemplateResponse(request, self.template_name, {'editAccountForm':editAccountForm,
+                                                              'editAccountDetailsForm':editAccountDetailsForm,
                                                               'passwordChangeForm':passwordChangeForm})
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
+        try: userDetails = UserDetails.objects.get(user=request.user)
+        except UserDetails.DoesNotExist: userDetails = None
+        
         formSuccess = None
         formSuccessMessage = ""
         formName = request.POST.get('form-name')
         
         if formName == 'informations': 
             editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST)
             
             if editAccountForm.is_valid():
                 user = editAccountForm.save()
                 editAccountForm = EditAccountForm(instance=user)
+                
+                if userDetails: editAccountDetailsForm.save()
+                else:
+                    # In case the userDetails does not exist yet
+                    userDetails = editAccountDetailsForm.save(commit=False)
+                    userDetails.user = user
+                    userDetails.save()
+                
                 formSuccess = 'informations'
                 formSuccessMessage = u"Vos informations de comptes ont été mises à jour avec succès."
             
-        else : editAccountForm = EditAccountForm(instance=request.user)
+        else:
+            editAccountForm = EditAccountForm(instance=request.user)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
         
         if formName == 'password':
             passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)
@@ -156,5 +183,6 @@ class ManagerView(View):
         return TemplateResponse(request, self.template_name, {'formSuccess':formSuccess,
                                                               'formSuccessMessage':formSuccessMessage,
                                                               'editAccountForm':editAccountForm,
+                                                              'editAccountDetailsForm':editAccountDetailsForm,
                                                               'passwordChangeForm':passwordChangeForm})
     
