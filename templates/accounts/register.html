@@ -12,12 +12,13 @@
 				</li>
 			</ul>
 		</div>
-		{% endif %}
+		{% else %}
 		{% csrf_token %}
 		{{registerForm|crispy}}
 		<button type="submit" class="btn btn-primary">
 			<span class="fa fa-check"></span> S'enregistrer
 		</button>
+		{% endif %}
 	</form>
 </div>
 {% endblock %}

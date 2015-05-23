@@ -5,40 +5,36 @@
  */
 var AppEvent = {
 	/**
-	 * Login form submit:
-	 * - _isSubmittingLoginForm
-	 * - _selectors.submitLoginForm
-	 * - submitLoginForm
-	 * 
-	 * Could be used for a totally ajax login with interface change !
+	 * Informations form submit:
+	 * - _isSubmittingForm
+	 * + initAjaxForm
+	 * - _submitAjaxForm
 	 */
-	_isSubmittingLoginForm: false,
+	_isSubmittingForm: false,
 	
-	_selectors: {
-		submitLoginForm: {
-			user: $('#login-form input[name=user]'),
-			pass: $('#login-form input[name=pass]')
-		}
-	},
+	initAjaxForm: function(formId, buttonId, url) {
+		url = url == undefined ? '' : url;
+		$('#'+buttonId).click(this._submitAjaxForm.bind(this, formId, buttonId, url));
+	}, 
 		
-	submitLoginForm: function() {
-		if(!this._isSubmittingLoginForm) {
+	_submitAjaxForm: function(formId, buttonId, url) {
+		if(!this._isSubmittingForm) {
+			var that = this;
+			
 			$.ajax({
-		        url: "/account/login/",
+		        url: url,
 		        type: "POST",
-		        data: {
-		        	user: this._selectors.submitLoginForm.user.val(),
-		        	pass : this._selectors.submitLoginForm.pass.val()
-		        }
+		        data: $('#'+formId).serialize()
 		    }).done(function(data) {
-		    	console.log(data);
-		    }).always(function() {
-		    	this._isSubmittingLoginForm = false;
+		    	var formContent = $('#'+formId, data).html();
+		    	$('#'+formId).html(formContent);
+		    	AppEvent.initAjaxForm(formId, buttonId, url);
+		    	that._isSubmittingForm = false;
+		    }).fail(function() {
+		    	this._isSubmittingForm = false;
 		    });
 			
-			this._isSubmittingLoginForm = true;
+			this._isSubmittingForm = true;
 		}
-		
-		return false;
 	}
 };

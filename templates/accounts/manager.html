@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-12">
+	<h2>Bonjour {{request.user.get_full_name}}</h2>
+	
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+	    	<div class="panel-heading" role="tab" id="headingInfo">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" href="#informations" aria-expanded="true" aria-controls="collapseOne">
+	          			<span class="fa fa-user"> </span> Informations du compte
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div id="informations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+	      		<div class="panel-body">
+	      			<form id="informations-form" method="post" action="" onsubmit="return false">
+					    {% csrf_token %}
+						<input type="hidden" name="form-name" value="informations"/>
+						{{editAccountForm|crispy}}
+						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+	      				{% if formSuccess == "informations" %}
+	      					<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
+	      				{% endif %}
+	      			</form>
+	      		</div>
+	      	</div>
+	    	<div class="panel-heading" role="tab" id="headingPass">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" href="#password" aria-expanded="true" aria-controls="collapseOne">
+	          			<span class="fa fa-lock"> </span> Mot de passe
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div id="password" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPass">
+	      		<div class="panel-body">
+	      			<form id="password-form" method="post" action="" onsubmit="return false">
+					    {% csrf_token %}
+						<input type="hidden" name="form-name" value="password"/>
+						{{passwordChangeForm|crispy}}
+						<button id="password-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+	      				{% if formSuccess == "password" %}
+	      					<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
+	      				{% endif %}
+	      			</form>
+	      		</div>
+	      	</div>
+	    	<div class="panel-heading" role="tab" id="headingShipping">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
+	          			<span class="fa fa-map-marker"> </span> Adresses de livraison
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div id="shipping" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShipping">
+	      		<div class="panel-body">
+	      		
+	      		</div>
+	      	</div>
+	    	<div class="panel-heading" role="tab" id="headingHistory">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" href="#history" aria-expanded="true" aria-controls="collapseOne">
+	          			<span class="fa fa-shopping-cart"> </span> Historique d'achats
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div id="history" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHistory">
+	      		<div class="panel-body">
+	      		
+	      		</div>
+	      	</div>
+	    </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+	AppEvent.initAjaxForm("informations-form", "informations-form-submit");
+	AppEvent.initAjaxForm("password-form", "password-form-submit");
+});
+</script>
+{% endblock %}

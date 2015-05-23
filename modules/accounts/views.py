@@ -3,7 +3,7 @@
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import urlparse
 
-from forms import RegistrationForm
+from forms import RegistrationForm, EditAccountForm
 
 # View used for
 # /accounts/register/
@@ -115,7 +115,46 @@ class LogoutView(View):
 # View used for
 # /accounts/manage/
 class ManagerView(View):
+    template_name = 'accounts/manager.html'
+    
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        return TemplateResponse(request, 'accounts/index.html', {})
+        editAccountForm = EditAccountForm(instance=request.user)
+        passwordChangeForm = PasswordChangeForm(user=request.user)
+        
+        return TemplateResponse(request, self.template_name, {'editAccountForm':editAccountForm,
+                                                              'passwordChangeForm':passwordChangeForm})
+    
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        formSuccess = None
+        formSuccessMessage = ""
+        formName = request.POST.get('form-name')
+        
+        if formName == 'informations': 
+            editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
+            
+            if editAccountForm.is_valid():
+                user = editAccountForm.save()
+                editAccountForm = EditAccountForm(instance=user)
+                formSuccess = 'informations'
+                formSuccessMessage = u"Vos informations de comptes ont été mises à jour avec succès."
+            
+        else : editAccountForm = EditAccountForm(instance=request.user)
+        
+        if formName == 'password':
+            passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)
+            
+            if passwordChangeForm.is_valid():
+                user = passwordChangeForm.save()
+                passwordChangeForm = PasswordChangeForm(user=request.user)
+                formSuccess = 'password'
+                formSuccessMessage = u"Votre mot de passe a été modifié avec succès."
+        
+        else: passwordChangeForm = PasswordChangeForm(user=request.user)
+        
+        return TemplateResponse(request, self.template_name, {'formSuccess':formSuccess,
+                                                              'formSuccessMessage':formSuccessMessage,
+                                                              'editAccountForm':editAccountForm,
+                                                              'passwordChangeForm':passwordChangeForm})
     
