@@ -2,8 +2,8 @@
 	{% if request.user.is_authenticated %}
 		<div class="text-right">
 			<p class="no-marginBottom">Vous êtes connecté avec <strong>{{ request.user.username }}</strong></p>
-			<a class="borderRight paddingRight10" href="{% url 'manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
-			<a class="paddingLeft10" href="{% url 'logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
+			<a class="borderRight paddingRight5" href="{% url 'manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
+			<a class="paddingLeft5" href="{% url 'logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
 		</div>
 	{% else %}
 		<div class="text-right">

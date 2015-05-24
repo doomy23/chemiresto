@@ -65,6 +65,14 @@ header .navbar-collapse{
 	padding-right:10px;
 }
 
+.paddingLeft5{
+	padding-left:5px;
+}
+
+.paddingRight5{
+	padding-right:5px;
+}
+
 .marginTop20{
 	margin-top:20px;
 }
@@ -92,6 +100,29 @@ Use .pull-right from BS instead.
 	margin-bottom:30px;
 }
 
+#navbar .navbar-header{
+	margin-right:0px;
+	margin-left:0px;
+}
+
+#navbar .navbar-header .navbar-brand{
+	padding:15px 0;
+}
+
+@media only screen and (max-width: 992px) {
+	#navbar{
+		margin-right:15px;
+		margin-left:15px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#navbar{
+		margin-right:0px;
+		margin-left:0px;
+	}
+}
+
 #header-login .text-right{
 	text-align: center !important;
 }
@@ -100,8 +131,4 @@ Use .pull-right from BS instead.
 	display:block;
 	border:0px !important;
 	height:20px;
-}
-
-#header-login a{
-	font-size:16px;
 }
