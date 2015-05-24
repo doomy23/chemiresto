@@ -15,4 +15,6 @@ class UserDetails(models.Model):
     consent_cp = models.BooleanField(verbose_name=u"J'accepte les conditions d'utilisations")
     
     class Meta:
-        app_label = 'user_details'
+        app_label = 'details_de_compte'
+        db_table = 'accounts_userdetails'
+        
