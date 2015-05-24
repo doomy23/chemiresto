@@ -1,0 +1,93 @@
+*{
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+
+.no-element{
+	display:none;
+}
+
+.no-padding{
+	padding:0px !important;
+}
+
+.no-paddingLeft{
+	padding-left:0px !important;
+}
+
+.no-paddingRight{
+	padding-right:0px !important;
+}
+
+.no-margin{
+	margin:0px !important;
+}
+
+.no-marginTop{
+	margin-top:0px !important;
+}
+
+.no-marginLeft{
+	margin-left:0px !important;
+}
+
+.no-marginRight{
+	margin-right:0px !important;
+}
+
+.no-marginBottom{
+	margin-bottom:0px !important;
+}
+
+.paddingBottom30{
+	padding-bottom:30px;
+}
+
+.paddingLeft10{
+	padding-left:10px;
+}
+
+.paddingRight10{
+	padding-right:10px;
+}
+
+.marginTop20{
+	margin-top:20px;
+}
+
+.marginLeft15{
+	margin-left:15px;
+}
+
+.floatRight{
+	float:right;
+}
+
+.borderRight{
+	border-right:1px solid;
+}
+
+#box_form_header{
+
+}
+
+#box_form_header .text-right{
+	text-align: center !important;
+}
+
+#box_form_header_Desktop{
+	border:0px !important;
+	height:20px;
+}
+
+#box_form_header_Desktop a{
+	font-size:16px;
+}
+
+
+p#username_header::first-letter{
+	text-transform : uppercase;
+}
+
+

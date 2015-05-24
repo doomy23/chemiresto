@@ -8,3 +8,5 @@ chemiresto.sqlite
 .settings/*
 .project
 .pydevproject
+.classpath
+/bin/

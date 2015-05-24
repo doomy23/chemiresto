@@ -22,19 +22,25 @@ var AppEvent = {
 			var that = this;
 			
 			$.ajax({
-		        url: url,
-		        type: "POST",
-		        data: $('#'+formId).serialize()
-		    }).done(function(data) {
-		    	var formContent = $('#'+formId, data).html();
-		    	$('#'+formId).html(formContent);
-		    	AppEvent.initAjaxForm(formId, buttonId, url);
-		    	that._isSubmittingForm = false;
-		    }).fail(function() {
-		    	this._isSubmittingForm = false;
-		    });
-			
+				url: url,
+				type: "POST",
+				data: $('#'+formId).serialize()
+			}).done(function(data) {
+				var formContent = $('#'+formId, data).html();
+				$('#'+formId).html(formContent);
+				AppEvent.initAjaxForm(formId, buttonId, url);
+				that._isSubmittingForm = false;
+			}).fail(function() {
+				that._isSubmittingForm = false;
+			});
+						
 			this._isSubmittingForm = true;
 		}
 	}
 };
+
+//Faire apparaitre le formulaire d'identification
+function toggleBox() {
+	$("#box_form_registe").toggle(300);
+			
+}
