@@ -1,18 +1,17 @@
-<div class="row">
+<div id="header-login" class="col-md-3 col-xs-12">
 	{% if request.user.is_authenticated %}
 		<div class="text-right">
 			<p class="no-marginBottom">Vous êtes connecté avec <strong>{{ request.user.username }}</strong></p>
-			
 			<a class="borderRight paddingRight10" href="{% url 'manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
 			<a class="paddingLeft10" href="{% url 'logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
 		</div>
 	{% else %}
 		<div class="text-right">
-			<a class="borderRight paddingRight10" href="javascript:void(0)" onclick="toggleBox()"><span class="fa fa-power-on"></span> S'identifier</a>
+			<a id="login-form-box-toogle-button" class="borderRight paddingRight10" href="#"><span class="fa fa-power-on"></span> S'identifier</a>
 			<a class="paddingLeft10" href="{% url 'register' %}">Créer un compte</a>
 		</div>
 		
-		<div id="box_form_registe" class="no-element col-md-3 floatRight marginTop20 paddingBottom30">
+		<div id="login-form-box" class="no-element marginTop20 paddingBottom30">
 			<form id="login-form" method="post" action="{% url 'login' %}?next={{request.path}}">
 				{% csrf_token %}
 				<div class="form-group">

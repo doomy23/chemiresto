@@ -1,0 +1,107 @@
+/* Bootstrap overwrites */
+
+header .navbar,
+header .navbar .container-fluid,
+header .navbar-collapse{
+	padding:0 !important;
+}
+
+#collapse-navigation{
+	margin:0 !important;
+	overflow-x:hidden;
+}
+
+#collapse-navigation .navbar-nav{
+	margin:0 !important;
+}
+
+/* Helper classes */
+
+.no-element{
+	display:none;
+}
+
+.no-padding{
+	paddding:0px !important;
+}
+
+.no-paddingLeft{
+	padding-left:0px !important;
+}
+
+.no-paddingRight{
+	padding-right:0px !important;
+}
+
+.no-margin{
+	margin:0px !important;
+}
+
+.no-marginTop{
+	margin-top:0px !important;
+}
+
+.no-marginLeft{
+	margin-left:0px !important;
+}
+
+.no-marginRight{
+	margin-right:0px !important;
+}
+
+.no-marginBottom{
+	margin-bottom:0px !important;
+}
+
+.paddingBottom30{
+	padding-bottom:30px;
+}
+
+.paddingLeft10{
+	padding-left:10px;
+}
+
+.paddingRight10{
+	padding-right:10px;
+}
+
+.marginTop20{
+	margin-top:20px;
+}
+
+.marginLeft15{
+	margin-left:15px;
+}
+
+
+/* 
+Use .pull-right from BS instead.
+
+.floatRight{
+	float:right;
+}*/
+
+.borderRight{
+	border-right:1px solid;
+}
+
+/* Design style */
+
+#page-header{
+	display:block;
+	margin-bottom:30px;
+}
+
+#header-login .text-right{
+	text-align: center !important;
+}
+
+#header-login{
+	display:block;
+	border:0px !important;
+	height:20px;
+}
+
+#header-login a{
+	font-size:16px;
+}

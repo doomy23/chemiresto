@@ -1,15 +1,28 @@
-*{
-	margin:0px;
-	padding:0px;
-	border:0px;
+/* Bootstrap overwrites */
+
+header .navbar,
+header .navbar .container-fluid,
+header .navbar-collapse{
+	padding:0 !important;
 }
+
+#collapse-navigation{
+	margin:0 !important;
+	overflow-x:hidden;
+}
+
+#collapse-navigation .navbar-nav{
+	margin:0 !important;
+}
+
+/* Helper classes */
 
 .no-element{
 	display:none;
 }
 
 .no-padding{
-	padding:0px !important;
+	paddding:0px !important;
 }
 
 .no-paddingLeft{
@@ -60,34 +73,35 @@
 	margin-left:15px;
 }
 
+
+/* 
+Use .pull-right from BS instead.
+
 .floatRight{
 	float:right;
-}
+}*/
 
 .borderRight{
 	border-right:1px solid;
 }
 
-#box_form_header{
+/* Design style */
 
+#page-header{
+	display:block;
+	margin-bottom:30px;
 }
 
-#box_form_header .text-right{
+#header-login .text-right{
 	text-align: center !important;
 }
 
-#box_form_header_Desktop{
+#header-login{
+	display:block;
 	border:0px !important;
 	height:20px;
 }
 
-#box_form_header_Desktop a{
+#header-login a{
 	font-size:16px;
 }
-
-
-p#username_header::first-letter{
-	text-transform : uppercase;
-}
-
-
