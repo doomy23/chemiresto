@@ -14,3 +14,5 @@ class UserDetails(models.Model):
     zip = models.CharField(max_length=10, verbose_name=u"Code postal")
     consent_cp = models.BooleanField(verbose_name=u"J'accepte les conditions d'utilisations")
     
+    class Meta:
+        app_label = 'user_details'
