@@ -38,3 +38,9 @@ var AppEvent = {
 		}
 	}
 };
+
+//Faire apparaitre le formulaire d'identification
+function toggleBox() {
+	$("#box_form_registe").toggle(300);
+			
+}
