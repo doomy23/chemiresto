@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-12">
+	<form id="delete-form" method="post" action="">
+		{% csrf_token %}
+		{{form|crispy}}
+        <p>Êtes-vous certains de vouloir supprimer votre compte ?</p>
+		<button type="submit" class="btn btn-primary">
+			<span class="fa fa-check"></span> Supprimer mon compte
+		</button>
+	</form>
+</div>
+{% endblock %}
