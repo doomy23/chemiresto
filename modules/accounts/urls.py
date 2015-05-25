@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
-    url(r'^manage/$', ManagerView.as_view(), name="manage_account")
+    url(r'^manage/$', ManagerView.as_view(), name="manage_account"),
+    url(r'^delete/(?P<pk>\d+)/$', DeleteView.as_view(), name="delete_account"),
 )
