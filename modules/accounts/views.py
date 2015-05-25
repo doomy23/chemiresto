@@ -2,7 +2,7 @@
 
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import Group
@@ -187,8 +187,37 @@ class ManagerView(View):
                                                               'editAccountDetailsForm':editAccountDetailsForm,
                                                               'passwordChangeForm':passwordChangeForm})
 
-class DeleteView(DeleteView):
+class DeleteUserView(DeleteView):
     model = User
     template_name = 'accounts/delete_account.html'
     success_url = reverse_lazy('login')
+    
+    # Overwrite of the confirmation page so that
+    # it ensure the user is logged in and that he's not trying
+    # to delete someone else
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
         
+        # Security check !
+        if not self.object.id == request.user.id: raise Http404
+        
+        return self.render_to_response(context)
+    
+    # Overwrite of the delete function so that it does not
+    # really delete the data but mark it as inactive
+    @method_decorator(login_required)
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        
+        # Security check !
+        if not self.object.id == request.user.id: raise Http404
+        
+        self.object.is_active = False
+        self.object.save()
+        
+        logout(request)
+        
+        return HttpResponseRedirect(success_url)
