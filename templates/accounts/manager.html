@@ -72,6 +72,18 @@
 	      		
 	      		</div>
 	      	</div>
+	    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" href="#deleteAccount" aria-expanded="true" aria-controls="collapseOne">
+	          			<span class="fa fa-trash-o"> </span> Supprimer mon compte
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div id="deleteAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeleteAccount">
+	      		<div class="panel-body">
+                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> Supprimer mon compte</button>
+	      		</div>
+	      	</div>
 	    </div>
 	</div>
 </div>
@@ -82,6 +94,10 @@
 $(document).ready(function() {
 	AppEvent.initAjaxForm("informations-form", "informations-form-submit");
 	AppEvent.initAjaxForm("password-form", "password-form-submit");
+    
+    document.getElementById("delete-account").onclick = function () {
+        location.href = "{% url 'delete_account' request.user.id %}";
+    };
 });
 </script>
 {% endblock %}
