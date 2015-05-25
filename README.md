@@ -21,12 +21,9 @@ Allez sur http://localhost:8000/admin
 - "chemiresto.sqlite" = base de donnée courrante
 - "chemiresto.prod.sqlite" = base de donnée de production
 
-Si vous avez des modifications faites à "chemiresto.sqlite" dans votre commit et que vous n'avez pas
-toucher à la structure de la DB, veuillez entrer les commandes suivantes pour éviter de futur conflits:
+**Pour le lancement local** : La base de donnée de production sera copié lors du premier lancement en "chemiresto.sqlite" car ce fichier est dans le gitignore. La raison : éviter les conflits.
 
-```
-git update-index --assume-unchanged chemiresto.sqlite
-```
+**Pour le déploiement** : Ne pas obligé de copier manuellement la base de donnée.
 
 ## Commandes pratiques
 
