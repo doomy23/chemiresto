@@ -191,4 +191,16 @@ class DeleteView(DeleteView):
     model = User
     template_name = 'accounts/delete_account.html'
     success_url = reverse_lazy('login')
+    
+    # Overwrite of the delete function so that it does not
+    # really delete the data but mark it as inactive
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
         
+        self.object.is_active = False
+        self.object.save()
+        
+        logout(request)
+        
+        return HttpResponseRedirect(success_url)
