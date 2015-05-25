@@ -10,7 +10,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.views.generic import DeleteView
 import urlparse
 
 from forms import *
@@ -185,4 +186,9 @@ class ManagerView(View):
                                                               'editAccountForm':editAccountForm,
                                                               'editAccountDetailsForm':editAccountDetailsForm,
                                                               'passwordChangeForm':passwordChangeForm})
-    
+
+class DeleteView(DeleteView):
+    model = User
+    template_name = 'accounts/delete_account.html'
+    success_url = reverse_lazy('login')
+        
