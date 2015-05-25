@@ -24,7 +24,7 @@ INTERNAL_IPS = (env('DJANGO_DEBUG_TOOLBAR_INTERNAL_IP'),)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'chemiresto.sqlite'
+        'NAME': env('SQLITE_DB')
     }
 }
 
