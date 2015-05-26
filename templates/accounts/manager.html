@@ -16,11 +16,13 @@
 	    	</div>
 	    	<div id="informations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
 	      		<div class="panel-body">
-	      			<form id="informations-form" method="post" action="" onsubmit="return false">
+	      			<form id="informations-form" class="form-horizontal" method="post" action="" onsubmit="return false">
 					    {% csrf_token %}
 						<input type="hidden" name="form-name" value="informations"/>
-						{{editAccountForm|crispy}}
-						{% crispy editAccountDetailsForm %}
+						<div class="clearfix">
+							{% crispy editAccountForm %}
+							{% crispy editAccountDetailsForm %}
+						</div>
 						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
 	      				{% if formSuccess == "informations" %}
 	      					<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
