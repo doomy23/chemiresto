@@ -1,7 +1,7 @@
 <div id="header-login" class="col-md-3 col-xs-12">
 	{% if request.user.is_authenticated %}
 		<div class="text-right">
-			<p class="no-marginBottom">Vous êtes connecté avec <strong>{{ request.user.username }}</strong></p>
+			<p class="no-marginBottom">Connecté sous <strong>{{ request.user.email }}</strong></p>
 			<a class="borderRight paddingRight5" href="{% url 'manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
 			<a class="paddingLeft5" href="{% url 'logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
 		</div>
@@ -15,7 +15,7 @@
 			<form id="login-form" method="post" action="{% url 'login' %}?next={{request.path}}">
 				{% csrf_token %}
 				<div class="form-group">
-					<input name="username" placeholder="Nom d'utilisateur *" class="form-control" type="text"/>
+					<input name="username" placeholder="Courriel ou nom d'usagé *" class="form-control" type="text"/>
 				</div>
 				<div class="form-group">
 					<input name="password" placeholder="Mot de passe *" class="form-control" type="password"/>

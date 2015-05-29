@@ -14,7 +14,7 @@
 		</div>
 		{% else %}
 		{% csrf_token %}
-		{{registerForm|crispy}}
+		{% crispy registerForm %}
 		{% crispy registerDetailsForm %}
 		<button type="submit" class="btn btn-primary">
 			<span class="fa fa-check"></span> S'enregistrer

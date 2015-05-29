@@ -3,7 +3,7 @@
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
@@ -62,7 +62,7 @@ class LoginView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
         
-        form = AuthenticationForm()
+        form = LoginForm()
         
         request.session.set_test_cookie()
         
@@ -71,7 +71,7 @@ class LoginView(View):
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def post(self, request, *args, **kwargs):
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         
         if form.is_valid():
             user = form.get_user()

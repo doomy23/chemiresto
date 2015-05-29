@@ -17,29 +17,22 @@ DEBUG = env('DJANGO_DEBUG')
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = (env('DJANGO_DEBUG_TOOLBAR_INTERNAL_IP'),)
 
-
-##
-## Database
-##
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': env('SQLITE_DB')
-    }
-}
-
-
 ##
 ## I18N & L18N
 ##
 TIME_ZONE = 'America/Montreal'
+
 LANGUAGES = (
-  #('en', 'English'),
   ('fr', 'Français'),
+  ('en', 'English'),
 )
+
+LANGUAGE_CODE = 'fr'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
@@ -76,7 +69,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -128,7 +120,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ## Apps
 ##
 INSTALLED_APPS = (
-    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -152,16 +143,6 @@ EMAIL_HOST = env('DJANGO_EMAIL_HOST'),
 EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER'),
 EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD'),
 EMAIL_PORT = env('DJANGO_EMAIL_PORT')
-
-
-##
-## Admins
-##
-ADMINS = (
-        ('Dominic Roberge', 'doomy23@gmail.com'),
-		('Etienne Caya', 'etiennecaya@gmail.com'),
-)
-MANAGERS = ADMINS
 
 
 ##
