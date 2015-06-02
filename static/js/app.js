@@ -57,6 +57,25 @@ var AppEvent = {
 	}
 };
 
+/**
+ * RegisterForm:
+ * Scripts used for the RegisterForm page
+ */
+var RegisterForm = {
+	generateUsername: function() {
+		var generated = "";
+		var firstName = $.trim($('#id_first_name').val()), lastName = $.trim($('#id_last_name').val());
+		var randomInt = Math.floor((Math.random() * 100) + 1);
+		
+		generated = (firstName!=="")? firstName + "." : "";
+		generated += (lastName!=="")? lastName + "." : "";
+		generated += randomInt;
+		generated = generated.toLowerCase();
+		
+		$('#id_username').val(generated);
+	}
+};
+
 $(document).ready(function() {
 	AppEvent.init();
 });

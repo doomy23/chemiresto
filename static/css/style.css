@@ -130,5 +130,7 @@ Use .pull-right from BS instead.
 #header-login{
 	display:block;
 	border:0px !important;
-	height:20px;
+	/*
+	We have to find something better then : ...
+	height:20px;*/
 }

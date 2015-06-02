@@ -64,7 +64,7 @@ var AppEvent = {
 var RegisterForm = {
 	generateUsername: function() {
 		var generated = "";
-		var firstName = $('#id_first_name').val(), lastName = $('#id_last_name').val();
+		var firstName = $.trim($('#id_first_name').val()), lastName = $.trim($('#id_last_name').val());
 		var randomInt = Math.floor((Math.random() * 100) + 1);
 		
 		generated = (firstName!=="")? firstName + "." : "";
