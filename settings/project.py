@@ -40,6 +40,7 @@ INSTALLED_APPS += (
     
     # Modules
     "accounts",
+    "restaurant",
 )
 
 ##

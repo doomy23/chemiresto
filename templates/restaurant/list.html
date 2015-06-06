@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-12">
+	<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Ville</th>
+                <th>Adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in restaurants %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.tel }}</td>
+                    <td>{{ r.country }}, {{ r.city }}</td>
+                    <td>{{ r.address1 }}, {{ r.address2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
