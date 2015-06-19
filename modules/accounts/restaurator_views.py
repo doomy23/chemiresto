@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from restaurator_forms import *
+
 # Check if the user has access to the admin
 def check_admin_right(user):
     return user.is_staff
@@ -25,5 +27,7 @@ class CreateRestauratorView(View):
     def get(self, request, *args, **kwargs):
         if not check_admin_right(request.user): raise Http404()
         
-        return TemplateResponse(request, self.template_name, {})
+        form = CreateRestauratorForm()
+        
+        return TemplateResponse(request, self.template_name, {'form':form})
     

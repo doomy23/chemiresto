@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>{% block title %}{% endblock %}</title>
+		{% block meta %}{% endblock %}
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="{{ STATIC_URL }}font-awesome/css/font-awesome.css" rel="stylesheet"/>
+		<link href="{{ STATIC_URL }}css/restaurators.css" rel="stylesheet"/>
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="page-header">
+			<div class="container">
+				<h1><a href="{% url 'home' %}">Chemiresto</a></h1>
+			</div>
+		</div>
+		<div id="page-content">
+			<div class="container">
+				<div class="row">
+					<div id="menu" class="col-md-4">
+						<ul>
+							<li><a href="/admin/">Retour à l'admin</a></li>
+						</ul>
+					</div>
+					<div id="content" class="col-md-8">
+						{% block content %}{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
+	</body>
+</html>
