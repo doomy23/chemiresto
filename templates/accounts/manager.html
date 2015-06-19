@@ -98,7 +98,7 @@ $(document).ready(function() {
 	AppEvent.initAjaxForm("password-form", "password-form-submit");
     
     document.getElementById("delete-account").onclick = function () {
-        location.href = "{% url 'delete_account' request.user.id %}";
+        location.href = "{% url 'accounts:delete_account' request.user.id %}";
     };
 });
 </script>

@@ -40,7 +40,11 @@ INSTALLED_APPS += (
     
     # Modules
     "accounts",
-    "restaurant",
+    "restaurants",
+)
+
+MIDDLEWARE_CLASSES += (
+    'accounts.middlewares.AccountTypeMiddleware',
 )
 
 ##

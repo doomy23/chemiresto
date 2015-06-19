@@ -86,8 +86,8 @@ class LoginView(View):
             if redirect_to:
                 netloc = urlparse.urlparse(redirect_to)[1]
                 if netloc and netloc != request.get_host(): redirect_to = None
-                if redirect_to == reverse('login'): redirect_to = None
-                if redirect_to == reverse('register'): redirect_to = None
+                if redirect_to == reverse('accounts:login'): redirect_to = None
+                if redirect_to == reverse('accounts:register'): redirect_to = None
                 
                 if redirect_to: return HttpResponseRedirect(redirect_to)
                 
@@ -102,8 +102,8 @@ class LoginView(View):
 def user_default_redirect(user):
     groupNames = [x.name for x in user.groups.all()]
     
-    if 'Client' in groupNames: return HttpResponseRedirect(reverse('manage_account'))
-    elif 'Restaurateur' in groupNames: return HttpResponseRedirect('/admin/')
+    if 'Client' in groupNames: return HttpResponseRedirect(reverse('accounts:manage_account'))
+    elif 'Restaurateur' in groupNames: return HttpResponseRedirect(reverse('accounts:restaurators_home'))
     else: return HttpResponseRedirect(reverse('home')) # Not supposed to happen
         
 # View used for
@@ -119,7 +119,7 @@ class LogoutView(View):
             if netloc and netloc != request.get_host(): redirect_to = None
             else: return HttpResponseRedirect(redirect_to)
         
-        return HttpResponseRedirect(reverse('login'))
+        return HttpResponseRedirect(reverse('accounts:login'))
 
 # View used for
 # /accounts/manage/
@@ -161,6 +161,7 @@ class ManagerView(View):
                     # In case the userDetails does not exist yet
                     userDetails = editAccountDetailsForm.save(commit=False)
                     userDetails.user = user
+                    if not userDetails.id: userDetails.consent_cp = True
                     userDetails.save()
                 
                 formSuccess = 'informations'

@@ -15,3 +15,7 @@ class Restaurant(models.Model):
     zip = models.CharField(max_length=10, verbose_name=u"Code postal")
     
     admin_order_field = 'name'
+    
+    class Meta:
+        app_label = 'restaurants'
+        db_table = 'restaurants_restaurant'

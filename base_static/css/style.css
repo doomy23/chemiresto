@@ -1,5 +1,9 @@
 /* Bootstrap overwrites */
 
+a:hover{
+	text-decoration:none;
+}
+
 header .navbar,
 header .navbar .container-fluid,
 header .navbar-collapse{
@@ -98,6 +102,21 @@ Use .pull-right from BS instead.
 #page-header{
 	display:block;
 	margin-bottom:30px;
+	background:#f32837;
+	border-bottom:10px #CCC solid;
+}
+
+#page-header h1{
+	margin:25px 0;
+}
+
+#page-header h1 a{
+	color:white;
+	decoration:none;
+}
+
+#navbar{
+	margin:20px auto;
 }
 
 #navbar .navbar-header{
@@ -108,6 +127,27 @@ Use .pull-right from BS instead.
 #navbar .navbar-header .navbar-brand{
 	padding:15px 0;
 }
+
+#header-login{
+	display:block;
+	margin:20px 0;
+	border:0px !important;
+	color:white;
+}
+
+#header-login a{
+	color:white;
+	display:inline-block;
+}
+
+/*
+Shoulndt do this. read more on : http://getbootstrap.com/css/#type-alignment
+
+#header-login .text-right{
+	text-align: center !important;
+}*/
+
+/* Responsive */
 
 @media only screen and (max-width: 992px) {
 	#navbar{
@@ -121,16 +161,4 @@ Use .pull-right from BS instead.
 		margin-right:0px;
 		margin-left:0px;
 	}
-}
-
-#header-login .text-right{
-	text-align: center !important;
-}
-
-#header-login{
-	display:block;
-	border:0px !important;
-	/*
-	We have to find something better then : ...
-	height:20px;*/
 }

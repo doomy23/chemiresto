@@ -31,3 +31,14 @@ class CreateRestauratorView(View):
         
         return TemplateResponse(request, self.template_name, {'form':form})
     
+# View used for
+# /accounts/restaurators/
+class RestauratorDashView(View):
+    template_name = 'accounts/restaurator_dash.html'
+    
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        if not check_restaurator_group(request.user): raise Http404()
+        
+        return TemplateResponse(request, self.template_name, {})
+    
