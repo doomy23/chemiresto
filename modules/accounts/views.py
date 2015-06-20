@@ -15,6 +15,7 @@ from django.views.generic import DeleteView
 import urlparse
 
 from forms import *
+from utils import *
 
 # View used for
 # /accounts/register/
@@ -97,14 +98,6 @@ class LoginView(View):
             if not redirect_to: return user_default_redirect(user)
         
         return TemplateResponse(request, self.template_name, {'loginForm': form})
-
-# Default redirection for a client depending on his groups
-def user_default_redirect(user):
-    groupNames = [x.name for x in user.groups.all()]
-    
-    if 'Client' in groupNames: return HttpResponseRedirect(reverse('accounts:manage_account'))
-    elif 'Restaurateur' in groupNames: return HttpResponseRedirect(reverse('accounts:restaurators_home'))
-    else: return HttpResponseRedirect(reverse('home')) # Not supposed to happen
         
 # View used for
 # /accounts/logout/
@@ -191,7 +184,7 @@ class ManagerView(View):
 class DeleteUserView(DeleteView):
     model = User
     template_name = 'accounts/delete_account.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('accounts:login')
     
     # Overwrite of the confirmation page so that
     # it ensure the user is logged in and that he's not trying

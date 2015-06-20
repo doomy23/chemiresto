@@ -4,6 +4,14 @@ a:hover{
 	text-decoration:none;
 }
 
+ul.nav li.dropdown:hover ul.dropdown-menu {
+	display: block;
+}
+
+.modal-dialog .modal-content .modal-header h4{
+	color:#333;
+}
+
 header .navbar,
 header .navbar .container-fluid,
 header .navbar-collapse{
@@ -85,9 +93,7 @@ header .navbar-collapse{
 	margin-left:15px;
 }
 
-
-/* 
-Use .pull-right from BS instead.
+/* Use .pull-right from BS instead.
 
 .floatRight{
 	float:right;
@@ -133,19 +139,38 @@ Use .pull-right from BS instead.
 	margin:20px 0;
 	border:0px !important;
 	color:white;
+	position:relative;
 }
 
 #header-login a{
 	color:white;
-	display:inline-block;
 }
 
-/*
-Shoulndt do this. read more on : http://getbootstrap.com/css/#type-alignment
+#header-login #login-form-box{
+	display:none;
+	position:absolute;
+	width:100%;
+}
+
+#header-login #login-form-box.active{
+	display:block;
+}
+
+/* Shouldnt do this. read more on : http://getbootstrap.com/css/#type-alignment
 
 #header-login .text-right{
 	text-align: center !important;
 }*/
+
+#page-content{
+	margin-bottom:30px;
+}
+
+/* Page-specific design */
+
+#generate-username{
+	margin:0 0 15px;
+}
 
 /* Responsive */
 

@@ -5,17 +5,10 @@ from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 from restaurator_forms import *
-
-# Check if the user has access to the admin
-def check_admin_right(user):
-    return user.is_staff
-
-# Check if the user is a Restaurator
-def check_restaurator_group(user):
-    groupNames = [x.name for x in user.groups.all()]
-    return 'Restaurateur' in groupNames
+from utils import *
 
 # ADMIN ONLY
 # View used for
@@ -30,6 +23,39 @@ class CreateRestauratorView(View):
         form = CreateRestauratorForm()
         
         return TemplateResponse(request, self.template_name, {'form':form})
+    
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        if not check_admin_right(request.user): raise Http404()
+        
+        messageType = None
+        message = ""
+        
+        form = CreateRestauratorForm(request.POST)
+        
+        if form.is_valid():
+            group = Group.objects.get(id=2)
+            
+            restaurant = form.cleaned_data['restaurant']
+            restaurator = form.save()
+            restaurator.groups.add(group)
+            
+            if restaurant:
+                restaurant.user = restaurator
+                restaurant.save()
+                
+                messageType = "success"
+                message = u"Le restaurateur a été créé avec succès et le restaurant lui a été assigné."
+            
+            else:
+                messageType = "warning"
+                message = u"Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été assigné."
+            
+            form = CreateRestauratorForm()
+        
+        return TemplateResponse(request, self.template_name, {'form':form,
+                                                              'message':message,
+                                                              'messageType':messageType})
     
 # View used for
 # /accounts/restaurators/
