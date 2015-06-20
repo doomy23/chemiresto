@@ -1,14 +1,14 @@
 <div id="header-login" class="col-md-3 col-xs-12">
 {% if request.user.is_authenticated %}
-	<div class="text-right">
+	<div class="text-center">
 		<p class="no-marginBottom">Connecté sous <strong>{{ request.user.email }}</strong></p>
 		<a class="borderRight paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
 		<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
 	</div>
 {% else %}
-	<div class="text-right">
-		<a class="show-login-form-modal borderRight paddingRight10" href="#"><span class="fa fa-power-on"></span> S'identifier</a>
-		<a class="paddingLeft10" href="{% url 'accounts:register' %}">Créer un compte</a>
+	<div class="text-center">
+		<a class="show-login-form-modal borderRight paddingRight5" href="#"><span class="fa fa-lock"></span> S'identifier</a>
+		<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> Inscription</a>
 	</div>
 	
 	<div class="modal fade" id="login-form-modal" tabindex="-1" role="dialog" aria-labelledby="login-form-modal-label">

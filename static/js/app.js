@@ -9,8 +9,8 @@ var AppEvent = {
 	 */
 	init: function() {
 		// Toogle login box event
-		if($("#login-form-box").length === 1) {
-			$("#login-form-box-toogle-button").click(this.toogleLoginBox);
+		if($("#login-form-modal").length === 1) {
+			$(".show-login-form-modal").click(this.showLoginModal);
 		}
 	},
 		
@@ -51,9 +51,9 @@ var AppEvent = {
 	/**
 	 * Toogle the login box in the header
 	 */
-	toogleLoginBox: function(event) {
+	showLoginModal: function(event) {
 		event.preventDefault();
-		$("#login-form-box").toggle();
+		$('#login-form-modal').modal('show');
 	}
 };
 

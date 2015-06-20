@@ -1,0 +1,39 @@
+/* Bootstrap overwrites */
+
+a:hover{
+	text-decoration:none;
+}
+
+/* Design style */
+
+#page-header{
+	display:block;
+	margin-bottom:30px;
+	background:#f32837;
+	border-bottom:10px #CCC solid;
+}
+
+#page-header h1{
+	margin:25px 0;
+}
+
+#page-header h1 a{
+	color:white;
+	decoration:none;
+}
+
+#page-content{
+	margin-bottom:30px;
+}
+
+#page-content .page-title{
+	margin:0 0 20px;
+	padding:0 0 5px;
+	border-bottom:1px solid #CCC;
+}
+
+/* Specific design */
+
+#generate-username{
+	margin:0 0 15px;
+}

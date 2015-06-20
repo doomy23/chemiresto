@@ -166,6 +166,13 @@ header .navbar-collapse{
 	margin-bottom:30px;
 }
 
+#page-content .page-title{
+	margin:0 0 20px;
+	padding:0 0 5px;
+	border-bottom:1px solid #CCC;
+}
+
+
 /* Page-specific design */
 
 #generate-username{

@@ -15,63 +15,65 @@
 		<![endif]-->
 	</head>
 	<body>
-		<header id="page-header" class="row clearfix">
+		<header id="page-header">
 			<div class="container">
-				<div class="col-md-3">
-					<h1 class="hidden-xs"><a href="{% url 'home' %}">Chemiresto</a></h1>
-				</div>
-				
-				<nav id="navbar" class="col-md-6 navbar navbar-default">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
-								<span class="sr-only">Navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">Chemiresto</a></h2>
-						</div>
-						<div class="collapse navbar-collapse" id="collapse-navigation">
-							<ul class="nav navbar-nav">
-								<li class="{% if request.url_name = 'home' %}active{% endif %}"><a href="{% url 'home' %}">Accueil</a></li>
-								<li class="{% if 'restaurants' in request.url_namespaces %}active{% endif %}"><a href="{% url 'restaurants:restaurant_list' %}">Restaurants</a></li>
-								<li><a href="#">À propos</a></li>
-								<li><a href="#">Contact</a></li>
-							</ul>
-							{% if request.user_type == 'Restaurator' %}
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown">
-									<a class="dropdown-toggle" href="{% url 'accounts:restaurators_dash' %}">
-										Restauration <span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
-										<li><a href="{% url 'accounts:restaurators_dash' %}">Gérer Restaurants</a></li>
-									</ul>
-								</li>
-							</ul>
-							{% elif request.user_type == 'Admin' %}
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown">
-									<a class="dropdown-toggle" href="/admin/">
-										Admin <span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
-										<li><a href="{% url 'accounts:restaurators_create' %}">Nouveau restaurateur</a></li>
-									</ul>
-								</li>
-							</ul>
-							{% endif %}
-						</div>
+				<div class="row">
+					<div class="col-md-3">
+						<h1 class="hidden-xs"><a href="{% url 'home' %}">Chemiresto</a></h1>
 					</div>
-				</nav>
-				
-				{% block header-login %}{% headerlogin request %}{% endblock %}
+					
+					<nav id="navbar" class="col-md-6 navbar navbar-default">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
+									<span class="sr-only">Navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">Chemiresto</a></h2>
+							</div>
+							<div class="collapse navbar-collapse" id="collapse-navigation">
+								<ul class="nav navbar-nav">
+									<li class="{% if request.url_name = 'home' %}active{% endif %}"><a href="{% url 'home' %}">Accueil</a></li>
+									<li class="{% if 'restaurants' in request.url_namespaces %}active{% endif %}"><a href="{% url 'restaurants:restaurant_list' %}">Restaurants</a></li>
+									<li><a href="#">À propos</a></li>
+									<li><a href="#">Contact</a></li>
+								</ul>
+								{% if request.user_type == 'Restaurator' %}
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a class="dropdown-toggle" href="{% url 'accounts:restaurators_dash' %}">
+											Restauration <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="{% url 'accounts:restaurators_dash' %}">Gérer Restaurants</a></li>
+										</ul>
+									</li>
+								</ul>
+								{% elif request.user_type == 'Admin' %}
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a class="dropdown-toggle" href="/admin/">
+											Admin <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="{% url 'accounts:restaurators_create' %}">Nouveau restaurateur</a></li>
+										</ul>
+									</li>
+								</ul>
+								{% endif %}
+							</div>
+						</div>
+					</nav>
+					
+					{% block header-login %}{% headerlogin request %}{% endblock %}
+				</div>
 			</div>
 		</header>
 		
-		<div class="container">
-			<div id="content" class="row">
+		<div id="page-content" class="container">
+			<div class="row">
 				{% block content %}
 				{% endblock %}
 			</div>
