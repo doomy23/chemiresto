@@ -23,7 +23,9 @@
 						<input type="hidden" name="form-name" value="informations"/>
 						<div class="clearfix">
 							{% crispy editAccountForm %}
+							{% if editAccountDetailsForm %}
 							{% crispy editAccountDetailsForm %}
+							{% endif %}
 						</div>
 						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
 	      				{% if formSuccess == "informations" %}
@@ -52,6 +54,7 @@
 	      			</form>
 	      		</div>
 	      	</div>
+	      	{% if request.user_type == 'Client' %}
 	    	<div class="panel-heading" role="tab" id="headingShipping">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
@@ -76,6 +79,7 @@
 	      		
 	      		</div>
 	      	</div>
+	      	{% endif %}
 	    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#deleteAccount" aria-expanded="true" aria-controls="collapseOne">

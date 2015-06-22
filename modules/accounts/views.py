@@ -119,13 +119,16 @@ class LogoutView(View):
 class ManagerView(View):
     template_name = 'accounts/manager.html'
     
+    def hide_user_details(self, request):
+        return request.user_type == 'Restaurator' or request.user_type == 'Admin'
+    
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
         editAccountForm = EditAccountForm(instance=request.user)
-        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
+        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if not self.hide_user_details(request) else None
         passwordChangeForm = PasswordChangeForm(user=request.user)
         
         return TemplateResponse(request, self.template_name, {'editAccountForm':editAccountForm,
@@ -140,17 +143,19 @@ class ManagerView(View):
         formSuccess = None
         formSuccessMessage = ""
         formName = request.POST.get('form-name')
+        hideUserDetails = self.hide_user_details(request)
         
         if formName == 'informations': 
             editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST) \
+                if not hideUserDetails else None
             
             if editAccountForm.is_valid():
                 user = editAccountForm.save()
                 editAccountForm = EditAccountForm(instance=user)
                 
-                if userDetails: editAccountDetailsForm.save()
-                else:
+                if userDetails and editAccountDetailsForm: editAccountDetailsForm.save()
+                elif editAccountDetailsForm:
                     # In case the userDetails does not exist yet
                     userDetails = editAccountDetailsForm.save(commit=False)
                     userDetails.user = user
@@ -162,7 +167,8 @@ class ManagerView(View):
             
         else:
             editAccountForm = EditAccountForm(instance=request.user)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) \
+                if not hideUserDetails else None
         
         if formName == 'password':
             passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)
