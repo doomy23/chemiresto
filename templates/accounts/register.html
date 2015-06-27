@@ -6,6 +6,7 @@
 {% block content %}
 <div class="col-md-12">
 	<form id="register-form" method="post" action="">
+		<h2 class="page-title">Inscription</h2>
 		{% if user.id %}
 		<div class="alert alert-block alert-success">
 			<ul>
@@ -24,4 +25,12 @@
 		{% endif %}
 	</form>
 </div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+	RegionSelector.init("#id_country", "#id_region");
+});
+</script>
 {% endblock %}

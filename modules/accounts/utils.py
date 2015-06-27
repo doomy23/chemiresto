@@ -16,7 +16,7 @@ def user_default_redirect(user):
     groupIds = [x.id for x in user.groups.all()]
     
     if 1 in groupIds: return HttpResponseRedirect(reverse('accounts:manage_account'))
-    elif 2 in groupIds: return HttpResponseRedirect(reverse('accounts:restaurators_home'))
+    elif 2 in groupIds: return HttpResponseRedirect(reverse('accounts:restaurators_dash'))
     else: return HttpResponseRedirect(reverse('home')) # Not supposed to happen
 
 # Get the user type

@@ -104,6 +104,7 @@ class RegistrationForm(UserCreationForm):
     
 class RegistrationDetailsForm(forms.ModelForm):
     conditions = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly', 'rows':'5'}))
+    save_as_delivery_address = forms.BooleanField(label=u"Enregistrer comme adresse de livraison", required=False, initial=True)
     
     class Meta:
         model = UserDetails
@@ -122,7 +123,7 @@ Aenean dictum lorem sapien, egestas blandit dui pharetra a. Suspendisse id dolor
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'tel', 'city', 'country', 'address1', 'address2', 'zip', 'conditions', 'consent_cp'
+            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'save_as_delivery_address', 'conditions', 'consent_cp'
         )
         
     def clean_consent_cp(self):
@@ -172,6 +173,6 @@ class EditAccountDetailsForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
-            'tel', 'city', 'country', 'address1', 'address2', 'zip', 'consent_cp'
+            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'consent_cp'
         )
         

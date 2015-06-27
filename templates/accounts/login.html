@@ -8,6 +8,7 @@
 {% block content %}
 <div class="col-md-12">
 	<form id="login-form" method="post" action="">
+		<h2 class="page-title">Identification</h2>
 		{% csrf_token %}
 		{{loginForm|crispy}}
 		<button type="submit" class="btn btn-primary">

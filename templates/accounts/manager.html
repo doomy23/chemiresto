@@ -23,7 +23,9 @@
 						<input type="hidden" name="form-name" value="informations"/>
 						<div class="clearfix">
 							{% crispy editAccountForm %}
+							{% if editAccountDetailsForm %}
 							{% crispy editAccountDetailsForm %}
+							{% endif %}
 						</div>
 						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
 	      				{% if formSuccess == "informations" %}
@@ -95,13 +97,20 @@
 
 {% block page-scripts %}
 <script type="text/javascript">
+function initInformationForm() {
+	// RegionSelector.init {% if editAccountDetailsForm %}
+	RegionSelector.init("#informations-form #id_country", "#informations-form #id_region");//{% endif %}
+}
+
 $(document).ready(function() {
-	AppEvent.initAjaxForm("informations-form", "informations-form-submit");
+	initInformationForm();
+	
+	AppEvent.initAjaxForm("informations-form", "informations-form-submit", "", initInformationForm);
 	AppEvent.initAjaxForm("password-form", "password-form-submit");
     
-    document.getElementById("delete-account").onclick = function () {
+    $("delete-account").click(function () {
         location.href = "{% url 'accounts:delete_account' request.user.id %}";
-    };
+    });
 });
 </script>
 {% endblock %}

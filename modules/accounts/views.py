@@ -16,6 +16,7 @@ import urlparse
 
 from forms import *
 from utils import *
+from models import UserAddress
 
 # View used for
 # /accounts/register/
@@ -43,9 +44,22 @@ class RegisterView(View):
             group = Group.objects.get(id=1)
             user.groups.add(group)
             
+            save_as_delivery_address = detailsForm.cleaned_data['save_as_delivery_address']
+            
             clientDetails = detailsForm.save(commit=False)
             clientDetails.user = user
             clientDetails.save()
+            
+            if save_as_delivery_address:
+                deliveryAddress = UserAddress()
+                deliveryAddress.primary = True
+                deliveryAddress.city = clientDetails.city
+                deliveryAddress.region = clientDetails.region
+                deliveryAddress.country = clientDetails.country
+                deliveryAddress.address1 = clientDetails.address1
+                deliveryAddress.address2 = clientDetails.address2
+                deliveryAddress.zip = clientDetails.zip
+                deliveryAddress.save()
             
             form = RegistrationForm()
         
@@ -121,11 +135,12 @@ class ManagerView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
+        user_type = get_user_type(request.user)
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
         editAccountForm = EditAccountForm(instance=request.user)
-        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
+        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if user_type == 'Client' else None
         passwordChangeForm = PasswordChangeForm(user=request.user)
         
         return TemplateResponse(request, self.template_name, {'editAccountForm':editAccountForm,
@@ -134,6 +149,7 @@ class ManagerView(View):
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
+        user_type = get_user_type(request.user)
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
@@ -143,14 +159,14 @@ class ManagerView(View):
         
         if formName == 'informations': 
             editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST) if user_type == 'Client' else None
             
-            if editAccountForm.is_valid():
+            if (editAccountForm.is_valid() and not editAccountDetailsForm) or (editAccountForm.is_valid() and editAccountDetailsForm.is_valid()):
                 user = editAccountForm.save()
                 editAccountForm = EditAccountForm(instance=user)
                 
-                if userDetails: editAccountDetailsForm.save()
-                else:
+                if userDetails and editAccountDetailsForm: editAccountDetailsForm.save()
+                elif editAccountDetailsForm:
                     # In case the userDetails does not exist yet
                     userDetails = editAccountDetailsForm.save(commit=False)
                     userDetails.user = user
@@ -162,7 +178,7 @@ class ManagerView(View):
             
         else:
             editAccountForm = EditAccountForm(instance=request.user)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if user_type == 'Client' else None
         
         if formName == 'password':
             passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)

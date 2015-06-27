@@ -39,8 +39,10 @@ INSTALLED_APPS += (
     "django_countries",
     
     # Modules
+    "extras",
     "accounts",
     "restaurants",
+    "orders",
 )
 
 MIDDLEWARE_CLASSES += (
