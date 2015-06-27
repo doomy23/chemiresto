@@ -173,6 +173,6 @@ class EditAccountDetailsForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
-            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'consent_cp'
+            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
