@@ -17,8 +17,9 @@ class Order(models.Model):
     tips = CurrencyField(max_digits=10, decimal_places=2, verbose_name=u"TIPS donné")
     taxable = models.BooleanField(verbose_name="Taxable")
     
+    done = models.BooleanField(verbose_name=u"Terminée", default=False)
     delivered = models.BooleanField(verbose_name=u"Délivré", default=False)
-    deliveryAddress = models.ForeignKey(UserAddress, verbose_name="Adresse de livraison")
+    deliveryAddress = models.ForeignKey(UserAddress, verbose_name="Adresse de livraison", null=True, blank=True)
     
     class Meta:
         app_label = 'orders'

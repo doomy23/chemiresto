@@ -18,6 +18,8 @@ from forms import *
 from utils import *
 from models import UserAddress
 
+from orders.models import Order
+
 # View used for
 # /accounts/register/
 class RegisterView(View):
@@ -142,13 +144,18 @@ class ManagerView(View):
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
+        userAddresses = UserAddress.objects.filter(user=request.user)
+        
         editAccountForm = EditAccountForm(instance=request.user)
         editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if not self.hide_user_details(request) else None
         passwordChangeForm = PasswordChangeForm(user=request.user)
+        shippingForm = ShippingAddressForm()
         
-        return TemplateResponse(request, self.template_name, {'editAccountForm':editAccountForm,
+        return TemplateResponse(request, self.template_name, {'userAddresses':userAddresses,
+                                                              'editAccountForm':editAccountForm,
                                                               'editAccountDetailsForm':editAccountDetailsForm,
-                                                              'passwordChangeForm':passwordChangeForm})
+                                                              'passwordChangeForm':passwordChangeForm,
+                                                              'shippingForm':shippingForm})
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
@@ -156,11 +163,17 @@ class ManagerView(View):
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
+        userAddresses = UserAddress.objects.filter(user=request.user)
+        
         formSuccess = None
+        formSuccessType = None
         formSuccessMessage = ""
         formName = request.POST.get('form-name')
         hideUserDetails = self.hide_user_details(request)
         
+        #
+        # Informations form
+        #
         if formName == 'informations': 
             editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
             editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST) if not hideUserDetails else None
@@ -184,6 +197,9 @@ class ManagerView(View):
             editAccountForm = EditAccountForm(instance=request.user)
             editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if not hideUserDetails else None
         
+        #
+        # Password form
+        #
         if formName == 'password':
             passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)
             
@@ -195,11 +211,98 @@ class ManagerView(View):
         
         else: passwordChangeForm = PasswordChangeForm(user=request.user)
         
-        return TemplateResponse(request, self.template_name, {'formSuccess':formSuccess,
+        #
+        # Shipping form
+        #
+        if formName == 'shipping':
+            addressId = request.POST.get('id')
+            delete = True if not request.POST.get('delete') == '0' else False
+            
+            try:
+                address = UserAddress.objects.get(id=addressId, user=request.user)  if not addressId == '0' else None
+                
+                if not delete:
+                    shippingForm = ShippingAddressForm(instance=address, data=request.POST)
+                    
+                    if shippingForm.is_valid():
+                        if not address:
+                            shippingAddress = shippingForm.save(commit=False)
+                            shippingAddress.user = request.user
+                            
+                            if userAddresses.count() == 0 and shippingAddress.primary == False: 
+                                shippingAddress.primary = True
+                            elif userAddresses.count() > 0 and shippingAddress.primary == True:
+                                userAddresses.update(primary=False)
+                            
+                            shippingAddress.save()
+                            
+                            formSuccess = 'shipping'
+                            formSuccessType = 'success'
+                            formSuccessMessage = u"L'adresse de livraison a été créée avec succès."
+                            
+                            shippingForm = ShippingAddressForm()
+                            
+                        else:
+                            unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
+                            
+                            if unfinishedOrders.count() == 0:
+                                shippingAddress = shippingForm.save(commit=False)
+                                
+                                if userAddresses.exclude(id=address.id).count() == 0 and shippingAddress.primary == False: 
+                                    shippingAddress.primary = True
+                                elif userAddresses.exclude(id=address.id).count() > 0 and shippingAddress.primary == True:
+                                    userAddresses.exclude(id=address.id).update(primary=False)
+                                    
+                                shippingAddress.save()
+                                
+                                formSuccess = 'shipping'
+                                formSuccessType = 'success'
+                                formSuccessMessage = u"L'adresse de livraison a été mise à jour avec succès."
+                                
+                                shippingForm = ShippingAddressForm()
+                                
+                            else:
+                                formSuccess = 'shipping'
+                                formSuccessType = 'danger'
+                                formSuccessMessage = u"Une commande non terminée est associée à cette adresse de livraison."
+                            
+                else:
+                    shippingForm = ShippingAddressForm()
+                    unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
+                    
+                    if unfinishedOrders.count() == 0:
+                        if userAddresses.exclude(id=address.id).count() > 0 and address.primary:
+                            firstUserAddressPossible = userAddresses.exclude(id=address.id)[0]
+                            firstUserAddressPossible.primary = True
+                            firstUserAddressPossible.save()
+                            
+                        address.delete()
+                        
+                        formSuccess = 'shipping'
+                        formSuccessType = 'success'
+                        formSuccessMessage = u"L'adresse de livraison a été supprimée."
+                        
+                    else:
+                        formSuccess = 'shipping'
+                        formSuccessType = 'danger'
+                        formSuccessMessage = u"Une commande non terminée est associée à cette adresse de livraison."
+                
+            except UserAddress.DoesNotExist:
+                shippingForm = ShippingAddressForm()
+                formSuccess = 'shipping'
+                formSuccessType = 'danger'
+                formSuccessMessage = u"L'adresse de livraison spécifiée n'existe pas."
+            
+        else: shippingForm = ShippingAddressForm()
+        
+        return TemplateResponse(request, self.template_name, {'userAddresses':userAddresses,
+                                                              'formSuccess':formSuccess,
+                                                              'formSuccessType':formSuccessType,
                                                               'formSuccessMessage':formSuccessMessage,
                                                               'editAccountForm':editAccountForm,
                                                               'editAccountDetailsForm':editAccountDetailsForm,
-                                                              'passwordChangeForm':passwordChangeForm})
+                                                              'passwordChangeForm':passwordChangeForm,
+                                                              'shippingForm':shippingForm})
 
 class DeleteUserView(DeleteView):
     model = User

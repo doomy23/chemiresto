@@ -22,6 +22,7 @@ class UserDetails(models.Model):
         verbose_name_plural = 'Détails de comptes'
         
 class UserAddress(models.Model):
+    user = models.ForeignKey(User)
     primary = models.BooleanField(verbose_name=u"Adresse primaire")
     city = models.CharField(max_length=250, verbose_name=u"Ville")
     region = models.CharField(max_length=250, verbose_name=u"Province/État/Région")

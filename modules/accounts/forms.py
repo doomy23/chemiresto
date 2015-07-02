@@ -9,7 +9,7 @@ from crispy_forms.layout import Layout, HTML
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
-from models import UserDetails
+from models import *
 
 class LoginForm(AuthenticationForm):
     is_using_email = None
@@ -174,5 +174,21 @@ class EditAccountDetailsForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
             'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip',
+        )
+
+class ShippingAddressForm(forms.ModelForm):
+    class Meta:
+        model = UserAddress
+        exclude = ("user",)
+        
+    def __init__(self, *args, **kwargs):
+        super(ShippingAddressForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.layout = Layout(
+            'primary', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
