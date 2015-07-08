@@ -21,3 +21,12 @@ class Restaurant(models.Model):
         app_label = 'restaurants'
         db_table = 'restaurants_restaurant'
         
+class Meal(models.Model):
+    restaurant = models.ForeignKey(Restaurant, verbose_name=u"Propriétaire")
+    name = models.CharField(max_length=250, verbose_name="Nom")
+    image = models.ImageField(upload_to='/restaurants/', width_field=400, height_field=300, verbose_name="Image")
+
+class MealTag(models.Model):
+    tag = models.CharField(max_length=250, verbose_name="Tag")
+    meals = models.ManyToManyField(Meal, verbose_name=u"Meals")
+    
