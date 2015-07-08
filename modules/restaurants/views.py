@@ -9,4 +9,12 @@ class RestaurantListView(ListView):
     template_name = 'restaurants/list.html'
     
     def get_queryset(self):
-        return Restaurant.objects.all().order_by('name')
+        city = self.request.GET.get('c')
+        
+        if city:
+            return Restaurant.objects.filter(city=city).order_by('name')
+        else:
+            if request.user and request.user_details:
+                return Restaurant.objects.filter(city=request.user_details.city).order_by('name')
+            else: 
+                return Restaurant.objects.all().order_by('name')
