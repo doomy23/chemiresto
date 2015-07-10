@@ -147,8 +147,8 @@ class EditAccountForm(forms.ModelForm):
         
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-4'
+        self.helper.label_class = 'col-lg-5'
+        self.helper.field_class = 'col-lg-7'
         
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -170,8 +170,8 @@ class EditAccountDetailsForm(forms.ModelForm):
         
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-4'
+        self.helper.label_class = 'col-lg-5'
+        self.helper.field_class = 'col-lg-7'
         self.helper.layout = Layout(
             'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )

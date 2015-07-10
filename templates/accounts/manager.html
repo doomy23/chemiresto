@@ -8,7 +8,7 @@
 	<h2 class="page-title">Bonjour {{request.user.get_full_name}}</h2>
 	
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		<div class="panel panel-default">
+		<div class="panel panel-default">	
 	    	<div class="panel-heading" role="tab" id="headingInfo">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#informations" aria-expanded="true" aria-controls="collapseOne">
@@ -16,6 +16,7 @@
 	        		</a>
 	      		</h4>
 	    	</div>
+		    	
 	    	<div id="informations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
 	      		<div class="panel-body">
 	      			<form id="informations-form" class="form-horizontal" method="post" action="" onsubmit="return false">
@@ -34,6 +35,7 @@
 	      			</form>
 	      		</div>
 	      	</div>
+
 	    	<div class="panel-heading" role="tab" id="headingPass">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#password" aria-expanded="true" aria-controls="collapseOne">
@@ -53,107 +55,121 @@
 	      				{% endif %}
 	      			</form>
 	      		</div>
-	      	</div>
-	      	{% if request.user_type == 'Client' %}
-	    	<div class="panel-heading" role="tab" id="headingShipping">
-	      		<h4 class="panel-title">
-	        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
-	          			<span class="fa fa-map-marker"> </span> Adresses de livraison
-	        		</a>
-	      		</h4>
-	    	</div>
-	    	<div id="shipping" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShipping">
-	      		<div class="panel-body">
-	      			<form id="shipping-form" class="form-horizontal" method="post" action="" onsubmit="return false">
-	      				{% csrf_token %}
-						<input type="hidden" name="form-name" value="shipping"/>
-						<input type="hidden" name="id" value="{% if shippingForm.instance.id %}{{shippingForm.instance.id}}{% else %}0{% endif %}"/>
-						<input type="hidden" name="delete" value="0"/>
-	      				{% if formSuccess == "shipping" %}
-	      				<div class="alert alert-{{formSuccessType}}" role="alert">{{formSuccessMessage}}</div>
-	      				{% endif %}
-	      				<h3 class="no-marginTop">Adresses enregistrées</h3>
-						<table class="table">
-							<thead>
-								<tr>
-									<th style="width:120px;">Actions</th>
-									<th>Adresse</th>
-									<th style="width:120px;">Par défaut</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for userAddress in userAddresses %}
-								<tr>
-									<td>
-										<a onclick="editShippingAddress('{{userAddress.id}}', ('{% if userAddress.primary %}1{% else %}0{% endif %}'=='1'), '{{userAddress.city|addslashes}}', '{{userAddress.country|addslashes}}', '{{userAddress.region|addslashes}}', '{{userAddress.address1|addslashes}}', '{{userAddress.address2|addslashes}}', '{{userAddress.zip|addslashes}}');" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span></a>
-										<a onclick="askDeleteShippingAddress('{{userAddress.id}}', '{{userAddress.address1|addslashes}}{% if userAddress.address2 %}, {{userAddress.address2|addslashes}}{% endif %}, {{userAddress.city|addslashes}}, {{userAddress.region|addslashes}}, {{userAddress.country|addslashes}}, {{userAddress.zip|addslashes|upper}}');" class="btn btn-xs btn-default"><span class="fa fa-times"></span></a>
-									</td>
-									<td>
-										{{userAddress.address1}}{% if userAddress.address2 %}, {{userAddress.address2}}{% endif %}, 
-										{{userAddress.city}}, {{userAddress.region}}, {{userAddress.country}}, {{userAddress.zip|upper}}
-									</td>
-									<td>{% if userAddress.primary %}<span class="fa fa-check"></span>{% endif %}</td>
-								</tr>
-								{% empty %}
-								<tr><td colspan="3" class="text-center">- Aucune -</td></tr>
-								{% endfor %}
-							</tbody>
-						</table>
-						<h3 id="shipping-form-title-new">Nouvelle adresse</h3>
-						<h3 id="shipping-form-title-edit" class="no-element">Modification d'une adresse</h3>
-						{% crispy shippingForm %}
-						<button id="shipping-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
-						<button id="shipping-form-reset" class="btn btn-default"><span class="fa fa-eraser"> </span> Effacer</button>
-	      			</form>
-	      		</div>
-	      	</div>
-	    	<div class="panel-heading" role="tab" id="headingHistory">
-	      		<h4 class="panel-title">
-	        		<a data-toggle="collapse" data-parent="#accordion" href="#history" aria-expanded="true" aria-controls="collapseOne">
-	          			<span class="fa fa-shopping-cart"> </span> Historique d'achats
-	        		</a>
-	      		</h4>
-	    	</div>
-	    	<div id="history" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHistory">
-	      		<div class="panel-body">
-	      		
-	      		</div>
-	      	</div>
-	      	{% endif %}
-	    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
-	      		<h4 class="panel-title">
-	        		<a data-toggle="collapse" data-parent="#accordion" href="#deleteAccount" aria-expanded="true" aria-controls="collapseOne">
-	          			<span class="fa fa-trash-o"> </span> Supprimer mon compte
-	        		</a>
-	      		</h4>
-	    	</div>
-	    	<div id="deleteAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeleteAccount">
-	      		<div class="panel-body">
-                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> Supprimer mon compte</button>
-	      		</div>
-	      	</div>
-	    </div>
+	      	</div>  
+		     	
+		    
+	      	{% if request.user_type == 'Client' %}	
+		    	<div class="panel-heading" role="tab" id="headingShipping">
+		      		<h4 class="panel-title">
+		        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
+		          			<span class="fa fa-map-marker"> </span> Adresses de livraison
+		        		</a>
+		      		</h4>
+		    	</div>
+		    	
+		    	<div id="shipping" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShipping">
+		      		<div class="panel-body">
+		      			<form id="shipping-form" class="form-horizontal" method="post" action="" onsubmit="return false">
+		      				{% csrf_token %}
+								<input type="hidden" name="form-name" value="shipping"/>
+								<input type="hidden" name="id" value="{% if shippingForm.instance.id %}{{shippingForm.instance.id}}{% else %}0{% endif %}"/>
+								<input type="hidden" name="delete" value="0"/>
+		      				{% if formSuccess == "shipping" %}
+		      					<div class="alert alert-{{formSuccessType}}" role="alert">{{formSuccessMessage}}</div>
+		      				{% endif %}
+		      				
+		      				<h3 class="no-marginTop">Adresses enregistrées</h3>
+							
+							<table class="table">
+								<thead>
+									<tr>
+										<th style="width:120px;">Actions</th>
+										<th>Adresse</th>
+										<th style="width:120px;">Par défaut</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for userAddress in userAddresses %}
+									<tr>
+										<td>
+											<a onclick="editShippingAddress('{{userAddress.id}}', ('{% if userAddress.primary %}1{% else %}0{% endif %}'=='1'), '{{userAddress.city|addslashes}}', '{{userAddress.country|addslashes}}', '{{userAddress.region|addslashes}}', '{{userAddress.address1|addslashes}}', '{{userAddress.address2|addslashes}}', '{{userAddress.zip|addslashes}}');" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span></a>
+											<a onclick="askDeleteShippingAddress('{{userAddress.id}}', '{{userAddress.address1|addslashes}}{% if userAddress.address2 %}, {{userAddress.address2|addslashes}}{% endif %}, {{userAddress.city|addslashes}}, {{userAddress.region|addslashes}}, {{userAddress.country|addslashes}}, {{userAddress.zip|addslashes|upper}}');" class="btn btn-xs btn-default"><span class="fa fa-times"></span></a>
+										</td>
+										<td>
+											{{userAddress.address1}}{% if userAddress.address2 %}, {{userAddress.address2}}{% endif %}, 
+											{{userAddress.city}}, {{userAddress.region}}, {{userAddress.country}}, {{userAddress.zip|upper}}
+										</td>
+										<td>{% if userAddress.primary %}<span class="fa fa-check"></span>{% endif %}</td>
+									</tr>
+									{% empty %}
+									<tr><td colspan="3" class="text-center">- Aucune -</td></tr>
+									{% endfor %}
+								</tbody>
+							</table>
+							
+							<h3 id="shipping-form-title-new">Nouvelle adresse</h3>
+							
+							<h3 id="shipping-form-title-edit" class="no-element">Modification d'une adresse</h3>
+							
+							{% crispy shippingForm %}
+							
+							<button id="shipping-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+							
+							<button id="shipping-form-reset" class="btn btn-default"><span class="fa fa-eraser"> </span> Effacer</button>
+		      			</form>
+		      		</div>
+		      	</div>
+		    	
+		    	<div class="panel-heading" role="tab" id="headingHistory">
+		      		<h4 class="panel-title">
+		        		<a data-toggle="collapse" data-parent="#accordion" href="#history" aria-expanded="true" aria-controls="collapseOne">
+		          			<span class="fa fa-shopping-cart"> </span> Historique d'achats
+		        		</a>
+		      		</h4>
+		    	</div>
+		    	
+		    	<div id="history" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHistory">
+		      		<div class="panel-body">
+		      		
+		      		</div>
+		      	</div>
+		    	
+		    {% endif %}
+		      	
+		    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
+		      		<h4 class="panel-title">
+		        		<a data-toggle="collapse" data-parent="#accordion" href="#deleteAccount" aria-expanded="true" aria-controls="collapseOne">
+		          			<span class="fa fa-trash-o"> </span> Supprimer mon compte
+		        		</a>
+		      		</h4>
+		    	</div>
+		    	<div id="deleteAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeleteAccount">
+		      		<div class="panel-body">
+	                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> Supprimer mon compte</button>
+		      		</div>
+		      	</div>
+		    </div>
+		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="shipping-form-delete-modal" tabindex="-1" role="dialog" aria-labelledby="login-form-modal-label">
-	<div class="modal-dialog" role="document">
- 		<div class="modal-content">
-   			<div class="modal-header">
-     			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-     			<h4 class="modal-title" id="login-form-modal-label">Confirmation</h4>
-   			</div>
-   			<div class="modal-body">
-				<strong>Voulez-vous vraiment supprimer l'adresse suivante?</strong><br/><br/>
-				<span id="shipping-form-delete-modal-address"></span>
-   			</div>
-    		<div class="modal-footer">
-      			<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-      			<button id="shipping-form-delete-modal-confirm" type="submit" class="btn btn-danger"><span class="fa fa-times"></span> Supprimer</button>
-    		</div>
- 		</div>
+	<div class="modal fade" id="shipping-form-delete-modal" tabindex="-1" role="dialog" aria-labelledby="login-form-modal-label">
+		<div class="modal-dialog" role="document">
+	 		<div class="modal-content">
+	   			<div class="modal-header">
+	     			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	     			<h4 class="modal-title" id="login-form-modal-label">Confirmation</h4>
+	   			</div>
+	   			<div class="modal-body">
+					<strong>Voulez-vous vraiment supprimer l'adresse suivante?</strong><br/><br/>
+					<span id="shipping-form-delete-modal-address"></span>
+	   			</div>
+	    		<div class="modal-footer">
+	      			<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+	      			<button id="shipping-form-delete-modal-confirm" type="submit" class="btn btn-danger"><span class="fa fa-times"></span> Supprimer</button>
+	    		</div>
+	 		</div>
+		</div>
 	</div>
-</div>
 {% endblock %}
 
 {% block page-scripts %}
