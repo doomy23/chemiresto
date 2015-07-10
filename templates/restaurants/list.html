@@ -33,6 +33,10 @@ $('#pagination').twbsPagination({
 	totalPages: {{ paginator.num_pages }},
 	startPage: {{ page.number }},
 	visiblePages: 10,
+	first: 'Première',
+	prev: 'Précédant',
+	next: 'Suivant',
+	last: 'Dernière',
 	onPageClick: function (event, page) {
     	alert(page);
 	}
