@@ -93,12 +93,6 @@ header .navbar-collapse{
 	margin-left:15px;
 }
 
-/* Use .pull-right from BS instead.
-
-.floatRight{
-	float:right;
-}*/
-
 .borderRight{
 	border-right:1px solid;
 }
@@ -194,3 +188,50 @@ header .navbar-collapse{
 		margin-left:0px;
 	}
 }
+
+.btn-success{
+	background-color: #F32837;
+	border-color: #CCC;
+}
+
+.btn-success:hover, 
+.btn-success:focus, 
+.btn-success:active, 
+.btn-success.active, 
+.open > .dropdown-toggle.btn-success{
+	background-color: #000000;
+	border-color: #CCC;
+}
+
+.navbar-default{
+	background:none;
+	
+	border:none;
+}
+
+.navbar-default .navbar-nav > li > a{
+	color:#ffffff;
+}
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > li > a:hover{
+	color:#ffffff;
+	background:#F32837;
+	text-decoration:underline;
+}
+
+.accountMenu.navbar-nav > li {
+	
+}
+
+.accountMenu.navbar-nav > li:hover, .accountMenu.navbar-nav > li:focus, 
+.accountMenu.navbar-nav > li > a:hover, .accountMenu.navbar-nav > li > a:focus{
+	background:none;
+}
+
+.accountMenu .dropdown-menu{
+	background-color:#000000;
+}
+
+
