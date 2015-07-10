@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.utils.translation import ugettext as _
 
 from restaurator_forms import *
 from utils import *
@@ -45,11 +46,11 @@ class CreateRestauratorView(View):
                 restaurant.save()
                 
                 messageType = "success"
-                message = u"Le restaurateur a été créé avec succès et le restaurant lui a été assigné."
+                message = _("The restaurateur was successfully created its restaurant has been assigned.")
             
             else:
                 messageType = "warning"
-                message = u"Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été assigné."
+                message = _("The restaurateur was successfully created but he doesn't have any ass restaurant.")
             
             form = CreateRestauratorForm()
         

@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import DeleteView
+from django.utils.translation import ugettext as _
 import urlparse
 
 from forms import *
@@ -191,7 +192,7 @@ class ManagerView(View):
                     userDetails.save()
                 
                 formSuccess = 'informations'
-                formSuccessMessage = u"Vos informations de comptes ont été mises à jour avec succès."
+                formSuccessMessage = _("Your account information has been updated successfully.")
             
         else:
             editAccountForm = EditAccountForm(instance=request.user)
@@ -207,7 +208,7 @@ class ManagerView(View):
                 user = passwordChangeForm.save()
                 passwordChangeForm = PasswordChangeForm(user=request.user)
                 formSuccess = 'password'
-                formSuccessMessage = u"Votre mot de passe a été modifié avec succès."
+                formSuccessMessage = _("Your password has been updated successfully.")
         
         else: passwordChangeForm = PasswordChangeForm(user=request.user)
         
@@ -238,7 +239,7 @@ class ManagerView(View):
                             
                             formSuccess = 'shipping'
                             formSuccessType = 'success'
-                            formSuccessMessage = u"L'adresse de livraison a été créée avec succès."
+                            formSuccessMessage = _("The delivery address has been successfully created.")
                             
                             shippingForm = ShippingAddressForm()
                             
@@ -257,14 +258,14 @@ class ManagerView(View):
                                 
                                 formSuccess = 'shipping'
                                 formSuccessType = 'success'
-                                formSuccessMessage = u"L'adresse de livraison a été mise à jour avec succès."
+                                formSuccessMessage = _("The delivery address has been updated successfully.")
                                 
                                 shippingForm = ShippingAddressForm()
                                 
                             else:
                                 formSuccess = 'shipping'
                                 formSuccessType = 'danger'
-                                formSuccessMessage = u"Une commande non terminée est associée à cette adresse de livraison."
+                                formSuccessMessage = _("An unfinished command is associated with the delivery address.")
                             
                 else:
                     shippingForm = ShippingAddressForm()
@@ -280,18 +281,18 @@ class ManagerView(View):
                         
                         formSuccess = 'shipping'
                         formSuccessType = 'success'
-                        formSuccessMessage = u"L'adresse de livraison a été supprimée."
+                        formSuccessMessage = _("The delivery address has been successfully deleted.")
                         
                     else:
                         formSuccess = 'shipping'
                         formSuccessType = 'danger'
-                        formSuccessMessage = u"Une commande non terminée est associée à cette adresse de livraison."
+                        formSuccessMessage = _("An unfinished command is associated with the delivery address.")
                 
             except UserAddress.DoesNotExist:
                 shippingForm = ShippingAddressForm()
                 formSuccess = 'shipping'
                 formSuccessType = 'danger'
-                formSuccessMessage = u"L'adresse de livraison spécifiée n'existe pas."
+                formSuccessMessage = _("The delivery address specified does not exist.")
             
         else: shippingForm = ShippingAddressForm()
         
