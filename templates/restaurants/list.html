@@ -19,7 +19,21 @@
             <a class="btn btn-danger"><span class="glyphicon glyphicon-cutlery"></span> Visiter</a>
         </div>
     	{% endfor %}
-	
+    	
+		<ul id="pagination" class="pagination-sm"></ul>
 	</div>
 </div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+$('#pagination').twbsPagination({
+	totalPages: {{ paginator.num_pages }},
+	startPage: {{ page.number }},
+	visiblePages: 10,
+	onPageClick: function (event, page) {
+    	alert(page);
+	}
+});
+</script>
 {% endblock %}
