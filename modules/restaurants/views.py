@@ -9,7 +9,7 @@ except: GeoIP = None
 
 from models import Restaurant
 
-RESTAURANTS_BY_PAGE = 6
+RESTAURANTS_BY_PAGE = 1
 
 class RestaurantsView(View):
     template_name = 'restaurants/list.html'

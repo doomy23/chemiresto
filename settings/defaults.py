@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'modules'))
 GEOIP_PATH = BASE_DIR
 GEOIP_COUNTRY = 'GeoIP.dat'
 GEOIP_CITY = 'GeoLiteCity.dat'
+THUMBNAIL_DEBUG = True
 
 ##
 ## Debug
@@ -134,6 +135,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'easy_thumbnails',
 )
 
 

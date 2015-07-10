@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block title %}Restaurants - {% endblock %}
 
@@ -11,6 +12,10 @@
 	<div id="restaurants">
     	{% for r in page %}
         <div class="restaurant">
+        	{% if r.image %}
+        	{% thumbnail r.image 320x240 upscale as thumb %}
+        	<img src="{{thumb.url}}"/>
+        	{% endif %}
             <h2>{{ r.name }}</h2>
             <p class="adr">
             	{{ r.address1 }}, {% if r.address2 %}{{ r.address2 }}, {% endif %}{{ r.city }},
@@ -21,9 +26,9 @@
             </a>
         </div>
     	{% endfor %}
-    	
-		<ul id="pagination" class="pagination-sm"></ul>
 	</div>
+	
+	<ul id="pagination" class="pagination-sm"></ul>
 </div>
 {% endblock %}
 
@@ -38,7 +43,10 @@ $('#pagination').twbsPagination({
 	next: 'Suivant',
 	last: 'Dernière',
 	onPageClick: function (event, page) {
-    	alert(page);
+    	$.get("{% url 'restaurants:restaurants_list' %}?p="+page, function( data ) {
+			var content = $('#restaurants', data).html();
+			$('#restaurants').html(content);
+		});
 	}
 });
 </script>
