@@ -1,14 +1,44 @@
-<div id="header-login" class="col-md-3 col-xs-12">
+<div id="header-login" class="col-md-6 col-xs-12">
 {% if request.user.is_authenticated %}
 	<div class="text-center">
 		<p class="no-marginBottom">Connecté sous <strong>{{ request.user.email }}</strong></p>
-		<a class="borderRight paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
-		<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
+		
+		<ul class="nav navbar-nav navbar-right accountMenu">
+			<li>
+				<a class="paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
+			</li>
+			<li>
+				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
+			</li>
+			<li>
+				<a class="dropdown-toggle" href="">Langue <span class="fa fa-angle-down"></span></a>
+				
+				<ul class="dropdown-menu">
+					<li class="dropdown"><a href="">francais</a></li>
+					<li class="dropdown"><a href="">English</a></li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 {% else %}
-	<div class="text-center">
-		<a class="show-login-form-modal borderRight paddingRight5" href="#"><span class="fa fa-lock"></span> S'identifier</a>
-		<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> Inscription</a>
+	<div>
+		<ul class="nav navbar-nav navbar-right accountMenu">
+			<li>
+				<a class="show-login-form-modal paddingRight5" href="#"><span class="fa fa-lock"></span> S'identifier</a>
+			</li>
+			<li>
+				<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> Inscription</a>
+			</li>
+			<li class="dropdown pull-right">
+				<a class="dropdown-toggle" href="">Langue <span class="fa fa-angle-down"></span></a>
+				
+				<ul class="dropdown-menu">
+					<li><a href="">francais</a></li>
+					<li><a href="">English</a></li>
+				</ul>
+			</li>
+		</ul>
+		
 	</div>
 	
 	<div class="modal fade" id="login-form-modal" tabindex="-1" role="dialog" aria-labelledby="login-form-modal-label">
