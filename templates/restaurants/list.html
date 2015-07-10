@@ -7,25 +7,33 @@
 	<form id="filterForm" class="horizontal-form">
 	
 	</form>
-	<table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Téléphone</th>
-                <th>Ville</th>
-                <th>Adresse</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in restaurants %}
-                <tr>
-                    <td>{{ r.name }}</td>
-                    <td>{{ r.tel }}</td>
-                    <td>{{ r.country }}, {{ r.city }}</td>
-                    <td>{{ r.address1 }}, {{ r.address2 }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	
+	<div id="restaurants">
+    	{% for r in page %}
+        <div class="restaurant">
+            <h2>{{ r.name }}</h2>
+            <p class="adr">
+            	{{ r.address1 }}, {% if r.address2 %}{{ r.address2 }}, {% endif %}{{ r.city }},
+            	{{ r.region }}, {{ r.country }}, {{ r.zip }}
+            </p>
+            <a class="btn btn-danger"><span class="glyphicon glyphicon-cutlery"></span> Visiter</a>
+        </div>
+    	{% endfor %}
+    	
+		<ul id="pagination" class="pagination-sm"></ul>
+	</div>
 </div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+$('#pagination').twbsPagination({
+	totalPages: {{ paginator.num_pages }},
+	startPage: {{ page.number }},
+	visiblePages: 10,
+	onPageClick: function (event, page) {
+    	alert(page);
+	}
+});
+</script>
 {% endblock %}

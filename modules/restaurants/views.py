@@ -1,21 +1,56 @@
 # -*- coding: utf-8 -*-
-from django.views.generic.list import ListView
+from django.views.generic.base import View
+from django.template.response import TemplateResponse
+from django.http import HttpResponseRedirect, Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.gis.geoip import GeoIP
 
 from models import Restaurant
 
-class RestaurantListView(ListView):
-    model = Restaurant
-    context_object_name = "restaurants"
+RESTAURANTS_BY_PAGE = 6
+
+class RestaurantsView(View):
     template_name = 'restaurants/list.html'
     
-    def get_queryset(self):
-        request = self.request
-        city = request.GET.get('c')
+    def get(self, request, *args, **kwargs):
+        pageNum = request.GET.get('p', 1)
+        city = request.GET.get('city')
+        region = request.GET.get('region')
+        country = request.GET.get('country')
         
-        if city:
-            return Restaurant.objects.filter(city=city).order_by('name')
+        if (not city or not region or not country) and \
+            request.user and request.user_details:
+            city = request.user_details.city
+            region = request.user_details.region
+            country = request.user_details.country
+            
+        elif not city or not region or not country:
+            geoip = GeoIP()
+            
+            ip = request.META.get('REMOTE_ADDR')
+            cityData = geoip.city(ip)
+            
+            if cityData:
+                city = cityData.get('city')
+                region = cityData.get('region')
+                country = cityData.get('country_code')
+        
+        if city and region and country:
+            objects = Restaurant.objects.filter(city=city, region=region, country=country).order_by('name')
         else:
-            if request.user and request.user_details:
-                return Restaurant.objects.filter(city=request.user_details.city).order_by('name')
-            else: 
-                return Restaurant.objects.all().order_by('name')
+            objects = Restaurant.objects.all().order_by('name')
+        
+        paginator = Paginator(objects, RESTAURANTS_BY_PAGE)
+        
+        try:
+            page = paginator.page(pageNum)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+        
+        return TemplateResponse(request, self.template_name, {'page':page,
+                                                              'paginator':paginator,
+                                                              'city':city,
+                                                              'region':region,
+                                                              'country':country})

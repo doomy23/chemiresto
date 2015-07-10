@@ -35,10 +35,8 @@
 							</div>
 							<div class="collapse navbar-collapse" id="collapse-navigation">
 								<ul class="nav navbar-nav">
-									<li class="{% if request.url_name = 'home' %}active{% endif %}"><a href="{% url 'home' %}">Accueil</a></li>
-									<li class="{% if 'restaurants' in request.url_namespaces %}active{% endif %}"><a href="{% url 'restaurants:restaurant_list' %}">Restaurants</a></li>
+									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurant_list' %}">Restaurants</a></li>
 									<li><a href="#">À propos</a></li>
-									<li><a href="#">Contact</a></li>
 								</ul>
 								{% if request.user_type == 'Restaurator' %}
 								<ul class="nav navbar-nav navbar-right">
@@ -81,6 +79,7 @@
 		
 		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.twbsPagination.min.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
 		{% block page-scripts %}{% endblock %}
 	</body>

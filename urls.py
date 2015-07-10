@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls), name="admin"),
 	url(r'^accounts/', include(accounts.urls, namespace="accounts")),
     url(r'^restaurants/', include(restaurants.urls, namespace="restaurants")),
-	url(r'^$', TemplateView.as_view(template_name="index.html"), name="home")
+	url(r'^$', restaurants.views.RestaurantsView.as_view(), name="home")
 )
 
 if settings.DEBUG:
