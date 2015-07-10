@@ -35,7 +35,7 @@
 							</div>
 							<div class="collapse navbar-collapse" id="collapse-navigation">
 								<ul class="nav navbar-nav">
-									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurant_list' %}">Restaurants</a></li>
+									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurants_list' %}">Restaurants</a></li>
 									<li><a href="#">À propos</a></li>
 								</ul>
 								{% if request.user_type == 'Restaurator' %}
