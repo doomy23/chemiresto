@@ -54,3 +54,12 @@ class RestaurantsView(View):
                                                               'city':city,
                                                               'region':region,
                                                               'country':country})
+
+class RestaurantsDetailsView(View):
+    template_name = 'restaurants/details.html'
+    
+    def get(self, request, id, *args, **kwargs):
+        try: restaurant = Restaurant.objects.get(id=id)
+        except Restaurant.DoesNotExist: raise Http404
+        
+        return TemplateResponse(request, self.template_name, {'restaurant':restaurant})

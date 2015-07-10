@@ -16,7 +16,9 @@
             	{{ r.address1 }}, {% if r.address2 %}{{ r.address2 }}, {% endif %}{{ r.city }},
             	{{ r.region }}, {{ r.country }}, {{ r.zip }}
             </p>
-            <a class="btn btn-danger"><span class="glyphicon glyphicon-cutlery"></span> Visiter</a>
+            <a href="{% url 'restaurants:restaurants_details' r.id %}" class="btn btn-danger">
+            	<span class="glyphicon glyphicon-cutlery"></span> Visiter
+            </a>
         </div>
     	{% endfor %}
     	
