@@ -8,6 +8,7 @@ try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
 from models import Restaurant
+from forms import *
 
 RESTAURANTS_BY_PAGE = 1
 
@@ -36,6 +37,10 @@ class RestaurantsView(View):
                 city = cityData.get('city')
                 region = cityData.get('region')
                 country = cityData.get('country_code')
+                
+        filterForm = RestaurantFilterForm(data={'city':city,
+                                                'region':region,
+                                                'country':country})
         
         if city and region and country:
             objects = Restaurant.objects.filter(city=city, region=region, country=country).order_by('name')
@@ -55,7 +60,8 @@ class RestaurantsView(View):
                                                               'paginator':paginator,
                                                               'city':city,
                                                               'region':region,
-                                                              'country':country})
+                                                              'country':country,
+                                                              'filterForm':filterForm})
 
 class RestaurantsDetailsView(View):
     template_name = 'restaurants/details.html'
