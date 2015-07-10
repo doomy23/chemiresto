@@ -3,19 +3,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from django.utils.translation import ugettext_lazy as _
 
 class Restaurant(models.Model):
-    user = models.ForeignKey(User, verbose_name=u"Propriétaire")
-    name = models.CharField(max_length=250, verbose_name="Nom")
-    tel = models.CharField(max_length=30, verbose_name=u"Téléphone")
-    city = models.CharField(max_length=250, verbose_name=u"Ville")
-    region = models.CharField(max_length=250, verbose_name=u"Province/État/Région")
-    country = CountryField(verbose_name=u"Pays")
-    address1 = models.CharField(max_length=250, verbose_name=u"Adresse 1")
-    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Adresse 2")
-    zip = models.CharField(max_length=10, verbose_name=u"Code postal")
+    user = models.ForeignKey(User, verbose_name=_("restaurateur"))
+    name = models.CharField(max_length=250, verbose_name=_("name"))
+    tel = models.CharField(max_length=30, verbose_name=_("telephone"))
+    city = models.CharField(max_length=250, verbose_name=_("city"))
+    region = models.CharField(max_length=250, verbose_name=_("province/state/region"))
+    country = CountryField(verbose_name=_("country"))
+    address1 = models.CharField(max_length=250, verbose_name=_("address 1"))
+    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
+    zip = models.CharField(max_length=10, verbose_name=_("zip code"))
     
-    image = models.ImageField(upload_to='restaurants', verbose_name="Image", blank=True, null=True)
+    image = models.ImageField(upload_to='restaurants', verbose_name=_("image"), blank=True, null=True)
     
     admin_order_field = 'name'
     
@@ -29,9 +30,9 @@ class Restaurant(models.Model):
         verbose_name_plural = 'Restaurants'
         
 class Meal(models.Model):
-    restaurant = models.ForeignKey(Restaurant, verbose_name="Restaurant")
-    name = models.CharField(max_length=250, verbose_name="Nom")
-    image = models.ImageField(upload_to='restaurants/meals', verbose_name="Image", blank=True, null=True)
+    restaurant = models.ForeignKey(Restaurant, verbose_name=_("restaurant"))
+    name = models.CharField(max_length=250, verbose_name=_("name"))
+    image = models.ImageField(upload_to='restaurants/meals', verbose_name=_("image"), blank=True, null=True)
     
     def __unicode__(self):
         return u'%s' % self.name
@@ -43,8 +44,8 @@ class Meal(models.Model):
         verbose_name_plural = 'Repas'
 
 class MealTag(models.Model):
-    tag = models.CharField(max_length=250, verbose_name="Tag")
-    meals = models.ManyToManyField(Meal, verbose_name=u"Meals")
+    tag = models.CharField(max_length=250, verbose_name=_("tag"))
+    meals = models.ManyToManyField(Meal, verbose_name=_("meals"))
     
     class Meta:
         app_label = 'restaurants'

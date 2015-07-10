@@ -68,6 +68,16 @@
 					{% block header-login %}{% headerlogin request %}{% endblock %}
 				</div>
 			</div>
+			
+			<div id="banner">
+				<div class="container">
+					{% if request.user.is_authenticated %}
+						<div class="pull-right">
+							<p class="no-marginBottom pull-right">Vous &ecirc;tes sous <strong>{{ request.user.email }}</strong></p>
+						</div>
+					{% endif %}	
+				</div>
+			</div>
 		</header>
 		
 		<div id="page-content" class="container">

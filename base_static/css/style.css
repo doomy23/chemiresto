@@ -34,7 +34,7 @@ header .navbar-collapse{
 }
 
 .no-padding{
-	paddding:0px !important;
+	padding:0px !important;
 }
 
 .no-paddingLeft{
@@ -103,7 +103,11 @@ header .navbar-collapse{
 	display:block;
 	margin-bottom:30px;
 	background:#f32837;
-	border-bottom:10px #CCC solid;
+}
+
+#banner{
+	background-color:#cccccc;
+	min-height:10px;
 }
 
 #page-header h1{
@@ -130,7 +134,7 @@ header .navbar-collapse{
 
 #header-login{
 	display:block;
-	margin:20px 0;
+	margin:20px 0px;
 	border:0px !important;
 	color:white;
 	position:relative;
@@ -247,5 +251,13 @@ header .navbar-collapse{
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
 /* close commented backslash hack */
+
+.form-group{
+	width:100%;
+}
+
+.boxInfo{
+	display:none;
+}
 
 
