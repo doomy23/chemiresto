@@ -1,7 +1,7 @@
 <div id="header-login" class="col-md-6 col-xs-12">
 {% if request.user.is_authenticated %}
 	<div class="text-center">
-		<p class="no-marginBottom">Connecté sous <strong>{{ request.user.email }}</strong></p>
+		<p class="no-marginBottom pull-right">Connecté sous <strong>{{ request.user.email }}</strong></p>
 		
 		<ul class="nav navbar-nav navbar-right accountMenu">
 			<li>
@@ -10,7 +10,7 @@
 			<li>
 				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
 			</li>
-			<li>
+			<li class="dropdown pull-right">
 				<a class="dropdown-toggle" href="">Langue <span class="fa fa-angle-down"></span></a>
 				
 				<ul class="dropdown-menu">
