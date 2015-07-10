@@ -7,9 +7,9 @@ from models import Restaurant, Meal, MealTag
 class RestaurantAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'country', 'address1', 'address2')
     
-    def get_queryset(self, request):
-        qs = super(RestaurantAdmin, self).get_queryset(request)
-        return qs.filter(user=request.user).order_by('name')
+    #def get_queryset(self, request):
+    #    qs = super(RestaurantAdmin, self).get_queryset(request)
+    #    return qs.filter(user=request.user).order_by('name')
 
 @admin.register(Meal)
 class MealAdmin(admin.ModelAdmin):

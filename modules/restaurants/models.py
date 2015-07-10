@@ -15,6 +15,8 @@ class Restaurant(models.Model):
     address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Adresse 2")
     zip = models.CharField(max_length=10, verbose_name=u"Code postal")
     
+    image = models.ImageField(upload_to='/restaurants/', width_field=400, height_field=300, verbose_name="Image", blank=True, null=True)
+    
     admin_order_field = 'name'
     
     def __unicode__(self):
@@ -29,7 +31,7 @@ class Restaurant(models.Model):
 class Meal(models.Model):
     restaurant = models.ForeignKey(Restaurant, verbose_name="Restaurant")
     name = models.CharField(max_length=250, verbose_name="Nom")
-    image = models.ImageField(upload_to='/restaurants/', width_field=400, height_field=300, verbose_name="Image", blank=True, null=True)
+    image = models.ImageField(upload_to='/restaurants/meals/', width_field=400, height_field=300, verbose_name="Image", blank=True, null=True)
     
     def __unicode__(self):
         return u'%s' % self.name

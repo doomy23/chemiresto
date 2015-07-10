@@ -3,7 +3,9 @@ from django.views.generic.base import View
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.gis.geoip import GeoIP
+
+try: from django.contrib.gis.geoip import GeoIP
+except: GeoIP = None
 
 from models import Restaurant
 
@@ -24,7 +26,7 @@ class RestaurantsView(View):
             region = request.user_details.region
             country = request.user_details.country
             
-        elif not city or not region or not country:
+        elif (not city or not region or not country) and GeoIP:
             geoip = GeoIP()
             
             ip = request.META.get('REMOTE_ADDR')
