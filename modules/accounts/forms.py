@@ -99,13 +99,13 @@ class RegistrationForm(UserCreationForm):
         email = self.cleaned_data['email']
         
         users = User.objects.filter(email=email).count()
-        if users > 0: raise forms.ValidationError("This email address is already in use")
+        if users > 0: raise forms.ValidationError(_("This email address is already in use"))
 
         return email
     
 class RegistrationDetailsForm(forms.ModelForm):
     conditions = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly', 'rows':'5'}))
-    save_as_delivery_address = forms.BooleanField(label=u"Enregistrer comme adresse de livraison", required=False, initial=True)
+    save_as_delivery_address = forms.BooleanField(label=_("Save as delivery address"), required=False, initial=True)
     
     class Meta:
         model = UserDetails
