@@ -17,7 +17,7 @@
 	      		</h4>
 	    	</div>
 		    	
-	    	<div id="informations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+	    	<div id="informations" class="boxInfo">
 	      		<div class="panel-body">
 	      			<form id="informations-form" class="form-horizontal" method="post" action="" onsubmit="return false">
 					    {% csrf_token %}
@@ -253,6 +253,10 @@ $(document).ready(function() {
     
     $("delete-account").click(function () {
         location.href = "{% url 'accounts:delete_account' request.user.id %}";
+    });
+    
+    $(".btnInfo").click(function(){
+    	this.
     });
 });
 </script>

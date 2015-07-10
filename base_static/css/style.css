@@ -256,5 +256,8 @@ header .navbar-collapse{
 	width:100%;
 }
 
+.boxInfo{
+	display:none;
+}
 
 
