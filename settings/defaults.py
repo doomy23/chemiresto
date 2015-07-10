@@ -11,6 +11,13 @@ BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'modules'))
 
 ##
+## GeoIP
+##
+GEOIP_PATH = BASE_DIR
+GEOIP_COUNTRY = 'GeoIP.dat'
+GEOIP_CITY = 'GeoLiteCity.dat'
+
+##
 ## Debug
 ##
 DEBUG = env('DJANGO_DEBUG')
