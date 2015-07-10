@@ -8,6 +8,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from models import *
 
@@ -17,7 +18,7 @@ class LoginForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].label = u"Courriel ou nom d'usagé"
+        self.fields['username'].label = _("Email add or username")
     
     # Called before clean
     def clean_username(self):
@@ -98,7 +99,7 @@ class RegistrationForm(UserCreationForm):
         email = self.cleaned_data['email']
         
         users = User.objects.filter(email=email).count()
-        if users > 0: raise forms.ValidationError("Ce courriel est déjà utilisé")
+        if users > 0: raise forms.ValidationError("This email address is already in use")
 
         return email
     
@@ -129,7 +130,7 @@ Aenean dictum lorem sapien, egestas blandit dui pharetra a. Suspendisse id dolor
     def clean_consent_cp(self):
         consent_cp = self.cleaned_data['consent_cp']
         
-        if consent_cp == False: raise forms.ValidationError("Vous devez consentir")
+        if consent_cp == False: raise forms.ValidationError(_("You must accept"))
         
         return consent_cp
 
@@ -156,7 +157,7 @@ class EditAccountForm(forms.ModelForm):
         if self.instance: users = User.objects.filter(email=email).exclude(id=self.instance.id).count()
         else : users = User.objects.filter(email=email).count()
         
-        if users > 0: raise forms.ValidationError("Ce courriel est déjà utilisé")
+        if users > 0: raise forms.ValidationError(_("This email is already used"))
 
         return email
     

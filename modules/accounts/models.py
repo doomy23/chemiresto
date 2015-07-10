@@ -3,17 +3,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from django.utils.translation import ugettext_lazy as _
 
 class UserDetails(models.Model):
-    user = models.OneToOneField(User)
-    tel = models.CharField(max_length=30, verbose_name=u"Téléphone")
-    city = models.CharField(max_length=250, verbose_name=u"Ville")
-    region = models.CharField(max_length=250, verbose_name=u"Province/État/Région")
-    country = CountryField(verbose_name=u"Pays")
-    address1 = models.CharField(max_length=250, verbose_name=u"Adresse 1")
-    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Adresse 2")
-    zip = models.CharField(max_length=10, verbose_name=u"Code postal")
-    consent_cp = models.BooleanField(verbose_name=u"J'accepte les conditions d'utilisations")
+    user = models.OneToOneField(User, verbose_name=_("user"))
+    tel = models.CharField(max_length=30, verbose_name=_("telephone"))
+    city = models.CharField(max_length=250, verbose_name=_("city"))
+    region = models.CharField(max_length=250, verbose_name=_("province/state/region"))
+    country = CountryField(verbose_name=_("country"))
+    address1 = models.CharField(max_length=250, verbose_name=_("address 1"))
+    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
+    zip = models.CharField(max_length=10, verbose_name=_("zip code"))
+    consent_cp = models.BooleanField(verbose_name=_("I accept the terms of use"))
     
     class Meta:
         app_label = 'accounts'
@@ -23,13 +24,13 @@ class UserDetails(models.Model):
         
 class UserAddress(models.Model):
     user = models.ForeignKey(User)
-    primary = models.BooleanField(verbose_name=u"Adresse primaire")
-    city = models.CharField(max_length=250, verbose_name=u"Ville")
-    region = models.CharField(max_length=250, verbose_name=u"Province/État/Région")
-    country = CountryField(verbose_name=u"Pays")
+    primary = models.BooleanField(verbose_name=_("primary address"))
+    city = models.CharField(max_length=250, verbose_name=_("city"))
+    region = models.CharField(max_length=250, verbose_name=_("province/state/region"))
+    country = CountryField(verbose_name=_("country"))
     address1 = models.CharField(max_length=250, verbose_name=u"Adresse 1")
-    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Adresse 2")
-    zip = models.CharField(max_length=10, verbose_name=u"Code postal")
+    address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
+    zip = models.CharField(max_length=10, verbose_name=_("zip code"))
     
     class Meta:
         app_label = 'accounts'

@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML, Submit
+from django.utils.translation import ugettext_lazy as _
 
 from restaurants.models import Restaurant
 
 class CreateRestauratorForm(UserCreationForm):
-    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=u"Assignation d'un restaurant", required=False)
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Assign a restaurant"), required=False)
     
     class Meta:
         model = User
@@ -34,6 +35,6 @@ class CreateRestauratorForm(UserCreationForm):
         email = self.cleaned_data['email']
         
         users = User.objects.filter(email=email).count()
-        if users > 0: raise forms.ValidationError("Ce courriel est déjà utilisé")
+        if users > 0: raise forms.ValidationError(_("This email address is already in use."))
 
         return email
