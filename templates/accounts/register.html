@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Inscription - {% endblock %}
+{% block title %}{% trans "Inscription" %}{% endblock %}
 
 {% block content %}
 <div class="col-md-12">
 	<form id="register-form" method="post" action="">
-		<h2 class="page-title">Inscription</h2>
+		<h2 class="page-title">{% trans "Inscription" %}</h2>
 		{% if user.id %}
 		<div class="alert alert-block alert-success">
 			<ul>
 				<li>
-					Votre compte client a été enregistré, vous pouvez vous y connecter dès maintenant.
+					{% trans "Your customer account has been created, you can now sign in!" %}
 				</li>
 			</ul>
 		</div>
@@ -20,7 +20,7 @@
 		{% crispy registerForm %}
 		{% crispy registerDetailsForm %}
 		<button type="submit" class="btn btn-primary">
-			<span class="fa fa-check"></span> S'enregistrer
+			<span class="fa fa-check"></span> {% trans "Register" %}
 		</button>
 		{% endif %}
 	</form>

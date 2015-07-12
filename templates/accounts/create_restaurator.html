@@ -1,10 +1,10 @@
 {% extends "accounts/base_restaurator.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Création d'un restaurateur - {% endblock %}
+{% block title %}{% trans "Creating a restaurateur" %}{% endblock %}
 
 {% block content %}
-<h2 class="page-title">Créer un restaurateur</h2>
+<h2 class="page-title">{% trans "Create a restaurateur" %}</h2>
 {% if messageType and message %}<div class="alert alert-{{messageType}}" role="alert">{{message}}</div>{% endif %}
 {% crispy form %}
 {% endblock %}

@@ -192,7 +192,7 @@ class ManagerView(View):
                     userDetails.save()
                 
                 formSuccess = 'informations'
-                formSuccessMessage = _("Your account information has been updated successfully.")
+                formSuccessMessage = _("Your account information has been successfully updated.")
             
         else:
             editAccountForm = EditAccountForm(instance=request.user)
@@ -208,7 +208,7 @@ class ManagerView(View):
                 user = passwordChangeForm.save()
                 passwordChangeForm = PasswordChangeForm(user=request.user)
                 formSuccess = 'password'
-                formSuccessMessage = _("Your password has been updated successfully.")
+                formSuccessMessage = _("Your password has been successfully updated.")
         
         else: passwordChangeForm = PasswordChangeForm(user=request.user)
         
@@ -258,7 +258,7 @@ class ManagerView(View):
                                 
                                 formSuccess = 'shipping'
                                 formSuccessType = 'success'
-                                formSuccessMessage = _("The delivery address has been updated successfully.")
+                                formSuccessMessage = _("The delivery address has been successfully updated.")
                                 
                                 shippingForm = ShippingAddressForm()
                                 

@@ -50,7 +50,7 @@ class CreateRestauratorView(View):
             
             else:
                 messageType = "warning"
-                message = _("The restaurateur was successfully created but he doesn't have any ass restaurant.")
+                message = _("The restaurateur was successfully created but he doesn't have any associated restaurant.")
             
             form = CreateRestauratorForm()
         

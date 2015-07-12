@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "About" %}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <h2>{% trans "Laboratoire de LOG210 - ÉQUIPE 5 - GROUPE 3 - ÉTÉ 2015" %}</h2>
+    
+    <h4>{% trans "Fait par:" %}</h4>
+    <ul>
+        <li>{% trans "André Koolen" %}</li>
+        <li>{% trans "Anthony Martin Coallier" %}</li>
+        <li>{% trans "Dominic Roberge" %}</li>
+    </ul>
+    
+    <h4>{% trans "Fait pour:" %}</h4>
+    <p>
+        {% trans "École de technologie supérieure" %}<br>
+        {% trans "Département de génie logiciel et des TI" %}<br>
+        {% trans "Cours : LOG210 - Analyse et conception de logiciels" %}<br>
+        {% trans "Date de remise : 2015-07-27" %}<br>
+    </p>
+</div>
+{% endblock %}

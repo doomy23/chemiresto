@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load thumbnail crispy_forms_tags %}
+{% load thumbnail crispy_forms_tags i18n %}
 
-{% block title %}Restaurants - {% endblock %}
+{% block title %}{% trans "Restaurants" %}{% endblock %}
 
 {% block content %}
 <div class="col-md-12">
@@ -22,12 +22,12 @@
             	{{ r.region }}, {{ r.country }}, {{ r.zip }}
             </p>
             <a href="{% url 'restaurants:restaurants_details' r.id %}" class="btn btn-danger">
-            	<span class="glyphicon glyphicon-cutlery"></span> Visiter
+            	<span class="glyphicon glyphicon-cutlery"></span> {% trans "Visit" %}
             </a>
         </div>
         {% empty %}
         <div id="no-restaurants">
-        	<h2>Désolé, aucun restaurant trouvé dans cette zone.</h2>
+        	<h2>{% trans "Sorry no restaurant found in your area :(" %}</h2>
         </div>
     	{% endfor %}
 	</div>

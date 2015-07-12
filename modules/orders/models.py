@@ -30,7 +30,7 @@ class Order(models.Model):
     
 class OrderDetail(models.Model):
     #item = models.ForeignKey(MenuItem, verbose_name=u"Élément du menu")
-    price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("Cost before tax"))
+    price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("cost before tax"))
     qte = models.PositiveSmallIntegerField(verbose_name=_("qte"))
     taxable = models.BooleanField(verbose_name=_("taxable"), default=True)
     

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Mon compte - {% endblock %}
+{% block title %}{% trans "My account" %}{% endblock %}
 
 {% block content %}
 <div class="col-md-12">
@@ -12,7 +12,7 @@
 	    	<div class="panel-heading" role="tab" id="headingInfo">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#informations" aria-expanded="true" aria-controls="collapseOne">
-	          			<span class="fa fa-user"> </span> Informations du compte
+	          			<span class="fa fa-user"> </span> {% trans "Account informations" %}
 	        		</a>
 	      		</h4>
 	    	</div>
@@ -28,7 +28,7 @@
 							{% crispy editAccountDetailsForm %}
 							{% endif %}
 						</div>
-						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> {% trans "Save" %}</button>
 	      				{% if formSuccess == "informations" %}
 	      				<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
 	      				{% endif %}
@@ -39,7 +39,7 @@
 	    	<div class="panel-heading" role="tab" id="headingPass">
 	      		<h4 class="panel-title">
 	        		<a data-toggle="collapse" data-parent="#accordion" href="#password" aria-expanded="true" aria-controls="collapseOne">
-	          			<span class="fa fa-lock"> </span> Mot de passe
+	          			<span class="fa fa-lock"> </span> {% trans "Password" %}
 	        		</a>
 	      		</h4>
 	    	</div>
@@ -49,7 +49,7 @@
 					    {% csrf_token %}
 						<input type="hidden" name="form-name" value="password"/>
 						{{passwordChangeForm|crispy}}
-						<button id="password-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+						<button id="password-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> {% trans "Save" %}</button>
 	      				{% if formSuccess == "password" %}
 	      				<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
 	      				{% endif %}
@@ -62,7 +62,7 @@
 		    	<div class="panel-heading" role="tab" id="headingShipping">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
-		          			<span class="fa fa-map-marker"> </span> Adresses de livraison
+		          			<span class="fa fa-map-marker"> </span> {% trans "Delivery addresses" %}
 		        		</a>
 		      		</h4>
 		    	</div>
@@ -78,14 +78,14 @@
 		      					<div class="alert alert-{{formSuccessType}}" role="alert">{{formSuccessMessage}}</div>
 		      				{% endif %}
 		      				
-		      				<h3 class="no-marginTop">Adresses enregistrées</h3>
+		      				<h3 class="no-marginTop">{% trans "Saved addresses" %}</h3>
 							
 							<table class="table">
 								<thead>
 									<tr>
-										<th style="width:120px;">Actions</th>
-										<th>Adresse</th>
-										<th style="width:120px;">Par défaut</th>
+										<th style="width:120px;">{% trans "Actions" %}</th>
+										<th>{% trans "address" %}</th>
+										<th style="width:120px;">{% trans "By default" %}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -102,20 +102,20 @@
 										<td>{% if userAddress.primary %}<span class="fa fa-check"></span>{% endif %}</td>
 									</tr>
 									{% empty %}
-									<tr><td colspan="3" class="text-center">- Aucune -</td></tr>
+									<tr><td colspan="3" class="text-center">{% trans "- None -" %}</td></tr>
 									{% endfor %}
 								</tbody>
 							</table>
 							
-							<h3 id="shipping-form-title-new">Nouvelle adresse</h3>
+							<h3 id="shipping-form-title-new">{% trans "New address" %}</h3>
 							
-							<h3 id="shipping-form-title-edit" class="no-element">Modification d'une adresse</h3>
+							<h3 id="shipping-form-title-edit" class="no-element">{% trans "Editing an Address" %}</h3>
 							
 							{% crispy shippingForm %}
 							
-							<button id="shipping-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> Enregistrer</button>
+							<button id="shipping-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> {% trans "Save" %}</button>
 							
-							<button id="shipping-form-reset" class="btn btn-default"><span class="fa fa-eraser"> </span> Effacer</button>
+							<button id="shipping-form-reset" class="btn btn-default"><span class="fa fa-eraser"> </span> {% trans "Erase" %}</button>
 		      			</form>
 		      		</div>
 		      	</div>
@@ -123,7 +123,7 @@
 		    	<div class="panel-heading" role="tab" id="headingHistory">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#history" aria-expanded="true" aria-controls="collapseOne">
-		          			<span class="fa fa-shopping-cart"> </span> Historique d'achats
+		          			<span class="fa fa-shopping-cart"> </span> {% trans "Purchase history" %}
 		        		</a>
 		      		</h4>
 		    	</div>
@@ -139,13 +139,13 @@
 		    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#deleteAccount" aria-expanded="true" aria-controls="collapseOne">
-		          			<span class="fa fa-trash-o"> </span> Supprimer mon compte
+		          			<span class="fa fa-trash-o"> </span> {% trans "Delete my account" %}
 		        		</a>
 		      		</h4>
 		    	</div>
 		    	<div id="deleteAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeleteAccount">
 		      		<div class="panel-body">
-	                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> Supprimer mon compte</button>
+	                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> {% trans "Delete my account" %}</button>
 		      		</div>
 		      	</div>
 		    </div>
@@ -157,15 +157,15 @@
 	 		<div class="modal-content">
 	   			<div class="modal-header">
 	     			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	     			<h4 class="modal-title" id="login-form-modal-label">Confirmation</h4>
+	     			<h4 class="modal-title" id="login-form-modal-label">{% trans "Confirmation" %}</h4>
 	   			</div>
 	   			<div class="modal-body">
-					<strong>Voulez-vous vraiment supprimer l'adresse suivante?</strong><br/><br/>
+					<strong>{% trans "Do you really want to delete this address?" %}</strong><br/><br/>
 					<span id="shipping-form-delete-modal-address"></span>
 	   			</div>
 	    		<div class="modal-footer">
-	      			<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-	      			<button id="shipping-form-delete-modal-confirm" type="submit" class="btn btn-danger"><span class="fa fa-times"></span> Supprimer</button>
+	      			<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "cancel" %}</button>
+	      			<button id="shipping-form-delete-modal-confirm" type="submit" class="btn btn-danger"><span class="fa fa-times"></span> {% trans "Delete" %}</button>
 	    		</div>
 	 		</div>
 		</div>

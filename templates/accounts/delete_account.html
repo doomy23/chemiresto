@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Supression de compte - {% endblock %}
+{% block title %}{% trans "Delete my account" %}{% endblock %}
 
 {% block content %}
 <div class="col-md-12">
 	<form id="delete-form" method="post" action="">
 		{% csrf_token %}
 		{{form|crispy}}
-        <p>Êtes-vous certains de vouloir supprimer votre compte ?</p>
+        <p>{% trans "Are you sure you want to delete your account?" %}</p>
 		<button type="submit" class="btn btn-primary">
-			<span class="fa fa-check"></span> Supprimer mon compte
+			<span class="fa fa-check"></span> {% trans "Delete my account" %}
 		</button>
 	</form>
 </div>

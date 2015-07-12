@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Identification - {% endblock %}
+{% block title %}{% trans "Identification" %}{% endblock %}
 
 {% block header-login %}{% endblock %}
 
 {% block content %}
 <div class="col-md-12">
 	<form id="login-form" method="post" action="">
-		<h2 class="page-title">Identification</h2>
+		<h2 class="page-title">{% trans "Identification" %}</h2>
 		{% csrf_token %}
 		{{loginForm|crispy}}
 		<button type="submit" class="btn btn-primary">
-			<span class="fa fa-user"></span> Se connecter
+			<span class="fa fa-user"></span> {% trans "Sign in" %}
 		</button>
 		
 	</form>
