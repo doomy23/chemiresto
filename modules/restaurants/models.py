@@ -6,7 +6,7 @@ from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
 
 class Restaurant(models.Model):
-    user = models.ForeignKey(User, verbose_name=_("restaurateur"))
+    user = models.ForeignKey(User, null=True, blank=True, verbose_name=_("restaurateur"))
     name = models.CharField(max_length=250, verbose_name=_("name"))
     tel = models.CharField(max_length=30, verbose_name=_("telephone"))
     city = models.CharField(max_length=250, verbose_name=_("city"))

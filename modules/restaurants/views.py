@@ -2,15 +2,37 @@
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
+from django.views.generic.edit import CreateView
+from django.core.urlresolvers import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseForbidden
 
 try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
 from models import Restaurant
 from forms import *
+from accounts.utils import AllowedGroupsMixin
 
 RESTAURANTS_BY_PAGE = 1
+
+class RestaurantCreateView(AllowedGroupsMixin, SuccessMessageMixin, CreateView):
+    model = Restaurant
+    fields = ('name', 'tel', 'city', 'region', 'country', 'address1', 'address2', 'zip', 'user')
+    template_name = 'restaurants/create.html'
+    success_message = _("%(name)s was created successfully")
+    allowed_groups = ('Entrepreneur',)
+    
+    def form_valid(self, form):
+        if not form.cleaned_data['user']:
+            messages.warning(self.request, _("You have just created a new restaurant without assign it a restaurateur."))
+        return super(RestaurantCreateView, self).form_valid(form)  
+    
+    def get_success_url(self):
+        return reverse('restaurants:restaurants_details',args=(self.object.id,))
 
 class RestaurantsView(View):
     template_name = 'restaurants/list.html'
