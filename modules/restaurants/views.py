@@ -24,12 +24,14 @@ class RestaurantCreateView(AllowedGroupsMixin, SuccessMessageMixin, CreateView):
     fields = ('name', 'tel', 'city', 'region', 'country', 'address1', 'address2', 'zip', 'user')
     template_name = 'restaurants/create.html'
     success_message = _("%(name)s was created successfully")
-    allowed_groups = ('Entrepreneur',)
-    
-    def form_valid(self, form):
-        if not form.cleaned_data['user']:
+    allowed_groups = '__all__'
+        
+    def get_success_message(self, cleaned_data):
+        if not cleaned_data['user']:
             messages.warning(self.request, _("You have just created a new restaurant without assign it a restaurateur."))
-        return super(RestaurantCreateView, self).form_valid(form)  
+            return
+        else:
+            return super(RestaurantCreateView, self).get_success_message(cleaned_data)
     
     def get_success_url(self):
         return reverse('restaurants:restaurants_details',args=(self.object.id,))
