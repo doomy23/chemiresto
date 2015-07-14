@@ -125,7 +125,7 @@ header .navbar-collapse{
 }
 
 #page-content .page-title{
-	margin:0 0 20px;
+	margin:20px 0 20px 0;
 	padding:0 0 5px;
 	border-bottom:1px solid #CCC;
 }
