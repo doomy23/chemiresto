@@ -13,7 +13,7 @@
 				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> {% trans "Sign out" %}</a>
 			</li>
 			<li>
-				<a class="paddingLeft5" href="{% url 'accounts:select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
+				<a class="paddingLeft5" href="{% url 'select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
 			</li>
 		</ul>
 	</div>
@@ -27,7 +27,7 @@
 				<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> {% trans "Inscription" %}</a>
 			</li>
 			<li>
-				<a class="paddingLeft5" href="{% url 'accounts:select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
+				<a class="paddingLeft5" href="{% url 'select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
 			</li>
 		</ul>
 		

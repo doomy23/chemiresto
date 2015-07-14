@@ -54,7 +54,7 @@ $('#pagination').twbsPagination({
 	next: 'Suivant',
 	last: 'Dernière',
 	onPageClick: function (event, page) {
-    	$.get("{% url 'restaurants:restaurants_list' %}?p="+page, function( data ) {
+    	$.get("{% url 'restaurant:restaurants_list' %}?p="+page, function( data ) {
 			var content = $('#restaurants', data).html();
 			$('#restaurants').html(content);
 		});

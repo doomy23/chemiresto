@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "accounts/dashboard.html" %}
 {% load crispy_forms_tags i18n %}
 
 {% block title %}{% trans "My account" %}{% endblock %}
 
-{% block content %}
+{% block content-pane %}
 <div class="col-md-12">
 	<h2 class="page-title">Bonjour {{request.user.get_full_name}}</h2>
 	

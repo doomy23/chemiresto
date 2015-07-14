@@ -35,32 +35,10 @@
 							</div>
 							<div class="collapse navbar-collapse" id="collapse-navigation">
 								<ul class="nav navbar-nav">
-									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
+									<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
+									<li><a href="{% url 'accounts:dashboard' %}">{% trans "My dashboard" %}</a></li>
 									<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
 								</ul>
-								{% if request.user_type == 'Restaurator' %}
-								<ul class="nav navbar-nav navbar-right">
-									<li class="dropdown">
-										<a class="dropdown-toggle" href="{% url 'accounts:restaurators_dash' %}">
-											{% trans "Restaurations" %} <span class="caret"></span>
-										</a>
-										<ul class="dropdown-menu">
-											<li><a href="{% url 'accounts:restaurators_dash' %}">{% trans "Manage restaurants" %}</a></li>
-										</ul>
-									</li>
-								</ul>
-								{% elif request.user_type == 'Admin' %}
-								<ul class="nav navbar-nav navbar-right">
-									<li class="dropdown">
-										<a class="dropdown-toggle" href="/admin/">
-											{% trans "Admin" %} <span class="caret"></span>
-										</a>
-										<ul class="dropdown-menu">
-											<li><a href="{% url 'accounts:restaurators_create' %}">{% trans "New restaurateur" %}</a></li>
-										</ul>
-									</li>
-								</ul>
-								{% endif %}
 							</div>
 						</div>
 					</nav>
@@ -105,7 +83,7 @@
 				<h3>{% trans "Chemiresto" %}</h3>
 				<nav>
 					<ul>
-						<li><a href="{% url 'restaurants:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
+						<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
 						<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
 					</ul>
 				</nav>

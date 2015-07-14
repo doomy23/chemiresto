@@ -22,12 +22,6 @@ class Restaurant(models.Model):
     
     def __unicode__(self):
         return u'%s' % self.name
-    
-    class Meta:
-        app_label = 'restaurants'
-        db_table = 'restaurants_restaurant'
-        verbose_name = 'Restaurant'
-        verbose_name_plural = 'Restaurants'
         
 class Meal(models.Model):
     restaurant = models.ForeignKey(Restaurant, verbose_name=_("restaurant"))
@@ -36,20 +30,8 @@ class Meal(models.Model):
     
     def __unicode__(self):
         return u'%s' % self.name
-    
-    class Meta:
-        app_label = 'restaurants'
-        db_table = 'restaurants_meal'
-        verbose_name = 'Repas'
-        verbose_name_plural = 'Repas'
 
 class MealTag(models.Model):
     tag = models.CharField(max_length=250, verbose_name=_("tag"))
     meals = models.ManyToManyField(Meal, verbose_name=_("meals"))
-    
-    class Meta:
-        app_label = 'restaurants'
-        db_table = 'restaurants_mealtag'
-        verbose_name = 'Tag de repas'
-        verbose_name_plural = 'Tag de repas'
     

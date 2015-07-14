@@ -1,0 +1,14 @@
+{% extends "accounts/dashboard.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Creating a restaurant - " %}{% endblock %}
+
+{% block content-pane %}
+<div class="col-md-12">
+    <ul>
+    {% for r in restaurateurs %}
+        <li>{{ r.email }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

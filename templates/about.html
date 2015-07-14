@@ -5,21 +5,31 @@
 
 {% block content %}
 <div class="col-md-12">
-    <h2>{% trans "Laboratoire de LOG210 - ÉQUIPE 5 - GROUPE 3 - ÉTÉ 2015" %}</h2>
+    <div class="page-header">
+        <h1>{% trans "LOG210 Laboratory - TEAM #5 - GROUP 3" %} <small> {% trans "SUMMER 2015" %}</small></h1>
+    </div>
     
-    <h4>{% trans "Fait par:" %}</h4>
-    <ul>
-        <li>{% trans "André Koolen" %}</li>
-        <li>{% trans "Anthony Martin Coallier" %}</li>
-        <li>{% trans "Dominic Roberge" %}</li>
-    </ul>
-    
-    <h4>{% trans "Fait pour:" %}</h4>
-    <p>
-        {% trans "École de technologie supérieure" %}<br>
-        {% trans "Département de génie logiciel et des TI" %}<br>
-        {% trans "Cours : LOG210 - Analyse et conception de logiciels" %}<br>
-        {% trans "Date de remise : 2015-07-27" %}<br>
-    </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">MADE BY</div>
+        <div class="panel-body">
+            <ul>
+                <li>{% trans "André Koolen" %}</li>
+                <li>{% trans "Anthony Martin Coallier" %}</li>
+                <li>{% trans "Dominic Roberge" %}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">MADE FOR</div>
+        <div class="panel-body">
+            <p>
+                {% trans "École de technologie supérieure" %}<br>
+                {% trans "Department of Software Engineering and IT" %}<br>
+                {% trans "Classe : LOG210 - Analysis and Design Software" %}<br>
+                {% trans "Delivery date : 2015-07-27" %}<br>
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}

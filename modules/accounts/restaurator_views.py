@@ -5,8 +5,9 @@ from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext as _
+from django.views.generic.list import ListView
 
 from restaurator_forms import *
 from utils import *
@@ -68,4 +69,9 @@ class RestauratorDashView(View):
         if not check_restaurator_group(request.user): raise Http404()
         
         return TemplateResponse(request, self.template_name, {})
-    
+
+class RestauratorListView(ListView):
+    model = User
+    context_object_name = 'restaurateurs'
+    #queryset = User.objects.filter(groups__name='Restaurateur')
+    template_name = 'accounts/restaurator_list.html'

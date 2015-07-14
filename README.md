@@ -18,8 +18,8 @@ Allez sur http://localhost:8000/admin
 
 ## Base de donnée
 
-- "chemiresto.sqlite" = base de donnée courrante
-- "chemiresto.prod.sqlite" = base de donnée de production
+- "chemiresto.sqlite" = base de donnée
+- "données.json" = données à ajouter à la base de donnée
 
 **Pour le lancement local** : La base de donnée de production sera copié lors du premier lancement en "chemiresto.sqlite" car ce fichier est dans le gitignore. La raison : éviter les conflits.
 

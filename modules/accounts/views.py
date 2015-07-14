@@ -45,26 +45,26 @@ class RegisterView(View):
         detailsForm = RegistrationDetailsForm(data=request.POST)
         
         if form.is_valid() and detailsForm.is_valid():
-            user = form.save()
-            group = Group.objects.get(id=1)
+            user = form.save(commit=False)
+            user.username = form.cleaned_data['email']
+            user.save()
+            group = Group.objects.get(name="Client")
             user.groups.add(group)
-            
-            save_as_delivery_address = detailsForm.cleaned_data['save_as_delivery_address']
             
             clientDetails = detailsForm.save(commit=False)
             clientDetails.user = user
             clientDetails.save()
             
-            if save_as_delivery_address:
-                deliveryAddress = UserAddress()
-                deliveryAddress.primary = True
-                deliveryAddress.city = clientDetails.city
-                deliveryAddress.region = clientDetails.region
-                deliveryAddress.country = clientDetails.country
-                deliveryAddress.address1 = clientDetails.address1
-                deliveryAddress.address2 = clientDetails.address2
-                deliveryAddress.zip = clientDetails.zip
-                deliveryAddress.save()
+            deliveryAddress = UserAddress()
+            deliveryAddress.user = user
+            deliveryAddress.default = True
+            deliveryAddress.city = clientDetails.city
+            deliveryAddress.region = clientDetails.region
+            deliveryAddress.country = clientDetails.country
+            deliveryAddress.address1 = clientDetails.address1
+            deliveryAddress.address2 = clientDetails.address2
+            deliveryAddress.zip = clientDetails.zip
+            deliveryAddress.save()
             
             form = RegistrationForm()
         
@@ -361,3 +361,6 @@ class SelectLanguageView(TemplateView):
         
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
+        
+class DashboardView(TemplateView):
+    template_name = "accounts/dashboard.html"

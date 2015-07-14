@@ -8,10 +8,12 @@ urlpatterns = patterns('',
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
+    
     url(r'^manage/$', ManagerView.as_view(), name="manage_account"),
+    url(r'^dashboard/$', DashboardView.as_view(), name="dashboard"),
     url(r'^delete/(?P<pk>\d+)/$', DeleteUserView.as_view(), name="delete_account"),
-    url(r'^select_language/(?P<lang_code>\w+)/$', SelectLanguageView.as_view(), name="select_language"),
     
     url(r'^restaurators/create/$', CreateRestauratorView.as_view(), name="restaurators_create"),
+    url(r'^restaurators/list/$', RestauratorListView.as_view(), name="restaurators_list"),
     url(r'^restaurators/$', RestauratorDashView.as_view(), name="restaurators_dash"),
 )

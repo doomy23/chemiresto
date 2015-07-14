@@ -78,7 +78,7 @@ class LoginForm(AuthenticationForm):
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email")
+        fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
@@ -89,11 +89,7 @@ class RegistrationForm(UserCreationForm):
         
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'first_name', 'last_name', 'email', 'username',
-            HTML(u'''<a class="btn btn-primary" id="generate-username" onclick="RegisterForm.generateUsername()"><span class="fa fa-user"></span> Générer un nom automatiquement</a>'''),
-            'password1', 'password2'
-        )
+        self.helper.layout = Layout('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
         
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -105,7 +101,6 @@ class RegistrationForm(UserCreationForm):
     
 class RegistrationDetailsForm(forms.ModelForm):
     conditions = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly', 'rows':'5'}))
-    save_as_delivery_address = forms.BooleanField(label=_("Save as delivery address"), required=False, initial=True)
     
     class Meta:
         model = UserDetails
@@ -124,7 +119,7 @@ Aenean dictum lorem sapien, egestas blandit dui pharetra a. Suspendisse id dolor
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'save_as_delivery_address', 'conditions', 'consent_cp'
+            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'conditions', 'consent_cp'
         )
         
     def clean_consent_cp(self):

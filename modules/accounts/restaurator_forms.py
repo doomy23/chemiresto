@@ -7,7 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML, Submit
 from django.utils.translation import ugettext_lazy as _
 
-from restaurants.models import Restaurant
+from restaurant.models import Restaurant
 
 class CreateRestauratorForm(UserCreationForm):
     restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Assign a restaurant"), required=False)

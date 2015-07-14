@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "accounts/dashboard.html" %}
 {% load crispy_forms_tags i18n %}
 
 {% block title %}{% trans "Creating a restaurant - " %}{% endblock %}
 
-{% block content %}
+{% block content-pane %}
 <div class="col-md-12">
 	<form id="new-restaurant-form" method="post" action="{% url 'restaurants:restaurant_create' %}">
 		<h2 class="page-title">{% trans "New restaurant" %}</h2>
