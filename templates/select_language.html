@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Select Language" %}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <h2>{% trans "Select your language:" %}</h2>
+    
+    {% get_language_info_list for LANGUAGES as languages %}
+      {% for language in languages %}
+        <ul>
+            <li>
+                <a href="{% url 'accounts:select_language' language.code %}">{{ language.name_local }} ({{ language.code }})</a>
+            </li>
+        </ul>
+      {% endfor %}
+</div>
+{% endblock %}

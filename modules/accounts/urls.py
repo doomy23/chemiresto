@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
     url(r'^manage/$', ManagerView.as_view(), name="manage_account"),
     url(r'^delete/(?P<pk>\d+)/$', DeleteUserView.as_view(), name="delete_account"),
+    url(r'^select_language/(?P<lang_code>\w+)/$', SelectLanguageView.as_view(), name="select_language"),
     
     url(r'^restaurators/create/$', CreateRestauratorView.as_view(), name="restaurators_create"),
     url(r'^restaurators/$', RestauratorDashView.as_view(), name="restaurators_dash"),

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div id="header-login" class="col-md-4 col-xs-12">
 {% if request.user.is_authenticated %}
 	<div class="text-center">
@@ -11,13 +12,8 @@
 			<li>
 				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> {% trans "Sign out" %}</a>
 			</li>
-			<li class="dropdown">
-				<a class="dropdown-toggle" href="">{% trans "Language" %} <span class="fa fa-angle-down"></span></a>
-				
-				<ul class="dropdown-menu">
-					<li class="dropdown"><a href="">{% trans "French" %}</a></li>
-					<li class="dropdown"><a href="">{% trans "English" %}</a></li>
-				</ul>
+			<li>
+				<a class="paddingLeft5" href="{% url 'accounts:select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
 			</li>
 		</ul>
 	</div>
@@ -30,13 +26,8 @@
 			<li>
 				<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> {% trans "Inscription" %}</a>
 			</li>
-			<li class="dropdown">
-				<a class="dropdown-toggle" href="">{% trans "Language" %} <span class="fa fa-angle-down"></span></a>
-				
-				<ul class="dropdown-menu">
-					<li><a href="">{% trans "French" %}</a></li>
-					<li><a href="">{% trans "English" %}</a></li>
-				</ul>
+			<li>
+				<a class="paddingLeft5" href="{% url 'accounts:select_language' LANGUAGE_CODE  %}"><span class="fa fa-language"></span> {% trans "Select language" %}</a>
 			</li>
 		</ul>
 		
