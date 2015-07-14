@@ -9,6 +9,13 @@ from accounts.models import UserAddress
 from restaurants.models import Restaurant
 from extras.fields import CurrencyField
 
+ORDER_STATES = (
+    ('UNFINISHED',_("unfinished")),
+    ('AWAITING',_("awaiting")),
+    ('DELIVERING',_("delivering")),
+    ('DELIVERED',_("delivered")),
+)
+
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, verbose_name=_("user"))
@@ -16,10 +23,9 @@ class Order(models.Model):
     
     total = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("cost before tax"))
     tips = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("tips"))
-    taxable = models.BooleanField(verbose_name=_("taxable"))
     
-    done = models.BooleanField(verbose_name=_("done"), default=False)
-    delivered = models.BooleanField(verbose_name=_("delivered"), default=False)
+    state = models.CharField(verbose_name=_("state"), default='UNFINISHED', choices=ORDER_STATES, max_length=25)
+    
     deliveryAddress = models.ForeignKey(UserAddress, verbose_name=_("delivery address"), null=True, blank=True)
     
     class Meta:

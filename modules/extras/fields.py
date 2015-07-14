@@ -15,4 +15,15 @@ class CurrencyField(models.DecimalField):
            return super(CurrencyField, self).to_python(value).quantize(Decimal("0.01"))
         except AttributeError:
            return None
-       
+
+#
+# COUNTRIES_LIST is a list of countries ready for forms
+# with the translation from django_countries package
+#
+
+from django_countries.data import COUNTRIES
+
+COUNTRIES_LIST = (('', ''),)
+for k, country in COUNTRIES.iteritems(): 
+    COUNTRIES_LIST += ((k, country),)
+    

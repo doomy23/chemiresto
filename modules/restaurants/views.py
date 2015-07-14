@@ -37,10 +37,12 @@ class RestaurantsView(View):
                 city = cityData.get('city')
                 region = cityData.get('region')
                 country = cityData.get('country_code')
-                
-        filterForm = RestaurantFilterForm(data={'city':city,
-                                                'region':region,
-                                                'country':country})
+        
+        if city and region and country:
+            filterForm = RestaurantFilterForm(data={'city':city,
+                                                    'region':region,
+                                                    'country':country})
+        else: filterForm = RestaurantFilterForm()
         
         if city and region and country:
             objects = Restaurant.objects.filter(city=city, region=region, country=country).order_by('name')
