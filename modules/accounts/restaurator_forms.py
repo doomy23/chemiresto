@@ -28,7 +28,7 @@ class CreateRestauratorForm(UserCreationForm):
             'first_name', 'last_name', 'email', 'username',
             HTML(u'''<a class="btn btn-primary" id="generate-username" onclick="RegisterForm.generateUsername()"><span class="fa fa-user"></span> Générer un nom automatiquement</a>'''),
             'password1', 'password2', 'restaurant',
-            Submit('create', u'Créer le restaurateur', css_class='btn btn-primary')
+            Submit('create', _("Create the restaurateur"), css_class='btn btn-primary')
         )
         
     def clean_email(self):

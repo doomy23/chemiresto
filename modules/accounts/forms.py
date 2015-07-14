@@ -18,7 +18,7 @@ class LoginForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].label = _("Email add or username")
+        self.fields['username'].label = _("Email address or username")
     
     # Called before clean
     def clean_username(self):
@@ -157,7 +157,7 @@ class EditAccountForm(forms.ModelForm):
         if self.instance: users = User.objects.filter(email=email).exclude(id=self.instance.id).count()
         else : users = User.objects.filter(email=email).count()
         
-        if users > 0: raise forms.ValidationError(_("This email is already used"))
+        if users > 0: raise forms.ValidationError(_("This email is already in use"))
 
         return email
     

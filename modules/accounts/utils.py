@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 # Check if the user has access to the admin
 def check_admin_right(user):
@@ -27,3 +30,15 @@ def get_user_type(user):
     elif 2 in groupIds: return 'Restaurator'
     elif user.is_superuser: return 'Admin'
     else: return None
+    
+class AllowedGroupsMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.allowed_groups == '__all__':
+            return super(AllowedGroupsMixin, self).dispatch(*args, **kwargs)
+        else:
+            allowed_groups = self.request.user.groups.values_list('name',flat=True)
+            if [i for i in self.allowed_groups if i in allowed_groups]:
+                return super(AllowedGroupsMixin, self).dispatch(*args, **kwargs)
+            else:
+                raise PermissionDenied

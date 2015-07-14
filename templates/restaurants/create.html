@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags i18n %}
+
+{% block title %}{% trans "Creating a restaurant - " %}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+	<form id="new-restaurant-form" method="post" action="{% url 'restaurants:restaurant_create' %}">
+		<h2 class="page-title">{% trans "New restaurant" %}</h2>
+		{% csrf_token %}
+		{% crispy form %}
+		<button type="submit" id="new-restaurant-form-submit-btn" class="btn btn-primary">
+			<span class="fa fa-check"></span> {% trans "Save" %}
+		</button>
+	</form>
+</div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#new-restaurant-form-submit-btn').click(function() {
+            $('#new-restaurant-form').submit();
+        });
+    });
+</script>
+{% endblock %}

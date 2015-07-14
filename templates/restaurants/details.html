@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}{{ restaurant.name }} - Restaurants - {% endblock %}
+{% block title %}{{ restaurant.name }} - {% trans "Restaurants" %}{% endblock %}
 
 {% block content %}
 

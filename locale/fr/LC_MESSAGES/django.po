@@ -1,0 +1,449 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-12 14:17-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\modules\accounts\forms.py:21
+msgid "Email address or username"
+msgstr "Adresse courriel ou nom d'utilisateur"
+
+#: .\modules\accounts\forms.py:102
+msgid "This email address is already in use"
+msgstr "Cette adresse email est déjà en cours d'utilisation"
+
+#: .\modules\accounts\forms.py:108
+msgid "Save as delivery address"
+msgstr "Enregistrer comme adresse de livraison"
+
+#: .\modules\accounts\forms.py:133
+msgid "You must accept"
+msgstr "Vous devez accepter"
+
+#: .\modules\accounts\forms.py:160
+msgid "This email is already in use"
+msgstr "Cette adresse email est déjà en cours d'utilisation"
+
+#: .\modules\accounts\models.py:9 .\modules\orders\models.py:14
+msgid "user"
+msgstr "utilisateur"
+
+#: .\modules\accounts\models.py:10 .\modules\restaurants\models.py:11
+msgid "telephone"
+msgstr "téléphone"
+
+#: .\modules\accounts\models.py:11 .\modules\accounts\models.py:28
+#: .\modules\restaurants\forms.py:10 .\modules\restaurants\models.py:12
+msgid "city"
+msgstr "ville"
+
+#: .\modules\accounts\models.py:12 .\modules\accounts\models.py:29
+#: .\modules\restaurants\models.py:13
+msgid "province/state/region"
+msgstr "province/état/région"
+
+#: .\modules\accounts\models.py:13 .\modules\accounts\models.py:30
+#: .\modules\restaurants\forms.py:12 .\modules\restaurants\models.py:14
+msgid "country"
+msgstr "pays"
+
+#: .\modules\accounts\models.py:14 .\modules\restaurants\models.py:15
+msgid "address 1"
+msgstr "adresse 1"
+
+#: .\modules\accounts\models.py:15 .\modules\accounts\models.py:32
+#: .\modules\restaurants\models.py:16
+msgid "address 2"
+msgstr "adresse 2"
+
+#: .\modules\accounts\models.py:16 .\modules\accounts\models.py:33
+#: .\modules\restaurants\models.py:17
+msgid "zip code"
+msgstr "code postal"
+
+#: .\modules\accounts\models.py:17
+msgid "I accept the terms of use"
+msgstr "J'accepte les conditions d'utilisation"
+
+#: .\modules\accounts\models.py:27
+msgid "primary address"
+msgstr "adresse principale"
+
+#: .\modules\accounts\restaurator_forms.py:13
+msgid "Assign a restaurant"
+msgstr "Assigner un restaurant"
+
+#: .\modules\accounts\restaurator_forms.py:31
+msgid "Create the restaurateur"
+msgstr "Créer le restaurateur"
+
+#: .\modules\accounts\restaurator_forms.py:38
+msgid "This email address is already in use."
+msgstr "Cette adresse email est déjà en cours d'utilisation."
+
+#: .\modules\accounts\restaurator_views.py:49
+msgid ""
+"The restaurateur was successfully created its restaurant has been assigned."
+msgstr ""
+"Le restaurateur a été créé avec succès un restaurant lui a été assigné."
+
+#: .\modules\accounts\restaurator_views.py:53
+msgid ""
+"The restaurateur was successfully created but he doesn't have any associated "
+"restaurant."
+msgstr ""
+"Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été "
+"assigné."
+
+#: .\modules\accounts\views.py:195
+msgid "Your account information has been successfully updated."
+msgstr "Les informations de votre compte a été mis à jour avec succès."
+
+#: .\modules\accounts\views.py:211
+msgid "Your password has been successfully updated."
+msgstr "Votre mot de passe a été mis à jour avec succès."
+
+#: .\modules\accounts\views.py:242
+msgid "The delivery address has been successfully created."
+msgstr "L'adresse de livraison a été créé avec succès."
+
+#: .\modules\accounts\views.py:261
+msgid "The delivery address has been successfully updated."
+msgstr "L'adresse de livraison a été mis à jour avec succès."
+
+#: .\modules\accounts\views.py:268 .\modules\accounts\views.py:289
+msgid "An unfinished command is associated with the delivery address."
+msgstr "Une commande inachevée est associé à l'adresse de livraison."
+
+#: .\modules\accounts\views.py:284
+msgid "The delivery address has been successfully deleted."
+msgstr "L'adresse de livraison a été supprimé avec succès."
+
+#: .\modules\accounts\views.py:295
+msgid "The delivery address specified does not exist."
+msgstr "L'adresse de livraison spécifié n'existe pas."
+
+#: .\modules\orders\models.py:15 .\modules\restaurants\models.py:33
+msgid "restaurant"
+msgstr "restaurant"
+
+#: .\modules\orders\models.py:17 .\modules\orders\models.py:33
+msgid "cost before tax"
+msgstr "coûts avant impôts"
+
+#: .\modules\orders\models.py:18
+msgid "tips"
+msgstr "tips"
+
+#: .\modules\orders\models.py:19 .\modules\orders\models.py:35
+msgid "taxable"
+msgstr "imposable"
+
+#: .\modules\orders\models.py:21
+msgid "done"
+msgstr "terminé"
+
+#: .\modules\orders\models.py:22
+msgid "delivered"
+msgstr "livré"
+
+#: .\modules\orders\models.py:23
+msgid "delivery address"
+msgstr "adresse de livraison"
+
+#: .\modules\orders\models.py:34
+msgid "qte"
+msgstr "qté"
+
+#: .\modules\orders\models.py:44
+msgid "tax"
+msgstr "impôt"
+
+#: .\modules\orders\models.py:45
+msgid "rate"
+msgstr "taux"
+
+#: .\modules\orders\models.py:46
+msgid "price"
+msgstr "prix"
+
+#: .\modules\restaurants\forms.py:11
+msgid "state/province"
+msgstr "état/province"
+
+#: .\modules\restaurants\models.py:9
+msgid "restaurateur"
+msgstr "restaurateur"
+
+#: .\modules\restaurants\models.py:10 .\modules\restaurants\models.py:34
+msgid "name"
+msgstr "nom"
+
+#: .\modules\restaurants\models.py:19 .\modules\restaurants\models.py:35
+msgid "image"
+msgstr "image"
+
+#: .\modules\restaurants\models.py:47
+msgid "tag"
+msgstr "tag"
+
+#: .\modules\restaurants\models.py:48
+msgid "meals"
+msgstr "repas"
+
+#: .\settings\defaults.py:35 .\templates\accounts\header_login.html:18
+#: .\templates\accounts\header_login.html:37
+msgid "French"
+msgstr "Français"
+
+#: .\settings\defaults.py:36 .\templates\accounts\header_login.html:19
+#: .\templates\accounts\header_login.html:38
+msgid "English"
+msgstr "Anglais"
+
+#: .\templates\about.html:4 .\templates\base.html:39
+msgid "About"
+msgstr "À propos"
+
+#: .\templates\about.html:8
+msgid "Laboratoire de LOG210 - ÉQUIPE 5 - GROUPE 3 - ÉTÉ 2015"
+msgstr ""
+
+#: .\templates\about.html:10
+msgid "Fait par:"
+msgstr ""
+
+#: .\templates\about.html:12
+msgid "André Koolen"
+msgstr ""
+
+#: .\templates\about.html:13
+msgid "Anthony Martin Coallier"
+msgstr ""
+
+#: .\templates\about.html:14
+msgid "Dominic Roberge"
+msgstr ""
+
+#: .\templates\about.html:17
+msgid "Fait pour:"
+msgstr ""
+
+#: .\templates\about.html:19
+msgid "École de technologie supérieure"
+msgstr ""
+
+#: .\templates\about.html:20
+msgid "Département de génie logiciel et des TI"
+msgstr ""
+
+#: .\templates\about.html:21
+msgid "Cours : LOG210 - Analyse et conception de logiciels"
+msgstr ""
+
+#: .\templates\about.html:22
+msgid "Date de remise : 2015-07-27"
+msgstr ""
+
+#: .\templates\accounts\base_restaurator.html:7 .\templates\base.html:7
+msgid " - Chemiresto"
+msgstr " - Chemiresto"
+
+#: .\templates\accounts\base_restaurator.html:20 .\templates\base.html:22
+#: .\templates\base.html.py:34
+msgid "Chemiresto"
+msgstr "Chemiresto"
+
+#: .\templates\accounts\base_restaurator.html:28
+msgid "Administration"
+msgstr "Administration"
+
+#: .\templates\accounts\base_restaurator.html:29
+#: .\templates\accounts\header_login.html:9
+#: .\templates\accounts\manager.html:4
+msgid "My account"
+msgstr "Mon compte"
+
+#: .\templates\accounts\base_restaurator.html:30
+#: .\templates\accounts\header_login.html:12
+msgid "Sign out"
+msgstr "Déconnexion"
+
+#: .\templates\accounts\create_restaurator.html:4
+msgid "Creating a restaurateur"
+msgstr "Création d'un restaurateur"
+
+#: .\templates\accounts\create_restaurator.html:7
+msgid "Create a restaurateur"
+msgstr "Créer un restaurateur"
+
+#: .\templates\accounts\delete_account.html:4
+#: .\templates\accounts\delete_account.html:13
+#: .\templates\accounts\manager.html:142 .\templates\accounts\manager.html:148
+msgid "Delete my account"
+msgstr "Supprimer mon compte"
+
+#: .\templates\accounts\delete_account.html:11
+msgid "Are you sure you want to delete your account?"
+msgstr "Êtes-vous sûr de vouloir supprimer votre compte ?"
+
+#: .\templates\accounts\header_login.html:15
+#: .\templates\accounts\header_login.html:34
+msgid "Language"
+msgstr "Langue"
+
+#: .\templates\accounts\header_login.html:28
+#: .\templates\accounts\header_login.html:64
+#: .\templates\accounts\login.html:15
+msgid "Sign in"
+msgstr "Connexion"
+
+#: .\templates\accounts\header_login.html:31
+#: .\templates\accounts\register.html:4 .\templates\accounts\register.html:9
+msgid "Inscription"
+msgstr "Inscription"
+
+#: .\templates\accounts\header_login.html:51 .\templates\accounts\login.html:4
+#: .\templates\accounts\login.html.py:11
+msgid "Identification"
+msgstr "Identification"
+
+#: .\templates\accounts\header_login.html:63
+msgid "Cancel"
+msgstr "Annuler"
+
+#: .\templates\accounts\manager.html:15
+msgid "Account informations"
+msgstr "Informations du compte"
+
+#: .\templates\accounts\manager.html:31 .\templates\accounts\manager.html:52
+#: .\templates\accounts\manager.html:116
+msgid "Save"
+msgstr "Enregistrer"
+
+#: .\templates\accounts\manager.html:42
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\templates\accounts\manager.html:65
+msgid "Delivery addresses"
+msgstr "Adresses de livraison"
+
+#: .\templates\accounts\manager.html:81
+msgid "Saved addresses"
+msgstr "Adresses enregistrées"
+
+#: .\templates\accounts\manager.html:86
+msgid "Actions"
+msgstr "Actions"
+
+#: .\templates\accounts\manager.html:87
+msgid "address"
+msgstr "adresse"
+
+#: .\templates\accounts\manager.html:88
+msgid "By default"
+msgstr "Par défaut"
+
+#: .\templates\accounts\manager.html:105
+msgid "- None -"
+msgstr "- Acune -"
+
+#: .\templates\accounts\manager.html:110
+msgid "New address"
+msgstr "Nouvelle adresse"
+
+#: .\templates\accounts\manager.html:112
+msgid "Editing an Address"
+msgstr "Modification d'une adresse"
+
+#: .\templates\accounts\manager.html:118
+msgid "Erase"
+msgstr "Effacer"
+
+#: .\templates\accounts\manager.html:126
+msgid "Purchase history"
+msgstr "Historique des achats"
+
+#: .\templates\accounts\manager.html:160
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: .\templates\accounts\manager.html:163
+msgid "Do you really want to delete this address?"
+msgstr "Voulez-vous vraiment supprimer cette adresse ?"
+
+#: .\templates\accounts\manager.html:167
+msgid "cancel"
+msgstr "annuler"
+
+#: .\templates\accounts\manager.html:168
+msgid "Delete"
+msgstr "Supprimer"
+
+#: .\templates\accounts\register.html:14
+msgid "Your customer account has been created, you can now sign in!"
+msgstr ""
+"Votre compte client a été créé , vous pouvez maintenant vous connecter !"
+
+#: .\templates\accounts\register.html:23
+msgid "Register"
+msgstr "Enregistrer"
+
+#: .\templates\accounts\restaurator_dash.html:4
+msgid "Restauration"
+msgstr "Restauration"
+
+#: .\templates\accounts\restaurator_dash.html:7
+msgid "Welcome dear restaurateur!"
+msgstr "Bienvenue cher restaurateur !"
+
+#: .\templates\base.html:29
+msgid "Navigation"
+msgstr "Navigation"
+
+#: .\templates\base.html:38 .\templates\restaurants\details.html:4
+#: .\templates\restaurants\list.html:4
+msgid "Restaurants"
+msgstr "Restaurants"
+
+#: .\templates\base.html:45
+msgid "Restaurations"
+msgstr "Restaurations"
+
+#: .\templates\base.html:48
+msgid "Manage restaurants"
+msgstr "Gérer les restaurants"
+
+#: .\templates\base.html:56
+msgid "Admin"
+msgstr "Admin"
+
+#: .\templates\base.html:59
+msgid "New restaurateur"
+msgstr "Nouveau restaurateur"
+
+#: .\templates\base.html:76
+msgid "You are logged as"
+msgstr "Vous êtes connecté en tant que"
+
+#: .\templates\restaurants\list.html:25
+msgid "Visit"
+msgstr "Visiter"
+
+#: .\templates\restaurants\list.html:30
+msgid "Sorry no restaurant found in your area :("
+msgstr "Désolé, aucun restaurant trouvé dans votre région :("

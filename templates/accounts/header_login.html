@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="header-login" class="col-md-4 col-xs-12">
 {% if request.user.is_authenticated %}
 	<div class="text-center">
@@ -5,17 +6,17 @@
 		<div class="clearfix"></div>
 		<ul class="nav navbar-nav navbar-right accountMenu">
 			<li>
-				<a class="paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> Mon compte</a>
+				<a class="paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> {% trans "My account" %}</a>
 			</li>
 			<li>
-				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> Déconnexion</a>
+				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> {% trans "Sign out" %}</a>
 			</li>
 			<li class="dropdown">
-				<a class="dropdown-toggle" href="">Langue <span class="fa fa-angle-down"></span></a>
+				<a class="dropdown-toggle" href="">{% trans "Language" %} <span class="fa fa-angle-down"></span></a>
 				
 				<ul class="dropdown-menu">
-					<li class="dropdown"><a href="">francais</a></li>
-					<li class="dropdown"><a href="">English</a></li>
+					<li class="dropdown"><a href="">{% trans "French" %}</a></li>
+					<li class="dropdown"><a href="">{% trans "English" %}</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -24,17 +25,17 @@
 	<div>
 		<ul class="nav navbar-nav navbar-right accountMenu">
 			<li>
-				<a class="show-login-form-modal paddingRight5" href="#"><span class="fa fa-lock"></span> S'identifier</a>
+				<a class="show-login-form-modal paddingRight5" href="#"><span class="fa fa-lock"></span> {% trans "Sign in" %}</a>
 			</li>
 			<li>
-				<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> Inscription</a>
+				<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> {% trans "Inscription" %}</a>
 			</li>
 			<li class="dropdown">
-				<a class="dropdown-toggle" href="">Langue <span class="fa fa-angle-down"></span></a>
+				<a class="dropdown-toggle" href="">{% trans "Language" %} <span class="fa fa-angle-down"></span></a>
 				
 				<ul class="dropdown-menu">
-					<li><a href="">francais</a></li>
-					<li><a href="">English</a></li>
+					<li><a href="">{% trans "French" %}</a></li>
+					<li><a href="">{% trans "English" %}</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -47,7 +48,7 @@
 	   			<div class="modal-content">
 	     			<div class="modal-header">
 	       				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	       				<h4 class="modal-title" id="login-form-modal-label">Identification</h4>
+	       				<h4 class="modal-title" id="login-form-modal-label">{% trans "Identification" %}</h4>
 	     			</div>
 	     			<div class="modal-body">
 						{% csrf_token %}
@@ -59,8 +60,8 @@
 						</div>
 	     			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-	        			<button type="submit" class="btn btn-primary"><span class="fa fa-lock"></span> S'identifier</button>
+	        			<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+	        			<button type="submit" class="btn btn-primary"><span class="fa fa-lock"></span> {% trans "Sign in" %}</button>
 	      			</div>
 	   			</div>
 	 		</div>

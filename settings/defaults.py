@@ -3,6 +3,7 @@
 import os.path
 import sys
 from getenv import env
+from django.utils.translation import ugettext_lazy as _
 
 ##
 ## Paths
@@ -31,8 +32,8 @@ INTERNAL_IPS = (env('DJANGO_DEBUG_TOOLBAR_INTERNAL_IP'),)
 TIME_ZONE = 'America/Montreal'
 
 LANGUAGES = (
-  ('fr', 'Français'),
-  ('en', 'English'),
+  ('fr', _('French')),
+  ('en', _('English')),
 )
 
 LANGUAGE_CODE = 'fr'

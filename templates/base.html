@@ -1,10 +1,10 @@
-{% load headerlogin %}<!DOCTYPE HTML>
+{% load headerlogin i18n %}<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>{% block title %}{% endblock %}Chemiresto</title>
+		<title>{% block title %}{% endblock %}{% trans " - Chemiresto" %}</title>
 		{% block meta %}{% endblock %}
 		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 		<link href="{{ STATIC_URL }}font-awesome/css/font-awesome.css" rel="stylesheet"/>
@@ -19,33 +19,33 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						<h1 class="hidden-xs"><a href="{% url 'home' %}">Chemiresto</a></h1>
+						<h1 class="hidden-xs"><a href="{% url 'home' %}">{% trans "Chemiresto" %}</a></h1>
 					</div>
 					
 					<nav id="navbar" class="col-md-5 navbar navbar-default">
 						<div class="container-fluid">
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
-									<span class="sr-only">Navigation</span>
+									<span class="sr-only">{% trans "Navigation" %}</span>
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">Chemiresto</a></h2>
+								<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">{% trans "Chemiresto" %}</a></h2>
 							</div>
 							<div class="collapse navbar-collapse" id="collapse-navigation">
 								<ul class="nav navbar-nav">
-									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurants_list' %}">Restaurants</a></li>
-									<li><a href="#">À propos</a></li>
+									<li class="{% if 'restaurants' in request.url_namespaces or request.url_name = 'home' %}active{% endif %}"><a href="{% url 'restaurants:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
+									<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
 								</ul>
 								{% if request.user_type == 'Restaurator' %}
 								<ul class="nav navbar-nav navbar-right">
 									<li class="dropdown">
 										<a class="dropdown-toggle" href="{% url 'accounts:restaurators_dash' %}">
-											Restauration <span class="caret"></span>
+											{% trans "Restaurations" %} <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
-											<li><a href="{% url 'accounts:restaurators_dash' %}">Gérer Restaurants</a></li>
+											<li><a href="{% url 'accounts:restaurators_dash' %}">{% trans "Manage restaurants" %}</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -53,10 +53,10 @@
 								<ul class="nav navbar-nav navbar-right">
 									<li class="dropdown">
 										<a class="dropdown-toggle" href="/admin/">
-											Admin <span class="caret"></span>
+											{% trans "Admin" %} <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
-											<li><a href="{% url 'accounts:restaurators_create' %}">Nouveau restaurateur</a></li>
+											<li><a href="{% url 'accounts:restaurators_create' %}">{% trans "New restaurateur" %}</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -73,7 +73,7 @@
 				<div class="container">
 					{% if request.user.is_authenticated %}
 						<div class="pull-right">
-							<p class="no-marginBottom pull-right">Vous &ecirc;tes sous <strong>{{ request.user.email }}</strong></p>
+							<p class="no-marginBottom pull-right">{% trans "You are logged as" %} <strong>{{ request.user.email }}</strong></p>
 						</div>
 					{% endif %}	
 				</div>
@@ -82,9 +82,22 @@
 		
 		<div id="page-content" class="container">
 			<div class="row">
+                <div class="col-md-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message|safe }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+			</div>
+            
+            <div class="row">
 				{% block content %}
 				{% endblock %}
-			</div>
+             </div>
 		</div>
 		
 		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
