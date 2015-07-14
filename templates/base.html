@@ -100,6 +100,19 @@
              </div>
 		</div>
 		
+		<div id="page-footer" class="container">
+			<div class="row">
+				<h3>{% trans "Chemiresto" %}</h3>
+				<nav>
+					<ul>
+						<li><a href="{% url 'restaurants:restaurants_list' %}">{% trans "Restaurants" %}</a></li>
+						<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+					</ul>
+				</nav>
+				<p>{% trans "Copyright Chemiresto" %} &copy; {% trans "all rights reserved" %}</p>
+			</div>
+		</div>
+		
 		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.twbsPagination.min.js"></script>

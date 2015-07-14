@@ -101,8 +101,8 @@ header .navbar-collapse{
 
 #page-header{
 	display:block;
-	margin-bottom:30px;
 	background:#f32837;
+	margin:0;
 }
 
 #banner{
@@ -117,6 +117,48 @@ header .navbar-collapse{
 #page-header h1 a{
 	color:white;
 	decoration:none;
+}
+
+#page-content{
+	margin-bottom:30px;
+	min-height:0px;
+}
+
+#page-content .page-title{
+	margin:0 0 20px;
+	padding:0 0 5px;
+	border-bottom:1px solid #CCC;
+}
+
+#page-footer{
+	background:#eee;
+}
+
+#page-footer h3{
+	font-size:16px;
+	float:left;
+	margin:0 10px;
+	padding:15px 0;
+	font-weight:600;
+}
+
+#page-footer nav ul{
+	float:left;
+	margin:0 10px 0 0;
+	padding:0;
+	list-style:none;
+}
+
+#page-footer nav ul li{
+	float:left;
+	padding:12px;
+	margin:0;
+}
+
+#page-footer p{
+	float:right;
+	margin:0;
+	padding:12px 10px;
 }
 
 #navbar{
@@ -160,21 +202,32 @@ header .navbar-collapse{
 	text-align: center !important;
 }*/
 
-#page-content{
-	margin-bottom:30px;
-}
-
-#page-content .page-title{
-	margin:0 0 20px;
-	padding:0 0 5px;
-	border-bottom:1px solid #CCC;
-}
-
 
 /* Page-specific design */
 
 #generate-username{
 	margin:0 0 15px;
+}
+
+#filterRow{
+	background:#EEE;
+	padding:15px 0;
+}
+
+#filterRow #filterForm .form-group{
+	margin-right:15px;
+}
+
+#filterRow #filterForm .form-group label{
+	font-size:80%;
+}
+
+#filterRow #filterForm .form-group input[type=text],
+#filterRow #filterForm .form-group select{
+	font-size:80%;
+	border:2px #CCC solid;
+	background:white;
+	color:black;
 }
 
 /* Responsive */
@@ -238,6 +291,8 @@ header .navbar-collapse{
 	background-color:#000000;
 }
 
+/* **** Existe deja dans bootstrap3 : http://getbootstrap.com/css/#helper-classes-clearfix
+
 .clearfix:after {
      visibility: hidden;
      display: block;
@@ -248,13 +303,15 @@ header .navbar-collapse{
      }
 .clearfix { display: inline-block; }
 /* start commented backslash hack \*/
-* html .clearfix { height: 1%; }
-.clearfix { display: block; }
+/** html .clearfix { height: 1%; }
+.clearfix { display: block; }*/
 /* close commented backslash hack */
 
+/* faut pas trop généraliser... le mettre seulement si nessessaire sur un #formQuelqueconte
 .form-group{
 	width:100%;
 }
+*/
 
 .boxInfo{
 	display:none;

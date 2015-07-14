@@ -8,6 +8,10 @@ var AppEvent = {
 	 * Function called on document ready
 	 */
 	init: function() {
+		// Check content min size from window height
+		this.checkContentMinHeight();
+		$(window).resize(this.checkContentMinHeight); 
+		
 		// Toogle login box event
 		if($("#login-form-modal").length === 1) {
 			$(".show-login-form-modal").click(this.showLoginModal);
@@ -58,6 +62,16 @@ var AppEvent = {
 	showLoginModal: function(event) {
 		event.preventDefault();
 		$('#login-form-modal').modal('show');
+	},
+	
+	/**
+	 * Check content min height from current window height
+	 */
+	checkContentMinHeight: function() {
+		var wHeight = $(window).height();
+		var diff = wHeight - 500;
+		var minHeight = 265 + diff;
+		if(minHeight>0) $('#page-content').css('min-height', minHeight);
 	}
 };
 
