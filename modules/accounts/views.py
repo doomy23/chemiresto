@@ -232,10 +232,10 @@ class ManagerView(View):
                             shippingAddress = shippingForm.save(commit=False)
                             shippingAddress.user = request.user
                             
-                            if userAddresses.count() == 0 and shippingAddress.primary == False: 
-                                shippingAddress.primary = True
-                            elif userAddresses.count() > 0 and shippingAddress.primary == True:
-                                userAddresses.update(primary=False)
+                            if userAddresses.count() == 0 and shippingAddress.default == False: 
+                                shippingAddress.default = True
+                            elif userAddresses.count() > 0 and shippingAddress.default == True:
+                                userAddresses.update(default=False)
                             
                             shippingAddress.save()
                             
@@ -251,10 +251,10 @@ class ManagerView(View):
                             if unfinishedOrders.count() == 0:
                                 shippingAddress = shippingForm.save(commit=False)
                                 
-                                if userAddresses.exclude(id=address.id).count() == 0 and shippingAddress.primary == False: 
-                                    shippingAddress.primary = True
-                                elif userAddresses.exclude(id=address.id).count() > 0 and shippingAddress.primary == True:
-                                    userAddresses.exclude(id=address.id).update(primary=False)
+                                if userAddresses.exclude(id=address.id).count() == 0 and shippingAddress.default == False: 
+                                    shippingAddress.default = True
+                                elif userAddresses.exclude(id=address.id).count() > 0 and shippingAddress.default == True:
+                                    userAddresses.exclude(id=address.id).update(default=False)
                                     
                                 shippingAddress.save()
                                 
@@ -274,9 +274,9 @@ class ManagerView(View):
                     unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
                     
                     if unfinishedOrders.count() == 0:
-                        if userAddresses.exclude(id=address.id).count() > 0 and address.primary:
+                        if userAddresses.exclude(id=address.id).count() > 0 and address.default:
                             firstUserAddressPossible = userAddresses.exclude(id=address.id)[0]
-                            firstUserAddressPossible.primary = True
+                            firstUserAddressPossible.default = True
                             firstUserAddressPossible.save()
                             
                         address.delete()

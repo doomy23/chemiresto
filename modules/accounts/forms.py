@@ -185,6 +185,6 @@ class ShippingAddressForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
-            'primary', 'city', 'country', 'region', 'address1', 'address2', 'zip',
+            'default', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
