@@ -15,13 +15,16 @@
 - "données.json" = ficher contenant les données à ajouter à la base de donnée.
 
 **Pour le lancement local** :
-    - ./manage.py dumpdata --indent 2 > testdata.json   (Envoie les modèles et les données dans un fichier json)
-    - ./manage.py loaddata testdata.json   (Charge les modèles et les données à partir d'un fichier json)
-    **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
+
+- ./manage.py dumpdata --indent 2 > testdata.json   (Envoie les modèles et les données dans un fichier json)
+- ./manage.py loaddata testdata.json   (Charge les modèles et les données à partir d'un fichier json)
+- **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
 **Pour le déploiement** :
-    - ./manage.py dumpdata --indent 2 > proddata.json
-    - ./manage.py loaddata proddata.json
+
+- ./manage.py dumpdata --indent 2 > proddata.json
+- ./manage.py loaddata proddata.json
+- **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
 ## Commandes pratiques
 
