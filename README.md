@@ -5,25 +5,23 @@
 - Python 2.7.8
 - virtualenv + pip
 
-## Admin
-
-Allez sur http://localhost:8000/admin
-
-- **User** : chemiresto
-- **Pass** : chemiresto123
-
 ## Dossiers manquants
 
 - "env" (à vous de le créer avec virtualenv)
 
 ## Base de donnée
 
-- "chemiresto.sqlite" = base de donnée
-- "données.json" = données à ajouter à la base de donnée
+- "chemiresto.sqlite" = ficher contenant la base de donnée.
+- "données.json" = ficher contenant les données à ajouter à la base de donnée.
 
-**Pour le lancement local** : La base de donnée de production sera copié lors du premier lancement en "chemiresto.sqlite" car ce fichier est dans le gitignore. La raison : éviter les conflits.
+**Pour le lancement local** :
+    - ./manage.py dumpdata --indent 2 > testdata.json   (Envoie les modèles et les données dans un fichier json)
+    - ./manage.py loaddata testdata.json   (Charge les modèles et les données à partir d'un fichier json)
+    **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
-**Pour le déploiement** : Ne pas obligé de copier manuellement la base de donnée.
+**Pour le déploiement** :
+    - ./manage.py dumpdata --indent 2 > proddata.json
+    - ./manage.py loaddata proddata.json
 
 ## Commandes pratiques
 
@@ -50,7 +48,7 @@ pip install django-blablabla
 ./manage.py collectstatic --noinput
 
 # Syncher la DB
-./manage.py syncdb
+./manage.py migrate
 
 # Cleaner tout les .pyc ou autre
 sudo find . -name \*.pyc -type f -delete
