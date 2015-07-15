@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 19:39-0400\n"
+"POT-Creation-Date: 2015-07-15 09:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "code postal"
 
 #: .\modules\accounts\models.py:17
 msgid "I agree to the Terms of Use, EULA and Privacy Policy"
-msgstr ""
+msgstr "J'accepte les Conditions d'utilisation"
 
 #: .\modules\accounts\models.py:21
 #, fuzzy
@@ -138,11 +138,11 @@ msgstr "L'adresse de livraison spécifié n'existe pas."
 
 #: .\modules\orders\models.py:13
 msgid "unfinished"
-msgstr ""
+msgstr "inachevé"
 
 #: .\modules\orders\models.py:14
 msgid "awaiting"
-msgstr ""
+msgstr "en attente"
 
 #: .\modules\orders\models.py:15
 #, fuzzy
@@ -219,12 +219,12 @@ msgstr "repas"
 #: .\modules\restaurant\views.py:26
 #, python-format
 msgid "%(name)s was created successfully"
-msgstr ""
+msgstr "%(name)s a été créé avec succès"
 
 #: .\modules\restaurant\views.py:31
 msgid ""
 "You have just created a new restaurant without assign it a restaurateur."
-msgstr ""
+msgstr "Vous venez de créer un nouveau restaurant sans lui attribuer un restaurateur."
 
 #: .\settings\defaults.py:35
 msgid "French"
@@ -241,39 +241,39 @@ msgstr "À propos"
 
 #: .\templates\about.html:9
 msgid "LOG210 Laboratory - TEAM #5 - GROUP 3"
-msgstr ""
+msgstr "LOG210 Laboratoire - ÉQUIPE #5 - GROUPE 3"
 
 #: .\templates\about.html:9
 msgid "SUMMER 2015"
-msgstr ""
+msgstr "ÉTÉ 2015"
 
 #: .\templates\about.html:16
 msgid "André Koolen"
-msgstr ""
+msgstr "André Koolen"
 
 #: .\templates\about.html:17
 msgid "Anthony Martin Coallier"
-msgstr ""
+msgstr "Anthony Martin Coallier"
 
 #: .\templates\about.html:18
 msgid "Dominic Roberge"
-msgstr ""
+msgstr "Dominic Roberge"
 
 #: .\templates\about.html:27
 msgid "École de technologie supérieure"
-msgstr ""
+msgstr "École de technologie supérieure"
 
 #: .\templates\about.html:28
 msgid "Department of Software Engineering and IT"
-msgstr ""
+msgstr "Département de génie logiciel et des TI"
 
 #: .\templates\about.html:29
-msgid "Classe : LOG210 - Analysis and Design Software"
-msgstr ""
+msgid "Classe : LOG210 - Analysis and software design"
+msgstr "Cours : LOG210 - Analyse et conception de logiciels"
 
 #: .\templates\about.html:30
 msgid "Delivery date : 2015-07-27"
-msgstr ""
+msgstr "Date de remise : 2015-07-27"
 
 #: .\templates\accounts\base_restaurator.html:7 .\templates\base.html:7
 msgid " - Chemiresto"
@@ -311,7 +311,7 @@ msgstr "Créer un restaurateur"
 
 #: .\templates\accounts\dashboard.html:4 .\templates\base.html:39
 msgid "My dashboard"
-msgstr ""
+msgstr "Mon tableau de bord"
 
 #: .\templates\accounts\dashboard.html:14
 #, fuzzy
@@ -501,7 +501,7 @@ msgstr " - Chemiresto"
 
 #: .\templates\base.html:90
 msgid "all rights reserved"
-msgstr ""
+msgstr "Tous droits réservés"
 
 #: .\templates\restaurants\create.html:9
 #, fuzzy
@@ -519,7 +519,7 @@ msgstr "Désolé, aucun restaurant trouvé dans votre région :("
 
 #: .\templates\select_language.html:4 .\templates\select_language.html.py:9
 msgid "Select your language"
-msgstr ""
+msgstr "Choisissez votre langue"
 
 #~ msgid "I accept the terms of use"
 #~ msgstr "J'accepte les conditions d'utilisation"
