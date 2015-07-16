@@ -12,12 +12,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, DeleteView
+from django.shortcuts import get_object_or_404
 
 try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
 from models import Meal, Menu, Restaurant
-from forms import MealsFormset, MenuForm, RestaurantFilterForm, RestaurantForm
+from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm
 
 class RestaurantCreateView(CreateView):
     template_name = 'restaurants/create.html'
@@ -131,7 +132,7 @@ class MenuCreateView(CreateView):
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        if not request.user == self.get_object().user:
+        if not request.user == self.get_restaurant().restaurateur:
             # Seul le restaurateur qui possède le restaurant peut modifier le
             # menu.
             return HttpResponseForbidden()
@@ -148,7 +149,9 @@ class MenuCreateView(CreateView):
                                   meal_formset=meal_formset,))
         
     def form_valid(self, form, meal_formset):
-        self.object = form.save()
+        self.object = form.save(commit=False)
+        self.object.restaurant = self.get_restaurant()
+        self.object.save()
         meal_formset.instance = self.object
         meal_formset.save()
         return HttpResponseRedirect(self.get_success_url())
@@ -156,18 +159,27 @@ class MenuCreateView(CreateView):
     def get(self, request, *args, **kwargs):
         self.object = None
         form = MenuForm()
-        meal_formset = MealsFormset()
+        meal_formset = MealFormset(request=request)
         return self.render_to_response(
             self.get_context_data(form=form,
                                   meal_formset=meal_formset,))
                                   
+    def get_context_data(self, **kwargs):
+        context = super(MenuCreateView, self).get_context_data(**kwargs)
+        context['restaurant'] = self.get_restaurant()
+        return context
+        
+    def get_restaurant(self):
+        pk = self.kwargs['restaurant_pk']
+        return get_object_or_404(Restaurant, pk=pk)
+                                  
     def get_success_url(self):
-        return reverse('restaurants:restaurants_list')
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
         
     def post(self, request, *args, **kwargs):
         self.object = None
         form = MenuForm(self.request.POST)
-        meal_formset = MealsFormset(self.request.POST)
+        meal_formset = MealFormset(self.request.POST, request=request)
         if (form.is_valid() and meal_formset.is_valid()):
             return self.form_valid(form, meal_formset)
         else:

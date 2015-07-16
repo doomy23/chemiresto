@@ -7,7 +7,7 @@ from django.forms import ModelForm
 from django.forms.formsets import formset_factory
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
-from django.forms.models import inlineformset_factory
+from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 from extras.fields import COUNTRIES_LIST
@@ -65,30 +65,40 @@ class MenuForm(ModelForm):
         fields = ['name',]
         
 class MealForm(ModelForm):
-
+    
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
         super(MealForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        
-    def clean(self):
-        cleaned_data = super(MealForm, self).clean()
-        
-        if self.is_valid():
-            name = cleaned_data.get("name")
-            description = cleaned_data.get("description")
-            
-            if description:
-                messages.success(self.request, _("'%s' was created successfully" % name))
-            else:
-                messages.warning(self.request, _("'%s' doesn't have a description." % name))
         
     class Meta:
         model = Meal
         fields = ['name', 'description', 'price',]
         
-MealsFormset = inlineformset_factory(Menu, Meal,
-    form=MenuForm,
-    formset=formset_factory(MealForm),
-    extra=1)
+class MealBaseFormSet(BaseInlineFormSet):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(MealBaseFormSet, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        
+    def clean(self):
+        super(MealBaseFormSet, self).clean()
+        
+        for form in self.forms:
+            if form.is_valid():
+                name = form.cleaned_data.get("name")
+                description = form.cleaned_data.get("description")
+                
+                if description:
+                    messages.success(self.request, _("'%s' was created successfully" % name))
+                else:
+                    messages.warning(self.request, _("'%s' doesn't have a description." % name))
+                    
+MealFormset = inlineformset_factory(Menu, Meal,
+    form=MealForm,
+    formset=MealBaseFormSet,
+    extra=2,
+    can_delete=False,
+)
