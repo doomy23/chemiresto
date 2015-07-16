@@ -1,0 +1,30 @@
+{% extends "accounts/dashboard.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete a restaurant - " %}{% endblock %}
+
+{% block content-pane %}
+<div class="col-md-12">
+    <h2 class="page-title">{% trans "Delete restaurant" %}</h2>
+        
+    <form id="delete-restaurant-form" method="post" action="{% url 'restaurant:restaurant_delete' object.pk %}">
+        {% csrf_token %}
+        
+        <p>Are you sure you want to delete "{{ object.name }}"?</p>
+        
+        <button type="submit" id="form-submit-btn" class="btn btn-primary">
+            <span class="fa fa-check"></span> {% trans "delete" %}
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#form-submit-btn').click(function() {
+            $('#delete-restaurant-form').submit();
+        });
+    });
+</script>
+{% endblock %}

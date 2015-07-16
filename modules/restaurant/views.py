@@ -1,43 +1,80 @@
 # -*- coding: utf-8 -*-
-from django.views.generic.base import View
-from django.template.response import TemplateResponse
-from django.http import HttpResponseRedirect, Http404
-from django.views.generic.edit import CreateView
-from django.core.urlresolvers import reverse
-from django.contrib.messages.views import SuccessMessageMixin
+
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
+from django.template.response import TemplateResponse
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseForbidden
+from django.views.generic import DetailView
+from django.views.generic.base import View
+from django.views.generic.edit import CreateView, DeleteView
 
 try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
-from models import Restaurant
-from forms import *
-from accounts.utils import AllowedGroupsMixin
+from models import Meal, Menu, Restaurant
+from forms import MealsFormset, MenuForm, RestaurantFilterForm, RestaurantForm
 
-RESTAURANTS_BY_PAGE = 1
-
-class RestaurantCreateView(AllowedGroupsMixin, SuccessMessageMixin, CreateView):
-    model = Restaurant
-    fields = ('name', 'tel', 'city', 'region', 'country', 'address1', 'address2', 'zip', 'user')
+class RestaurantCreateView(CreateView):
     template_name = 'restaurants/create.html'
-    success_message = _("%(name)s was created successfully")
-    allowed_groups = '__all__'
-        
-    def get_success_message(self, cleaned_data):
-        if not cleaned_data['user']:
-            messages.warning(self.request, _("You have just created a new restaurant without assign it a restaurateur."))
-            return
-        else:
-            return super(RestaurantCreateView, self).get_success_message(cleaned_data)
     
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name="Entrepreneur").exists():
+            # Seul un entrepreneur peut créer un restaurant
+            return HttpResponseForbidden()
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+        
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form = RestaurantForm(request=request)
+        return self.render_to_response(
+            self.get_context_data(form=form,))
+                                  
     def get_success_url(self):
-        return reverse('restaurants:restaurants_details',args=(self.object.id,))
-
-class RestaurantsView(View):
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
+        
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = RestaurantForm(self.request.POST, request=request)
+        if (form.is_valid()):
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+            
+class RestaurantDetailView(DetailView):
+    model = Restaurant
+    template_name = 'restaurants/detail.html'
+    
+class RestaurantDeleteView(DeleteView):
+    model = Restaurant
+    success_url = reverse_lazy('restaurant:restaurant_list')
+    template_name = 'restaurants/delete.html'
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name="Entrepreneur").exists():
+            # Seul un entrepreneur peut supprimer un restaurant
+            return HttpResponseForbidden()
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+    
+class RestaurantListView(View):
     template_name = 'restaurants/list.html'
+    RESTAURANTS_BY_PAGE = 1
     
     def get(self, request, *args, **kwargs):
         pageNum = request.GET.get('p', 1)
@@ -73,7 +110,7 @@ class RestaurantsView(View):
         else:
             objects = Restaurant.objects.all().order_by('name')
         
-        paginator = Paginator(objects, RESTAURANTS_BY_PAGE)
+        paginator = Paginator(objects, self.RESTAURANTS_BY_PAGE)
         
         try:
             page = paginator.page(pageNum)
@@ -89,11 +126,53 @@ class RestaurantsView(View):
                                                               'country':country,
                                                               'filterForm':filterForm})
 
-class RestaurantsDetailsView(View):
-    template_name = 'restaurants/details.html'
+class MenuCreateView(CreateView):
+    template_name = 'restaurants/menus/create.html'
     
-    def get(self, request, id, *args, **kwargs):
-        try: restaurant = Restaurant.objects.get(id=id)
-        except Restaurant.DoesNotExist: raise Http404
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user == self.get_object().user:
+            # Seul le restaurateur qui possède le restaurant peut modifier le
+            # menu.
+            return HttpResponseForbidden()
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+
+    def form_invalid(self, form, meal_formset):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  meal_formset=meal_formset,))
         
-        return TemplateResponse(request, self.template_name, {'restaurant':restaurant})
+    def form_valid(self, form, meal_formset):
+        self.object = form.save()
+        meal_formset.instance = self.object
+        meal_formset.save()
+        return HttpResponseRedirect(self.get_success_url())
+        
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form = MenuForm()
+        meal_formset = MealsFormset()
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  meal_formset=meal_formset,))
+                                  
+    def get_success_url(self):
+        return reverse('restaurants:restaurants_list')
+        
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = MenuForm(self.request.POST)
+        meal_formset = MealsFormset(self.request.POST)
+        if (form.is_valid() and meal_formset.is_valid()):
+            return self.form_valid(form, meal_formset)
+        else:
+            return self.form_invalid(form, meal_formset)
+        
+class MenuDetailView(DetailView):
+    model = Restaurant
+    

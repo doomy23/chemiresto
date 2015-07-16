@@ -27,8 +27,8 @@
                         {{ r.address1 }}, {% if r.address2 %}{{ r.address2 }}, {% endif %}{{ r.city }},
                         {{ r.region }}, {{ r.country }}, {{ r.zip }}
                     </p>
-                    <a href="{% url 'restaurants:restaurants_details' r.id %}" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-cutlery"></span> {% trans "Visit" %}
+                    <a href="{% url 'restaurant:restaurant_detail' r.id %}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-cutlery"></span> {% trans "View the menu" %}
                     </a>
                 </div>
                 {% empty %}
@@ -54,7 +54,7 @@ $('#pagination').twbsPagination({
 	next: 'Suivant',
 	last: 'Dernière',
 	onPageClick: function (event, page) {
-    	$.get("{% url 'restaurant:restaurants_list' %}?p="+page, function( data ) {
+    	$.get("{% url 'restaurant:restaurant_list' %}?p="+page, function( data ) {
 			var content = $('#restaurants', data).html();
 			$('#restaurants').html(content);
 		});

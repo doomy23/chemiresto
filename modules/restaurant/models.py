@@ -6,7 +6,9 @@ from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
 
 class Restaurant(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, verbose_name=_("restaurateur"))
+    # Classe qui représente un restaurant.
+    
+    restaurateur = models.ForeignKey(User, null=True, blank=True, verbose_name=_("restaurateur"))
     name = models.CharField(max_length=250, verbose_name=_("name"))
     tel = models.CharField(max_length=30, verbose_name=_("telephone"))
     city = models.CharField(max_length=250, verbose_name=_("city"))
@@ -15,23 +17,19 @@ class Restaurant(models.Model):
     address1 = models.CharField(max_length=250, verbose_name=_("address 1"))
     address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
     zip = models.CharField(max_length=10, verbose_name=_("zip code"))
-    
-    image = models.ImageField(upload_to='restaurants', verbose_name=_("image"), blank=True, null=True)
-    
-    admin_order_field = 'name'
-    
-    def __unicode__(self):
-        return u'%s' % self.name
+    image = models.ImageField(upload_to='restaurant/restaurants', blank=True, null=True, verbose_name=_("image"))
         
-class Meal(models.Model):
-    restaurant = models.ForeignKey(Restaurant, verbose_name=_("restaurant"))
-    name = models.CharField(max_length=250, verbose_name=_("name"))
-    image = models.ImageField(upload_to='restaurants/meals', verbose_name=_("image"), blank=True, null=True)
+class Menu(models.Model):
+    # Classe qui représente le menu d'un restaurant.
     
-    def __unicode__(self):
-        return u'%s' % self.name
-
-class MealTag(models.Model):
-    tag = models.CharField(max_length=250, verbose_name=_("tag"))
-    meals = models.ManyToManyField(Meal, verbose_name=_("meals"))
+    restaurant = models.ForeignKey(Restaurant)
+    name = models.CharField(max_length=250, verbose_name=_("name"))
+    
+class Meal(models.Model):
+    # Classe qui représente un plat qui se retrouve sur un menu.
+    
+    menu = models.ForeignKey(Menu)
+    name = models.CharField(max_length=250, verbose_name=_("name"))
+    description = models.CharField(max_length=250, blank=True, null=True, verbose_name=_("description"))
+    price = models.IntegerField(verbose_name=_("price"))
     
