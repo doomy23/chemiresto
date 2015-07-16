@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -8,7 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language, ugettext_lazy as _
 
 from models import *
 
@@ -108,13 +110,17 @@ class RegistrationDetailsForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(RegistrationDetailsForm, self).__init__(*args, **kwargs)
+
+        this_dir = os.path.dirname(__file__)
+        rel_path = "../../licenses/license_%s.txt" % get_language()
+        abs_file_path = os.path.join(this_dir, rel_path)
         
-        self.fields['conditions'].initial = u'''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur massa ante, efficitur at elementum ut, faucibus at nisl. Duis vitae lectus molestie, commodo lectus sit amet, tempus risus. Duis posuere placerat mi quis placerat. Praesent diam nisl, scelerisque id urna eget, feugiat imperdiet turpis. Vivamus a nulla semper dolor commodo dignissim et ut nisl. Donec auctor porttitor orci, pretium sagittis quam molestie eu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi nisi ligula, rutrum tristique lacus eu, sollicitudin vehicula diam. Sed vehicula quis leo vel venenatis. Curabitur odio dui, feugiat vitae eros in, vestibulum venenatis sapien.
-
-Etiam vitae augue semper, consequat eros vitae, venenatis ante. Donec ut tristique enim. Proin cursus nunc tortor, at mattis tortor rhoncus sed. Donec vehicula sem vitae tortor gravida viverra. Vestibulum bibendum aliquet turpis. In faucibus consectetur urna. Mauris tristique elementum dictum. Mauris ipsum justo, molestie vitae imperdiet a, posuere eu augue. Etiam aliquam ligula vel lacinia bibendum. Sed pharetra ornare elit mattis imperdiet. Ut dignissim urna nec sapien cursus sodales. Curabitur rhoncus, ex eget commodo pulvinar, enim est porttitor urna, maximus pellentesque nunc urna placerat erat. Ut id euismod ligula. Donec non nisi feugiat, venenatis ligula eget, cursus neque.
-
-Aenean dictum lorem sapien, egestas blandit dui pharetra a. Suspendisse id dolor quis dui lobortis mollis quis a ante. Cras laoreet pretium quam, nec tempus lacus scelerisque vel. Nunc iaculis libero metus, ut hendrerit enim egestas eu. Nulla facilisi. Phasellus justo massa, hendrerit ac ullamcorper eget, porttitor non urna. Proin venenatis justo tempor efficitur pulvinar. Morbi quis mi lectus. 
-'''
+        try:
+            license = open(abs_file_path, 'r').read()
+        except:
+            license = _("Unable to load the license at this time.")
+            
+        self.fields['conditions'].initial = license
         
         self.helper = FormHelper()
         self.helper.form_tag = False
