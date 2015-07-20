@@ -13,7 +13,7 @@
                             {#<li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Create a restaurateur" %}</a></li>#}
                             {#<li class="list-group-item"><a href="{% url 'accounts:restaurators_list' %}"><span class="fa fa-cog"></span> {% trans "Manage the restaurateurs" %}</a></li>#}
                             <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cutlery"></span> {% trans "Add a restaurant" %}</a></li>
-                            {#<li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage the restaurants" %}</a></li>#}
+                            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cog"></span> {% trans "Edit a restaurant" %}</a></li>
                         {% endif %}
                         
                         {#{% if request.user|has_group:"Restaurateur" %}#}

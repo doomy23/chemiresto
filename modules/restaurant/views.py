@@ -12,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 
 try: from django.contrib.gis.geoip import GeoIP
@@ -73,7 +74,7 @@ class RestaurantDeleteView(DeleteView):
             handler = self.http_method_not_allowed
         return handler(request, *args, **kwargs)
     
-class RestaurantListView(View):
+class RestaurantsView(View):
     template_name = 'restaurants/list.html'
     RESTAURANTS_BY_PAGE = 1
     
@@ -184,7 +185,11 @@ class MenuCreateView(CreateView):
             return self.form_valid(form, meal_formset)
         else:
             return self.form_invalid(form, meal_formset)
-        
+            
+class RestaurantListView(ListView):
+    model = Restaurant
+    template_name = 'restaurants/restaurant/list.html'
+    
 class MenuDetailView(DetailView):
     model = Restaurant
     

@@ -1,0 +1,12 @@
+{% extends "accounts/dashboard.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Select a restaurant to edit - " %}{% endblock %}
+
+{% block content-pane %}
+<div class="col-md-12">
+    {% for restaurant in object_list %}
+        <a href="{% url 'restaurant:restaurant_detail' restaurant.pk %}">{{ restaurant.name }}</a>
+    {% endfor %}
+</div>
+{% endblock %}
