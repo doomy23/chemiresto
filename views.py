@@ -16,16 +16,11 @@ class HomeView(View):
         # compte), il est redirigé vers la liste des restaurants.
         redirect_to = None
         
-        if request.user:
-            if request.user.groups.filter(name="Entrepreneur").count():
-                redirect_to = reverse('accounts:dashboard')
-            if request.user.groups.filter(name="Restaurateur").count():
-                redirect_to = reverse('accounts:dashboard')
-            if request.user.groups.filter(name="Delivery man").count():
-                redirect_to = reverse('accounts:dashboard')
+        if request.user.is_authenticated():
+            redirect_to = request.user.userdetails.get_default_redirect()
                 
         if not redirect_to:
-            redirect_to = reverse('restaurant:restaurants_list')
+            redirect_to = reverse('restaurant:restaurant_list')
         
         return HttpResponseRedirect(redirect_to)
 
