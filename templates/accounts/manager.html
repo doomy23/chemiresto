@@ -1,5 +1,5 @@
 {% extends "accounts/dashboard.html" %}
-{% load crispy_forms_tags i18n %}
+{% load crispy_forms_tags account_filters i18n %}
 
 {% block title %}{% trans "My account" %}{% endblock %}
 
@@ -57,8 +57,8 @@
 	      		</div>
 	      	</div>  
 		     	
-		    
-	      	{% if request.user_type == 'Client' %}	
+			   {% if not request.user|has_group:"Entrepreneur" and not request.user|has_group:"Restaurateur" %}
+		   
 		    	<div class="panel-heading" role="tab" id="headingShipping">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#shipping" aria-expanded="true" aria-controls="collapseOne">
@@ -66,7 +66,6 @@
 		        		</a>
 		      		</h4>
 		    	</div>
-		    	
 		    	<div id="shipping" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShipping">
 		      		<div class="panel-body">
 		      			<form id="shipping-form" class="form-horizontal" method="post" action="" onsubmit="return false">
@@ -119,7 +118,7 @@
 		      			</form>
 		      		</div>
 		      	</div>
-		    	
+			    	
 		    	<div class="panel-heading" role="tab" id="headingHistory">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#history" aria-expanded="true" aria-controls="collapseOne">
@@ -127,14 +126,12 @@
 		        		</a>
 		      		</h4>
 		    	</div>
-		    	
 		    	<div id="history" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHistory">
 		      		<div class="panel-body">
 		      		
 		      		</div>
 		      	</div>
-		    	
-		    {% endif %}
+			    {% endif %}
 		      	
 		    	<div class="panel-heading" role="tab" id="headingDeleteAccount">
 		      		<h4 class="panel-title">
@@ -148,6 +145,7 @@
 	                    <a id="delete-account" href="{% url 'accounts:delete_account' request.user.id %}" class="btn btn-success"><span class="fa fa-trash-o"></span> {% trans "Delete my account" %}</a>
 		      		</div>
 		      	</div>
+		      	
 		    </div>
 		</div>
 	</div>
