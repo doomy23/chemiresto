@@ -18,12 +18,18 @@ class Restaurant(models.Model):
     address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
     zip = models.CharField(max_length=10, verbose_name=_("zip code"))
     image = models.ImageField(upload_to='restaurant/restaurants', blank=True, null=True, verbose_name=_("image"))
+    
+    class Meta:
+         app_label = 'restaurant'
         
 class Menu(models.Model):
     # Classe qui représente le menu d'un restaurant.
     
     restaurant = models.ForeignKey(Restaurant)
     name = models.CharField(max_length=250, verbose_name=_("name"))
+    
+    class Meta:
+         app_label = 'restaurant'
     
 class Meal(models.Model):
     # Classe qui représente un plat qui se retrouve sur un menu.
@@ -32,4 +38,7 @@ class Meal(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
     description = models.CharField(max_length=250, blank=True, null=True, verbose_name=_("description"))
     price = models.IntegerField(verbose_name=_("price"))
+    
+    class Meta:
+         app_label = 'restaurant'
     

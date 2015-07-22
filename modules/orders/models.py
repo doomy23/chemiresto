@@ -28,14 +28,23 @@ class Order(models.Model):
     
     deliveryAddress = models.ForeignKey(UserAddress, verbose_name=_("delivery address"), null=True, blank=True)
     
+    class Meta:
+         app_label = 'order'
+    
 class OrderDetail(models.Model):
     #item = models.ForeignKey(MenuItem, verbose_name=u"Élément du menu")
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("cost before tax"))
     qte = models.PositiveSmallIntegerField(verbose_name=_("qte"))
     taxable = models.BooleanField(verbose_name=_("taxable"), default=True)
     
+    class Meta:
+         app_label = 'order'
+    
 class OrderTax(models.Model):
     tax = models.CharField(max_length=10, verbose_name=_("tax"))
     rate = models.DecimalField(max_digits=5, decimal_places=4, verbose_name=_("rate"))
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("price"))
+    
+    class Meta:
+         app_label = 'order'
     

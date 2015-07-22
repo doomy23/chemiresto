@@ -34,6 +34,7 @@ virtualenv --no-site-packages env
 
 # Se sourcer
 source env/bin/activate
+win: env\Scripts\activate
 
 # Installer les requirements
 pip install -r requirements.txt

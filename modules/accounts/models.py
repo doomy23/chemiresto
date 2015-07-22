@@ -52,6 +52,9 @@ class UserDetails(models.Model):
         Retourne VRAI si l'utilisateur est un livreur.
         """
         return self.user.groups.filter(name='Delivery man').exists()
+    
+    class Meta:
+         app_label = 'accounts'
         
 class UserAddress(models.Model):
     user = models.ForeignKey(User, verbose_name=_("user"))
@@ -62,4 +65,7 @@ class UserAddress(models.Model):
     address1 = models.CharField(max_length=250, verbose_name=_("address 1"))
     address2 = models.CharField(max_length=250, null=True, blank=True, verbose_name=_("address 2"))
     zip = models.CharField(max_length=10, verbose_name=_("zip code"))
+    
+    class Meta:
+         app_label = 'accounts'
     
