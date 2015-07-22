@@ -20,7 +20,7 @@ class HomeView(View):
             redirect_to = request.user.userdetails.get_default_redirect()
                 
         if not redirect_to:
-            redirect_to = reverse('restaurant:restaurant_list')
+            redirect_to = reverse('restaurant:restaurants')
         
         return HttpResponseRedirect(redirect_to)
 

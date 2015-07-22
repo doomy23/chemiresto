@@ -25,7 +25,7 @@ class UserDetails(models.Model):
         if self.is_an_entrepreneur() or self.is_a_restaurateur() or self.is_a_delivery_man():
             redirect_to = reverse('accounts:dashboard')
         else:
-            redirect_to = reverse('restaurant:restaurant_list')
+            redirect_to = reverse('restaurant:restaurants')
             
         return redirect_to
         
