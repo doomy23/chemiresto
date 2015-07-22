@@ -50,8 +50,7 @@ class RestaurantForm(ModelForm):
         
     class Meta:
         model = Restaurant
-        fields = ['restaurateur', 'name', 'tel', 'city', 'region', 'country', 'address1', 'address2', 'zip',
-            'image',]
+        fields = ['restaurateur', 'name', 'tel', 'country', 'region', 'city', 'address1', 'address2', 'zip', 'image',]
         
 class MenuForm(ModelForm):
     

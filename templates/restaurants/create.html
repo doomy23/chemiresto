@@ -18,10 +18,8 @@
 
 {% block page-scripts %}
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#form-submit-btn').click(function() {
-            $('#new-restaurant-form').submit();
-        });
-    });
+$(document).ready(function() {
+	RegionSelector.init("#new-restaurant-form #id_country", "#new-restaurant-form #id_region");
+});
 </script>
 {% endblock %}

@@ -26,6 +26,26 @@
 - ./manage.py loaddata proddata.json
 - **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
+## Comptes de test
+
+```
+email: entrepreneur@email.com
+passw: entrepreneur
+pbkdf2_sha256$20000$TBSpnyWmCE2p$l1cqAttD8M6ycVOexWKl0kHJfRy7XA408EvDCO0sWh4=
+
+email: client@email.com
+passw: client
+pbkdf2_sha256$20000$N9VpyM1mFPmj$Pk3efZZ2YI4lf1ZbbWwWIatj1b1CF2KQkj9yq8WctE8=
+
+email: livreur@email.com
+passw: livreur
+pbkdf2_sha256$20000$vehT6Sa20IrU$O8FZeU5fyHq5gHmOtDYLIJkFd08D3uIhh8e2BcaFVvU=
+
+email: restaurateur@email.com
+passw: restaurateur
+pbkdf2_sha256$20000$zP2csRFMYnS3$LOeoN6doh1a/TvfXxxgcwWufQoX+hzzSV3XRMKvTYxw=
+```
+
 ## Commandes pratiques
 
 ```

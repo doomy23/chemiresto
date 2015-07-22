@@ -145,7 +145,7 @@
 		    	</div>
 		    	<div id="deleteAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeleteAccount">
 		      		<div class="panel-body">
-	                    <button id="delete-account" class="btn btn-success"><span class="fa fa-trash-o"></span> {% trans "Delete my account" %}</button>
+	                    <a id="delete-account" href="{% url 'accounts:delete_account' request.user.id %}" class="btn btn-success"><span class="fa fa-trash-o"></span> {% trans "Delete my account" %}</a>
 		      		</div>
 		      	</div>
 		    </div>
@@ -250,14 +250,6 @@ $(document).ready(function() {
 	AppEvent.initAjaxForm("informations-form", "informations-form-submit", "", initInformationForm);
 	AppEvent.initAjaxForm("password-form", "password-form-submit");
 	AppEvent.initAjaxForm("shipping-form", "shipping-form-submit", "", initShippingForm);
-    
-    $("delete-account").click(function () {
-        location.href = "{% url 'accounts:delete_account' request.user.id %}";
-    });
-    
-    $(".btnInfo").click(function(){
-    	this.
-    });
 });
 </script>
 {% endblock %}

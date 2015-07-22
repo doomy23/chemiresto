@@ -35,7 +35,7 @@ class LoginForm(AuthenticationForm):
                 # And expect the password to be ok
                 username = User.objects.get(email=username).username
                 
-            except ObjectDoesNotExist:
+            except User.DoesNotExist:
                 raise ValidationError(
                     self.error_messages['invalid_login'],
                     code='invalid_login',

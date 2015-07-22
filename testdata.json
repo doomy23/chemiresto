@@ -639,7 +639,7 @@
       1
     ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$20000$zpsMjxSfXxba$dVrXA8haOXxlhi4dTjCTIioUqMQadEM1bjlUK++sJdQ=",
+    "password": "pbkdf2_sha256$20000$TBSpnyWmCE2p$l1cqAttD8M6ycVOexWKl0kHJfRy7XA408EvDCO0sWh4=",
     "email": "entrepreneur@email.com",
     "date_joined": "2015-07-21T17:27:21.009Z"
   },
@@ -659,7 +659,7 @@
       2
     ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$20000$4DCcnuWFcKBs$mm/YH0YxFiWMw30HaTNEbORR+DaVXo0y0qzis4IspwM=",
+    "password": "pbkdf2_sha256$20000$N9VpyM1mFPmj$Pk3efZZ2YI4lf1ZbbWwWIatj1b1CF2KQkj9yq8WctE8=",
     "email": "client@email.com",
     "date_joined": "2015-07-21T17:28:45.346Z"
   },
@@ -679,7 +679,7 @@
       3
     ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$20000$x3ZZuoTdnQxq$mUyYUnD0jYi5xLsSt7yL00/SgEl11cyY9cxRTlD/3ts=",
+    "password": "pbkdf2_sha256$20000$vehT6Sa20IrU$O8FZeU5fyHq5gHmOtDYLIJkFd08D3uIhh8e2BcaFVvU=",
     "email": "livreur@email.com",
     "date_joined": "2015-07-21T17:29:14.404Z"
   },
@@ -699,11 +699,71 @@
       4
     ],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$20000$Ad40sK40AFLm$G6MsNrwx/xbYvbPQeW1FH4DVcas3fWGYu2xmmpXG5gY=",
+    "password": "pbkdf2_sha256$20000$zP2csRFMYnS3$LOeoN6doh1a/TvfXxxgcwWufQoX+hzzSV3XRMKvTYxw=",
     "email": "restaurateur@email.com",
     "date_joined": "2015-07-21T17:29:47.039Z"
   },
   "model": "auth.user",
+  "pk": 4
+},
+{
+  "fields": {
+    "user_id": 1,
+    "tel": "123-123-1234",
+    "city": "Montreal",
+    "region": "QC",
+    "country": "CA",
+    "address1": "301 rue peel",
+    "address2": null,
+    "zip": "g1q1q9",
+    "consent_cp": 1
+  },
+  "model": "accounts.userdetails",
+  "pk": 1
+},
+{
+  "fields": {
+    "user_id": 2,
+    "tel": "123-123-1234",
+    "city": "Montreal",
+    "region": "QC",
+    "country": "CA",
+    "address1": "301 rue peel",
+    "address2": null,
+    "zip": "g1q1q9",
+    "consent_cp": 1
+  },
+  "model": "accounts.userdetails",
+  "pk": 2
+},
+{
+  "fields": {
+    "user_id": 3,
+    "tel": "123-123-1234",
+    "city": "Montreal",
+    "region": "QC",
+    "country": "CA",
+    "address1": "301 rue peel",
+    "address2": null,
+    "zip": "g1q1q9",
+    "consent_cp": 1
+  },
+  "model": "accounts.userdetails",
+  "pk": 3
+},
+{
+  "fields": {
+    "user_id": 4,
+    "tel": "123-123-1234",
+    "city": "Montreal",
+    "region": "QC",
+    "country": "CA",
+    "address1": "301 rue peel",
+    "address2": null,
+    "zip": "g1q1q9",
+    "consent_cp": 1
+  },
+  "model": "accounts.userdetails",
   "pk": 4
 }
 ]
