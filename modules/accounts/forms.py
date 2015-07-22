@@ -91,7 +91,7 @@ class RegistrationForm(UserCreationForm):
         
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
+        self.helper.layout = Layout('first_name', 'last_name', 'email', 'password1', 'password2')
         
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -138,7 +138,7 @@ class RegistrationDetailsForm(forms.ModelForm):
 class EditAccountForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email")
+        fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
         super(EditAccountForm, self).__init__(*args, **kwargs)

@@ -42,6 +42,15 @@ class SelectLanguageView(TemplateView):
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
         translation.activate(lang_code)
         
+        #
+        # Check last HTTP_REFERER in headers and send back
+        # (anyway we dont translate urls)
+        #
+        referer = request.META.get('HTTP_REFERER')
+        
+        if referer:
+            return HttpResponseRedirect(referer)
+        
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
         

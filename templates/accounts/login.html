@@ -11,10 +11,11 @@
 		<h2 class="page-title">{% trans "Identification" %}</h2>
 		{% csrf_token %}
 		{{loginForm|crispy}}
-		<button type="submit" class="btn btn-primary">
+		<button type="submit" class="btn btn-primary pull-left" style="margin:0 20px 10px 0">
 			<span class="fa fa-user"></span> {% trans "Sign in" %}
 		</button>
-		
+		<p><strong>{% trans "Vous n'avez pas de compte?" %}</strong></p>
+		<p><a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> {% trans "Inscription" %}</a></p>
 	</form>
 </div>
 {% endblock %}

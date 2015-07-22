@@ -8,6 +8,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	display: block;
 }
 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+	background:none;
+}
+
+.dropdown-menu > li > a:hover{
+	background:#333;
+}
+
 .modal-dialog .modal-content .modal-header h4{
 	color:#333;
 }
@@ -120,7 +128,7 @@ header .navbar-collapse{
 }
 
 #page-content{
-	margin-bottom:30px;
+	margin: 30px auto;
 	min-height:0px;
 }
 

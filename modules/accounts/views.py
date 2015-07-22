@@ -134,6 +134,15 @@ class LogoutView(View):
         return HttpResponseRedirect(reverse('accounts:login'))
 
 # View used for
+# /accounts/dashboard/  
+class DashboardView(View):
+    template_name = "accounts/dashboard.html"
+    
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request, self.template_name, {})
+
+# View used for
 # /accounts/manage/
 class ManagerView(View):
     template_name = 'accounts/manager.html'
@@ -361,6 +370,4 @@ class SelectLanguageView(TemplateView):
         
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
-        
-class DashboardView(TemplateView):
-    template_name = "accounts/dashboard.html"
+    

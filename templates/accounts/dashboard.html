@@ -4,9 +4,6 @@
 {% block title %}{% trans "My dashboard" %}{% endblock %}
 
 {% block content %}
-    <div id="page-content">
-        <div class="container">
-            <div class="row">
                 <div id="menu" class="col-md-3">
                     <ul class="list-group">
                         {% if request.user|has_group:"Entrepreneur" %}
@@ -28,7 +25,4 @@
                 <div id="content" class="col-md-9">
                     {% block content-pane %}{% endblock %}
                 </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
