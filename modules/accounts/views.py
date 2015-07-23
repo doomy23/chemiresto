@@ -40,6 +40,8 @@ class RegisterView(View):
                                                               'user': user})
     
     def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated(): return user_default_redirect(request.user)
+        
         user = None
         form = RegistrationForm(data=request.POST)
         detailsForm = RegistrationDetailsForm(data=request.POST)
@@ -91,6 +93,8 @@ class LoginView(View):
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated(): return user_default_redirect(request.user)
+        
         form = LoginForm(data=request.POST)
         
         if form.is_valid():
@@ -148,7 +152,7 @@ class ManagerView(View):
     template_name = 'accounts/manager.html'
     
     def hide_user_details(self, request):
-        return request.user_type == 'Restaurator' or request.user_type == 'Admin'
+        return not request.user_details.is_a_client()
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):

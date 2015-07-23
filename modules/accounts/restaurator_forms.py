@@ -14,7 +14,7 @@ class CreateRestauratorForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email")
+        fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
         super(CreateRestauratorForm, self).__init__(*args, **kwargs)
@@ -26,7 +26,6 @@ class CreateRestauratorForm(UserCreationForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'first_name', 'last_name', 'email', 'username',
-            HTML(u'''<a class="btn btn-primary" id="generate-username" onclick="RegisterForm.generateUsername()"><span class="fa fa-user"></span> Générer un nom automatiquement</a>'''),
             'password1', 'password2', 'restaurant',
             Submit('create', _("Create the restaurateur"), css_class='btn btn-primary')
         )

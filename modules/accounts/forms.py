@@ -15,12 +15,10 @@ from django.utils.translation import get_language, ugettext_lazy as _
 from models import *
 
 class LoginForm(AuthenticationForm):
-    is_using_email = None
-    
     def __init__(self, request=None, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].label = _("Email address or username")
+        self.fields['username'].label = _("Email")
     
     # Called before clean
     def clean_username(self):
@@ -28,54 +26,11 @@ class LoginForm(AuthenticationForm):
         
         try:
             validate_email(username)
-            self.is_using_email = username
-            
-            try:
-                # Auth requires the username so we switch to it
-                # And expect the password to be ok
-                username = User.objects.get(email=username).username
                 
-            except User.DoesNotExist:
-                raise ValidationError(
-                    self.error_messages['invalid_login'],
-                    code='invalid_login',
-                    params={'username':self.username_field.verbose_name},
-                )
-                
-        except ValidationError: pass
+        except ValidationError:
+            forms.ValidationError(_("Invalid email"))
         
         return username
-    
-    # Overwrites AuthenticationForm clean method to support email address
-    def clean(self):
-        username = self.data['username']
-        
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-        
-        if username and password:
-            self.user_cache = authenticate(username=username,
-                                           password=password)
-                
-            if self.user_cache is None:
-                # If the auth is not ok and the user logged with an email
-                # then we put back the email in case it was replaced in clean_username
-                #
-                # The main reason : Hackers could use this data leak as an opportunity to
-                # fin credentials with bruteforce more easily by example...
-                # @Doomy
-                if self.is_using_email:
-                    self.cleaned_data['username'] = self.is_using_email
-                
-                raise forms.ValidationError(
-                    self.error_messages['invalid_login'],
-                    code='invalid_login',
-                    params={'username': self.username_field.verbose_name},
-                )
-            else:
-                self.confirm_login_allowed(self.user_cache)
-
-        return self.cleaned_data
 
 class RegistrationForm(UserCreationForm):
     class Meta:

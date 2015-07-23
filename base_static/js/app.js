@@ -146,10 +146,11 @@ var RegionSelector = {
 };
 
 /**
+ * OUTDATED
  * RegisterForm:
  * Scripts used for the RegisterForm page
  */
-var RegisterForm = {
+/*var RegisterForm = {
 	generateUsername: function() {
 		var firstName = $.trim($('#id_first_name').val()), lastName = $.trim($('#id_last_name').val());
 		
@@ -165,7 +166,7 @@ var RegisterForm = {
 			$('#id_username').val(generated);
 		}
 	}
-};
+};*/
 
 $(document).ready(function() {
 	AppEvent.init();

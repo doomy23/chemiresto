@@ -36,7 +36,7 @@ class CreateRestauratorView(View):
         form = CreateRestauratorForm(request.POST)
         
         if form.is_valid():
-            group = Group.objects.get(id=2)
+            group = Group.objects.get(name='Restaurateur')
             
             restaurant = form.cleaned_data['restaurant']
             restaurator = form.save()
