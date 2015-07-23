@@ -128,7 +128,7 @@ header .navbar-collapse{
 }
 
 #page-content{
-	margin: 30px auto;
+	margin: 0 auto;
 	min-height:0px;
 }
 
@@ -136,6 +136,10 @@ header .navbar-collapse{
 	margin:20px 0 20px 0;
 	padding:0 0 5px;
 	border-bottom:1px solid #CCC;
+}
+
+#page-content #menu{
+	margin:20px 0;
 }
 
 #page-footer{
@@ -315,7 +319,7 @@ header .navbar-collapse{
 .clearfix { display: block; }*/
 /* close commented backslash hack */
 
-/* faut pas trop généraliser... le mettre seulement si nessessaire sur un #formQuelqueconte
+/* faut pas trop gï¿½nï¿½raliser... le mettre seulement si nessessaire sur un #formQuelqueconte
 .form-group{
 	width:100%;
 }

@@ -350,24 +350,4 @@ class DeleteUserView(DeleteView):
         logout(request)
         
         return HttpResponseRedirect(success_url)
-
-class SelectLanguageView(TemplateView):
-    template_name = "select_language.html"
-    
-    def get(self, request, *args, **kwargs):
-        from django.utils import translation
-        
-        if not self.kwargs['lang_code'] in dict(settings.LANGUAGES):
-            raise Http404
-        else:
-            lang_code = self.kwargs['lang_code']
-        
-        if hasattr(request, 'session'):
-            request.session['django_language'] = lang_code
-        else:
-            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
-        translation.activate(lang_code)
-        
-        context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
     

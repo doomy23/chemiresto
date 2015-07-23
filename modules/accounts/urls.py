@@ -15,5 +15,4 @@ urlpatterns = patterns('',
     
     url(r'^restaurators/create/$', CreateRestauratorView.as_view(), name="restaurators_create"),
     url(r'^restaurators/list/$', RestauratorListView.as_view(), name="restaurators_list"),
-    url(r'^restaurators/$', RestauratorDashView.as_view(), name="restaurators_dash"),
 )

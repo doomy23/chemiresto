@@ -20,7 +20,7 @@ class CreateRestauratorView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        if not check_admin_right(request.user): raise Http404()
+        if not request.user_details.is_an_entrepreneur(): raise Http404()
         
         form = CreateRestauratorForm()
         
@@ -28,7 +28,7 @@ class CreateRestauratorView(View):
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        if not check_admin_right(request.user): raise Http404()
+        if not request.user_details.is_an_entrepreneur(): raise Http404()
         
         messageType = None
         message = ""
