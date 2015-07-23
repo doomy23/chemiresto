@@ -14,5 +14,7 @@ urlpatterns = patterns('',
     url(r'^delete/(?P<pk>\d+)/$', DeleteUserView.as_view(), name="delete_account"),
     
     url(r'^restaurators/create/$', CreateRestauratorView.as_view(), name="restaurators_create"),
+    url(r'^restaurators/(?P<pk>\d+)/manage/$', ManageRestauratorView.as_view(), name="restaurators_manage"),
+    url(r'^restaurators/(?P<pk>\d+)/delete/$', DeleteRestauratorView.as_view(), name="restaurators_delete"),
     url(r'^restaurators/list/$', RestauratorListView.as_view(), name="restaurators_list"),
 )

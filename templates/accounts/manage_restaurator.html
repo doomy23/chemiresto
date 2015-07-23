@@ -1,0 +1,25 @@
+{% extends "accounts/dashboard.html" %}
+{% load crispy_forms_tags i18n %}
+
+{% block title %}{% trans "Update a restaurateur" %}{% endblock %}
+
+{% block content-pane %}
+<div class="col-md-12">
+    <h2 class="page-title">{% trans "Update a restaurateur" %}</h2>
+	{% if messageType and message %}<div class="alert alert-{{messageType}}" role="alert">{{message}}</div>{% endif %}
+	{% crispy form %}
+    
+    
+    <button type="button" id="delete-btn" class="btn btn-danger">
+        <span class="fa fa-trash-o"></span> {% trans "Delete this restaurateur" %}
+    </button>
+</div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+    $('#delete-btn').click(function() {
+            window.location.href='{% url "accounts:restaurators_delete" object.pk %}';
+    });
+</script>
+{% endblock %}

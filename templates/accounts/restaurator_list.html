@@ -5,10 +5,21 @@
 
 {% block content-pane %}
 <div class="col-md-12">
-    <ul>
-    {% for r in restaurateurs %}
-        <li>{{ r.email }}</li>
-    {% endfor %}
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Email address" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in restaurateurs %}
+            <tr>
+                <td><a href="{% url 'accounts:restaurators_manage' r.pk %}">{{ r.first_name }} {{ r.last_name }}</a></td>
+                <td><a href="{% url 'accounts:restaurators_manage' r.pk %}">{{ r.email }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

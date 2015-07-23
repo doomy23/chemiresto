@@ -37,3 +37,24 @@ class CreateRestauratorForm(UserCreationForm):
         if users > 0: raise forms.ValidationError(_("This email address is already in use."))
 
         return email
+        
+class UpdateRestauratorForm(UserCreationForm):
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Restaurant"), required=False)
+    
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email")
+        
+    def __init__(self, *args, **kwargs):
+        super(UpdateRestauratorForm, self).__init__(*args, **kwargs)
+        
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'first_name', 'last_name', 'email', 'username',
+            'password1', 'password2', 'restaurant',
+            Submit('create', _("Update the restaurateur"), css_class='btn btn-primary')
+        )
