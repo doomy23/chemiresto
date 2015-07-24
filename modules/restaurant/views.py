@@ -21,62 +21,12 @@ except: GeoIP = None
 from models import Meal, Menu, Restaurant
 from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm
 
-class RestaurantCreateView(CreateView):
-    template_name = 'restaurants/create.html'
-    
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name="Entrepreneur").exists():
-            # Seul un entrepreneur peut créer un restaurant
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
-        
-    def get(self, request, *args, **kwargs):
-        self.object = None
-        form = RestaurantForm(request=request)
-        return self.render_to_response(
-            self.get_context_data(form=form,))
-                                  
-    def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
-        
-    def post(self, request, *args, **kwargs):
-        self.object = None
-        form = RestaurantForm(self.request.POST, request=request)
-        if (form.is_valid()):
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-            
-class RestaurantDetailView(DetailView):
-    model = Restaurant
-    template_name = 'restaurants/detail.html'
-    
-class RestaurantDeleteView(DeleteView):
-    model = Restaurant
-    success_url = reverse_lazy('restaurant:restaurant_list')
-    template_name = 'restaurants/delete.html'
-    
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name="Entrepreneur").exists():
-            # Seul un entrepreneur peut supprimer un restaurant
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
-    
+#
+# Public Views
+#
 class RestaurantsView(View):
     template_name = 'restaurants/list.html'
-    RESTAURANTS_BY_PAGE = 1
+    RESTAURANTS_BY_PAGE = 5
     
     def get(self, request, *args, **kwargs):
         pageNum = request.GET.get('p', 1)
@@ -84,12 +34,18 @@ class RestaurantsView(View):
         region = request.GET.get('region')
         country = request.GET.get('country')
         
+        #
+        # By default takes the user_details location
+        #
         if (not city or not region or not country) and \
             request.user and request.user_details:
             city = request.user_details.city
             region = request.user_details.region
             country = request.user_details.country
-            
+        
+        #
+        # GeoIp checkup to get the current city
+        #
         elif (not city or not region or not country) and GeoIP:
             geoip = GeoIP()
             
@@ -128,6 +84,69 @@ class RestaurantsView(View):
                                                               'country':country,
                                                               'filterForm':filterForm})
 
+class RestaurantDetailView(DetailView):
+    model = Restaurant
+    template_name = 'restaurants/detail.html'
+
+#
+# Entrepreneur Views
+#
+class RestaurantCreateView(CreateView):
+    template_name = 'restaurants/create.html'
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name="Entrepreneur").exists():
+            # Seul un entrepreneur peut créer un restaurant
+            return HttpResponseForbidden()
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+        
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form = RestaurantForm(request=request)
+        return self.render_to_response(
+            self.get_context_data(form=form,))
+                                  
+    def get_success_url(self):
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
+        
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = RestaurantForm(self.request.POST, request=request)
+        if (form.is_valid()):
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
+class RestaurantDeleteView(DeleteView):
+    model = Restaurant
+    success_url = reverse_lazy('restaurant:restaurant_list')
+    template_name = 'restaurants/delete.html'
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name="Entrepreneur").exists():
+            # Seul un entrepreneur peut supprimer un restaurant
+            return HttpResponseForbidden()
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+
+class RestaurantListView(ListView):
+    model = Restaurant
+    template_name = 'restaurants/restaurant/list.html'
+
+#
+# Restaurateur Views
+#
 class MenuCreateView(CreateView):
     template_name = 'restaurants/menus/create.html'
     
@@ -185,10 +204,6 @@ class MenuCreateView(CreateView):
             return self.form_valid(form, meal_formset)
         else:
             return self.form_invalid(form, meal_formset)
-            
-class RestaurantListView(ListView):
-    model = Restaurant
-    template_name = 'restaurants/restaurant/list.html'
     
 class MenuDetailView(DetailView):
     model = Restaurant

@@ -16,8 +16,12 @@
 
 **Pour le lancement local** :
 
-- ./manage.py dumpdata --indent 2 > testdata.json   (Envoie les modèles et les données dans un fichier json)
+Chargement:
+- ./manage.py syncdb (Créer le chemiresto.sqlite, pas besoin d'ajouter de superuser)
 - ./manage.py loaddata testdata.json   (Charge les modèles et les données à partir d'un fichier json)
+
+Exportation:
+- ./manage.py dumpdata --indent 2 > testdata.json   (Envoie les modèles et les données dans un fichier json)
 - **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
 **Pour le déploiement** :
