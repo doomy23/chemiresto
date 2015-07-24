@@ -13,8 +13,8 @@ from django.views.generic import DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 
-from restaurator_forms import *
-from utils import *
+from forms import CreateRestauratorForm, UpdateRestauratorForm
+#from utils import *
 
 # ADMIN ONLY
 # View used for

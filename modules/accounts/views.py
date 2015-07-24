@@ -5,7 +5,7 @@ from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -17,8 +17,8 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 import urlparse
 
-from forms import *
-from utils import *
+import forms
+#from utils import *
 from models import UserAddress
 
 from orders.models import Order
@@ -32,8 +32,8 @@ class RegisterView(View):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
         
         user = None
-        form = RegistrationForm()
-        detailsForm = RegistrationDetailsForm()
+        form = forms.RegistrationForm()
+        detailsForm = forms.RegistrationDetailsForm()
         
         return TemplateResponse(request, self.template_name, {'registerForm': form,
                                                               'registerDetailsForm': detailsForm,
@@ -43,8 +43,8 @@ class RegisterView(View):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
         
         user = None
-        form = RegistrationForm(data=request.POST)
-        detailsForm = RegistrationDetailsForm(data=request.POST)
+        form = forms.RegistrationForm(data=request.POST)
+        detailsForm = forms.RegistrationDetailsForm(data=request.POST)
         
         if form.is_valid() and detailsForm.is_valid():
             user = form.save()
@@ -66,7 +66,7 @@ class RegisterView(View):
             deliveryAddress.zip = clientDetails.zip
             deliveryAddress.save()
             
-            form = RegistrationForm()
+            form = forms.RegistrationForm()
         
         return TemplateResponse(request, self.template_name, {'registerForm': form,
                                                               'registerDetailsForm': detailsForm,
@@ -82,7 +82,7 @@ class LoginView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
         
-        form = LoginForm()
+        form = forms.LoginForm()
         
         request.session.set_test_cookie()
         
@@ -93,7 +93,7 @@ class LoginView(View):
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated(): return user_default_redirect(request.user)
         
-        form = LoginForm(data=request.POST)
+        form = forms.LoginForm(data=request.POST)
         
         if form.is_valid():
             user = form.get_user()
@@ -154,12 +154,12 @@ class ManagerView(View):
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
-        userAddresses = UserAddress.objects.filter(user=request.user)
+        userAddresses = forms.UserAddress.objects.filter(user=request.user)
         
-        editAccountForm = EditAccountForm(instance=request.user)
-        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
-        passwordChangeForm = PasswordChangeForm(user=request.user)
-        shippingForm = ShippingAddressForm()
+        editAccountForm = forms.EditAccountForm(instance=request.user)
+        editAccountDetailsForm = forms.EditAccountDetailsForm(instance=userDetails)
+        passwordChangeForm = forms.PasswordChangeForm(user=request.user)
+        shippingForm = forms.ShippingAddressForm()
         
         return TemplateResponse(request, self.template_name, {'userAddresses':userAddresses,
                                                               'editAccountForm':editAccountForm,
@@ -183,8 +183,8 @@ class ManagerView(View):
         # Informations form
         #
         if formName == 'informations': 
-            editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST)
+            editAccountForm = forms.EditAccountForm(instance=request.user, data=request.POST)
+            editAccountDetailsForm = forms.EditAccountDetailsForm(instance=userDetails, data=request.POST)
             
             if (editAccountForm.is_valid() and not editAccountDetailsForm) or (editAccountForm.is_valid() and editAccountDetailsForm.is_valid()):
                 user = editAccountForm.save()
@@ -202,22 +202,22 @@ class ManagerView(View):
                 formSuccessMessage = _("Your account information has been successfully updated.")
             
         else:
-            editAccountForm = EditAccountForm(instance=request.user)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
+            editAccountForm = forms.EditAccountForm(instance=request.user)
+            editAccountDetailsForm = forms.EditAccountDetailsForm(instance=userDetails)
         
         #
         # Password form
         #
         if formName == 'password':
-            passwordChangeForm = PasswordChangeForm(user=request.user, data=request.POST)
+            passwordChangeForm = forms.PasswordChangeForm(user=request.user, data=request.POST)
             
             if passwordChangeForm.is_valid():
                 user = passwordChangeForm.save()
-                passwordChangeForm = PasswordChangeForm(user=request.user)
+                passwordChangeForm = forms.PasswordChangeForm(user=request.user)
                 formSuccess = 'password'
                 formSuccessMessage = _("Your password has been successfully updated.")
         
-        else: passwordChangeForm = PasswordChangeForm(user=request.user)
+        else: passwordChangeForm = forms.PasswordChangeForm(user=request.user)
         
         #
         # Shipping form
@@ -230,7 +230,7 @@ class ManagerView(View):
                 address = UserAddress.objects.get(id=addressId, user=request.user)  if not addressId == '0' else None
                 
                 if not delete:
-                    shippingForm = ShippingAddressForm(instance=address, data=request.POST)
+                    shippingForm = forms.ShippingAddressForm(instance=address, data=request.POST)
                     
                     if shippingForm.is_valid():
                         if not address:
@@ -248,7 +248,7 @@ class ManagerView(View):
                             formSuccessType = 'success'
                             formSuccessMessage = _("The delivery address has been successfully created.")
                             
-                            shippingForm = ShippingAddressForm()
+                            shippingForm = forms.ShippingAddressForm()
                             
                         else:
                             unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
@@ -267,7 +267,7 @@ class ManagerView(View):
                                 formSuccessType = 'success'
                                 formSuccessMessage = _("The delivery address has been successfully updated.")
                                 
-                                shippingForm = ShippingAddressForm()
+                                shippingForm = forms.ShippingAddressForm()
                                 
                             else:
                                 formSuccess = 'shipping'
@@ -296,12 +296,12 @@ class ManagerView(View):
                         formSuccessMessage = _("An unfinished command is associated with the delivery address.")
                 
             except UserAddress.DoesNotExist:
-                shippingForm = ShippingAddressForm()
+                shippingForm = forms.ShippingAddressForm()
                 formSuccess = 'shipping'
                 formSuccessType = 'danger'
                 formSuccessMessage = _("The delivery address specified does not exist.")
             
-        else: shippingForm = ShippingAddressForm()
+        else: shippingForm = forms.ShippingAddressForm()
         
         return TemplateResponse(request, self.template_name, {'userAddresses':userAddresses,
                                                               'formSuccess':formSuccess,

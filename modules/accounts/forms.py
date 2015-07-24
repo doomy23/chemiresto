@@ -12,7 +12,8 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils.translation import get_language, ugettext_lazy as _
 
-from models import *
+from models import UserDetails, UserAddress
+from restaurant.models import Restaurant
 
 class LoginForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
@@ -145,3 +146,28 @@ class ShippingAddressForm(forms.ModelForm):
             'default', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
+class CreateRestauratorForm(BaseUserForm):
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Assign a restaurant"), required=False)
+    
+    def __init__(self, *args, **kwargs):
+        super(CreateRestauratorForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'first_name', 'last_name', 'email', 'username',
+            'password1', 'password2', 'restaurant',
+            Submit('create', _("Create the restaurateur"), css_class='btn btn-primary')
+        )
+        
+class UpdateRestauratorForm(BaseUserForm):
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Restaurant"), required=False)
+    
+    def __init__(self, *args, **kwargs):
+        super(UpdateRestauratorForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'first_name', 'last_name', 'email', 'username',
+            'password1', 'password2', 'restaurant',
+            Submit('create', _("Update the restaurateur"), css_class='btn btn-primary')
+        )
