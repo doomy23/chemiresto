@@ -32,8 +32,8 @@ INTERNAL_IPS = (env('DJANGO_DEBUG_TOOLBAR_INTERNAL_IP'),)
 TIME_ZONE = 'America/Montreal'
 
 LANGUAGES = (
-  ('fr', _('French')),
-  ('en', _('English')),
+  ('fr', u'Français'),
+  ('en', u'English'),
 )
 
 LANGUAGE_CODE = 'fr'
