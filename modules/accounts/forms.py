@@ -75,6 +75,9 @@ class RegistrationDetailsForm(forms.ModelForm):
     class Meta:
         model = UserDetails
         exclude = ("user",)
+        widgets = {
+            'birthdate': forms.DateInput(attrs={'class':'datepicker'}),
+        }
         
     def __init__(self, *args, **kwargs):
         super(RegistrationDetailsForm, self).__init__(*args, **kwargs)
@@ -93,7 +96,7 @@ class RegistrationDetailsForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'conditions', 'consent_cp'
+            'birthdate', 'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip', 'conditions', 'consent_cp'
         )
         
     def clean_consent_cp(self):

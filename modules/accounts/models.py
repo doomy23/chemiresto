@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class UserDetails(models.Model):
     user = models.OneToOneField(User, verbose_name=_("user"))
+    birthdate = models.DateField(verbose_name=_("birth date"))
     tel = models.CharField(max_length=30, verbose_name=_("telephone"))
     city = models.CharField(max_length=250, verbose_name=_("city"))
     region = models.CharField(max_length=250, verbose_name=_("province/state/region"))
