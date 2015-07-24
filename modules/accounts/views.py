@@ -112,6 +112,7 @@ class LoginView(View):
                 if netloc and netloc != request.get_host(): redirect_to = None
                 if redirect_to == reverse('accounts:login'): redirect_to = None
                 if redirect_to == reverse('accounts:register'): redirect_to = None
+                if redirect_to == reverse('restaurant:restaurants'): redirect_to = None
                 
                 if redirect_to: return HttpResponseRedirect(redirect_to)
                 
@@ -156,7 +157,6 @@ class ManagerView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        user_type = get_user_type(request.user)
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         
@@ -175,7 +175,6 @@ class ManagerView(View):
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        user_type = get_user_type(request.user)
         try: userDetails = UserDetails.objects.get(user=request.user)
         except UserDetails.DoesNotExist: userDetails = None
         

@@ -24,6 +24,8 @@
 </div>
 
 <div id="content" class="col-md-9">
-{% block content-pane %}{% endblock %}
+{% block content-pane %}
+	<h2 class="page-title">{% trans "Welcome in Chemiresto" %} {{request.user.get_full_name}}</h2>
+{% endblock %}
 </div>
 {% endblock %}
