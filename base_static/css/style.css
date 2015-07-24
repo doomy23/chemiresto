@@ -347,4 +347,7 @@ header .navbar-collapse{
 	display:none;
 }
 
+.noStyle{
+	list-style:none;
+}
 
