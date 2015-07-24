@@ -15,7 +15,7 @@
         
         {% if request.user|has_group:"Restaurateur" %}
             <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage my orders" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage my menus" %}</a></li>
+            <li class="list-group-item"><a href="{% url 'restaurant:menu_list' %}"><span class="fa fa-cog"></span> {% trans "Manage my menus" %}</a></li>
         {% endif %}
         
         <li class="list-group-item"><a href="{% url 'accounts:manage_account' %}"><span class="fa fa-user"></span> {% trans "Manage my account" %}</a></li>

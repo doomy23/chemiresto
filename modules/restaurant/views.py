@@ -183,7 +183,6 @@ class RestaurantListView(AllowedGroupsMixin, ListView):
     model = Restaurant
     template_name = 'restaurants/restaurant/list.html'
     
-
 #
 # Restaurateur Views
 #
@@ -245,6 +244,13 @@ class MenuCreateView(CreateView):
         else:
             return self.form_invalid(form, meal_formset)
     
-class MenuDetailView(DetailView):
-    model = Restaurant
+class MenuListView(AllowedGroupsMixin, ListView):
+    allowed_groups = ['Restaurateur', ]
+    model = Menu
+    template_name = 'restaurants/menus/list.html'
     
+    def get_context_data(self, **kwargs):
+        context = super(MenuListView, self).get_context_data(**kwargs)
+        context['restaurants'] = Restaurant.objects.filter(restaurateur=self.request.user)
+        return context
+        

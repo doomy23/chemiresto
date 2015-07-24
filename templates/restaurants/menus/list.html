@@ -1,0 +1,15 @@
+{% extends "accounts/dashboard.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Select a Menu to edit - " %}{% endblock %}
+
+{% block content-pane %}
+<div class="col-md-12">
+    {% for r in restaurants %}
+        <h1>{{ r.name }} - {{ r.address1 }}</h1><a href="{% url 'restaurant:menu_create' r.pk %}">Ajouter un menu pour ce restaurant</a>
+        Ici on loop sur les menus
+    {% empty %}
+        {% trans "You don't have any restaurant." %}
+    {% endfor %}
+</div>
+{% endblock %}
