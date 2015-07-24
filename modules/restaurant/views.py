@@ -233,7 +233,7 @@ class MenuCreateView(CreateView):
         return get_object_or_404(Restaurant, pk=pk)
                                   
     def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().pk})
         
     def post(self, request, *args, **kwargs):
         self.object = None
