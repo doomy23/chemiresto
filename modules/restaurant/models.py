@@ -21,6 +21,9 @@ class Restaurant(models.Model):
     zip = models.CharField(max_length=10, verbose_name=_("zip code"))
     image = models.ImageField(upload_to='restaurant/restaurants', blank=True, null=True, verbose_name=_("image"))
     
+    def __unicode__(self):
+        return self.name
+    
     @property
     def menus(self):
         return Menu.objects.filter(restaurant=self)
@@ -33,6 +36,9 @@ class Menu(models.Model):
     
     restaurant = models.ForeignKey(Restaurant)
     name = models.CharField(max_length=250, verbose_name=_("name"))
+    
+    def __unicode__(self):
+        return self.name
     
     @property
     def meals(self):
@@ -48,6 +54,9 @@ class Meal(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
     description = models.CharField(max_length=250, blank=True, null=True, verbose_name=_("description"))
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("price"))
+    
+    def __unicode__(self):
+        return self.name
     
     class Meta:
          app_label = 'restaurant'
