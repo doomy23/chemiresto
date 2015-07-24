@@ -47,9 +47,7 @@ class RegisterView(View):
         detailsForm = RegistrationDetailsForm(data=request.POST)
         
         if form.is_valid() and detailsForm.is_valid():
-            user = form.save(commit=False)
-            user.username = form.cleaned_data['email']
-            user.save()
+            user = form.save()
             group = Group.objects.get(name="Client")
             user.groups.add(group)
             

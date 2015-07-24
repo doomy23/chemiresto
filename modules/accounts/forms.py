@@ -31,30 +31,41 @@ class LoginForm(AuthenticationForm):
             forms.ValidationError(_("Invalid email"))
         
         return username
-
-class RegistrationForm(UserCreationForm):
+        
+class BaseUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
+        super(BaseUserForm, self).__init__(*args, **kwargs)
         
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
         
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('first_name', 'last_name', 'email', 'password1', 'password2')
-        
     def clean_email(self):
         email = self.cleaned_data['email']
         
         users = User.objects.filter(email=email).count()
-        if users > 0: raise forms.ValidationError(_("This email address is already in use"))
+        if users > 0: raise forms.ValidationError(_("The email address you entered is already in use on another account"))
 
         return email
+        
+    def save(self, commit=True):
+        instance = super(BaseUserForm, self).save(commit=False)
+        instance.username = self.cleaned_data['email']
+        if commit:
+            instance.save()
+        return instance
+
+class RegistrationForm(BaseUserForm):
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout('first_name', 'last_name', 'email', 'password1', 'password2')
     
 class RegistrationDetailsForm(forms.ModelForm):
     conditions = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly', 'rows':'5'}))
@@ -90,32 +101,17 @@ class RegistrationDetailsForm(forms.ModelForm):
         
         return consent_cp
 
-class EditAccountForm(forms.ModelForm):
+class EditAccountForm(BaseUserForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
         super(EditAccountForm, self).__init__(*args, **kwargs)
-        
-        self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
-        self.fields['email'].required = True
-        
         self.helper = FormHelper()
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-4'
         self.helper.form_tag = False
-        
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        
-        if self.instance: users = User.objects.filter(email=email).exclude(id=self.instance.id).count()
-        else : users = User.objects.filter(email=email).count()
-        
-        if users > 0: raise forms.ValidationError(_("This email is already in use"))
-
-        return email
     
 class EditAccountDetailsForm(forms.ModelForm):
     class Meta:
