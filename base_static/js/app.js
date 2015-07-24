@@ -168,6 +168,27 @@ var RegionSelector = {
 	}
 };*/
 
+var Utilities = {
+	truncateDecimals: function(number, digits) {
+	    var multiplier = Math.pow(10, digits),
+	    adjustedNum = number * multiplier,
+	    truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'ceil'](adjustedNum);
+	    
+	    return (truncatedNum / multiplier).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	},
+	
+	isInt: function(value) {
+		return !isNaN(value) && 
+			parseInt(Number(value)) == value && 
+		    !isNaN(parseInt(value, 10));
+	},
+	
+	scrollTo: function(sel) {
+	    var Tag = $(sel);
+	    $('html,body').animate({scrollTop: Tag.offset().top});
+	}
+};
+
 $(document).ready(function() {
 	AppEvent.init();
 });

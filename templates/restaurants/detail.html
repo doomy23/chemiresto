@@ -27,9 +27,29 @@
 	    	<div id="menu-{{menu.id}}" class="panel-collapse {% if forloop.counter == 1 %}in{% else %}collapse{% endif %}" role="tabpanel" aria-labelledby="heading-menu-{{menu.id}}">
 	      		<div class="panel-body clearfix">
 	      		{% for meal in menu.meals %}
-	      			<div class="meal">
+	      			<div class="meal clearfix">
+						{% if meal.image %}
+						{% thumbnail meal.image 200x150 crop as thumb %}
+        				<img class="image" src="{{thumb.url}}"/>
+				        {% else %}
+				        <img class="image" src="{{ STATIC_URL }}img/placeholder-200x150.png"/>
+						{% endif %}
 	      				<h5>{{ meal }}</h5>
+	      				<p class="description">{{meal.description}}</p>
+	      				<p class="price">{{meal.price}}$</p>
 	      				
+	      				<form id="meal-form-{{meal.id}}" class="well pull-left form-inline meal-form" onsubmit="return false">
+	      					<div id="div_id_qte-{{meal.id}}" class="form-group">
+								<label class="control-label requiredField" for="id_qte-{{meal.id}}">
+									{% trans "Qte" %}
+									<span class="asteriskField">*</span>
+								</label>
+								<div class="controls">
+									<input id="id_qte-{{meal.id}}" class="textinput textInput form-control" name="qte" value="1">
+								</div>
+							</div>
+							<input onclick="addMeal({{meal.id}})" id="add-meal-{{meal.id}}" class="btn btn-primary" type="button" value="{% trans "Add to order" %}" name="add">
+	      				</form>
 	      			</div>
 	      		{% endfor %}
 	      		</div>
@@ -55,9 +75,19 @@
 			<tr id="emptyOrder">
 				<td colspan="3" class="text-center">- {% trans "None" %} -</td>
 			</tr>
-			<tr id="subtotal">
+			{% for menu in restaurant.menus %}{% for meal in menu.meals %}
+			<tr id="order-meal-{{meal.id}}" class="hidden">
+				<td>
+					<a onclick="deleteMeal({{meal.id}})" class="btn btn-default btn-xs"><span class="fa fa-times"></span></a>
+					{{ meal }}
+				</td>
+				<td id="order-meal-qte-{{meal.id}}" class="text-right"></td>
+				<td class="text-right">{{meal.price}}$</td>
+			</tr>
+			{% endfor %}{% endfor %}
+			<tr>
 				<td colspan="2" class="text-right">{% trans "Subtotal" %}</td>
-				<td class="text-right">0.00$</td>
+				<td id="subtotal" class="text-right">0.00$</td>
 			</tr>
 		</tbody>
 	</table>
@@ -74,7 +104,62 @@
 <script type="text/javascript">
 var map;
 
+var meals = { //{% for menu in restaurant.menus %}{% for meal in menu.meals %}
+	'{{meal.id}}': {
+		name: '{{meal|addslashes}}',
+		price: '{{meal.price}}',
+		qte: 0
+	}{% if not forloop.last or not forloop.parentloop.last %},{% endif %}{% endfor %}{% endfor %}
+};
+
+function refreshMyOrder() {
+	var subtotal = 0;
+	
+	for(var mealId in meals) {
+		if(meals[mealId].qte>0) {
+			subtotal += meals[mealId].qte * parseFloat(meals[mealId].price);
+			
+			$("#order-meal-qte-"+mealId).html(meals[mealId].qte);
+			$("#order-meal-"+mealId).removeClass('hidden');
+		} else {
+			$("#order-meal-"+mealId).addClass('hidden');
+		}
+	}
+	
+	$("#subtotal").html(Utilities.truncateDecimals(subtotal, 2)+"$");
+	
+	if(subtotal==0) {
+		$("#emptyOrder").removeClass('hidden');
+		$("#create-order-button").attr("disabled", true);
+	} else {
+		$("#emptyOrder").addClass('hidden');
+		$("#create-order-button").attr("disabled", false);
+	}
+}
+
+function addMeal(id) {
+	var qte = $("#id_qte-"+id).val();
+	
+	if(Utilities.isInt(qte)) {
+		meals[id].qte = meals[id].qte + parseInt(qte);
+		refreshMyOrder();
+	}
+	
+	$("#id_qte-"+id).val(1);
+}
+
+function deleteMeal(id) {
+	meals[id].qte=0;
+	refreshMyOrder();
+}
+
 $(document).ready(function () {
+	refreshMyOrder();
+	
+	$("#create-order-button").click(function(){
+		
+	});
+	
 	var jqxhr = $.get("https://maps.googleapis.com/maps/api/geocode/json?address={{ restaurant.zip|addslashes }}&key=AIzaSyCWVV4JsXtPPqY6ngQB8G3MVHf6S3ylFQw", function(data) {
 		if(data.results.length>0) {
 			//{% if restaurant.image %}
