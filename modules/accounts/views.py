@@ -100,7 +100,9 @@ class LoginView(View):
             login(request, user)
             
             if request.session.test_cookie_worked(): request.session.delete_test_cookie()
-                
+            
+            if user.id == 1: return HttpResponseRedirect(reverse('admin:index'))
+            
             redirect_to = request.GET.get('next', None)
         
             # Block redirections to other websites
