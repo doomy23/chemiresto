@@ -9,27 +9,35 @@
         <h1>{% trans "LOG210 Laboratory - TEAM #5 - GROUP 3" %} <small> {% trans "SUMMER 2015" %}</small></h1>
     </div>
     
-    <div class="panel panel-default">
-        <div class="panel-heading">MADE BY</div>
-        <div class="panel-body">
-            <ul class="noStyle no-paddingLeft no-marginLeft">
-                <li>{% trans "André Koolen" %}</li>
-                <li>{% trans "Anthony Martin Coallier" %}</li>
-                <li>{% trans "Dominic Roberge" %}</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">MADE FOR</div>
-        <div class="panel-body">
-            <p>
-                {% trans "École de technologie supérieure" %}<br>
-                {% trans "Department of Software Engineering and IT" %}<br>
-                {% trans "Classe : LOG210 - Analysis and software design" %}<br>
-                {% trans "Delivery date : 2015-07-27" %}<br>
-            </p>
-        </div>
+    <div class="col-md-6">
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	        	<span>MADE BY</span>
+	        </div>
+	        
+	        <div class="panel-body">
+	            <ul class="noStyle no-paddingLeft no-marginLeft">
+	                <li>{% trans "André Koolen" %}</li>
+	                <li>{% trans "Anthony Martin Coallier" %}</li>
+	                <li>{% trans "Dominic Roberge" %}</li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	
+	<div class="col-md-6">
+    	<div class="panel panel-default">
+        	<div class="panel-heading">
+        		<span>MADE FOR</span>
+        	</div>
+        	
+        	<div class="panel-body">
+            	<span>{% trans "École de technologie supérieure" %}</span><br>
+                <span>{% trans "Department of Software Engineering and IT" %}</span><br>
+                <span>{% trans "Classe : LOG210 - Analysis and software design" %}</span><br>
+                <span>{% trans "Delivery date : 2015-07-27" %}</span><br>
+        	</div>
+    	</div>
     </div>
 </div>
 {% endblock %}
