@@ -137,6 +137,67 @@
 },
 {
   "fields": {
+    "name": "restaurant/restaurants/chat62.jpg",
+    "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
+    "modified": "2015-07-24T18:45:53.733Z"
+  },
+  "model": "easy_thumbnails.source",
+  "pk": 1
+},
+{
+  "fields": {
+    "source": 1,
+    "name": "restaurant/restaurants\\chat62.jpg.400x300_q85_crop.jpg",
+    "storage_hash": "d26becbf46ac48eda79c7a39a13a02dd",
+    "modified": "2015-07-24T18:40:17.483Z"
+  },
+  "model": "easy_thumbnails.thumbnail",
+  "pk": 1
+},
+{
+  "fields": {
+    "source": 1,
+    "name": "restaurant/restaurants\\chat62.jpg.320x240_q85_crop.jpg",
+    "storage_hash": "d26becbf46ac48eda79c7a39a13a02dd",
+    "modified": "2015-07-24T18:45:53.835Z"
+  },
+  "model": "easy_thumbnails.thumbnail",
+  "pk": 2
+},
+{
+  "fields": {
+    "name": "Entr\u00e9es",
+    "restaurant": 1
+  },
+  "model": "restaurant.menu",
+  "pk": 1
+},
+{
+  "fields": {
+    "name": "Crevette au patate",
+    "menu": 1,
+    "price": "9.99",
+    "taxable": true,
+    "image": "restaurant/meals/crevetteaupatate.jpeg",
+    "description": "Crevettes servies avec des patate de qualit\u00e9 sup\u00e9rieur"
+  },
+  "model": "restaurant.meal",
+  "pk": 1
+},
+{
+  "fields": {
+    "name": "Salade de concombre",
+    "menu": 1,
+    "price": "5.99",
+    "taxable": true,
+    "image": "restaurant/meals/saladedeconcombre.jpeg",
+    "description": "Salade de concombre de premi\u00e8re qualit\u00e9"
+  },
+  "model": "restaurant.meal",
+  "pk": 2
+},
+{
+  "fields": {
     "codename": "add_logentry",
     "name": "Can add log entry",
     "content_type": 1
@@ -634,7 +695,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": null,
+    "last_login": "2015-07-24T18:24:40.630Z",
     "groups": [
       1
     ],
@@ -694,7 +755,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": null,
+    "last_login": "2015-07-24T18:46:31.815Z",
     "groups": [
       4
     ],
@@ -708,62 +769,78 @@
 },
 {
   "fields": {
-    "user_id": 1,
-    "tel": "123-123-1234",
     "city": "Montreal",
-    "region": "QC",
-    "country": "CA",
+    "tel": "123-123-1234",
+    "zip": "H3C3R9",
     "address1": "301 rue peel",
-    "address2": null,
-    "zip": "g1q1q9",
-    "consent_cp": 1
+    "region": "QC",
+    "consent_cp": true,
+    "user": 1,
+    "country": "CA",
+    "address2": null
   },
   "model": "accounts.userdetails",
   "pk": 1
 },
 {
   "fields": {
-    "user_id": 2,
-    "tel": "123-123-1234",
     "city": "Montreal",
-    "region": "QC",
-    "country": "CA",
+    "tel": "123-123-1234",
+    "zip": "H3C3R9",
     "address1": "301 rue peel",
-    "address2": null,
-    "zip": "g1q1q9",
-    "consent_cp": 1
+    "region": "QC",
+    "consent_cp": true,
+    "user": 2,
+    "country": "CA",
+    "address2": null
   },
   "model": "accounts.userdetails",
   "pk": 2
 },
 {
   "fields": {
-    "user_id": 3,
-    "tel": "123-123-1234",
     "city": "Montreal",
-    "region": "QC",
-    "country": "CA",
+    "tel": "123-123-1234",
+    "zip": "H3C3R9",
     "address1": "301 rue peel",
-    "address2": null,
-    "zip": "g1q1q9",
-    "consent_cp": 1
+    "region": "QC",
+    "consent_cp": true,
+    "user": 3,
+    "country": "CA",
+    "address2": null
   },
   "model": "accounts.userdetails",
   "pk": 3
 },
 {
   "fields": {
-    "user_id": 4,
-    "tel": "123-123-1234",
     "city": "Montreal",
-    "region": "QC",
-    "country": "CA",
+    "tel": "123-123-1234",
+    "zip": "H3C3R9",
     "address1": "301 rue peel",
-    "address2": null,
-    "zip": "g1q1q9",
-    "consent_cp": 1
+    "region": "QC",
+    "consent_cp": true,
+    "user": 4,
+    "country": "CA",
+    "address2": null
   },
   "model": "accounts.userdetails",
   "pk": 4
+},
+{
+  "fields": {
+    "city": "Montreal",
+    "tel": "123-123-1234",
+    "name": "Restaurant chez Wong",
+    "zip": "H3C1K3",
+    "country": "CA",
+    "region": "QC",
+    "restaurateur": 4,
+    "image": "restaurant/restaurants/chat62.jpg",
+    "address1": "1100 Rue Notre-Dame Ouest",
+    "address2": ""
+  },
+  "model": "restaurant.restaurant",
+  "pk": 1
 }
 ]

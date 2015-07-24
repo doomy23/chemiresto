@@ -25,8 +25,13 @@
 	      		</h4>
 	    	</div>
 	    	<div id="menu-{{menu.id}}" class="panel-collapse {% if forloop.counter == 1 %}in{% else %}collapse{% endif %}" role="tabpanel" aria-labelledby="heading-menu-{{menu.id}}">
-	      		<div class="panel-body">
-	      			fgnbgfhfgh
+	      		<div class="panel-body clearfix">
+	      		{% for meal in menu.meals %}
+	      			<div class="meal">
+	      				<h5>{{ meal }}</h5>
+	      				
+	      			</div>
+	      		{% endfor %}
 	      		</div>
 	      	</div>
 			{% endfor %}
