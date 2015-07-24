@@ -150,9 +150,6 @@ header .navbar-collapse{
 #page-footer{
 	background:#F32837;
 	border-top:solid 5px #CCC;
-	position:absolute;
-	bottom:0px;
-	margin-top:-50px;
 	width:100%;
 }
 
