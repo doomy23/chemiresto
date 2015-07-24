@@ -217,7 +217,8 @@ header .navbar-collapse{
 }
 
 #filterForm .control-label, 
-#filterForm .controls input{
+#filterForm .controls input,
+#filterForm .controls select{
 	font-size:100% !important;
 }
 

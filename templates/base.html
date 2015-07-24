@@ -60,18 +60,18 @@
 		</header>
 		
 		<div id="page-content" class="container">
-			<div class="row">
-                <div class="col-md-12">
-                    {% if messages %}
+			{% if messages %}
+				<div class="row">
+	                <div class="col-md-12">
                         {% for message in messages %}
                             <div class="alert alert-{{ message.tags }}">
                                 <a class="close" data-dismiss="alert">×</a>
                                 {{ message|safe }}
                             </div>
                         {% endfor %}
-                    {% endif %}
-                </div>
-			</div>
+	                </div>
+				</div>
+            {% endif %}
             
             <div class="row">
 				{% block content %}
@@ -79,16 +79,18 @@
              </div>
 		</div>
 		
-		<div id="page-footer" class="container">
-			<div class="row">
-				<h3>{% trans "Chemiresto" %}</h3>
-				<nav>
-					<ul>
-                        {#<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>#}
-						<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
-					</ul>
-				</nav>
-				<p>{% trans "Copyright Chemiresto" %} &copy; {% trans "all rights reserved" %}</p>
+		<div id="page-footer">
+			<div class="container">
+				<div class="row">
+					<h3>{% trans "Chemiresto" %}</h3>
+					<nav>
+						<ul>
+	                        {#<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>#}
+							<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+						</ul>
+					</nav>
+					<p>{% trans "Copyright Chemiresto" %} &copy; {% trans "all rights reserved" %}</p>
+				</div>
 			</div>
 		</div>
 		
