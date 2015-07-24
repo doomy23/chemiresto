@@ -97,6 +97,10 @@ header .navbar-collapse{
 	margin-top:20px;
 }
 
+.marginTop6{
+	margin-top:6px;
+}
+
 .marginLeft15{
 	margin-left:15px;
 }
@@ -130,6 +134,7 @@ header .navbar-collapse{
 #page-content{
 	margin: 0 auto;
 	min-height:0px;
+	padding-bottom:25px;
 }
 
 #page-content .page-title{
@@ -143,7 +148,12 @@ header .navbar-collapse{
 }
 
 #page-footer{
-	background:#eee;
+	background:#F32837;
+	border-top:solid 5px #CCC;
+	position:absolute;
+	bottom:0px;
+	margin-top:-50px;
+	width:100%;
 }
 
 #page-footer h3{
@@ -152,6 +162,7 @@ header .navbar-collapse{
 	margin:0 10px;
 	padding:15px 0;
 	font-weight:600;
+	color:#fff;
 }
 
 #page-footer nav ul{
@@ -167,10 +178,19 @@ header .navbar-collapse{
 	margin:0;
 }
 
+#page-footer nav ul li a{
+	color:#fff;
+}
+
+#page-footer nav ul li a:hover{
+	text-decoration:underline;
+}
+
 #page-footer p{
 	float:right;
 	margin:0;
 	padding:12px 10px;
+	color:#fff;
 }
 
 #navbar{

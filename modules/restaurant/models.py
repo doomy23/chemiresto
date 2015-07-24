@@ -23,6 +23,16 @@ class Restaurant(models.Model):
     
     def __unicode__(self):
         return self.name
+        
+    def get_address(self):
+        return _("%(address1)s %(address2)s, %(city)s, %(region)s (%(country)s) %(zip)s") % {
+            'address1':address1,
+            'address2':address2,
+            'city':city,
+            'region':region,
+            'country':country,
+            'zip':zip,
+        }
     
     @property
     def menus(self):

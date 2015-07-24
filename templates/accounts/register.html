@@ -28,9 +28,20 @@
 {% endblock %}
 
 {% block page-scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	RegionSelector.init("#id_country", "#id_region");
+    
+    var d = new Date();
+    var maxYear = d.getFullYear();
+    var minYear = maxYear - 150;
+    $( ".datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: minYear + ":" + maxYear,
+    });
 });
 </script>
 {% endblock %}

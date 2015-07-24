@@ -97,6 +97,10 @@ header .navbar-collapse{
 	margin-top:20px;
 }
 
+.marginTop6{
+	margin-top:6px;
+}
+
 .marginLeft15{
 	margin-left:15px;
 }
@@ -130,6 +134,7 @@ header .navbar-collapse{
 #page-content{
 	margin: 0 auto;
 	min-height:0px;
+	padding-bottom:25px;
 }
 
 #page-content .page-title{
@@ -143,7 +148,8 @@ header .navbar-collapse{
 }
 
 #page-footer{
-	background:#eee;
+	background:#F32837;
+	border-top:solid 5px #CCC;
 }
 
 #page-footer h3{
@@ -152,6 +158,7 @@ header .navbar-collapse{
 	margin:0 10px;
 	padding:15px 0;
 	font-weight:600;
+	color:#fff;
 }
 
 #page-footer nav ul{
@@ -167,10 +174,19 @@ header .navbar-collapse{
 	margin:0;
 }
 
+#page-footer nav ul li a{
+	color:#fff;
+}
+
+#page-footer nav ul li a:hover{
+	text-decoration:underline;
+}
+
 #page-footer p{
 	float:right;
 	margin:0;
 	padding:12px 10px;
+	color:#fff;
 }
 
 #navbar{
@@ -208,6 +224,20 @@ header .navbar-collapse{
 	display:block;
 }
 
+#filterForm .btn-primary{
+	margin-top:20px;
+}
+
+#filterForm .control-label:first-letter{
+	text-transform:uppercase;
+}
+
+#filterForm .control-label, 
+#filterForm .controls input,
+#filterForm .controls select{
+	font-size:100% !important;
+}
+
 /* Shouldnt do this. read more on : http://getbootstrap.com/css/#type-alignment
 
 #header-login .text-right{
@@ -240,6 +270,24 @@ header .navbar-collapse{
 	border:2px #CCC solid;
 	background:white;
 	color:black;
+}
+
+#restaurant-details .image{
+	float:left;
+	padding:0 10px 15px 0;
+	width:39%;
+	height:auto;
+}
+
+#restaurant-details #map-convas{
+	float:left;
+}
+
+#my-order h3{
+	margin:20px 0 20px 0;
+	padding:0 0 5px;
+	border-bottom:1px solid #CCC;
+	font-size: 30px;
 }
 
 /* Responsive */
@@ -329,4 +377,7 @@ header .navbar-collapse{
 	display:none;
 }
 
+.noStyle{
+	list-style:none;
+}
 

@@ -10,7 +10,7 @@
             <li class="list-group-item"><a href="{% url 'accounts:restaurators_create' %}"><span class="fa fa-cog"></span> {% trans "Create a restaurateur" %}</a></li>
             <li class="list-group-item"><a href="{% url 'accounts:restaurators_list' %}"><span class="fa fa-cog"></span> {% trans "Manage the restaurateurs" %}</a></li>
             <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cutlery"></span> {% trans "Add a restaurant" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cog"></span> {% trans "Edit a restaurant" %}</a></li>
+            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cutlery"></span> {% trans "Edit a restaurant" %}</a></li>
         {% endif %}
         
         {% if request.user|has_group:"Restaurateur" %}
@@ -25,7 +25,7 @@
 
 <div id="content" class="col-md-9">
 {% block content-pane %}
-	<h2 class="page-title">{% trans "Welcome in Chemiresto" %} {{request.user.get_full_name}}</h2>
+	<h2 class="page-title">{% trans "Welcome in Chemiresto" %} {{ request.user.get_full_name }}</h2>
 {% endblock %}
 </div>
 {% endblock %}

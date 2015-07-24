@@ -787,6 +787,7 @@
 },
 {
   "fields": {
+    "birthdate": "2015-07-15",
     "city": "Montreal",
     "tel": "123-123-1234",
     "zip": "H3C3R9",
@@ -802,6 +803,7 @@
 },
 {
   "fields": {
+    "birthdate": "2015-07-15",
     "city": "Montreal",
     "tel": "123-123-1234",
     "zip": "H3C3R9",
@@ -817,6 +819,7 @@
 },
 {
   "fields": {
+    "birthdate": "2015-07-15",
     "city": "Montreal",
     "tel": "123-123-1234",
     "zip": "H3C3R9",
@@ -832,6 +835,7 @@
 },
 {
   "fields": {
+    "birthdate": "2015-07-15",
     "city": "Montreal",
     "tel": "123-123-1234",
     "zip": "H3C3R9",

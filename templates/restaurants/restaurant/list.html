@@ -1,12 +1,37 @@
 {% extends "accounts/dashboard.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Select a restaurant to edit - " %}{% endblock %}
+{% block title %}{% trans "Edit a restaurant - " %}{% endblock %}
 
 {% block content-pane %}
 <div class="col-md-12">
-    {% for restaurant in object_list %}
-        <a href="{% url 'restaurant:restaurant_update' restaurant.pk %}">{{ restaurant.name }}</a>
-    {% endfor %}
+    <h2 class="page-title">{% trans "Select a restaurant to edit" %}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Address" %}</th>
+                <th>{% trans "City" %}</th>
+                <th>{% trans "Region" %}</th>
+                <th>{% trans "Country" %}</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in restaurants %}
+            <tr>
+                <td>{{ r.name }}</a></td>
+                <td>{{ r.address1 }} {{ r.address2 }}</td>
+                <td>{{ r.city }}</td>
+                <td>{{ r.region }}</td>
+                <td>{{ r.country }}</td>
+                <th><a href="{% url 'restaurant:restaurant_update' r.pk %}">{% trans "Update" %}</a></th>
+                <th><a href="{% url 'restaurant:restaurant_delete' r.pk %}">{% trans "Delete" %}</a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
