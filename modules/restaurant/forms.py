@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ModelForm
 from django.forms.formsets import formset_factory
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout
+from crispy_forms.layout import Layout, Submit
 from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
@@ -25,7 +25,7 @@ class RestaurantFilterForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'country', 'region', 'city'
+            'country', 'region', 'city', Submit('search', _("Search"))
         )
         
 class RestaurantForm(ModelForm):
