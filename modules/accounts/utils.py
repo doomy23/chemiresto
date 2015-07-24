@@ -39,15 +39,4 @@ def user_default_redirect(user):
 #    elif 2 in groupIds: return 'Restaurator'
 #    elif user.is_superuser: return 'Admin'
 #    else: return None
-    
-class AllowedGroupsMixin(object):
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        if self.allowed_groups == '__all__':
-            return super(AllowedGroupsMixin, self).dispatch(*args, **kwargs)
-        else:
-            allowed_groups = self.request.user.groups.values_list('name',flat=True)
-            if [i for i in self.allowed_groups if i in allowed_groups]:
-                return super(AllowedGroupsMixin, self).dispatch(*args, **kwargs)
-            else:
-                raise PermissionDenied
+

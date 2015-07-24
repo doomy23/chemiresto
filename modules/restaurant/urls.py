@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     
     # Pour l'entrepreneur
     url(r'^create/$', RestaurantCreateView.as_view(), name="restaurant_create"),
+    url(r'^(?P<pk>\d+)/update/$', RestaurantUpdateView.as_view(), name="restaurant_update"),
     url(r'^(?P<pk>\d+)/delete/$', RestaurantDeleteView.as_view(), name="restaurant_delete"),
     url(r'^list/$', RestaurantListView.as_view(), name="restaurant_list"),
     

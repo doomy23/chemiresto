@@ -9,7 +9,7 @@ from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.list import ListView
@@ -20,6 +20,7 @@ except: GeoIP = None
 
 from models import Meal, Menu, Restaurant
 from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm
+from accounts.mixins import AllowedGroupsMixin
 
 #
 # Public Views
@@ -95,7 +96,7 @@ class RestaurantDetailView(DetailView):
 #
 # Entrepreneur Views
 #
-class RestaurantCreateView(CreateView):
+class RestaurantCreateView(SuccessMessageMixin, CreateView):
     template_name = 'restaurants/create.html'
     
     @method_decorator(login_required)
@@ -115,6 +116,17 @@ class RestaurantCreateView(CreateView):
         form = RestaurantForm(request=request)
         return self.render_to_response(
             self.get_context_data(form=form,))
+            
+    def get_success_message(self, cleaned_data):
+            name = cleaned_data.get("name")
+            restaurateur = cleaned_data.get("restaurateur")
+            
+            if restaurateur:
+                messages.success(self.request, _("'%s' was created successfully" % name))
+            else:
+                messages.warning(self.request, _("'%s' doesn't have a restaurateur" % name))
+                
+            return
                                   
     def get_success_url(self):
         return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
@@ -126,27 +138,51 @@ class RestaurantCreateView(CreateView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+            
+class RestaurantUpdateView(SuccessMessageMixin, UpdateView):
+    allowed_groups = ['Entrepreneur', ]
+    template_name = 'restaurants/update.html'
+    model = Restaurant
+        
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = RestaurantForm(instance=self.object, request=request)
+        return self.render_to_response(
+            self.get_context_data(form=form,))
+            
+    def get_success_message(self, cleaned_data):
+            name = cleaned_data.get("name")
+            restaurateur = cleaned_data.get("restaurateur")
+            
+            if restaurateur:
+                messages.success(self.request, _("'%s' was updated successfully" % name))
+            else:
+                messages.warning(self.request, _("'%s' still doesn't have a restaurateur" % name))
+                
+            return
+            
+    def get_success_url(self):
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
+        
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = RestaurantForm(self.request.POST, self.request.FILES, instance=self.object, request=request)
+        if (form.is_valid()):
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
     
-class RestaurantDeleteView(DeleteView):
+class RestaurantDeleteView(AllowedGroupsMixin, DeleteView):
+    allowed_groups = ['Entrepreneur', ]
     model = Restaurant
     success_url = reverse_lazy('restaurant:restaurant_list')
     template_name = 'restaurants/delete.html'
-    
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name="Entrepreneur").exists():
-            # Seul un entrepreneur peut supprimer un restaurant
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
 
-class RestaurantListView(ListView):
+class RestaurantListView(AllowedGroupsMixin, ListView):
+    allowed_groups = ['Entrepreneur', ]
     model = Restaurant
     template_name = 'restaurants/restaurant/list.html'
+    
 
 #
 # Restaurateur Views

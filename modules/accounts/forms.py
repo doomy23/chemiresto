@@ -6,13 +6,15 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, HTML
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils.translation import get_language, ugettext_lazy as _
 
-from models import *
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, HTML, Submit
+
+from models import UserDetails, UserAddress
+from restaurant.models import Restaurant
 
 class LoginForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
@@ -31,30 +33,41 @@ class LoginForm(AuthenticationForm):
             forms.ValidationError(_("Invalid email"))
         
         return username
-
-class RegistrationForm(UserCreationForm):
+        
+class BaseUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
+        super(BaseUserForm, self).__init__(*args, **kwargs)
         
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
         
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('first_name', 'last_name', 'email', 'password1', 'password2')
-        
     def clean_email(self):
         email = self.cleaned_data['email']
         
         users = User.objects.filter(email=email).count()
-        if users > 0: raise forms.ValidationError(_("This email address is already in use"))
+        if users > 0: raise forms.ValidationError(_("The email address you entered is already in use on another account"))
 
         return email
+        
+    def save(self, commit=True):
+        instance = super(BaseUserForm, self).save(commit=False)
+        instance.username = self.cleaned_data['email']
+        if commit:
+            instance.save()
+        return instance
+
+class RegistrationForm(BaseUserForm):
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout('first_name', 'last_name', 'email', 'password1', 'password2')
     
 class RegistrationDetailsForm(forms.ModelForm):
     conditions = forms.CharField(widget=forms.Textarea(attrs={'readonly':'readonly', 'rows':'5'}))
@@ -90,32 +103,17 @@ class RegistrationDetailsForm(forms.ModelForm):
         
         return consent_cp
 
-class EditAccountForm(forms.ModelForm):
+class EditAccountForm(BaseUserForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "email")
         
     def __init__(self, *args, **kwargs):
         super(EditAccountForm, self).__init__(*args, **kwargs)
-        
-        self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
-        self.fields['email'].required = True
-        
         self.helper = FormHelper()
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-4'
         self.helper.form_tag = False
-        
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        
-        if self.instance: users = User.objects.filter(email=email).exclude(id=self.instance.id).count()
-        else : users = User.objects.filter(email=email).count()
-        
-        if users > 0: raise forms.ValidationError(_("This email is already in use"))
-
-        return email
     
 class EditAccountDetailsForm(forms.ModelForm):
     class Meta:
@@ -149,3 +147,28 @@ class ShippingAddressForm(forms.ModelForm):
             'default', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
+class CreateRestauratorForm(BaseUserForm):
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Assign a restaurant"), required=False)
+    
+    def __init__(self, *args, **kwargs):
+        super(CreateRestauratorForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'first_name', 'last_name', 'email', 'username',
+            'password1', 'password2', 'restaurant',
+            Submit('create', _("Create the restaurateur"), css_class='btn btn-primary')
+        )
+        
+class UpdateRestauratorForm(BaseUserForm):
+    restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Restaurant"), required=False)
+    
+    def __init__(self, *args, **kwargs):
+        super(UpdateRestauratorForm, self).__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'first_name', 'last_name', 'email', 'username',
+            'password1', 'password2', 'restaurant',
+            Submit('create', _("Update the restaurateur"), css_class='btn btn-primary')
+        )
