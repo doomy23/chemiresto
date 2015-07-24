@@ -38,7 +38,7 @@
 								<ul class="nav navbar-nav">
 
 									{% if not request.user_details or request.user_details.is_a_client %}
-										<li><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>
+										<li><a href="{% url 'restaurant:restaurants' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>
 									{% endif %}
 									<li><a href="{% url 'about' %}"><span class="fa fa-info-circle"></span>  {% trans "About" %}</a></li>
 									{% if request.user_details %}
