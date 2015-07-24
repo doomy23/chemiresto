@@ -96,78 +96,51 @@ class RestaurantDetailView(DetailView):
 #
 # Entrepreneur Views
 #
-class RestaurantCreateView(SuccessMessageMixin, CreateView):
+class RestaurantCreateView(AllowedGroupsMixin, CreateView):
+    allowed_groups = ['Entrepreneur',]
+    form_class = RestaurantForm
     template_name = 'restaurants/create.html'
+    success_url = reverse_lazy('restaurant:restaurant_create')
     
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name="Entrepreneur").exists():
-            # Seul un entrepreneur peut créer un restaurant
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
-        
-    def get(self, request, *args, **kwargs):
-        self.object = None
-        form = RestaurantForm(request=request)
-        return self.render_to_response(
-            self.get_context_data(form=form,))
-            
-    def get_success_message(self, cleaned_data):
-            name = cleaned_data.get("name")
-            restaurateur = cleaned_data.get("restaurateur")
-            
-            if restaurateur:
-                messages.success(self.request, _("'%s' was created successfully" % name))
-            else:
-                messages.warning(self.request, _("'%s' doesn't have a restaurateur" % name))
-                
-            return
-                                  
-    def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
-        
     def post(self, request, *args, **kwargs):
         self.object = None
-        form = RestaurantForm(self.request.POST, self.request.FILES, request=request)
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        
         if (form.is_valid()):
+            name = form.cleaned_data.get("name")
+            restaurateur = form.cleaned_data.get("restaurateur")
+            
+            if restaurateur:
+                messages.success(self.request, _("'%s' has been successfully created" % name))
+            else:
+                messages.warning(self.request, _("'%s' has been successfully created but doesn't have an assigned restaurateur" % name))
+                
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
             
-class RestaurantUpdateView(SuccessMessageMixin, UpdateView):
+class RestaurantUpdateView(AllowedGroupsMixin, UpdateView):
     allowed_groups = ['Entrepreneur', ]
-    template_name = 'restaurants/update.html'
+    form_class = RestaurantForm
     model = Restaurant
-        
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = RestaurantForm(instance=self.object, request=request)
-        return self.render_to_response(
-            self.get_context_data(form=form,))
-            
-    def get_success_message(self, cleaned_data):
-            name = cleaned_data.get("name")
-            restaurateur = cleaned_data.get("restaurateur")
-            
-            if restaurateur:
-                messages.success(self.request, _("'%s' was updated successfully" % name))
-            else:
-                messages.warning(self.request, _("'%s' still doesn't have a restaurateur" % name))
-                
-            return
-            
-    def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.object.pk})
-        
+    success_url = reverse_lazy('restaurant:restaurant_list')
+    template_name = 'restaurants/update.html'
+    
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = RestaurantForm(self.request.POST, self.request.FILES, instance=self.object, request=request)
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        
         if (form.is_valid()):
+            name = form.cleaned_data.get("name")
+            restaurateur = form.cleaned_data.get("restaurateur")
+            
+            if restaurateur:
+                messages.success(self.request, _("'%s' has been successfully updated" % name))
+            else:
+                messages.warning(self.request, _("'%s' has been successfully updated but doesn't have an assigned restaurateur" % name))
+                
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -180,6 +153,7 @@ class RestaurantDeleteView(AllowedGroupsMixin, DeleteView):
 
 class RestaurantListView(AllowedGroupsMixin, ListView):
     allowed_groups = ['Entrepreneur', ]
+    context_object_name = 'restaurants'
     model = Restaurant
     template_name = 'restaurants/restaurant/list.html'
     

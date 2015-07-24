@@ -13,10 +13,6 @@
             <span class="fa fa-check"></span> {% trans "Save" %}
         </button>
     </form>
-    
-    <button type="button" id="delete-btn" class="btn btn-danger">
-        <span class="fa fa-trash-o"></span> {% trans "DESTROY !!!!" %}
-    </button>
 </div>
 {% endblock %}
 
@@ -24,10 +20,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	RegionSelector.init("#restaurant-form #id_country", "#restaurant-form #id_region");
-    
-    $('#delete-btn').click(function() {
-       window.location = "{% url 'restaurant:restaurant_delete' object.pk %}";
-    });
 });
 </script>
 {% endblock %}

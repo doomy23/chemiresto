@@ -7,7 +7,7 @@
 		<div class="clearfix"></div>
 		<ul class="nav navbar-nav navbar-right accountMenu">
 			<li>
-				<a class="paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-cog"></span> {% trans "My account" %}</a>
+				<a class="paddingRight5" href="{% url 'accounts:manage_account' %}"><span class="fa fa-user"></span> {% trans "My account" %}</a>
 			</li>
 			<li>
 				<a class="paddingLeft5" href="{% url 'accounts:logout' %}?next={{request.path}}"><span class="fa fa-power-off"></span> {% trans "Sign out" %}</a>
