@@ -6,11 +6,12 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, HTML
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils.translation import get_language, ugettext_lazy as _
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, HTML, Submit
 
 from models import UserDetails, UserAddress
 from restaurant.models import Restaurant
