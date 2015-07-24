@@ -37,9 +37,15 @@
 							</div>
 							<div class="collapse navbar-collapse" id="collapse-navigation">
 								<ul class="nav navbar-nav">
-									{#<li><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>#}
-									<li><a href="{% url 'accounts:dashboard' %}"><span class="fa fa-tachometer"></span> {% trans "My dashboard" %}</a></li>
-									<li><a href="{% url 'about' %}"><span class="fa fa-info-circle"></span> {% trans "About" %}</a></li>
+
+									{% if not request.user_details or request.user_details.is_a_client %}
+										<li><a href="{% url 'restaurant:restaurants' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>
+									{% endif %}
+									<li><a href="{% url 'about' %}"><span class="fa fa-info-circle"></span>  {% trans "About" %}</a></li>
+									{% if request.user_details %}
+										<li><a href="{% url 'accounts:dashboard' %}"><span class="fa fa-tachometer"></span> {% trans "My dashboard" %}</a></li>
+									{% endif %}
+
 								</ul>
 							</div>
 						</div>
