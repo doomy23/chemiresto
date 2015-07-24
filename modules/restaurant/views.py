@@ -117,7 +117,7 @@ class RestaurantCreateView(CreateView):
         
     def post(self, request, *args, **kwargs):
         self.object = None
-        form = RestaurantForm(self.request.POST, request=request)
+        form = RestaurantForm(self.request.POST, self.request.FILES, request=request)
         if (form.is_valid()):
             return self.form_valid(form)
         else:

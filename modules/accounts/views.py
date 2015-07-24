@@ -152,9 +152,6 @@ class DashboardView(View):
 class ManagerView(View):
     template_name = 'accounts/manager.html'
     
-    def hide_user_details(self, request):
-        return not request.user_details.is_a_client()
-    
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         try: userDetails = UserDetails.objects.get(user=request.user)
@@ -163,7 +160,7 @@ class ManagerView(View):
         userAddresses = UserAddress.objects.filter(user=request.user)
         
         editAccountForm = EditAccountForm(instance=request.user)
-        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if not self.hide_user_details(request) else None
+        editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
         passwordChangeForm = PasswordChangeForm(user=request.user)
         shippingForm = ShippingAddressForm()
         
@@ -184,14 +181,13 @@ class ManagerView(View):
         formSuccessType = None
         formSuccessMessage = ""
         formName = request.POST.get('form-name')
-        hideUserDetails = self.hide_user_details(request)
         
         #
         # Informations form
         #
         if formName == 'informations': 
             editAccountForm = EditAccountForm(instance=request.user, data=request.POST)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST) if not hideUserDetails else None
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails, data=request.POST)
             
             if (editAccountForm.is_valid() and not editAccountDetailsForm) or (editAccountForm.is_valid() and editAccountDetailsForm.is_valid()):
                 user = editAccountForm.save()
@@ -210,7 +206,7 @@ class ManagerView(View):
             
         else:
             editAccountForm = EditAccountForm(instance=request.user)
-            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails) if not hideUserDetails else None
+            editAccountDetailsForm = EditAccountDetailsForm(instance=userDetails)
         
         #
         # Password form

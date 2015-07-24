@@ -45,20 +45,24 @@
 
 {% block page-scripts %}
 <script type="text/javascript">
-$('#pagination').twbsPagination({
-	totalPages: {{ paginator.num_pages }},
-	startPage: {{ page.number }},
-	visiblePages: 10,
-	first: '{% trans "First" %}',
-	prev: '{% trans "Before" %}',
-	next: '{% trans "Next" %}',
-	last: '{% trans "Last" %}',
-	onPageClick: function (event, page) {
-    	$.get("{% url 'restaurant:restaurant_list' %}?p="+page, function( data ) {
-			var content = $('#restaurants', data).html();
-			$('#restaurants').html(content);
-		});
-	}
+$(document).ready(function() {
+	RegionSelector.init("#filterForm #id_country", "#filterForm #id_region");
+	
+	$('#pagination').twbsPagination({
+		totalPages: {{ paginator.num_pages }},
+		startPage: {{ page.number }},
+		visiblePages: 10,
+		first: '{% trans "First" %}',
+		prev: '{% trans "Before" %}',
+		next: '{% trans "Next" %}',
+		last: '{% trans "Last" %}',
+		onPageClick: function (event, page) {
+	    	$.get("{% url 'restaurant:restaurant_list' %}?p="+page, function( data ) {
+				var content = $('#restaurants', data).html();
+				$('#restaurants').html(content);
+			});
+		}
+	});
 });
 </script>
 {% endblock %}
