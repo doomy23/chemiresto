@@ -33,6 +33,10 @@ Exportation:
 ## Comptes de test
 
 ```
+email: chemiresto@gmail.com
+passw: chemiresto
+pbkdf2_sha256$20000$XONT2g8BLDGP$0tbZN9KZnY/IIepSc18Mh5tCNiY2gKDfPVYCgsquGIw=
+
 email: entrepreneur@email.com
 passw: entrepreneur
 pbkdf2_sha256$20000$TBSpnyWmCE2p$l1cqAttD8M6ycVOexWKl0kHJfRy7XA408EvDCO0sWh4=

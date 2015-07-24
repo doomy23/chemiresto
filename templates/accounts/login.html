@@ -6,16 +6,20 @@
 {% block header-login %}{% endblock %}
 
 {% block content %}
-<div class="col-md-12">
+<div class="col-md-5">
 	<form id="login-form" method="post" action="">
 		<h2 class="page-title">{% trans "Identification" %}</h2>
 		{% csrf_token %}
 		{{loginForm|crispy}}
+		
 		<button type="submit" class="btn btn-primary pull-left" style="margin:0 20px 10px 0">
 			<span class="fa fa-user"></span> {% trans "Sign in" %}
 		</button>
-		<p><strong>{% trans "Vous n'avez pas de compte?" %}</strong></p>
-		<p><a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> {% trans "Inscription" %}</a></p>
+		
+		<div class="pull-left marginTop6">
+			<a class="paddingLeft5" href="{% url 'accounts:register' %}"><span class="fa fa-user-plus"></span> <strong>{% trans "Vous n'avez pas de compte?" %}</strong></a>
+		</div>
+		
 	</form>
 </div>
 {% endblock %}
