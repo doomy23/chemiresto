@@ -97,6 +97,10 @@ header .navbar-collapse{
 	margin-top:20px;
 }
 
+.marginTop6{
+	margin-top:6px;
+}
+
 .marginLeft15{
 	margin-left:15px;
 }
@@ -130,6 +134,7 @@ header .navbar-collapse{
 #page-content{
 	margin: 0 auto;
 	min-height:0px;
+	padding-bottom:25px;
 }
 
 #page-content .page-title{
