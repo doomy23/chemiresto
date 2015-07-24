@@ -13,10 +13,20 @@
 		{% endif %}
 		<div id="map-canvas" style="width:{% if restaurant.image %}60%{% else %}100%{% endif %};height:300px;"></div>
 	</div>
+	{% if restaurant.menus %}
+	<div id="restaurant-menu" class="panel-group" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+			{% for menu in restaurant.menus %}
+			
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
 </div>
 {% if not request.user_details or request.user_details.is_a_client %}
 <div id="my-order" class="col-md-4">
 	<h3>{% trans "My order" %}</h3>
+	
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -35,6 +45,7 @@
 			</tr>
 		</tbody>
 	</table>
+	
 	<div class="text-right">
 		<button id="create-order-button" class="btn btn-danger" disabled="disabled">{% trans "Order now!" %}</button>
 	</div>
