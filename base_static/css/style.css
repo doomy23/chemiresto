@@ -143,7 +143,8 @@ header .navbar-collapse{
 }
 
 #page-footer{
-	background:#eee;
+	background:#F32837;
+	border-top:solid 5px #CCC;
 }
 
 #page-footer h3{
@@ -152,6 +153,7 @@ header .navbar-collapse{
 	margin:0 10px;
 	padding:15px 0;
 	font-weight:600;
+	color:#fff;
 }
 
 #page-footer nav ul{
@@ -167,10 +169,19 @@ header .navbar-collapse{
 	margin:0;
 }
 
+#page-footer nav ul li a{
+	color:#fff;
+}
+
+#page-footer nav ul li a:hover{
+	text-decoration:underline;
+}
+
 #page-footer p{
 	float:right;
 	margin:0;
 	padding:12px 10px;
+	color:#fff;
 }
 
 #navbar{
