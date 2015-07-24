@@ -112,7 +112,6 @@ class LoginView(View):
                 if netloc and netloc != request.get_host(): redirect_to = None
                 if redirect_to == reverse('accounts:login'): redirect_to = None
                 if redirect_to == reverse('accounts:register'): redirect_to = None
-                if redirect_to == reverse('restaurant:restaurants'): redirect_to = None
                 
                 if redirect_to: return HttpResponseRedirect(redirect_to)
                 

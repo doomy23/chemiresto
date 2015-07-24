@@ -29,6 +29,9 @@ class RestaurantsView(View):
     RESTAURANTS_BY_PAGE = 5
     
     def get(self, request, *args, **kwargs):
+        if request.user_details and not request.user_details.is_a_client():
+            return HttpResponseRedirect(reverse('accounts:dashboard'))
+        
         pageNum = request.GET.get('p', 1)
         city = request.GET.get('city')
         region = request.GET.get('region')
