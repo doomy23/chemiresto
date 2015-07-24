@@ -33,6 +33,7 @@ class RestaurantForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(RestaurantForm, self).__init__(*args, **kwargs)
+        self.fields['restaurateur'].queryset = User.objects.filter(groups__name='Restaurateur')
         self.helper = FormHelper()
         self.helper.form_tag = False
         
