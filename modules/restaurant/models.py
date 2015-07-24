@@ -25,7 +25,7 @@ class Restaurant(models.Model):
         return self.name
         
     def get_address(self):
-        return _("%s %s, %s, %s (%s) %s") % {
+        return _("%(address1)s %(address2)s, %(city)s, %(region)s (%(country)s) %(zip)s") % {
             'address1':address1,
             'address2':address2,
             'city':city,
