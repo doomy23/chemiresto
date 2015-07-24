@@ -38,21 +38,9 @@ class RestaurantForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         
-    def clean(self):
-        cleaned_data = super(RestaurantForm, self).clean()
-        
-        if self.is_valid():
-            name = cleaned_data.get("name")
-            restaurateur = cleaned_data.get("restaurateur")
-            
-            if restaurateur:
-                messages.success(self.request, _("'%s' was created successfully" % name))
-            else:
-                messages.warning(self.request, _("'%s' doesn't have a restaurateur" % name))
-        
     class Meta:
         model = Restaurant
-        fields = ['restaurateur', 'name', 'tel', 'country', 'region', 'city', 'address1', 'address2', 'zip', 'image',]
+        fields = ['name', 'tel', 'country', 'region', 'city', 'address1', 'address2', 'zip', 'image', 'restaurateur']
         
 class MenuForm(ModelForm):
     
