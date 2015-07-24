@@ -54,6 +54,8 @@ class Meal(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
     description = models.CharField(max_length=250, blank=True, null=True, verbose_name=_("description"))
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("price"))
+    taxable = models.BooleanField(verbose_name=_("taxable"), default=True)
+    image = models.ImageField(upload_to='restaurant/restaurants', blank=True, null=True, verbose_name=_("image"))
     
     def __unicode__(self):
         return self.name

@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from accounts.models import UserAddress
 from restaurant.models import Restaurant
 from extras.fields import CurrencyField
+from restaurant.models import Meal
 
 ORDER_STATES = (
     ('UNFINISHED',_("unfinished")),
@@ -32,7 +33,7 @@ class Order(models.Model):
          app_label = 'order'
     
 class OrderDetail(models.Model):
-    #item = models.ForeignKey(MenuItem, verbose_name=u"Élément du menu")
+    item = models.ForeignKey(Meal, verbose_name=_("meal"))
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("cost before tax"))
     qte = models.PositiveSmallIntegerField(verbose_name=_("qte"))
     taxable = models.BooleanField(verbose_name=_("taxable"), default=True)

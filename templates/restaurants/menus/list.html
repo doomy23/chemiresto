@@ -6,8 +6,11 @@
 {% block content-pane %}
 <div class="col-md-12">
     {% for r in restaurants %}
-        <h1>{{ r.name }} - {{ r.address1 }}</h1><a href="{% url 'restaurant:menu_create' r.pk %}">Ajouter un menu pour ce restaurant</a>
-        Ici on loop sur les menus
+        <h1>{{ r.name }} - {{ r.address1 }}</h1><a href="{% url 'restaurant:menu_create' r.pk %}">Ajouter un menu pour ce restaurant</a> <br>
+        
+        {% for m in r.menus %}
+            <a href="{% url 'restaurant:menu_update' m.pk %}">{{ m.name }}</a> <br>
+        {% endfor %}
     {% empty %}
         {% trans "You don't have any restaurant." %}
     {% endfor %}
