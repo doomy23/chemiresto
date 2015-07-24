@@ -242,6 +242,24 @@ header .navbar-collapse{
 	color:black;
 }
 
+#restaurant-details .image{
+	float:left;
+	padding:0 10px 15px 0;
+	width:39%;
+	height:auto;
+}
+
+#restaurant-details #map-convas{
+	float:left;
+}
+
+#my-order h3{
+	margin:20px 0 20px 0;
+	padding:0 0 5px;
+	border-bottom:1px solid #CCC;
+	font-size: 30px;
+}
+
 /* Responsive */
 
 @media only screen and (max-width: 992px) {

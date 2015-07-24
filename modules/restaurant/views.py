@@ -90,6 +90,7 @@ class RestaurantsView(View):
 class RestaurantDetailView(DetailView):
     model = Restaurant
     template_name = 'restaurants/detail.html'
+    context_object_name = 'restaurant'
 
 #
 # Entrepreneur Views

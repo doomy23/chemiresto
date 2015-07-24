@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
 
+from extras.fields import CurrencyField
+
 class Restaurant(models.Model):
     # Classe qui représente un restaurant.
     
@@ -37,7 +39,7 @@ class Meal(models.Model):
     menu = models.ForeignKey(Menu)
     name = models.CharField(max_length=250, verbose_name=_("name"))
     description = models.CharField(max_length=250, blank=True, null=True, verbose_name=_("description"))
-    price = models.IntegerField(verbose_name=_("price"))
+    price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("price"))
     
     class Meta:
          app_label = 'restaurant'

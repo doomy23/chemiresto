@@ -17,7 +17,7 @@
 **Pour le lancement local** :
 
 Chargement:
-- ./manage.py syncdb (Créer le chemiresto.sqlite, pas besoin d'ajouter de superuser)
+- ./manage.py migrate (Créer le chemiresto.sqlite, pas besoin d'ajouter de superuser)
 - ./manage.py loaddata testdata.json   (Charge les modèles et les données à partir d'un fichier json)
 
 Exportation:

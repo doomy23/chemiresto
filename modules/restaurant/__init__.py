@@ -1,1 +1,1 @@
-import urls, views, models, forms
+import urls, views, models, forms, admin

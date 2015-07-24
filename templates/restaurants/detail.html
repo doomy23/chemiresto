@@ -1,8 +1,91 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load thumbnail i18n %}
 
 {% block title %}{{ restaurant.name }} - {% trans "Restaurants" %}{% endblock %}
 
 {% block content %}
-    Ici il faut afficher tous les menus et tout...
+<div id="restaurant" class="{% if not request.user_details or request.user_details.is_a_client %}col-md-8{% else %}col-md-12{% endif %}">
+	<div id="restaurant-details">
+		<h2 class="page-title">{{ restaurant.name }}</h2>
+		{% if restaurant.image %}
+		{% thumbnail restaurant.image 400x300 crop as thumb %}
+        <img class="image" src="{{thumb.url}}"/>
+		{% endif %}
+		<div id="map-canvas" style="width:{% if restaurant.image %}60%{% else %}100%{% endif %};height:300px;"></div>
+	</div>
+</div>
+{% if not request.user_details or request.user_details.is_a_client %}
+<div id="my-order" class="col-md-4">
+	<h3>{% trans "My order" %}</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>{% trans "Item" %}</th>
+				<th class="text-right">{% trans "Qte" %}</th>
+				<th style="width:75px" class="text-right">{% trans "Price" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr id="emptyOrder">
+				<td colspan="3" class="text-center">- {% trans "None" %} -</td>
+			</tr>
+			<tr id="subtotal">
+				<td colspan="2" class="text-right">{% trans "Subtotal" %}</td>
+				<td class="text-right">0.00$</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="text-right">
+		<button id="create-order-button" class="btn btn-danger" disabled="disabled">{% trans "Order now!" %}</button>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language={{ request.LANGUAGE_CODE }}&key=AIzaSyCWVV4JsXtPPqY6ngQB8G3MVHf6S3ylFQw"></script>
+<script type="text/javascript">
+var map;
+
+$(document).ready(function () {
+	var jqxhr = $.get("https://maps.googleapis.com/maps/api/geocode/json?address={{ restaurant.zip|addslashes }}&key=AIzaSyCWVV4JsXtPPqY6ngQB8G3MVHf6S3ylFQw", function(data) {
+		if(data.results.length>0) {
+			//{% if restaurant.image %}
+			$('#map-canvas').height($('#restaurant-details .image').height()); //{% endif %}
+			
+			var lat = data.results[0].geometry.location.lat;
+			var lng = data.results[0].geometry.location.lng;
+			
+			var position = new google.maps.LatLng(lat, lng);
+			
+			var mapOptions = {
+				center: position,
+		      	zoom: 16,
+		      	mapTypeId: google.maps.MapTypeId.HYBRID
+		    };
+			
+			map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+		
+		    var marker = new google.maps.Marker({
+		        position: position,
+		        map: map,
+		        title: '{{ restaurant.name|addslashes }}'
+		    });
+		    
+		    var infowindow = new google.maps.InfoWindow({
+		        content: '<div id="content"><h1 id="firstHeading" class="firstHeading">{{ restaurant.name|addslashes }}</h1>' +
+		        	'<div id="bodyContent"><p class="adr">{{ restaurant.address1|addslashes }}, {% if restaurant.address2 %}{{ restaurant.address2|addslashes }}, {% endif %}' + 
+		        	'{{ restaurant.city|addslashes }}, {{ restaurant.region|addslashes }}, {{ restaurant.country|addslashes }}, {{ restaurant.zip|addslashes }}</p></div></div>'
+		    });
+		    
+		    google.maps.event.addListener(marker, 'click', function() {
+		    	infowindow.open(map, marker);
+		    });
+		} else {
+			console.error('No locations found for zip code: {{ restaurant.zip|addslashes }}')
+			$('#map-canvas').remove();
+		}
+	});
+});
+</script>
 {% endblock %}
