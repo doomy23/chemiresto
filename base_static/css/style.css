@@ -208,6 +208,19 @@ header .navbar-collapse{
 	display:block;
 }
 
+#filterForm .btn-primary{
+	margin-top:20px;
+}
+
+#filterForm .control-label:first-letter{
+	text-transform:uppercase;
+}
+
+#filterForm .control-label, 
+#filterForm .controls input{
+	font-size:100% !important;
+}
+
 /* Shouldnt do this. read more on : http://getbootstrap.com/css/#type-alignment
 
 #header-login .text-right{
