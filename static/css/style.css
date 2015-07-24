@@ -150,6 +150,7 @@ header .navbar-collapse{
 #page-footer{
 	background:#F32837;
 	border-top:solid 5px #CCC;
+	width:100%;
 }
 
 #page-footer h3{
@@ -281,6 +282,33 @@ header .navbar-collapse{
 
 #restaurant-details #map-convas{
 	float:left;
+}
+
+#restaurant-menu .meal{
+	border-bottom:2px #CCC solid;
+	padding-bottom:5px;
+	margin-bottom:20px;
+}
+
+#restaurant-menu .meal:last-child{
+	border-bottom:none;
+	padding-bottom:0;
+	margin-bottom:0;
+}
+
+#restaurant-menu .meal .image{
+	float:left;
+	padding:0 10px 15px;
+}
+
+#restaurant-menu .meal h5{
+	font-weight:bold;
+	font-size:20px;
+}
+
+#restaurant-menu .meal .meal-form input[name=qte]{
+	width:50px;
+	text-align:center;
 }
 
 #my-order h3{

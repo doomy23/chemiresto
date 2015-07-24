@@ -10,7 +10,7 @@ var AppEvent = {
 	init: function() {
 		// Check content min size from window height
 		this.checkContentMinHeight();
-		$(window).resize(this.checkContentMinHeight); 
+		$(window).resize(this.checkContentMinHeight);
 		
 		// Toogle login box event
 		if($("#login-form-modal").length === 1) {
@@ -69,9 +69,19 @@ var AppEvent = {
 	 */
 	checkContentMinHeight: function() {
 		var wHeight = $(window).height();
-		var diff = wHeight - 500;
-		var minHeight = 265 + diff;
-		if(minHeight>0) $('#page-content').css('min-height', minHeight);
+		var pcHeight = $("#page-content").height();
+		var phHeight = $("#page-header").height();
+		
+		var pfHeight = $("#page-footer").height();
+		
+		if(wHeight <= pcHeight + phHeight){
+			
+		} else{
+			$('#page-footer').css('position', "absolute");
+			$('#page-footer').css('bottom', 0);
+			$('#page-footer').css('margin-top', - pfHeight);
+		}
+
 	}
 };
 
@@ -146,10 +156,11 @@ var RegionSelector = {
 };
 
 /**
+ * OUTDATED
  * RegisterForm:
  * Scripts used for the RegisterForm page
  */
-var RegisterForm = {
+/*var RegisterForm = {
 	generateUsername: function() {
 		var firstName = $.trim($('#id_first_name').val()), lastName = $.trim($('#id_last_name').val());
 		
@@ -164,6 +175,27 @@ var RegisterForm = {
 			
 			$('#id_username').val(generated);
 		}
+	}
+};*/
+
+var Utilities = {
+	truncateDecimals: function(number, digits) {
+	    var multiplier = Math.pow(10, digits),
+	    adjustedNum = number * multiplier,
+	    truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'ceil'](adjustedNum);
+	    
+	    return (truncatedNum / multiplier).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	},
+	
+	isInt: function(value) {
+		return !isNaN(value) && 
+			parseInt(Number(value)) == value && 
+		    !isNaN(parseInt(value, 10));
+	},
+	
+	scrollTo: function(sel) {
+	    var Tag = $(sel);
+	    $('html,body').animate({scrollTop: Tag.offset().top});
 	}
 };
 

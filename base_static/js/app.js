@@ -8,7 +8,9 @@ var AppEvent = {
 	 * Function called on document ready
 	 */
 	init: function() {
-		 
+		// Check content min size from window height
+		this.checkContentMinHeight();
+		$(window).resize(this.checkContentMinHeight);
 		
 		// Toogle login box event
 		if($("#login-form-modal").length === 1) {
@@ -199,8 +201,4 @@ var Utilities = {
 
 $(document).ready(function() {
 	AppEvent.init();
-	
-	// Check content min size from window height
-		this.checkContentMinHeight();
-		$(window).resize(this.checkContentMinHeight);
 });
