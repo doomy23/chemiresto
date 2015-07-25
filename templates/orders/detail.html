@@ -1,0 +1,101 @@
+{% extends "accounts/dashboard.html" %}
+{% load account_filters i18n humanize %}
+
+{% block content-pane %}
+<h2 class="page-title">{% trans "order" %} #{{order.id}}</h2>
+
+<div class="row">
+	<div id="details" class="col-md-6">
+		<h3>{% trans "Billing" %}</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>{% trans "Item" %}</th>
+					<th class="text-right">{% trans "Qte" %}</th>
+					<th style="width:75px" class="text-right">{% trans "Price" %}</th>
+					<th style="width:75px" class="text-right">{% trans "Total" %}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for detail in order.details %}
+				<tr>
+					<td>{{detail.item.name}}</td>
+					<td class="text-right">{{detail.qte}}</td>
+					<td class="text-right">{{detail.price}}</td>
+					<td class="text-right">{{detail.cost}}$</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td colspan="3" class="text-right">{% trans "Subtotal" %}</td>
+					<td class="text-right">{{order.subtotal}}$</td>
+				</tr>
+				{% for tax in order.taxes %}
+				<tr>
+					<td colspan="3" class="text-right">{{tax.tax}}</td>
+					<td class="text-right">{{tax.price|floatformat:2|intcomma}}$</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td colspan="3" class="text-right">{% trans "Total" %}</td>
+					<td class="text-right">{{order.total|floatformat:2|intcomma}}$</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="text-right">{% trans "Suggested TIPS" %}</td>
+					<td class="text-right">{{order.suggested_tips|floatformat:2|intcomma}}$</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="text-right">{% trans "TIPS given" %}</td>
+					<td class="text-right">{{order.tips|floatformat:2|intcomma}}$</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="col-md-6">
+		<div class="row">
+			<div id="orderInformation" class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+				    	<h3 class="panel-title">{% trans "Informations" %}</h3>
+				  	</div>
+				  	<div class="panel-body">
+					    {% trans "Restaurant" %} : <strong class="restaurant">{{order.restaurant.name}}</strong><br/>
+					    {% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
+					    {% trans "Livreur" %} : <strong class="delivery-man">{% if order.deliveryMan %}{{order.deliveryMan.get_full_name}}{% else %}{% trans "None" %}{% endif %}</strong><br/>
+					    {% trans "Paid" %} : <strong class="paid{% if not order.paid %} alert{% endif %}">{% if order.paid %}Yes <span class="fa fa-check"></span>{% else %}No <span class="fa fa-times"></span>{% endif %}</strong><br/>
+						{% if not order.paid %}<br/><p class="no-marginBottom text-center">{% trans "You can pay on delivery or pay now in the form bellow." %}</p>{% endif %}
+				  	</div>
+				</div>
+			</div>
+		
+			{% if request.user|has_group:"Client" and not order.paid %}
+			<div id="payByPaypal" class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+				    	<h3 class="panel-title">{% trans "Pay with PayPal" %}</h3>
+				  	</div>
+				  	<div class="panel-body">
+					  	<form action="" method="post" class="form-horizontal clearfix">
+					  		{% csrf_token %}
+					  		<input type="hidden" name="form-name" value="paypal"/>
+							<div class="form-group{% if 'tips' in form_data.errors %} has-error{% endif %}">
+								<label class="control-label" for="id_tips">{% trans "TIPS" %}</label>
+								<div class="controls">
+									<input id="id_tips" name="tips" class="form-control" value="{% if not form_data.tips %}{{order.suggested_tips|floatformat:2|intcomma}}{% else %}{{form_data.tips}}{% endif %}"/>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-success btn-lg">
+								<span class="fa fa-check"></span> {% trans "Checkout with PayPal" %}
+							</button>
+					  	</form>
+					  	<p class="no-marginBottom text-center">
+					  		<img id="paypal-img" src="{{STATIC_URL}}img/paypal.png"/>
+					  	</p>
+					 </div>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -30,6 +30,14 @@ Exportation:
 - ./manage.py loaddata proddata.json
 - **Ne pas oublier de supprimer les fichers médias (images) qui ne sont plus dans la BD.**
 
+## Payment paypal
+
+```
+Sandbox:
+chemiresto-buyer@gmail.com
+chemiresto123
+```
+
 ## Comptes de test
 
 ```

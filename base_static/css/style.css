@@ -158,12 +158,8 @@ header .navbar-collapse{
 	padding-bottom:79px; /* 25 (padding) + 49 (footer) + 5 (footer's top border) */
 }
 
-#page-content #messages{
-	margin:20px 0;
-}
-
 #page-content #messages .alert{
-	margin-bottom:0;
+	margin:20px 0;
 }
 
 #page-content .page-title{
@@ -378,6 +374,32 @@ input#id_consent_cp{
 .dashboard-orders .order .date,
 .dashboard-orders .order .total{
 	color:red;
+}
+
+#orderInformation .paid.alert{
+	color:red;
+}
+
+#payByPaypal #id_tips{
+	width:75px;
+	text-align:center;
+}
+
+#payByPaypal .form-horizontal .form-group{
+	margin-left:0;
+	margin-right: 15px;
+	float:left;
+}
+
+#payByPaypal button[type=submit]{
+	margin-top:15px;
+	float:right;
+}
+
+#payByPaypal #paypal-img{
+	max-width:200px;
+	height:auto;
+	margin-top:20px;
 }
 
 /* Responsive */

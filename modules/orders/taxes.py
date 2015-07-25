@@ -133,7 +133,7 @@ def get_taxes_from(country, region, amount):
                 taxes.append({
                     'tax': taxRate['tax'],
                     'rate': taxRate['rate'],
-                    'amount': taxRate['rate'] * amount,
+                    'amount': Decimal(taxRate['rate'] * amount).quantize(Decimal('0.01')),
                 })
             
     return taxes

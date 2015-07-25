@@ -3,6 +3,8 @@
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
@@ -10,14 +12,164 @@ from datetime import datetime
 from decimal import Decimal
 import urllib
 
+from getenv import env
+import paypalrestsdk
+
 from accounts.models import UserAddress
 from accounts.forms import ShippingAddressForm
 from restaurant.models import Meal
 
-from models import Order, OrderDetail, OrderTax
+from models import Order, OrderDetail, OrderTax, SUGGESTED_TIPS_RATE
 from taxes import get_taxes_from
 
-SUGGESTED_TIPS_RATE = Decimal('0.15')
+class OrderDetailView(View):
+    template_name = 'orders/detail.html'
+    order = None
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, id, *args, **kwargs):
+        if request.user_details.is_a_client():
+            try: self.order = Order.objects.get(id=id, user=request.user)
+            except Order.DoesNotExist: raise Http404
+            
+            #
+            # Payment execution
+            #
+            paymentId = request.GET.get('paymentId')
+            payerID = request.GET.get('PayerID')
+            
+            if not self.order.paid and paymentId and payerID:
+                paypalrestsdk.configure({
+                    "mode": 'sandbox' if env('PAYPAL_SANDBOX') else 'live',
+                    "client_id": env('PAYPAL_SANDBOX_CLIENT') if env('PAYPAL_SANDBOX') else env('PAYPAL_CLIENT'),
+                    "client_secret": env('PAYPAL_SANDBOX_SECRET') if env('PAYPAL_SANDBOX') else env('PAYPAL_SECRET')
+                })
+                
+                payment = paypalrestsdk.Payment.find(paymentId)
+                
+                if payment.execute({"payer_id": payerID}):
+                    self.order.paypal_payment_id = paymentId
+                    self.order.paypal_user_id = payerID
+                    self.order.paid = True
+                    self.order.paidDatetime = datetime.now()
+                    self.order.save()
+                    
+                    messages.success(self.request, _("Thank you! You have paid your order successfully with PayPal."))
+                    
+                else:
+                    messages.success(self.request, _("Impossible to proceed payment with PayPal : ") + unicode(payment.error))
+            
+        elif request.user_details.is_a_restaurateur():
+            try: self.order = Order.objects.get(id=id, restaurant__restaurateur=request.user)
+            except Order.DoesNotExist: raise Http404
+            
+        elif request.user_details.is_an_entrepreneur():
+            try: self.order = Order.objects.get(id=id)
+            except Order.DoesNotExist: raise Http404
+            
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+    
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request, self.template_name, {'order':self.order})
+    
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        form_data = {}
+        form_name = request.POST.get('form-name')
+        
+        #
+        # Client actions
+        #
+        if request.user_details.is_a_client():
+            if form_name == 'paypal' and not self.order.paid:
+                form_data = {
+                    'errors': {},
+                    'tips': request.POST.get('tips')
+                }
+                
+                try: 
+                    tips_value = Decimal(form_data['tips']).quantize(Decimal('0.01'))
+                    self.order.tips = tips_value
+                    self.order.save()
+                    
+                    if tips_value < 0: form_data['errors']['tips'] = True
+                    
+                except: form_data['errors']['tips'] = True
+                
+                if len(form_data['errors']) == 0:
+                    #
+                    # Using PaypalSDK to create payment
+                    #
+                    paypalrestsdk.configure({
+                        "mode": 'sandbox' if env('PAYPAL_SANDBOX') else 'live',
+                        "client_id": env('PAYPAL_SANDBOX_CLIENT') if env('PAYPAL_SANDBOX') else env('PAYPAL_CLIENT'),
+                        "client_secret": env('PAYPAL_SANDBOX_SECRET') if env('PAYPAL_SANDBOX') else env('PAYPAL_SECRET')
+                    })
+                    
+                    payment_obj = {
+                        "intent": "sale",
+                        "payer": {
+                            "payment_method": "paypal"
+                        },
+                        "redirect_urls": {
+                            "return_url": request.build_absolute_uri(),
+                            "cancel_url": request.build_absolute_uri()
+                        },
+                        "transactions": [{
+                            "item_list": {
+                                "items": []
+                            },
+                            "amount": {
+                                "total": str(self.order.total + tips_value),
+                                "currency": env('CURRENCY'),
+                                "details": {
+                                    "subtotal": str(self.order.subtotal + tips_value),
+                                    "tax": str(self.order.tax_sum)
+                                }
+                            },
+                            "description": "Payment of a Chemiresto's order"
+                        }] 
+                    }
+                    
+                    for detail in self.order.details:
+                        payment_obj['transactions'][0]['item_list']['items'].append({
+                            "name": detail.item.name,
+                            "sku": detail.item.id,
+                            "price": str(detail.price),
+                            "currency": env('CURRENCY'),
+                            "quantity": detail.qte
+                        })
+                        
+                    if tips_value > 0:
+                        payment_obj['transactions'][0]['item_list']['items'].append({
+                            "name": 'TIPS',
+                            "sku": 'TIPS',
+                            "price": str(tips_value),
+                            "currency": env('CURRENCY'),
+                            "quantity": 1
+                        })
+                    
+                    payment = paypalrestsdk.Payment(payment_obj)
+                    
+                    if payment.create():
+                        for link in payment.links:
+                            if link.method == "REDIRECT":
+                                # Convert to str to avoid google appengine unicode issue
+                                # https://github.com/paypal/rest-api-sdk-python/pull/58
+                                redirect_url = str(link.href)
+                                
+                        return HttpResponseRedirect(redirect_url)
+                        
+                    else:
+                        messages.error(self.request, _("Cannot create PayPal payment object : ") + unicode(payment.error))
+        
+        return TemplateResponse(request, self.template_name, {'order':self.order,
+                                                              'form_data':form_data})
 
 class OrderCreatorView(View):
     template_name = 'orders/create.html'
@@ -195,6 +347,7 @@ class OrderCreatorView(View):
                 order = Order()
                 order.user = request.user
                 order.restaurant = restaurant
+                order.subtotal = order_data['subtotal']
                 order.total = order_data['total']
                 order.state = 'AWAITING'
                 order.deliveryAddress = deliveryAddress
@@ -218,7 +371,7 @@ class OrderCreatorView(View):
                     orderTax.price = tax['amount']
                     orderTax.save()
                 
-                messages.success(self.request, _("Your order has been created and you will be noticed as it changes state. You can pay on delivery on immediatly via Paypal."))
+                messages.success(self.request, _("Your order has been created and you will be noticed as it changes state. You can pay on delivery or immediatly with Paypal. Your order number is : ") + str(order.id))
                 return HttpResponseRedirect(reverse('accounts:dashboard'))
                 
             except Exception as e:
