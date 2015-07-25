@@ -26,7 +26,7 @@ class RestaurantFilterForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'country', 'region', 'city', Submit('search', _("Search"))
+            'country', 'region', 'city', Submit('search', _("Search"), css_class="btn-success")
         )
         
 class RestaurantForm(ModelForm):
