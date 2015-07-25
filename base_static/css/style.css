@@ -1,3 +1,12 @@
+html, body{
+    height: 100%
+}
+
+#holder{
+    min-height: 100%;
+    position:relative;
+}
+
 /* Bootstrap overwrites */
 
 a:hover{
@@ -151,6 +160,10 @@ header .navbar-collapse{
 	background:#F32837;
 	border-top:solid 5px #CCC;
 	width:100%;
+	position: absolute;
+	height: 49px;
+	bottom:0;
+	left:0;
 }
 
 #page-footer h3{
@@ -255,6 +268,7 @@ header .navbar-collapse{
 #filterRow{
 	background:#EEE;
 	padding:15px 0;
+	margin-bottom:20px;
 }
 
 #filterRow #filterForm .form-group{
@@ -272,6 +286,20 @@ header .navbar-collapse{
 	background:white;
 	color:black;
 }
+
+#restaurants .restaurant{
+	margin-bottom:20px;
+}
+
+#restaurants .restaurant:last-child{
+	margin-bottom:0;
+}
+
+#restaurants .restaurant .image{
+	float:left;
+	padding:0 15px 15px 0;
+}
+
 
 #restaurant-details .image{
 	float:left;

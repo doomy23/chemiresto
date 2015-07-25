@@ -17,88 +17,90 @@
 		{% block head-scripts %}{% endblock %}
 	</head>
 	<body>
-		<header id="page-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<h1 class="hidden-xs"><a href="{% url 'home' %}">{% trans "Chemiresto" %}</a></h1>
-					</div>
-					
-					<nav id="navbar" class="col-md-4 navbar navbar-default">
-						<div class="container-fluid">
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
-									<span class="sr-only">{% trans "Navigation" %}</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-								<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">{% trans "Chemiresto" %}</a></h2>
-							</div>
-							<div class="collapse navbar-collapse" id="collapse-navigation">
-								<ul class="nav navbar-nav">
-
-									{% if not request.user_details or request.user_details.is_a_client %}
-										<li><a href="{% url 'restaurant:restaurants' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>
-									{% endif %}
-									<li><a href="{% url 'about' %}"><span class="fa fa-info-circle"></span>  {% trans "About" %}</a></li>
-									{% if request.user_details %}
-										<li><a href="{% url 'accounts:dashboard' %}"><span class="fa fa-tachometer"></span> {% trans "My dashboard" %}</a></li>
-									{% endif %}
-
-								</ul>
-							</div>
+		<div id="holder">
+			<header id="page-header">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<h1 class="hidden-xs"><a href="{% url 'home' %}">{% trans "Chemiresto" %}</a></h1>
 						</div>
-					</nav>
-					
-					{% block header-login %}{% headerlogin request %}{% endblock %}
+						
+						<nav id="navbar" class="col-md-4 navbar navbar-default">
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
+										<span class="sr-only">{% trans "Navigation" %}</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+									<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">{% trans "Chemiresto" %}</a></h2>
+								</div>
+								<div class="collapse navbar-collapse" id="collapse-navigation">
+									<ul class="nav navbar-nav">
+	
+										{% if not request.user_details or request.user_details.is_a_client %}
+											<li><a href="{% url 'restaurant:restaurants' %}"><span class="fa fa-cutlery"></span> {% trans "Restaurants" %}</a></li>
+										{% endif %}
+										<li><a href="{% url 'about' %}"><span class="fa fa-info-circle"></span>  {% trans "About" %}</a></li>
+										{% if request.user_details %}
+											<li><a href="{% url 'accounts:dashboard' %}"><span class="fa fa-tachometer"></span> {% trans "My dashboard" %}</a></li>
+										{% endif %}
+	
+									</ul>
+								</div>
+							</div>
+						</nav>
+						
+						{% block header-login %}{% headerlogin request %}{% endblock %}
+					</div>
 				</div>
+				
+				<div id="banner">
+					<div class="container">
+						{% if request.user.is_authenticated %}
+							<div class="pull-right">
+								<p class="no-marginBottom pull-right">{% trans "You are logged as" %} <strong>{{ request.user.email }}</strong></p>
+							</div>
+						{% endif %}	
+					</div>
+				</div>
+			</header>
+			
+			<div id="page-content" class="container">
+				{% if messages %}
+					<div class="row">
+		                <div class="col-md-12">
+	                        {% for message in messages %}
+	                            <div class="alert alert-{{ message.tags }}">
+	                                <a class="close" data-dismiss="alert">×</a>
+	                                {{ message|safe }}
+	                            </div>
+	                        {% endfor %}
+		                </div>
+					</div>
+	            {% endif %}
+	            
+	            <div class="row">
+					{% block content %}
+					{% endblock %}
+	             </div>
 			</div>
 			
-			<div id="banner">
+			<div id="page-footer">
 				<div class="container">
-					{% if request.user.is_authenticated %}
-						<div class="pull-right">
-							<p class="no-marginBottom pull-right">{% trans "You are logged as" %} <strong>{{ request.user.email }}</strong></p>
-						</div>
-					{% endif %}	
-				</div>
-			</div>
-		</header>
-		
-		<div id="page-content" class="container">
-			{% if messages %}
-				<div class="row">
-	                <div class="col-md-12">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                                <a class="close" data-dismiss="alert">×</a>
-                                {{ message|safe }}
-                            </div>
-                        {% endfor %}
-	                </div>
-				</div>
-            {% endif %}
-            
-            <div class="row">
-				{% block content %}
-				{% endblock %}
-             </div>
-		</div>
-		
-		<div id="page-footer">
-			<div class="container">
-				<div class="row">
-					<nav>
-						<ul>
-							<li class="firstChild">
-								<a href="{% url 'home' %}"><strong>{% trans "Chemiresto" %}</strong></a>
-							</li>
-	                        {#<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>#}
-							<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
-						</ul>
-					</nav>
-					<p>{% trans "Copyright Chemiresto" %} &copy; {% trans "all rights reserved" %}</p>
+					<div class="row">
+						<nav>
+							<ul>
+								<li class="firstChild">
+									<a href="{% url 'home' %}"><strong>{% trans "Chemiresto" %}</strong></a>
+								</li>
+		                        {#<li><a href="{% url 'restaurant:restaurants_list' %}">{% trans "Restaurants" %}</a></li>#}
+								<li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+							</ul>
+						</nav>
+						<p>{% trans "Copyright Chemiresto" %} &copy; {% trans "all rights reserved" %}</p>
+					</div>
 				</div>
 			</div>
 		</div>
