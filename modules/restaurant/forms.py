@@ -83,7 +83,7 @@ class MealForm(ModelForm):
         
     class Meta:
         model = Meal
-        fields = ['name', 'description', 'price',]
+        fields = '__all__'
         
 class MealBaseFormSet(BaseInlineFormSet):
 
@@ -92,23 +92,10 @@ class MealBaseFormSet(BaseInlineFormSet):
         super(MealBaseFormSet, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        
-    def clean(self):
-        super(MealBaseFormSet, self).clean()
-        
-        for form in self.forms:
-            if form.is_valid():
-                name = form.cleaned_data.get("name")
-                description = form.cleaned_data.get("description")
-                
-                if description:
-                    messages.success(self.request, _("'%s' was created successfully" % name))
-                else:
-                    messages.warning(self.request, _("'%s' doesn't have a description." % name))
                     
 MealFormset = inlineformset_factory(Menu, Meal,
     form=MealForm,
     formset=MealBaseFormSet,
-    extra=2,
+    extra=1,
     can_delete=False,
 )

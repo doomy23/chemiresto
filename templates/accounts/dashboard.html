@@ -27,6 +27,59 @@
 <div id="content" class="col-md-9">
 {% block content-pane %}
 	<h2 class="page-title">{% trans "Welcome in Chemiresto" %} {{ request.user.get_full_name }}</h2>
+	
+	{% if request.user|has_group:"Client" %}
+	<div class="row">
+		<div id="unfinishedOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Current orders" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if unfinishedOrders %}
+			  		<ul class="list-group no-marginBottom">
+			    	{% for order in unfinishedOrders %}
+				    	<li class="order list-group-item">
+				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %}: <span class="state">{{order.get_state_text}}</span><br/>
+				    		<div class="text-right"><a class="btn btn-default btn-xs" href="">{% trans "More details" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+		
+		<div id="unpaidOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Unpaid order" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if unpaidOrders %}
+			  		<ul class="list-group">
+			    	{% for order in unpaidOrders %}
+				    	<li class="order list-group-item">
+				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %}: <span class="state">{{order.get_state_text}}</span><br/>
+				    		{% trans "Amount" %}: <span class="total">{{order.total}}$</span><br/>
+				    		<div class="text-right"><a class="btn btn-default btn-xs" href="">{% trans "More details" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
+			    	<p class="no-marginBottom text-center">{% trans "You can pay on delivery or pay now in the order details." %}</p>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	
 {% endblock %}
 </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from extras.utilities import get_tuple_value
 from accounts.models import UserAddress
 from restaurant.models import Restaurant
 from extras.fields import CurrencyField
@@ -13,6 +14,8 @@ from restaurant.models import Meal
 ORDER_STATES = (
     ('UNFINISHED',_("unfinished")),
     ('AWAITING',_("awaiting")),
+    ('PREPARING',_("preparing")),
+    ('READY',_("ready")),
     ('DELIVERING',_("delivering")),
     ('DELIVERED',_("delivered")),
 )
@@ -33,6 +36,10 @@ class Order(models.Model):
     paypal_payment_id = models.TextField(null=True, blank=True)
     paypal_user_id = models.TextField(null=True, blank=True)
     paid = models.BooleanField(verbose_name=_("paid"), default=False)
+    
+    @property
+    def get_state_text(self):
+        return get_tuple_value(ORDER_STATES, self.state)
     
     class Meta:
          app_label = 'orders'

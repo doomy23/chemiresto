@@ -1,18 +1,26 @@
 {% extends "accounts/dashboard.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Select a Menu to edit - " %}{% endblock %}
+{% block title %}{% trans "Edit my menus" %}{% endblock %}
 
 {% block content-pane %}
 <div class="col-md-12">
+    <h2>{% trans "Select a menu to edit" %}</h2>
+    
     {% for r in restaurants %}
-        <h1>{{ r.name }} - {{ r.address1 }}</h1><a href="{% url 'restaurant:menu_create' r.pk %}">Ajouter un menu pour ce restaurant</a> <br>
-        
-        {% for m in r.menus %}
-            <a href="{% url 'restaurant:menu_update' m.pk %}">{{ m.name }}</a> <br>
-        {% endfor %}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ r.name }} - {{ r.address1 }}</div>
+            <div class="panel-body">
+                <ul>
+                    {% for m in r.menus %}
+                        <li><a href="{% url 'restaurant:menu_update' m.pk %}">{{ m.name }}</a></li>
+                    {% endfor %}
+                        <li><a href="{% url 'restaurant:menu_create' r.pk %}">{% trans "Add a new menu" %}</a></li>
+                </ul>
+            </div>
+    </div>
     {% empty %}
-        {% trans "You don't have any restaurant." %}
+        <p>{% trans "You don't have any restaurant. You need to own at least one restaurant to create a menu." %}</p>
     {% endfor %}
 </div>
 {% endblock %}
