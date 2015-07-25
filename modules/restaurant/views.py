@@ -19,7 +19,7 @@ try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
 from models import Meal, Menu, Restaurant
-from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm
+from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm, RestaurantEditFilterForm
 
 from accounts.mixins import AllowedGroupsMixin
 from accounts.models import UserAddress
@@ -169,6 +169,36 @@ class RestaurantListView(AllowedGroupsMixin, ListView):
     context_object_name = 'restaurants'
     model = Restaurant
     template_name = 'restaurant/edit_list.html'
+    
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        
+        city = self.request.GET.get('city')
+        region = self.request.GET.get('region')
+        country = self.request.GET.get('country')
+        
+        filterForm = RestaurantEditFilterForm(data={'city':city, 'region':region, 'country':country})
+            
+        return self.render_to_response(
+            self.get_context_data(filterForm=filterForm,))
+    
+    def get_queryset(self):
+        city = self.request.GET.get('city')
+        region = self.request.GET.get('region')
+        country = self.request.GET.get('country')
+        
+        if not city and not region and not country:
+            queryset = Restaurant.objects.all().order_by('name')
+        else:
+            if city and region and country:
+                queryset = Restaurant.objects.filter(city=city, region=region, country=country).order_by('name')
+            elif region and country:
+                queryset = Restaurant.objects.filter(region=region, country=country).order_by('name')
+            else:
+                messages.error(self.request, _("You can search without a city, but the other fields are required."))
+                queryset = Restaurant.objects.none()
+            
+        return queryset
     
 #
 # Restaurateur Views

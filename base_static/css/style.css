@@ -50,6 +50,7 @@ header .navbar-collapse{
 	margin:0 !important;
 }
 
+
 /* Helper classes */
 
 .no-element{
@@ -261,6 +262,10 @@ header .navbar-collapse{
 #filterForm .controls input,
 #filterForm .controls select{
 	font-size:100% !important;
+}
+
+input#id_consent_cp{
+	margin-top:0px !important;
 }
 
 /* Shouldnt do this. read more on : http://getbootstrap.com/css/#type-alignment

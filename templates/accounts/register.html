@@ -16,12 +16,19 @@
 			</ul>
 		</div>
 		{% else %}
-		{% csrf_token %}
-		{% crispy registerForm %}
-		{% crispy registerDetailsForm %}
-		<button type="submit" class="btn btn-primary">
-			<span class="fa fa-check"></span> {% trans "Register" %}
-		</button>
+			{% csrf_token %}
+			
+			<div class="clearfix">
+				{% crispy registerForm %}
+			</div>
+			
+			<div class="clearfix">
+				<h3 class="page-title">Information personnel</h3>
+				{% crispy registerDetailsForm %}
+			</div>
+			<button type="submit" class="btn btn-success">
+				<span class="fa fa-check"></span> {% trans "Register" %}
+			</button>
 		{% endif %}
 	</form>
 </div>
@@ -42,6 +49,14 @@ $(document).ready(function() {
         changeYear: true,
         yearRange: minYear + ":" + maxYear,
     });
+    
+    $("#page-content .form-group").addClass("col-md-6");
+    
+    $("#div_id_email").addClass("pull-right");
+    $("#div_id_region").addClass("pull-right");
+    
+    $("#div_id_conditions").removeClass("col-md-6");
+    
 });
 </script>
 {% endblock %}
