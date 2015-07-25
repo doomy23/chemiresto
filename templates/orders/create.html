@@ -1,12 +1,59 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags i18n %}
+{% load crispy_forms_tags i18n humanize %}
 
 {% block title %}{% trans "New order" %}{% endblock %}
 
 {% block content %}
 {% if order_data %}
-<div class="col-md-12">
-
+<div id="new-order" class="col-md-12">
+	<h2 class="page-title">{% trans "New order" %}</h2>
+	
+	<div class="row">
+		<div id="details" class="col-md-8">
+			<h3>{% trans "Billing" %}</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>{% trans "Item" %}</th>
+						<th class="text-right">{% trans "Qte" %}</th>
+						<th style="width:75px" class="text-right">{% trans "Price" %}</th>
+						<th style="width:75px" class="text-right">{% trans "Total" %}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for id, meal in order_data.meals.iteritems %}
+					<tr>
+						<td>{{meal.name}}</td>
+						<td class="text-right">{{meal.qte}}</td>
+						<td class="text-right">{{meal.price}}</td>
+						<td class="text-right">{{meal.cost}}$</td>
+					</tr>
+					{% endfor %}
+					<tr>
+						<td colspan="3" class="text-right">{% trans "Subtotal" %}</td>
+						<td class="text-right">{{order_data.subtotal}}$</td>
+					</tr>
+					{% for tax in order_data.taxes %}
+					<tr>
+						<td colspan="3" class="text-right">{{tax.tax}}</td>
+						<td class="text-right">{{tax.amount|floatformat:2|intcomma}}$</td>
+					</tr>
+					{% endfor %}
+					<tr>
+						<td colspan="3" class="text-right">{% trans "Total" %}</td>
+						<td class="text-right">{{order_data.total|floatformat:2|intcomma}}$</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h4>{% trans "Suggested TIPS" %} : <span>{{order_data.suggested_tips|floatformat:2|intcomma}}$</span></h4>
+		</div>
+		
+		<div id="order-confirmation" class="col-md-4">
+			<h3>{% trans "Delivery" %}</h3>
+			
+		</div>
+	</div>
 </div>
 {% endif %}
 {% endblock %}

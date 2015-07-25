@@ -123,3 +123,17 @@ TAXES = {
         ],
     },
 }
+
+def get_taxes_from(country, region, amount):
+    taxes = []
+    
+    if country in TAXES:
+        if region in TAXES[country]:
+            for taxRate in TAXES[country][region]:
+                taxes.append({
+                    'tax': taxRate['tax'],
+                    'rate': taxRate['rate'],
+                    'amount': taxRate['rate'] * amount,
+                })
+            
+    return taxes
