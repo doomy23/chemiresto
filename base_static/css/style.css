@@ -12,7 +12,7 @@ html, body{
 .alert-error {
     background-color: #f2dede;
     border-color: #ebccd1;
-    color: #a94442;
+    color: #a94442;#restaurants .restaurant .image
 }
 
 a:hover{
@@ -304,7 +304,9 @@ input#id_consent_cp{
 }
 
 #restaurants .restaurant{
-	margin-bottom:20px;
+	
+	margin:0px 0px 20px 0px;
+	
 }
 
 #restaurants .restaurant:last-child{
@@ -312,10 +314,31 @@ input#id_consent_cp{
 }
 
 #restaurants .restaurant .image{
-	float:left;
-	padding:0 15px 15px 0;
+	padding:0px 0px 0px 0px;
+	border:solid #000 1px;
 }
 
+#restaurants .restaurant .boxTexte{
+	border:solid #000 1px;
+	border-top:none;
+	padding:0px 10px 15px 10px
+}
+
+#restaurants .restaurant p{
+	padding:0px;
+	margin:0px;
+}
+
+#restaurants .restaurant h2{
+	font-size:20px;
+	margin-top:0px;
+	padding-top:10px;
+}
+
+#restaurants .restaurant .btn-danger{
+	display:block;
+	margin-top:20px;
+}
 
 #restaurant-details .image{
 	float:left;
