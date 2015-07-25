@@ -43,7 +43,7 @@ class RestaurantsView(View):
         #
         # By default takes user's default delivery address
         #
-        if request.user:
+        if request.user.is_authenticated():
             deliveryAddresses = UserAddress.objects.filter(user=request.user).order_by('-default')
             
             if (not city or not region or not country) and deliveryAddresses:
@@ -55,7 +55,7 @@ class RestaurantsView(View):
         # Otherwise takes the user_details location
         #
         if (not city or not region or not country) and \
-            request.user and request.user_details:
+            request.user.is_authenticated() and request.user_details:
             city = request.user_details.city
             region = request.user_details.region
             country = request.user_details.country
