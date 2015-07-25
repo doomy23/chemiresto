@@ -1,13 +1,21 @@
 {% extends "accounts/dashboard.html" %}
-{% load i18n %}
+{% load crispy_forms_tags i18n %}
 
 {% block title %}{% trans "Edit a restaurant - " %}{% endblock %}
 
 {% block content-pane %}
 <div class="col-md-12">
     <h2 class="page-title">{% trans "Select a restaurant to edit" %}</h2>
+    
+    <div class="row" id="filterRow">
+        <div class="col-md-12">
+            <form id="filterForm" class="form-inline">
+                {% crispy filterForm %}
+            </form>
+        </div>
+    </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>{% trans "Name" %}</th>
@@ -22,7 +30,7 @@
         <tbody>
             {% for r in restaurants %}
             <tr>
-                <td>{{ r.name }}</a></td>
+                <td><a href="{% url 'restaurant:restaurant_detail' r.pk %}">{{ r.name }}</a></td>
                 <td>{{ r.address1 }} {{ r.address2 }}</td>
                 <td>{{ r.city }}</td>
                 <td>{{ r.region }}</td>
@@ -34,4 +42,12 @@
         </tbody>
     </table>
 </div>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+	RegionSelector.init("#filterForm #id_country", "#filterForm #id_region")
+});
+</script>
 {% endblock %}

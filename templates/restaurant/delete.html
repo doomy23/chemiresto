@@ -1,19 +1,15 @@
 {% extends "accounts/dashboard.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Delete a restaurant - " %}{% endblock %}
+{% block title %}{% trans "Delete a restaurant" %}{% endblock %}
 
 {% block content-pane %}
 <div class="col-md-12">
-    <h2 class="page-title">{% trans "Delete restaurant" %}</h2>
+    <h2 class="page-title">{% blocktrans with object.name as name %}Delete {{ name }} ?{% endblocktrans %}</h2>
         
-    <form id="delete-restaurant-form" method="post" action="{% url 'restaurant:restaurant_delete' object.pk %}">
-        {% csrf_token %}
-        
-        <p>Are you sure you want to delete "{{ object.name }}"?</p>
-        
-        <button type="submit" id="form-submit-btn" class="btn btn-primary">
-            <span class="fa fa-check"></span> {% trans "delete" %}
+    <form method="post" action="{% url 'restaurant:restaurant_delete' object.pk %}">{% csrf_token %}
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-trash-o"></span> {% trans "Click this button to confirm your choice" %}
         </button>
     </form>
 </div>
