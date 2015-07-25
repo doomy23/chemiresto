@@ -144,7 +144,13 @@ class DashboardView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        return TemplateResponse(request, self.template_name, {})
+        data = {}
+        
+        if request.user_details.is_a_client():
+            data['unfinishedOrders'] = Order.objects.filter(user=request.user).exclude(state='DELIVERED')
+            data['unpaidOrders'] = Order.objects.filter(user=request.user, paid=False)
+        
+        return TemplateResponse(request, self.template_name, data)
 
 # View used for
 # /accounts/manage/
@@ -253,7 +259,7 @@ class ManagerView(View):
                             shippingForm = ShippingAddressForm()
                             
                         else:
-                            unfinishedOrders = Order.objects.filter(user=request.user, state='UNFINISHED', deliveryAddress=address)
+                            unfinishedOrders = Order.objects.filter(user=request.user, deliveryAddress=address).exclude(state='DELIVERED')
                             
                             if unfinishedOrders.count() == 0:
                                 shippingAddress = shippingForm.save(commit=False)
@@ -278,7 +284,7 @@ class ManagerView(View):
                             
                 else:
                     shippingForm = ShippingAddressForm()
-                    unfinishedOrders = Order.objects.filter(user=request.user, state='UNFINISHED', deliveryAddress=address)
+                    unfinishedOrders = Order.objects.filter(user=request.user, deliveryAddress=address).exclude(state='DELIVERED')
                     
                     if unfinishedOrders.count() == 0:
                         if userAddresses.exclude(id=address.id).count() > 0 and address.default:

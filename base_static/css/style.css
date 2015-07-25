@@ -158,6 +158,14 @@ header .navbar-collapse{
 	padding-bottom:79px; /* 25 (padding) + 49 (footer) + 5 (footer's top border) */
 }
 
+#page-content #messages{
+	margin:20px 0;
+}
+
+#page-content #messages .alert{
+	margin-bottom:0;
+}
+
 #page-content .page-title{
 	margin:20px 0 20px 0;
 	padding:0 0 5px;
@@ -360,6 +368,16 @@ input#id_consent_cp{
 	padding:0 0 5px;
 	border-bottom:1px solid #CCC;
 	font-size: 30px;
+}
+
+.dashboard-orders .order .restaurant,
+.dashboard-orders .order .state{
+	font-weight:600;
+}
+
+.dashboard-orders .order .date,
+.dashboard-orders .order .total{
+	color:red;
 }
 
 /* Responsive */
