@@ -250,13 +250,17 @@ class MenuCreateView(CreateView):
         return get_object_or_404(Restaurant, pk=pk)
                                   
     def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().pk})
+        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().id})
         
     def post(self, request, *args, **kwargs):
         self.object = None
         form = MenuForm(self.request.POST)
         meal_formset = MealFormset(self.request.POST, request=request)
         if (form.is_valid() and meal_formset.is_valid()):
+        
+            name = self.get_restaurant().name
+            messages.success(self.request, _("The new menu for '%s' has been successfully created" % name))
+                
             return self.form_valid(form, meal_formset)
         else:
             return self.form_invalid(form, meal_formset)
