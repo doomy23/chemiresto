@@ -170,7 +170,17 @@
 	</div>
 {% endblock %}
 
+
+{% block head %}
+<link href="{{ STATIC_URL }}bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+{% endblock %}
+
 {% block page-scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/collapse.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/transition.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
 <script type="text/javascript">
 
 function init() {
@@ -181,6 +191,9 @@ function init() {
 function initInformationForm() {
 	// RegionSelector.init call {% if editAccountDetailsForm %}
 	RegionSelector.init("#informations-form #id_country", "#informations-form #id_region");//{% endif %}
+    $('.datepicker').datetimepicker({
+		format: "YYYY-MM-DD"
+	});
 }
 
 function initShippingForm() {
