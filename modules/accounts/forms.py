@@ -150,11 +150,11 @@ class ShippingAddressForm(forms.ModelForm):
             'default', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
         
-class CreateRestauratorForm(BaseUserForm):
+class CreateRestaurateurForm(BaseUserForm):
     restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Assign a restaurant"), required=False)
     
     def __init__(self, *args, **kwargs):
-        super(CreateRestauratorForm, self).__init__(*args, **kwargs)
+        super(CreateRestaurateurForm, self).__init__(*args, **kwargs)
         
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -163,11 +163,11 @@ class CreateRestauratorForm(BaseUserForm):
             Submit('create', _("Create the restaurateur"), css_class='btn btn-primary')
         )
         
-class UpdateRestauratorForm(BaseUserForm):
+class UpdateRestaurateurForm(BaseUserForm):
     restaurant = forms.ModelChoiceField(queryset=Restaurant.objects.all(), label=_("Restaurant"), required=False)
     
     def __init__(self, *args, **kwargs):
-        super(UpdateRestauratorForm, self).__init__(*args, **kwargs)
+        super(UpdateRestaurateurForm, self).__init__(*args, **kwargs)
         
         self.helper = FormHelper()
         self.helper.layout = Layout(

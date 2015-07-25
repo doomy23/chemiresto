@@ -26,7 +26,7 @@ from accounts.mixins import AllowedGroupsMixin
 # Public Views
 #
 class RestaurantsView(View):
-    template_name = 'restaurants/list.html'
+    template_name = 'restaurant/list.html'
     RESTAURANTS_BY_PAGE = 5
     
     def get(self, request, *args, **kwargs):
@@ -90,7 +90,7 @@ class RestaurantsView(View):
 
 class RestaurantDetailView(DetailView):
     model = Restaurant
-    template_name = 'restaurants/detail.html'
+    template_name = 'restaurant/detail.html'
     context_object_name = 'restaurant'
 
 #
@@ -99,7 +99,7 @@ class RestaurantDetailView(DetailView):
 class RestaurantCreateView(AllowedGroupsMixin, CreateView):
     allowed_groups = ['Entrepreneur',]
     form_class = RestaurantForm
-    template_name = 'restaurants/create.html'
+    template_name = 'restaurant/create.html'
     success_url = reverse_lazy('restaurant:restaurant_create')
     
     def post(self, request, *args, **kwargs):
@@ -125,7 +125,7 @@ class RestaurantUpdateView(AllowedGroupsMixin, UpdateView):
     form_class = RestaurantForm
     model = Restaurant
     success_url = reverse_lazy('restaurant:restaurant_list')
-    template_name = 'restaurants/update.html'
+    template_name = 'restaurant/update.html'
     
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -149,19 +149,19 @@ class RestaurantDeleteView(AllowedGroupsMixin, DeleteView):
     allowed_groups = ['Entrepreneur', ]
     model = Restaurant
     success_url = reverse_lazy('restaurant:restaurant_list')
-    template_name = 'restaurants/delete.html'
+    template_name = 'restaurant/delete.html'
 
 class RestaurantListView(AllowedGroupsMixin, ListView):
     allowed_groups = ['Entrepreneur', ]
     context_object_name = 'restaurants'
     model = Restaurant
-    template_name = 'restaurants/restaurant/list.html'
+    template_name = 'restaurant/edit_list.html'
     
 #
 # Restaurateur Views
 #
 class MenuCreateView(CreateView):
-    template_name = 'restaurants/menus/create.html'
+    template_name = 'restaurant/menus/create.html'
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -221,7 +221,7 @@ class MenuCreateView(CreateView):
 class MenuListView(AllowedGroupsMixin, ListView):
     allowed_groups = ['Restaurateur', ]
     model = Menu
-    template_name = 'restaurants/menus/list.html'
+    template_name = 'restaurant/menus/list.html'
     
     def get_context_data(self, **kwargs):
         context = super(MenuListView, self).get_context_data(**kwargs)
@@ -230,7 +230,7 @@ class MenuListView(AllowedGroupsMixin, ListView):
         
 
 class MenuUpdateView(CreateView):
-    template_name = 'restaurants/menus/create.html'
+    template_name = 'restaurant/menus/create.html'
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):

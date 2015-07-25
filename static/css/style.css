@@ -143,7 +143,7 @@ header .navbar-collapse{
 #page-content{
 	margin: 0 auto;
 	min-height:0px;
-	padding-bottom:25px;
+	padding-bottom:79px; /* 25 (padding) + 49 (footer) + 5 (footer's top border) */
 }
 
 #page-content .page-title{

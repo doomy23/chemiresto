@@ -2,7 +2,7 @@
 
 from django.conf.urls import patterns, url
 import views
-import restaurator_views
+import restaurateur_views
 
 urlpatterns = patterns('',
     url(r'^register/$', views.RegisterView.as_view(), name="register"),
@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', views.DashboardView.as_view(), name="dashboard"),
     url(r'^delete/(?P<pk>\d+)/$', views.DeleteUserView.as_view(), name="delete_account"),
     
-    url(r'^restaurators/create/$', restaurator_views.CreateRestauratorView.as_view(), name="restaurators_create"),
-    url(r'^restaurators/(?P<pk>\d+)/manage/$', restaurator_views.ManageRestauratorView.as_view(), name="restaurators_manage"),
-    url(r'^restaurators/(?P<pk>\d+)/delete/$', restaurator_views.DeleteRestauratorView.as_view(), name="restaurators_delete"),
-    url(r'^restaurators/list/$', restaurator_views.RestauratorListView.as_view(), name="restaurators_list"),
+    url(r'^restaurateurs/create/$', restaurateur_views.CreateRestaurateurView.as_view(), name="restaurateurs_create"),
+    url(r'^restaurateurs/(?P<pk>\d+)/manage/$', restaurateur_views.ManageRestaurateurView.as_view(), name="restaurateurs_manage"),
+    url(r'^restaurateurs/(?P<pk>\d+)/delete/$', restaurateur_views.DeleteRestaurateurView.as_view(), name="restaurateurs_delete"),
+    url(r'^restaurateurs/list/$', restaurateur_views.RestaurateurListView.as_view(), name="restaurateurs_list"),
 )

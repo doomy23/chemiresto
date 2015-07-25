@@ -6,19 +6,20 @@
 {% block content %}
 <div id="menu" class="col-md-3">
     <ul class="list-group">
+        <li class="list-group-item"><a href="{% url 'accounts:manage_account' %}"><span class="fa fa-user"></span> {% trans "Manage my account" %}</a></li>
+        
         {% if request.user|has_group:"Entrepreneur" %}
-            <li class="list-group-item"><a href="{% url 'accounts:restaurators_create' %}"><span class="fa fa-cog"></span> {% trans "Create a restaurateur" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'accounts:restaurators_list' %}"><span class="fa fa-cog"></span> {% trans "Manage the restaurateurs" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cutlery"></span> {% trans "Add a restaurant" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cutlery"></span> {% trans "Edit a restaurant" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:restaurateurs_create' %}"><span class="fa fa-cog"></span> {% trans "Create a restaurateur" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'accounts:restaurateurs_list' %}"><span class="fa fa-cog"></span> {% trans "Manage the restaurateurs" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cutlery"></span> {% trans "Add a restaurant" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'restaurant:restaurant_list' %}"><span class="fa fa-cutlery"></span> {% trans "Edit a restaurant" %}</a></li>
         {% endif %}
         
         {% if request.user|has_group:"Restaurateur" %}
-            <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage my orders" %}</a></li>
-            <li class="list-group-item"><a href="{% url 'restaurant:menu_list' %}"><span class="fa fa-cog"></span> {% trans "Manage my menus" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage my orders" %}</a></li>
+        <li class="list-group-item"><a href="{% url 'restaurant:menu_list' %}"><span class="fa fa-cog"></span> {% trans "Manage my menus" %}</a></li>
         {% endif %}
         
-        <li class="list-group-item"><a href="{% url 'accounts:manage_account' %}"><span class="fa fa-user"></span> {% trans "Manage my account" %}</a></li>
         <li class="list-group-item"><a href="{% url 'accounts:logout' %}"><span class="fa fa-power-off"></span> {% trans "Sign out" %}</a></li>
     </ul>
 </div>

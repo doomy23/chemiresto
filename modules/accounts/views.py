@@ -18,7 +18,7 @@ from django.utils.translation import ugettext as _
 import urlparse
 
 from forms import *
-#from utils import *
+from utils import *
 from models import UserAddress, UserDetails
 
 from orders.models import Order

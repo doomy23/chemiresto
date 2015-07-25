@@ -13,20 +13,20 @@ from django.views.generic import DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 
-from forms import CreateRestauratorForm, UpdateRestauratorForm
+from forms import CreateRestaurateurForm, UpdateRestaurateurForm
 #from utils import *
 
 # ADMIN ONLY
 # View used for
-# /accounts/restaurators/create/
-class CreateRestauratorView(View):
-    template_name = 'accounts/create_restaurator.html'
+# /accounts/restaurateurs/create/
+class CreateRestaurateurView(View):
+    template_name = 'accounts/create_restaurateur.html'
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         if not request.user_details.is_an_entrepreneur(): raise Http404()
         
-        form = CreateRestauratorForm()
+        form = CreateRestaurateurForm()
         
         return TemplateResponse(request, self.template_name, {'form':form})
     
@@ -37,17 +37,17 @@ class CreateRestauratorView(View):
         messageType = None
         message = ""
         
-        form = CreateRestauratorForm(request.POST)
+        form = CreateRestaurateurForm(request.POST)
         
         if form.is_valid():
             group = Group.objects.get(name='Restaurateur')
             
             restaurant = form.cleaned_data['restaurant']
-            restaurator = form.save()
-            restaurator.groups.add(group)
+            restaurateur = form.save()
+            restaurateur.groups.add(group)
             
             if restaurant:
-                restaurant.user = restaurator
+                restaurant.user = restaurateur
                 restaurant.save()
                 
                 messageType = "success"
@@ -57,49 +57,49 @@ class CreateRestauratorView(View):
                 messageType = "warning"
                 message = _("The restaurateur was successfully created but he doesn't have any associated restaurant.")
             
-            form = CreateRestauratorForm()
+            form = CreateRestaurateurForm()
         
         return TemplateResponse(request, self.template_name, {'form':form,
                                                               'message':message,
                                                               'messageType':messageType})
                                                               
-class ManageRestauratorView(UpdateView, SuccessMessageMixin):
-    form_class = UpdateRestauratorForm
+class ManageRestaurateurView(UpdateView, SuccessMessageMixin):
+    form_class = UpdateRestaurateurForm
     model = User
-    template_name = 'accounts/manage_restaurator.html'
+    template_name = 'accounts/manage_restaurateur.html'
     success_message = 'Restaurateur successfuly updated'
-    success_url = reverse_lazy('accounts:restaurators_list')
+    success_url = reverse_lazy('accounts:restaurateurs_list')
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         if not request.user_details.is_an_entrepreneur(): raise Http404()
-        return super(ManageRestauratorView, self).dispatch(request, *args, **kwargs)
+        return super(ManageRestaurateurView, self).dispatch(request, *args, **kwargs)
     
 # View used for
-# /accounts/restaurators/
-class RestauratorDashView(View):
-    template_name = 'accounts/restaurator_dash.html'
+# /accounts/restaurateurs/
+class RestaurateurDashView(View):
+    template_name = 'accounts/restaurateur_dash.html'
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        if not check_restaurator_group(request.user): raise Http404()
+        if not check_restaurateur_group(request.user): raise Http404()
         
         return TemplateResponse(request, self.template_name, {})
 
-class RestauratorListView(ListView):
+class RestaurateurListView(ListView):
     context_object_name = 'restaurateurs'
-    template_name = 'accounts/restaurator_list.html'
+    template_name = 'accounts/restaurateur_list.html'
     
     def get_queryset(self):
         return Group.objects.get(name='Restaurateur').user_set.all()
 
-class DeleteRestauratorView(DeleteView):
+class DeleteRestaurateurView(DeleteView):
     model = User
     template_name = 'accounts/delete_account.html'
-    success_url = reverse_lazy('accounts:restaurators_list')
+    success_url = reverse_lazy('accounts:restaurateurs_list')
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         if not request.user_details.is_an_entrepreneur(): raise Http404()
-        return super(DeleteRestauratorView, self).dispatch(request, *args, **kwargs)
+        return super(DeleteRestaurateurView, self).dispatch(request, *args, **kwargs)
     

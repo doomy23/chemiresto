@@ -1,6 +1,6 @@
 import urls
 import views
-import restaurator_views
+import restaurateur_views
 import forms
 import models
 import middlewares
