@@ -17,27 +17,35 @@
         <div class="col-md-12">
             <div id="restaurants" class="clearfix">
                 {% for r in page %}
-	                <div class="restaurant">
+	                <div class="restaurant col-md-3">
 	                    {% if r.image %}
-	                    	{% thumbnail r.image 320x240 crop as thumb %}
+	                    	{% thumbnail r.image 253x190 crop as thumb %}
 	                    	<img src="{{thumb.url}}" class="image"/>
 	                    {% endif %}
 	                    
-	                    <h2>{{ r.name }}</h2>
-	                    
-	                    <p class="adr">
-	                        {{ r.address1 }}, {% if r.address2 %}{{ r.address2 }}, {% endif %}{{ r.city }},
-	                        {{ r.region }}, {{ r.country }}, {{ r.zip }}
-	                    </p>
-	                    <a href="{% url 'restaurant:restaurant_detail' r.id %}" class="btn btn-danger">
-	                        <span class="glyphicon glyphicon-cutlery"></span> {% trans "View the menu" %}
-	                    </a>
+	                    <div class="boxTexte">
+		                    <h2 class="text-center">{{ r.name }}</h2>
+		                    
+		                    <p class="adr text-center">{{ r.address1 }}</p> 
+		                    
+		                    {% if r.address2 %}
+		                    	<p class="adr text-center">{{ r.address2 }}</p>
+		                    {% endif %}
+		                    
+		                    <p class="adr text-center">{{ r.city }}, {{ r.region }}, {{ r.country }}, {{ r.zip }}</p>
+		                    
+		                    <a href="{% url 'restaurant:restaurant_detail' r.id %}" class="btn btn-danger">
+		                        <span class="glyphicon glyphicon-cutlery"></span> {% trans "View the menu" %}
+		                    </a>
+	                    </div>
 	                </div>
                 {% empty %}
+                
                 <div id="no-restaurants">
                     <h2>{% trans "Sorry no restaurant found in your area :(" %}</h2>
                 </div>
                 {% endfor %}
+                
             </div>
             
             <ul id="pagination" class="pagination-sm"></ul>

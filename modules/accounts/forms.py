@@ -163,8 +163,6 @@ class EditAccountForm(AbstractUserChangeForm):
     def __init__(self, *args, **kwargs):
         super(EditAccountForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-4'
         self.helper.form_tag = False
     
 class EditAccountDetailsForm(forms.ModelForm):
@@ -182,8 +180,7 @@ class EditAccountDetailsForm(forms.ModelForm):
         
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-4'
+        
         self.helper.layout = Layout(
             'birthdate', 'tel', 'city', 'country', 'region', 'address1', 'address2', 'zip',
         )
