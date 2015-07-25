@@ -137,6 +137,14 @@
 },
 {
   "fields": {
+    "expire_date": "2015-08-08T01:26:00.671Z",
+    "session_data": "YzI0MTQxNjllNzFlZjg2Zjk0MzdlNTI4MjM2NjY5MDdjNjg2N2QyNzp7Il9sYW5ndWFnZSI6ImZyIiwiX2F1dGhfdXNlcl9oYXNoIjoiNzk5ZWY5YzYzMGU2NTEyMzgxMGY3NmRjMWRjZmY5YThkYWQwYTAwOSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjMifQ=="
+  },
+  "model": "sessions.session",
+  "pk": "eryd6eplvzyesa6va7f125mjjgpz7sg3"
+},
+{
+  "fields": {
     "name": "restaurant/restaurants/chat62.jpg",
     "storage_hash": "f9bde26a1556cd667f742bd34ec7c55e",
     "modified": "2015-07-24T18:45:53.733Z"
@@ -713,7 +721,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": "2015-07-24T18:24:40.630Z",
+    "last_login": "2015-07-25T01:14:20.484Z",
     "groups": [
       1
     ],
@@ -733,7 +741,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": null,
+    "last_login": "2015-07-25T01:26:00.564Z",
     "groups": [
       2
     ],
@@ -787,15 +795,15 @@
 },
 {
   "fields": {
-    "birthdate": "2015-07-15",
     "city": "Montreal",
+    "consent_cp": true,
     "tel": "123-123-1234",
     "zip": "H3C3R9",
-    "address1": "301 rue peel",
-    "region": "QC",
-    "consent_cp": true,
-    "user": 2,
     "country": "CA",
+    "region": "QC",
+    "birthdate": "2015-07-15",
+    "user": 2,
+    "address1": "301 rue peel",
     "address2": null
   },
   "model": "accounts.userdetails",
@@ -803,15 +811,15 @@
 },
 {
   "fields": {
-    "birthdate": "2015-07-15",
     "city": "Montreal",
+    "consent_cp": true,
     "tel": "123-123-1234",
     "zip": "H3C3R9",
-    "address1": "301 rue peel",
-    "region": "QC",
-    "consent_cp": true,
-    "user": 3,
     "country": "CA",
+    "region": "QC",
+    "birthdate": "2015-07-15",
+    "user": 3,
+    "address1": "301 rue peel",
     "address2": null
   },
   "model": "accounts.userdetails",
@@ -819,15 +827,15 @@
 },
 {
   "fields": {
-    "birthdate": "2015-07-15",
     "city": "Montreal",
+    "consent_cp": true,
     "tel": "123-123-1234",
     "zip": "H3C3R9",
-    "address1": "301 rue peel",
-    "region": "QC",
-    "consent_cp": true,
-    "user": 4,
     "country": "CA",
+    "region": "QC",
+    "birthdate": "2015-07-15",
+    "user": 4,
+    "address1": "301 rue peel",
     "address2": null
   },
   "model": "accounts.userdetails",
@@ -835,19 +843,33 @@
 },
 {
   "fields": {
-    "birthdate": "2015-07-15",
     "city": "Montreal",
+    "consent_cp": true,
     "tel": "123-123-1234",
     "zip": "H3C3R9",
-    "address1": "301 rue peel",
-    "region": "QC",
-    "consent_cp": true,
-    "user": 5,
     "country": "CA",
+    "region": "QC",
+    "birthdate": "2015-07-15",
+    "user": 5,
+    "address1": "301 rue peel",
     "address2": null
   },
   "model": "accounts.userdetails",
   "pk": 4
+},
+{
+  "fields": {
+    "city": "Montreal",
+    "zip": "H3C3R9",
+    "default": true,
+    "address1": "301 rue Peel",
+    "region": "QC",
+    "user": 3,
+    "country": "CA",
+    "address2": ""
+  },
+  "model": "accounts.useraddress",
+  "pk": 1
 },
 {
   "fields": {

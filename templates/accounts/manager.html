@@ -98,7 +98,7 @@
 											{{userAddress.address1}}{% if userAddress.address2 %}, {{userAddress.address2}}{% endif %}, 
 											{{userAddress.city}}, {{userAddress.region}}, {{userAddress.country}}, {{userAddress.zip|upper}}
 										</td>
-										<td>{% if userAddress.primary %}<span class="fa fa-check"></span>{% endif %}</td>
+										<td>{% if userAddress.default %}<span class="fa fa-check"></span>{% endif %}</td>
 									</tr>
 									{% empty %}
 									<tr><td colspan="3" class="text-center">{% trans "- None -" %}</td></tr>

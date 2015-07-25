@@ -253,7 +253,7 @@ class ManagerView(View):
                             shippingForm = ShippingAddressForm()
                             
                         else:
-                            unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
+                            unfinishedOrders = Order.objects.filter(user=request.user, state='UNFINISHED', deliveryAddress=address)
                             
                             if unfinishedOrders.count() == 0:
                                 shippingAddress = shippingForm.save(commit=False)
@@ -278,7 +278,7 @@ class ManagerView(View):
                             
                 else:
                     shippingForm = ShippingAddressForm()
-                    unfinishedOrders = Order.objects.filter(user=request.user, done=False, deliveryAddress=address)
+                    unfinishedOrders = Order.objects.filter(user=request.user, state='UNFINISHED', deliveryAddress=address)
                     
                     if unfinishedOrders.count() == 0:
                         if userAddresses.exclude(id=address.id).count() > 0 and address.default:

@@ -30,7 +30,7 @@ class Order(models.Model):
     deliveryAddress = models.ForeignKey(UserAddress, verbose_name=_("delivery address"), null=True, blank=True)
     
     class Meta:
-         app_label = 'order'
+         app_label = 'orders'
     
 class OrderDetail(models.Model):
     item = models.ForeignKey(Meal, verbose_name=_("meal"))
@@ -39,7 +39,7 @@ class OrderDetail(models.Model):
     taxable = models.BooleanField(verbose_name=_("taxable"), default=True)
     
     class Meta:
-         app_label = 'order'
+         app_label = 'orders'
     
 class OrderTax(models.Model):
     tax = models.CharField(max_length=10, verbose_name=_("tax"))
@@ -47,5 +47,5 @@ class OrderTax(models.Model):
     price = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("price"))
     
     class Meta:
-         app_label = 'order'
+         app_label = 'orders'
     

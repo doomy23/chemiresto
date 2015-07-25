@@ -20,7 +20,9 @@ except: GeoIP = None
 
 from models import Meal, Menu, Restaurant
 from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm
+
 from accounts.mixins import AllowedGroupsMixin
+from accounts.models import UserAddress
 
 #
 # Public Views
@@ -39,7 +41,18 @@ class RestaurantsView(View):
         country = request.GET.get('country')
         
         #
-        # By default takes the user_details location
+        # By default takes user's default delivery address
+        #
+        if request.user:
+            deliveryAddresses = UserAddress.objects.filter(user=request.user).order_by('-default')
+            
+            if (not city or not region or not country) and deliveryAddresses:
+                city = deliveryAddresses[0].city
+                region = deliveryAddresses[0].region
+                country = deliveryAddresses[0].country
+        
+        #
+        # Otherwise takes the user_details location
         #
         if (not city or not region or not country) and \
             request.user and request.user_details:
