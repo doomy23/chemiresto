@@ -19,15 +19,20 @@
 		    	
 	    	<div id="informations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
 	      		<div class="panel-body">
-	      			<form id="informations-form" class="form-horizontal" method="post" action="" onsubmit="return false">
+	      			<form id="informations-form" method="post" action="" onsubmit="return false">
 					    {% csrf_token %}
 						<input type="hidden" name="form-name" value="informations"/>
 						<div class="clearfix">
 							{% crispy editAccountForm %}
-							{% if editAccountDetailsForm %}
-							{% crispy editAccountDetailsForm %}
-							{% endif %}
-						</div>
+						</div>	
+						
+						{% if editAccountDetailsForm %}
+							<div class="clearfix">
+								
+								{% crispy editAccountDetailsForm %}
+							</div>	
+						{% endif %}
+						
 						<button id="informations-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> {% trans "Save" %}</button>
 	      				{% if formSuccess == "informations" %}
 	      				<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
@@ -46,9 +51,11 @@
 	    	<div id="password" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPass">
 	      		<div class="panel-body">
 	      			<form id="password-form" method="post" action="" onsubmit="return false">
+					    <div class="clearfix">
 					    {% csrf_token %}
 						<input type="hidden" name="form-name" value="password"/>
 						{{passwordChangeForm|crispy}}
+						</div>
 						<button id="password-form-submit" class="btn btn-success"><span class="fa fa-floppy-o"> </span> {% trans "Save" %}</button>
 	      				{% if formSuccess == "password" %}
 	      				<div class="alert alert-success" role="alert">{{formSuccessMessage}}</div>
@@ -248,6 +255,9 @@ $(document).ready(function() {
 	AppEvent.initAjaxForm("informations-form", "informations-form-submit", "", initInformationForm);
 	AppEvent.initAjaxForm("password-form", "password-form-submit");
 	AppEvent.initAjaxForm("shipping-form", "shipping-form-submit", "", initShippingForm);
+	
+	$("#page-content .form-group").addClass("col-md-6");
+	$("#div_id_email").addClass("pull-right");
 });
 </script>
 {% endblock %}
