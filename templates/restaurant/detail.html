@@ -38,6 +38,7 @@
 	      				<p class="description">{{meal.description}}</p>
 	      				<p class="price">{{meal.price}}$</p>
 	      				
+	      				{% if not request.user_details or request.user_details.is_a_client %}
 	      				<form id="meal-form-{{meal.id}}" class="well pull-left form-inline meal-form" onsubmit="return false">
 	      					<div id="div_id_qte-{{meal.id}}" class="form-group">
 								<label class="control-label requiredField" for="id_qte-{{meal.id}}">
@@ -50,6 +51,7 @@
 							</div>
 							<input onclick="addMeal({{meal.id}})" id="add-meal-{{meal.id}}" class="btn btn-primary" type="button" value="{% trans "Add to order" %}" name="add">
 	      				</form>
+	      				{% endif %}
 	      			</div>
 	      		{% endfor %}
 	      		</div>
@@ -104,6 +106,7 @@
 <script type="text/javascript">
 var map;
 
+// Client only {% if not request.user_details or request.user_details.is_a_client %}
 var meals = { //{% for menu in restaurant.menus %}{% for meal in menu.meals %}
 	'{{meal.id}}': {
 		name: '{{meal|addslashes}}',
@@ -153,12 +156,24 @@ function deleteMeal(id) {
 	refreshMyOrder();
 }
 
-$(document).ready(function () {
-	refreshMyOrder();
+function createOrder() {
+	var querys = [];
 	
-	$("#create-order-button").click(function(){
-		
-	});
+	for(var mealId in meals) {
+		if(meals[mealId].qte>0) {
+			querys.push(mealId+'='+meals[mealId].qte);
+		}
+	}
+	
+	window.location.href = "{% url 'orders:create' %}?" + querys.join('&');
+}
+// END{% endif %}
+
+$(document).ready(function () {
+	// Client only {% if not request.user_details or request.user_details.is_a_client %}
+	refreshMyOrder();
+	$("#create-order-button").click(createOrder);
+	// END{% endif %}
 	
 	var jqxhr = $.get("https://maps.googleapis.com/maps/api/geocode/json?address={{ restaurant.zip|addslashes }}&key=AIzaSyCWVV4JsXtPPqY6ngQB8G3MVHf6S3ylFQw", function(data) {
 		if(data.results.length>0) {
