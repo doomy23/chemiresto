@@ -49,11 +49,76 @@
 			<h4>{% trans "Suggested TIPS" %} : <span>{{order_data.suggested_tips|floatformat:2|intcomma}}$</span></h4>
 		</div>
 		
-		<div id="order-confirmation" class="col-md-4">
+		<form id="order-confirmation-form" class="col-md-4" method="post" action="{{ request.get_full_path }}">
+			{% csrf_token %}
 			<h3>{% trans "Delivery" %}</h3>
+			<div class="form-group{% if 'delivery_address' in form_data.errors %} has-error{% endif %}">
+				<label class="control-label" for="id_delivery_address">{% trans "Delivery Address" %}</label>
+				<div class="controls">
+					<select id="id_delivery_address" name="delivery_address" class="lazyselect form-control">
+						<option value=""></option>
+					{% for da in deliveryAddresses %}
+						<option value="{{da.id}}"{% if not form_data and da == deliveryAddress or da.id == form_data.delivery_address %} selected="selected"{% endif %}>
+							{{ da.address1 }}, {% if da.address2 %}{{ da.address2 }}, {% endif %}{{ da.city }},
+	                        {{ da.region }}, {{ da.country }}, {{ da.zip }}
+	                    </option>
+					{% endfor %}
+					</select>
+					{% if 'delivery_address' in form_data.errors %}<p id="error_1_id_delivery_address" class="help-block"><strong>{{form_data.errors.delivery_address}}</strong></p>{% endif %}
+				</div>
+			</div>
+
+			{% trans "Or" %} : <label class="control-label" for="new_delivery_address">{% trans "New address" %}</label>
+			<a onclick="$('#new_delivery_address').toggleClass('hidden')" class="btn btn-default btn-xs">+</a>
+			<div id="new_delivery_address" class="{% if not form_data or not form_data.show_new_delivery_addr_form %}hidden{% endif %}">
+				{{newShippingAddressForm|crispy}}
+			</div>
 			
-		</div>
+			<div class="form-group marginTop20{% if 'delivery_datetime' in form_data.errors %} has-error{% endif %}">
+				<label class="control-label" for="deliveryDateTimePicker">{% trans "Delivery time" %}</label>
+                <div class='input-group date' id='deliveryDateTimePicker'>
+                    <input name="delivery_datetime" type='text' class="form-control" value="{{form_data.delivery_datetime}}"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                {% if 'delivery_datetime' in form_data.errors %}<p id="error_1_id_delivery_datetime" class="help-block"><strong>{{form_data.errors.delivery_datetime}}</strong></p>{% endif %}
+            </div>
+            
+            <button type="submit" class="btn btn-success">
+            	<span class="fa fa-check"></span> {% trans "Confirm and send order" %}
+            </button>
+            
+			<button id="cancelOrder" type="button" class="btn btn-default">
+            	<span class="fa fa-times"></span> {% trans "Cancel order" %}
+            </button>
+		</form>
 	</div>
 </div>
+{% endif %}
+{% endblock %}
+
+{% block head %}
+<link href="{{ STATIC_URL }}bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block page-scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/collapse.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/transition.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+{% if order_data %}
+<script type="text/javascript">
+$(document).ready(function() {
+	RegionSelector.init("#id_country", "#id_region");
+	$('#deliveryDateTimePicker').datetimepicker({
+		minDate: Date('now'),
+		format: "YYYY-MM-DD HH:mm:ss"
+	});
+	$('#cancelOrder').click(function(){
+		window.location.href = "{% url 'restaurant:restaurant_detail' restaurant.id %}";
+	});
+});
+</script>
 {% endif %}
 {% endblock %}
