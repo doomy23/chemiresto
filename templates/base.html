@@ -27,15 +27,10 @@
 						<nav id="navbar" class="col-md-4 navbar navbar-default">
 							<div class="container-fluid">
 								<div class="navbar-header">
-									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navigation">
-										<span class="sr-only">{% trans "Navigation" %}</span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-									</button>
+									
 									<h2 class="visible-xs no-marginTop marginLeft15"><a class="navbar-brand" href="#">{% trans "Chemiresto" %}</a></h2>
 								</div>
-								<div class="collapse navbar-collapse" id="collapse-navigation">
+								<div class="text-center navbar-collapse" id="collapse-navigation">
 									<ul class="nav navbar-nav">
 	
 										{% if not request.user_details or request.user_details.is_a_client %}
