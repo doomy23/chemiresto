@@ -10,18 +10,46 @@ a {
 }
 </style>
 
-<div align="center" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;padding:10px;background-color:#CCC">
-	<table border="0" cellpadding="0" cellspacing="0" style="max-width:640px;border:1px solid #333;" width="640">
-		<tr>
-			<td style="color:white;border-bottom:3px solid #333;background:#f32837;padding:0px 0px;">
-				<h1 style="font-size:30px;margin:0;padding:15px;">Chemiresto</h1>
-				{% block email-header %}{% endblock %}
-			</td>
-		</tr>
-		<tr>
-			<td style="color:black;padding:15px 20px;background:white;display:block;">
-				{% block email-content %}{% endblock %}
-			</td>
-		</tr>
-	</table>
-</div>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td style="background-color:#CCCCCC;text-align:center;">	
+			<table border="0" cellpadding="0" align='center' cellspacing="0" style="max-width:640px;border:1px solid #333;margin:15px auto;" width="640">
+				<tr>
+					<td style="color:white;border-bottom:3px solid #333;background:#f32837;">
+						<table cellpadding='0' cellspacing='0' border='0' style='width:100%;'>
+							<tr>
+								<td colspan='3' style='height:15px;'></td>
+							</tr>
+							<tr>
+								<td style='width:15px;'></td>
+								<td>
+									<table cellpadding='0' cellspacing='0' border='0' style='width:100%;'>
+										<tr>
+											<td>
+												<h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffffff; font-size:30px; margin:0; padding:0px;">Chemiresto</h1>
+											</td>
+											{% block email-header %}
+											{% endblock %}
+										</tr>
+									</table>	
+								</td>
+								<td style='width:15px;'></td>
+							</tr>
+							<tr>
+								<td colspan='3' style='height:15px;'></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td style="color:#000000; background:#ffffff; display:block;">
+						{% block email-content %}{% endblock %}
+					</td>
+				</tr>
+				<tr>
+					<td style="background:#f32837; height:10px; border-top:solid 1px #000000;"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
