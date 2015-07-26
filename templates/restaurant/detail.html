@@ -9,11 +9,13 @@
 		<h2 class="page-title">{{ restaurant.name }}</h2>
 		
 		{% if restaurant.image %}
-			{% thumbnail restaurant.image 400x300 crop as thumb %}
-	        <img class="image" src="{{thumb.url}}"/>
+			<div class="col-md-5">
+				{% thumbnail restaurant.image 400x300 crop as thumb %}
+		        <img class="image" src="{{thumb.url}}"/>
+	        </div>
 		{% endif %}
 		
-		<div id="map-canvas" style="width:{% if restaurant.image %}60%{% else %}100%{% endif %};height:300px;"></div>
+		<div id="map-canvas" {% if restaurant.image %}class="col-md-7"{% else %}class="col-md-12"{% endif %}></div>
 	</div>
 	
 	{% if restaurant.menus %}
@@ -35,7 +37,7 @@
 	      				<div class="col-md-3">
 							{% if meal.image %}
 								{% thumbnail meal.image 200x150 crop as thumb %}
-		        				<img class="image" src="{{thumb.url}}" style="width:100%; height:auto;"/>
+		        				<img class="image" src="{{thumb.url}}" />
 					        {% else %}
 					        	<img class="image" src="{{ STATIC_URL }}img/placeholder-200x150.png" style="width:100%; height:auto;"/>
 							{% endif %}
@@ -56,7 +58,7 @@
 											<span class="asteriskField">*</span>
 										</label>
 										
-										<div class="controls pull-right">
+										<div class="controls pull-left marginLeft10">
 											<input id="id_qte-{{meal.id}}" class="textinput textInput form-control" name="qte" value="1">
 										</div>
 									</div>

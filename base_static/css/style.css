@@ -8,7 +8,7 @@ html, body{
 }
 
 /* Bootstrap overwrites */
-
+#restaurant-details .image
 .alert-error {
     background-color: #f2dede;
     border-color: #ebccd1;
@@ -119,6 +119,10 @@ header .navbar-collapse{
 
 .marginTop6{
 	margin-top:6px;
+}
+
+.marginLeft10{
+	margin-left:10px;
 }
 
 .marginLeft15{
@@ -357,11 +361,20 @@ input#id_consent_cp{
 	margin-top:20px;
 }
 
+#restaurant-details{
+	
+} 
+
+#restaurant-details #map-canvas{
+	height:300px;
+	margin-bottom:15px;
+}
+
 #restaurant-details .image{
-	float:left;
-	padding:0 10px 15px 0;
-	width:39%;
+	width:100%;
 	height:auto;
+	border:solid 1px #000;
+	margin-bottom:15px;
 }
 
 #restaurant-details #map-convas{
