@@ -5,6 +5,8 @@ from django.template.response import TemplateResponse
 from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
@@ -393,6 +395,19 @@ class OrderCreatorView(View):
                     orderTax.rate = tax['rate']
                     orderTax.price = tax['amount']
                     orderTax.save()
+                
+                #
+                # Sending email, must do in a try catch
+                # cause Gmail is shit and fail sometimes...
+                #
+                try:    
+                    email_message = render_to_string('orders/new_order_email.html', {'order':order})
+                    email = EmailMultiAlternatives(_("New order creation"), email_message, 'chemiresto@gmail.com', [request.user.email, order.restaurant.restaurateur.email])
+                    email.attach_alternative(email_message, "text/html")
+                    email.send()
+                    
+                except:
+                    pass
                 
                 messages.success(self.request, _("Your order has been created and you will be noticed as it changes state. You can pay on delivery or immediatly with Paypal. Your order number is : ") + str(order.id))
                 return HttpResponseRedirect(reverse('accounts:dashboard'))

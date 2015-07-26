@@ -1,0 +1,51 @@
+{% extends "email.html" %}
+{% load i18n humanize %}
+
+{% block email-header %}
+<h2 style="font-size:22px;margin:0;padding:0 15px 15px">{% trans "New order creation" %}</h2>
+{% endblock %}
+
+{% block email-content %}
+<p>{% trans "We inform you that a new order has been created." %}</p>
+
+<h3>{% trans "order" %} #{{order.id}}</h3>
+
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th style="text-align:left">{% trans "Item" %}</th>
+			<th style="text-align:right">{% trans "Qte" %}</th>
+			<th style="width:75px;text-align:right">{% trans "Price" %}</th>
+			<th style="width:75px;text-align:right">{% trans "Total" %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for detail in order.details %}
+		<tr>
+			<td>{{detail.item.name}}</td>
+			<td style="text-align:right">{{detail.qte}}</td>
+			<td style="text-align:right">{{detail.price}}</td>
+			<td style="text-align:right">{{detail.cost}}$</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" style="text-align:right">{% trans "Subtotal" %}</td>
+			<td style="text-align:right">{{order.subtotal}}$</td>
+		</tr>
+		{% for tax in order.taxes %}
+		<tr>
+			<td colspan="3" style="text-align:right">{{tax.tax}}</td>
+			<td style="text-align:right">{{tax.price|floatformat:2|intcomma}}$</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" style="text-align:right">{% trans "Total" %}</td>
+			<td style="text-align:right">{{order.total|floatformat:2|intcomma}}$</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align:right">{% trans "Suggested TIPS" %}</td>
+			<td style="text-align:right">{{order.suggested_tips|floatformat:2|intcomma}}$</td>
+		</tr>
+	</tbody>
+</table>
+{% endblock %}
