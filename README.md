@@ -92,4 +92,10 @@ pip install django-blablabla
 
 # Cleaner tout les .pyc ou autre
 sudo find . -name \*.pyc -type f -delete
+
+# Générer les .po pour les traduction
+python manage.py makemessages -l fr -i "env"
+
+# Compiler les .po
+python manage.py compilemessages -l fr
 ```
