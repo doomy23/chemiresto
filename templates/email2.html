@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Chemiresto | email</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />	
+</head>
+<style type="text/css">
+a {
+  color: red;
+}
+
+@media screen and (max-width: 480px){
+	table {
+		width: 100% !important;
+	}
+}
+</style>
+<body style='margin:0; padding:0; border:0px;'>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td style="background-color:#CCCCCC;">	
+			<table border="0" cellpadding="0" align='center' cellspacing="0" style="max-width:640px;border:1px solid #333;" width="640">
+				<tr>
+					<td style="color:white;border-bottom:3px solid #333;background:#f32837;">
+						<table cellpadding='0' cellspacing='0' border='0' style='width:100%;'>
+							<tr>
+								<td colspan='3' style='height:15px;'></td>
+							</tr>
+							<tr>
+								<td style='width:15px;'></td>
+								<td>
+									<table cellpadding='0' cellspacing='0' border='0' style='width:100%;'>
+										<tr>
+											<td>
+												<h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffffff; font-size:30px; margin:0; padding:0px;">Chemiresto</h1>
+											</td>
+											<td style='width:15px;'></td>
+											<td align='right'>
+												<h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#ffffff; font-size:22px; margin:0; padding:0px;">{% trans "New order creation" %}</h2>
+											</td>
+										</tr>
+									</table>	
+								</td>
+								<td style='width:15px;'></td>
+							</tr>
+							<tr>
+								<td colspan='3' style='height:15px;'></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td style="color:#000000; background:#ffffff; display:block;">
+						<table cellpadding='0' cellspacing='0' border='0' style='width:100%;'>
+							<tr>
+								<td colspan='5' style='height:15px;'></td>
+							</tr>
+							<tr>
+								<td style='width:15px;'></td>
+								<td>
+									<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; padding:0px; margin:0px; color:#000000; font-size:14px;">We inform you that a new order has been created.</p>
+								</td>
+								<td style='width:15px;'></td>
+								<td>
+									<h3 style="color:#000000; padding:0px; margin:0px; font-size:14px;">{% trans "order" %} : #{{order.id}}</h3>
+								</td>
+								<td style='width:15px;'></td>
+							</tr>
+							<tr>
+								<td colspan='5' style='height:15px;'></td>
+							</tr>
+							<tr>
+								<td style="width:15px;"></td>
+								<td colspan='3'>
+									<table cellpadding='0' cellspacing='0' border='0' style="border:solid 1px #000000;">
+										<thead>
+											<tr>
+												<th colspan="2" style="text-align:center; background-color:#f32837;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#ffffff; font-size:12px;">{% trans "Item" %}</p>
+												</th>
+												<th style="text-align:center;background-color:#f32837;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#ffffff; font-size:12px;">{% trans "Qte" %}</p>
+												</th>
+												<th style="text-align:center;background-color:#f32837;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#ffffff; font-size:12px;">{% trans "Price" %}</p>
+												</th>
+												<th colspan="2" style="text-align:center;background-color:#f32837;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#ffffff; font-size:12px;">{% trans "Total" %}</p>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for detail in order.details %}
+											<tr>
+												<td style="width:5px; border-bottom:solid 1px #000000; height:30px;"></td>
+												<td style="text-align:center; border-bottom:solid 1px #000000; height:30px;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{detail.item.name}}</p>
+												</td>
+												<td style="text-align:center; border-bottom:solid 1px #000000; height:30px;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{detail.qte}}</p>
+												</td>
+												<td style="text-align:center; border-bottom:solid 1px #000000; height:30px;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{detail.price}}</p>
+												</td>
+												<td style="text-align:right; border-bottom:solid 1px #000000; height:30px;">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{detail.cost}}$</p>
+												</td>
+												<td style="width:15px; border-bottom:solid 1px #000000; height:30px;"></td>
+											</tr>
+											{% endfor %}
+											{% for tax in order.taxes %}
+											<tr>
+												<td colspan="6" height="10"></td>
+											</tr>
+											<tr>
+												<td style="width:5px;"></td>
+												<td colspan="3" style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{% trans "Subtotal" %}</p>
+												</td>
+												<td style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{order.subtotal}}$</p>
+												</td>
+												<td style="width:15px;"></td>
+											</tr>
+											{% endfor %}
+											<tr>
+												<td colspan="6" height="5"></td>
+											</tr>
+											<tr>
+												<td style="width:15px;"></td>
+												<td colspan="3" style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{tax.tax}}</p>
+												</td>
+												<td style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{tax.price|floatformat:2|intcomma}}$</p>
+												</td>
+												<td style="width:15px;"></td>
+											</tr>
+											<tr>
+												<td colspan="6" height="5"></td>
+											</tr>
+											<tr>
+												<td style="width:15px;"></td>
+												<td colspan="3" style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{% trans "Total" %}</p>
+												</td>
+												<td style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;"><strong>{{order.total|floatformat:2|intcomma}}$</strong></p>
+												</td>
+												<td style="width:15px;"></td>
+											</tr>
+											<tr>
+												<td colspan="6" height="5"></td>
+											</tr>
+											<tr>
+												<td style="width:15px;"></td>
+												<td colspan="3" style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{% trans "Suggested TIPS" %}</p>
+												</td>
+												<td style="text-align:right">
+													<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0; padding:0; color:#000000; font-size:12px;">{{order.suggested_tips| floatformat:2|intcomma}}$</p>
+												</td>
+												<td style="width:15px;"></td>
+											</tr>
+											<tr>
+												<td colspan="6" height="10"></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+								<td style='width:15px;'></td>
+							</tr>
+							<tr>
+								<td colspan='5' style='height:15px;'></td>
+							</tr>
+						</table>
+						
+					</td>
+				</tr>
+				<tr>
+					<td style="background:#f32837; height:10px; border-top:solid 1px #000000;"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+
