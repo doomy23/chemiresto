@@ -28,7 +28,6 @@
 						
 						{% if editAccountDetailsForm %}
 							<div class="clearfix">
-								
 								{% crispy editAccountDetailsForm %}
 							</div>	
 						{% endif %}
@@ -64,7 +63,7 @@
 	      		</div>
 	      	</div>  
 		     	
-			   {% if not request.user|has_group:"Entrepreneur" and not request.user|has_group:"Restaurateur" and not request.user|has_group:"Livreur" %}
+			   {% if request.user|has_group:"Client" %}
 		   
 		    	<div class="panel-heading" role="tab" id="headingShipping">
 		      		<h4 class="panel-title">
@@ -75,7 +74,7 @@
 		    	</div>
 		    	<div id="shipping" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShipping">
 		      		<div class="panel-body">
-		      			<form id="shipping-form" class="form-horizontal" method="post" action="" onsubmit="return false">
+		      			<form id="shipping-form" method="post" action="" onsubmit="return false">
 		      				{% csrf_token %}
 								<input type="hidden" name="form-name" value="shipping"/>
 								<input type="hidden" name="id" value="{% if shippingForm.instance.id %}{{shippingForm.instance.id}}{% else %}0{% endif %}"/>

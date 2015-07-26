@@ -15,6 +15,9 @@ from django.views.generic import DeleteView
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.contrib import messages
+from decimal import Decimal
+from datetime import datetime
 import urlparse
 
 from forms import *
@@ -157,7 +160,98 @@ class DashboardView(View):
             data['unpaidOrders'] = Order.objects.filter(restaurant__restaurateur=request.user, state__in=nothingMoreToDoOnStates, paid=False)
             
         if request.user_details.is_a_delivery_man():
-            data['readyToDeliverOrders'] = Order.objects.filter(state="READY", deliveryMan=None)
+            try: data['currentlyDelivering'] = Order.objects.filter(state='DELIVERING', deliveryMan=request.user)[0]
+            except: data['currentlyDelivering'] = None
+            
+            if not data['currentlyDelivering']:
+                data['readyToDeliverOrders'] = Order.objects.filter(state="READY", deliveryMan=None)
+        
+        return TemplateResponse(request, self.template_name, data)
+    
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        data = {}
+        
+        if request.user_details.is_a_delivery_man():
+            try: data['currentlyDelivering'] = Order.objects.filter(state='DELIVERING', deliveryMan=request.user)[0]
+            except: data['currentlyDelivering'] = None
+            
+            if not data['currentlyDelivering']:
+                data['form_data'] = {
+                    'errors':{},
+                    'lat':request.POST.get('lat', ''),
+                    'lon':request.POST.get('lon', ''),
+                    'orderId':request.POST.get('order'),
+                    'accept':request.POST.get('accept')
+                }
+                
+                data['readyToDeliverOrders'] = Order.objects.filter(state="READY", deliveryMan=None)
+                    
+                try: 
+                    lat = Decimal(data['form_data']['lat'])
+                except: 
+                    lat = None
+                    data['form_data']['errors']['lat'] = True
+                
+                try: 
+                    lon = Decimal(data['form_data']['lon'])
+                except: 
+                    lon = None
+                    data['form_data']['errors']['lon'] = True
+                
+                if not data['form_data']['orderId']:
+                    messages.error(self.request, _("You have to select one order before beginning."))
+                    
+                elif lat and lon:
+                    try: 
+                        order = Order.objects.get(id=data['form_data']['orderId'], state="READY", deliveryMan=None)
+                    except:
+                        order = None
+                        messages.error(self.request, _("The selected order is no longer available."))
+                    
+                    if order:
+                        #
+                        # Affiche le trajet
+                        # (possibilité d'accepter ou de revenir)
+                        #
+                        data['showDirectionsAndAccept'] = order
+                        
+                        if data['form_data']['accept']:
+                            order.deliveryMan = request.user 
+                            order.state = 'DELIVERING'
+                            order.deliveryStart = datetime.now()
+                            order.deliveryManLat = lat
+                            order.deliveryManLon = lon
+                            order.save()
+                            
+                            messages.success(self.request, _("The order state is now : DELIVERING"))
+                            return HttpResponseRedirect(reverse('accounts:dashboard')) 
+                        
+            else:
+                data['form_data'] = {
+                    'errors':{},
+                    'tips':request.POST.get('tips', 0),
+                    'paid':request.POST.get('paid')
+                }
+                
+                try: 
+                    tips_value = Decimal(data['form_data']['tips']).quantize(Decimal('0.01'))
+                    if tips_value < 0: data['form_data']['errors']['tips'] = True
+                    
+                except: data['form_data']['errors']['tips'] = True
+                
+                if len(data['form_data']['errors']) == 0:
+                    data['currentlyDelivering'].state = 'DELIVERED'
+                    data['currentlyDelivering'].deliveryEnd = datetime.now()
+                    if data['form_data']['paid']: data['currentlyDelivering'].paid = True
+                    if tips_value > 0: data['currentlyDelivering'].tips = tips_value
+                    data['currentlyDelivering'].save()
+                    
+                    messages.success(self.request, _("You have completed a delivery successfully."))
+                    return HttpResponseRedirect(reverse('accounts:dashboard')) 
+            
+        else:
+            raise Http404
         
         return TemplateResponse(request, self.template_name, data)
 

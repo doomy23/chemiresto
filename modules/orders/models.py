@@ -36,11 +36,19 @@ class Order(models.Model):
     
     deliveryDatetime = models.DateTimeField(verbose_name=_("delivery datetime"))
     deliveryAddress = models.ForeignKey(UserAddress, verbose_name=_("delivery address"), null=True, blank=True)
+    deliveryStart = models.DateTimeField(verbose_name=_("delivery start"), null=True, blank=True)
+    deliveryEnd = models.DateTimeField(verbose_name=_("delivery end"), null=True, blank=True)
+    deliveryManLat = models.FloatField(null=True, blank=True)
+    deliveryManLon = models.FloatField(null=True, blank=True)
     
     paypal_payment_id = models.TextField(null=True, blank=True)
     paypal_user_id = models.TextField(null=True, blank=True)
     paid = models.BooleanField(verbose_name=_("paid"), default=False)
     paidDatetime = models.DateTimeField(verbose_name=_("paid datetime"), null=True, blank=True)
+    
+    @property
+    def id_as_string(self):
+        return str(self.id)
     
     @property
     def suggested_tips(self):

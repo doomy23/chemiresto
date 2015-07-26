@@ -25,7 +25,15 @@
 
 <div id="content" class="col-md-9">
 {% block content-pane %}
-	<h2 class="page-title">{% trans "Welcome in Chemiresto" %} {{ request.user.get_full_name }}</h2>
+	<h2 class="page-title">
+		{% if request.user|has_group:"Delivery man" and showDirectionsAndAccept %}
+		{% trans "order" %} #{{showDirectionsAndAccept.id}}
+		{% else %}{% if request.user|has_group:"Delivery man" and currentlyDelivering %}
+		{% trans "order" %} #{{currentlyDelivering.id}}
+		{% else %}
+		{% trans "Welcome in Chemiresto" %} {{ request.user.get_full_name }}
+		{% endif %}{% endif %}
+	</h2>
 	
 	{% if request.user|has_group:"Client" %}
 	<div class="row">
@@ -164,6 +172,9 @@
 	{% if request.user|has_group:"Delivery man" %}
 	<form class="row" action="" method="post">
 		{% csrf_token %}
+		
+		{% if not showDirectionsAndAccept and not currentlyDelivering %}
+		
 		<div id="readyToDeliverOrders" class="col-md-6 dashboard-orders">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -180,7 +191,7 @@
 				    		{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>
 				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
 				    		<div class="pull-left">
-				    			<input name="order" value="{{order.id}}" type="radio"/>
+				    			<input name="order" value="{{order.id}}" type="radio"{% if order.id_as_string == form_data.orderId %} checked="checked"{% endif %}/>
 				    		</div>
 				    		<div class="text-right pull-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
@@ -209,13 +220,57 @@
 					<div class="form-group{% if 'lon' in form_data.errors %} has-error{% endif %}">
 						<label class="control-label" for="id_lon">{% trans "Longitude" %}</label>
 						<div class="controls">
-							<input id="id_lon" name="lat" class="form-control" value="{{form_data.lon}}"/>
+							<input id="id_lon" name="lon" class="form-control" value="{{form_data.lon}}"/>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-danger pull-right">{% trans "Start !" %}</button>
 			  	</div>
 			</div>
 		</div>
+		
+		{% else %}{% if not currentlyDelivering %}
+		
+		<div id="directions" class="col-md-12">
+			<div id="map-canvas" style="width:100%;height:300px;" class="marginBottom20"></div>
+			<input name="lat" type="hidden" value="{{form_data.lat}}"/>
+			<input name="lon" type="hidden" value="{{form_data.lon}}"/>
+			<input name="order" type="hidden" value="{{form_data.orderId}}"/>
+			<input name="accept" class="btn btn-danger btn-lg" type="submit" value="{% trans 'Accept this delivery' %}"/>
+			<button onclick="window.location.href='{% url 'accounts:dashboard' %}';" type="button" class="btn btn-default btn-lg">
+				<span class="fa fa-times"></span>
+				{% trans 'Cancel' %}
+			</button>
+		</div>
+		
+		{% else %}
+		
+		<div id="directions" class="col-md-12">
+			<div id="map-canvas" style="width:100%;height:300px;" class="marginBottom20"></div>
+			<input name="lat" type="hidden" value="{{currentlyDelivering.deliveryManLat}}"/>
+			<input name="lon" type="hidden" value="{{currentlyDelivering.deliveryManLon}}"/>
+			<input name="order" type="hidden" value="{{currentlyDelivering.id}}"/>
+			
+			<div class="clearfix row">
+				{% if not currentlyDelivering.paid  %}
+				<div class="checkbox pull-left paddingLR15">
+					<label>
+						<input id="id_paid" type="checkbox" name="paid" {% if form_data.paid %}checked="checked"{% endif %}"/> {% trans "Mark as 'paid'" %}
+					</label>
+				</div>
+				{% endif %}
+				{% if currentlyDelivering.tips == 0  %}
+				<div class="form-group{% if 'tips' in form_data.errors %} has-error{% endif %} col-md-3">
+					<label class="control-label" for="id_tips">{% trans "TIPS given" %}</label>
+					<div class="controls">
+						<input id="id_tips" name="tips" class="form-control" value="{% if form_data.tips %}{{form_data.tips}}{% else %}0{% endif %}"/>
+					</div>
+				</div>
+				{% endif %}
+				<input name="delivered" class="btn btn-danger btn-lg" type="submit" value="{% trans "Mark as 'delivered'" %}"/>
+			</div>
+		</div>
+		
+		{% endif %}{% endif %}
 	</form>
 	{% endif %}
 	
@@ -225,9 +280,19 @@
 
 {% block page-scripts %}
 {% if request.user|has_group:"Delivery man" %}
+{% if showDirectionsAndAccept or currentlyDelivering  %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language={{ request.LANGUAGE_CODE }}&key=AIzaSyCWVV4JsXtPPqY6ngQB8G3MVHf6S3ylFQw"></script>
+{% endif %}
 <script type="text/javascript">
+// {% if showDirectionsAndAccept or currentlyDelivering %}
+var map;
+// {% endif %}
+
 $(document).ready(function() {
+	// {% if not showDirectionsAndAccept and not currentlyDelivering %}
+	
 	if(navigator.geolocation) {
+		if($('#id_lat').val() == "" | $('#id_lon').val() == "")
 		navigator.geolocation.getCurrentPosition(function(position) {
 	      	$('#id_lat').val(position.coords.latitude);
 	      	$('#id_lon').val(position.coords.longitude);
@@ -237,6 +302,40 @@ $(document).ready(function() {
 	} else {
 		console.error('Error: Your browser doesn\'t support geolocation')
 	}
+	
+	// {% else %}
+	
+	var position = new google.maps.LatLng($('#directions input[name=lat]').val(), $('#directions input[name=lon]').val());
+	
+	var mapOptions = {
+		center: position,
+      	zoom: 15,
+      	mapTypeId: google.maps.MapTypeId.HYBRID
+	};
+	
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	directionsDisplay.setMap(map);
+	
+	var request = {
+        origin : position,
+        destination : '{% if currentlyDelivering %}{{currentlyDelivering.deliveryAddress.zip}}{% else %}{{showDirectionsAndAccept.deliveryAddress.zip}}{% endif %}',
+        travelMode : google.maps.TravelMode.DRIVING,
+        waypoints: [
+        	{location:'{% if currentlyDelivering %}{{currentlyDelivering.restaurant.zip}}{% else %}{{showDirectionsAndAccept.restaurant.zip}}{% endif %}', stopover:true},
+        ]
+    };
+	
+	var directionsService = new google.maps.DirectionsService(); 
+	
+	directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        }
+    });
+	
+	// {% endif %}
 });
 </script>
 {% endif %}

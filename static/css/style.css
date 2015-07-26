@@ -113,6 +113,10 @@ header .navbar-collapse{
 	margin-top:20px;
 }
 
+.marginBottom20{
+	margin-bottom:20px;
+}
+
 .marginTop6{
 	margin-top:6px;
 }
@@ -123,6 +127,11 @@ header .navbar-collapse{
 
 .borderRight{
 	border-right:1px solid;
+}
+
+.paddingLR15{
+	padding-left:15px;
+	padding-right:15px;
 }
 
 .marginLRm15{
