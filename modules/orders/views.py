@@ -67,6 +67,10 @@ class OrderDetailView(View):
             try: self.order = Order.objects.get(id=id)
             except Order.DoesNotExist: raise Http404
             
+        elif request.user_details.is_a_delivery_man():
+            try: self.order = Order.objects.get(id=id, deliveryMan=None)
+            except Order.DoesNotExist: raise Http404
+            
         if request.method.lower() in self.http_method_names:
             handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
         else:

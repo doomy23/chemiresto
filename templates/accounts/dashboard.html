@@ -39,8 +39,9 @@
 			  		<ul class="list-group no-marginBottom">
 			    	{% for order in unfinishedOrders %}
 				    	<li class="order list-group-item">
-				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Order state" %}: <span class="state">{{order.get_state_text}}</span><br/>
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
 			    	{% endfor %}
@@ -62,8 +63,9 @@
 			  		<ul class="list-group">
 			    	{% for order in unpaidOrders %}
 				    	<li class="order list-group-item">
-				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
 				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
@@ -91,9 +93,10 @@
 			  		<ul class="list-group no-marginBottom">
 			    	{% for order in unfinishedOrders %}
 				    	<li class="order list-group-item">
-				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
-				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
+				    		{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "Prepare order" %}</a></div>
 				    	</li>
 			    	{% endfor %}
@@ -115,9 +118,10 @@
 			  		<ul class="list-group no-marginBottom">
 			    	{% for order in deliveryOrders %}
 				    	<li class="order list-group-item">
-				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
-				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
+				    		{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
 			    	{% endfor %}
@@ -139,9 +143,10 @@
 			  		<ul class="list-group no-marginBottom">
 			    	{% for order in unpaidOrders %}
 				    	<li class="order list-group-item">
-				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
-				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
+				    		{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>
 				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
@@ -156,6 +161,83 @@
 	</div>
 	{% endif %}
 	
+	{% if request.user|has_group:"Delivery man" %}
+	<form class="row" action="" method="post">
+		{% csrf_token %}
+		<div id="readyToDeliverOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Ready to deliver" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if readyToDeliverOrders %}
+			  		<ul class="list-group no-marginBottom">
+			    	{% for order in readyToDeliverOrders %}
+				    	<li class="order list-group-item clearfix">
+				    		<span class="restaurant">{{order.restaurant.name}}</span><br/>
+				    		{% trans "For the" %} : <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
+				    		{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>
+				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
+				    		<div class="pull-left">
+				    			<input name="order" value="{{order.id}}" type="radio"/>
+				    		</div>
+				    		<div class="text-right pull-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+		
+		<div id="deliverSelectedOrder" class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Start a delivery" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+					<p>{% trans "First, you have to select one order on the left then enter your actual coordinates if it's not already done by the navigator geolocalisation." %}</p>
+					<div class="form-group{% if 'lat' in form_data.errors %} has-error{% endif %}">
+						<label class="control-label" for="id_lat">{% trans "Latitude" %}</label>
+						<div class="controls">
+							<input id="id_lat" name="lat" class="form-control" value="{{form_data.lat}}"/>
+						</div>
+					</div>
+					<div class="form-group{% if 'lon' in form_data.errors %} has-error{% endif %}">
+						<label class="control-label" for="id_lon">{% trans "Longitude" %}</label>
+						<div class="controls">
+							<input id="id_lon" name="lat" class="form-control" value="{{form_data.lon}}"/>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-danger pull-right">{% trans "Start !" %}</button>
+			  	</div>
+			</div>
+		</div>
+	</form>
+	{% endif %}
+	
 {% endblock %}
 </div>
+{% endblock %}
+
+{% block page-scripts %}
+{% if request.user|has_group:"Delivery man" %}
+<script type="text/javascript">
+$(document).ready(function() {
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+	      	$('#id_lat').val(position.coords.latitude);
+	      	$('#id_lon').val(position.coords.longitude);
+	    }, function() {
+	      console.error('Error: The Geolocation service failed')
+	    });
+	} else {
+		console.error('Error: Your browser doesn\'t support geolocation')
+	}
+});
+</script>
+{% endif %}
 {% endblock %}

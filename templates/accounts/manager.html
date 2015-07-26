@@ -64,7 +64,7 @@
 	      		</div>
 	      	</div>  
 		     	
-			   {% if not request.user|has_group:"Entrepreneur" and not request.user|has_group:"Restaurateur" %}
+			   {% if not request.user|has_group:"Entrepreneur" and not request.user|has_group:"Restaurateur" and not request.user|has_group:"Livreur" %}
 		   
 		    	<div class="panel-heading" role="tab" id="headingShipping">
 		      		<h4 class="panel-title">
