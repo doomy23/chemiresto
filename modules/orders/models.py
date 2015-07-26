@@ -15,7 +15,6 @@ from decimal import Decimal
 SUGGESTED_TIPS_RATE = Decimal('0.15')
 
 ORDER_STATES = (
-    ('UNFINISHED',_("unfinished")),
     ('AWAITING',_("awaiting")),
     ('PREPARING',_("preparing")),
     ('READY',_("ready")),
@@ -33,7 +32,7 @@ class Order(models.Model):
     total = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("cost after tax"))
     tips = CurrencyField(max_digits=10, decimal_places=2, verbose_name=_("tips"), default=0)
     
-    state = models.CharField(verbose_name=_("state"), default='UNFINISHED', choices=ORDER_STATES, max_length=25)
+    state = models.CharField(verbose_name=_("state"), default='AWAITING', choices=ORDER_STATES, max_length=25)
     
     deliveryDatetime = models.DateTimeField(verbose_name=_("delivery datetime"))
     deliveryAddress = models.ForeignKey(UserAddress, verbose_name=_("delivery address"), null=True, blank=True)

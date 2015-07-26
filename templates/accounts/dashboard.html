@@ -16,7 +16,6 @@
         {% endif %}
         
         {% if request.user|has_group:"Restaurateur" %}
-        <li class="list-group-item"><a href="{% url 'restaurant:restaurant_create' %}"><span class="fa fa-cog"></span> {% trans "Manage my orders" %}</a></li>
         <li class="list-group-item"><a href="{% url 'restaurant:menu_list' %}"><span class="fa fa-cog"></span> {% trans "Manage my menus" %}</a></li>
         {% endif %}
         
@@ -56,7 +55,7 @@
 		<div id="unpaidOrders" class="col-md-6 dashboard-orders">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-			    	<h3 class="panel-title">{% trans "Unpaid order" %}</h3>
+			    	<h3 class="panel-title">{% trans "Unpaid orders" %}</h3>
 			  	</div>
 			  	<div class="panel-body">
 			  		{% if unpaidOrders %}
@@ -64,13 +63,90 @@
 			    	{% for order in unpaidOrders %}
 				    	<li class="order list-group-item">
 				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
-				    		{% trans "Order state" %}: <span class="state">{{order.get_state_text}}</span><br/>
-				    		{% trans "Amount" %}: <span class="total">{{order.total}}$</span><br/>
+				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
 				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
 				    	</li>
 			    	{% endfor %}
 			    	</ul>
 			    	<p class="no-marginBottom text-center">{% trans "You can pay on delivery or pay now in the order details." %}</p>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	
+	{% if request.user|has_group:"Restaurateur" %}
+	<div class="row">
+		<div id="unfinishedOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Current orders" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if unfinishedOrders %}
+			  		<ul class="list-group no-marginBottom">
+			    	{% for order in unfinishedOrders %}
+				    	<li class="order list-group-item">
+				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
+				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "Prepare order" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+		
+		<div id="deliveryOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Delivery orders" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if deliveryOrders %}
+			  		<ul class="list-group no-marginBottom">
+			    	{% for order in deliveryOrders %}
+				    	<li class="order list-group-item">
+				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
+				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
+			    	{% else %}
+			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
+			    	{% endif %}
+			  	</div>
+			</div>
+		</div>
+		
+		<div id="unpaidOrders" class="col-md-6 dashboard-orders">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">{% trans "Unpaid orders" %}</h3>
+			  	</div>
+			  	<div class="panel-body">
+			  		{% if unpaidOrders %}
+			  		<ul class="list-group no-marginBottom">
+			    	{% for order in unpaidOrders %}
+				    	<li class="order list-group-item">
+				    		<span class="restaurant">{{order.restaurant.name}}</span> {% trans "for the" %} <span class="date">{{order.deliveryDatetime}}</span><br/>
+				    		{% trans "Client" %} : <span class="state">{{order.user.get_full_name}}</span><br/>
+				    		{% trans "Order state" %} : <span class="state">{{order.get_state_text}}</span><br/>
+				    		{% trans "Amount" %} : <span class="total">{{order.total}}$</span><br/>
+				    		<div class="text-right"><a class="btn btn-default btn-xs" href="{% url 'orders:detail' order.id %}">{% trans "More details" %}</a></div>
+				    	</li>
+			    	{% endfor %}
+			    	</ul>
 			    	{% else %}
 			    	<p class="no-marginBottom text-center">- {% trans "None" %} -</p>
 			    	{% endif %}

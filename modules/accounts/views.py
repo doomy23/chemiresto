@@ -149,6 +149,12 @@ class DashboardView(View):
         if request.user_details.is_a_client():
             data['unfinishedOrders'] = Order.objects.filter(user=request.user).exclude(state='DELIVERED')
             data['unpaidOrders'] = Order.objects.filter(user=request.user, paid=False)
+            
+        if request.user_details.is_a_restaurateur():
+            nothingMoreToDoOnStates = ['READY', 'DELIVERING', 'DELIVERED']
+            data['unfinishedOrders'] = Order.objects.filter(restaurant__restaurateur=request.user).exclude(state__in=nothingMoreToDoOnStates)
+            data['deliveryOrders'] = Order.objects.filter(restaurant__restaurateur=request.user, state__in=['DELIVERING', 'READY'])
+            data['unpaidOrders'] = Order.objects.filter(restaurant__restaurateur=request.user, state__in=nothingMoreToDoOnStates, paid=False)
         
         return TemplateResponse(request, self.template_name, data)
 

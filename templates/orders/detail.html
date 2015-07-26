@@ -59,11 +59,18 @@
 				    	<h3 class="panel-title">{% trans "Informations" %}</h3>
 				  	</div>
 				  	<div class="panel-body">
+				  		<strong class="id">#{{order.id}}</strong><br/>
 					    {% trans "Restaurant" %} : <strong class="restaurant">{{order.restaurant.name}}</strong><br/>
 					    {% trans "Order state" %} : <strong class="state">{{order.get_state_text}}</strong><br/>
-					    {% trans "Livreur" %} : <strong class="delivery-man">{% if order.deliveryMan %}{{order.deliveryMan.get_full_name}}{% else %}{% trans "None" %}{% endif %}</strong><br/>
-					    {% trans "Paid" %} : <strong class="paid{% if not order.paid %} alert{% endif %}">{% if order.paid %}Yes <span class="fa fa-check"></span>{% else %}No <span class="fa fa-times"></span>{% endif %}</strong><br/>
-						{% if not order.paid %}<br/><p class="no-marginBottom text-center">{% trans "You can pay on delivery or pay now in the form bellow." %}</p>{% endif %}
+					    {% if not request.user|has_group:"Client" %}{% trans "Client" %} : <strong class="client">{{order.user.get_full_name}}</strong><br/>{% endif %}
+					    {% trans "Delivery address" %} : 
+					    <strong class="delivery-address">
+					    	{{order.deliveryAddress.address1}}{% if order.deliveryAddress.address2 %}, {{order.deliveryAddress.address2}}{% endif %}, 
+							{{order.deliveryAddress.city}}, {{order.deliveryAddress.region}}, {{order.deliveryAddress.country}}, {{order.deliveryAddress.zip|upper}}
+					    </strong><br/>
+					    {% trans "Delivery man" %} : <strong class="delivery-man">{% if order.deliveryMan %}{{order.deliveryMan.get_full_name}}{% else %}{% trans "None" %}{% endif %}</strong><br/>
+					    {% trans "Paid" %} : <strong class="paid{% if not order.paid %} red{% endif %}">{% if order.paid %}Yes <span class="fa fa-check"></span>{% else %}No <span class="fa fa-times"></span>{% endif %}</strong><br/>
+						{% if request.user|has_group:"Client" and not order.paid %}<br/><p class="no-marginBottom text-center">{% trans "You can pay on delivery or pay now in the form bellow." %}</p>{% endif %}
 				  	</div>
 				</div>
 			</div>
@@ -91,6 +98,36 @@
 					  	<p class="no-marginBottom text-center">
 					  		<img id="paypal-img" src="{{STATIC_URL}}img/paypal.png"/>
 					  	</p>
+					 </div>
+				</div>
+			</div>
+			{% endif %}
+			
+			{% if request.user|has_group:"Restaurateur" and not order.state in nothingMoreToDoRestaurateurOnStates %}
+			<div id=stateChanger class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+				    	<h3 class="panel-title">{% trans "Order state changes" %}</h3>
+				  	</div>
+				  	<div class="panel-body">
+					  	<form action="" method="post" class="form-horizontal clearfix">
+					  		{% csrf_token %}
+					  		{% if order.state == 'AWAITING' %}
+					  		<p>{% trans "Before starting to cook this order, please change its state by pressing the following button..." %}</p>
+					  		<input type="hidden" name="form-name" value="changestate-preparing"/>
+							<button type="submit" class="btn btn-success btn-lg">
+								<span class="fa fa-check"></span> {% trans "Mark as 'Preparing'" %}
+							</button>
+							{% endif %}
+							
+							{% if order.state == 'PREPARING' %}
+					  		<p>{% trans "Before the delivery man comes, you have to mark the order as ready, to do so press the following..." %}</p>
+					  		<input type="hidden" name="form-name" value="changestate-ready"/>
+							<button type="submit" class="btn btn-success btn-lg">
+								<span class="fa fa-check"></span> {% trans "Mark as 'Ready'" %}
+							</button>
+							{% endif %}
+					  	</form>
 					 </div>
 				</div>
 			</div>

@@ -75,12 +75,15 @@ class OrderDetailView(View):
     
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
-        return TemplateResponse(request, self.template_name, {'order':self.order})
+        nothingMoreToDoRestaurateurOnStates = ['READY', 'DELIVERING', 'DELIVERED']
+        return TemplateResponse(request, self.template_name, {'order':self.order,
+                                                              'nothingMoreToDoRestaurateurOnStates':nothingMoreToDoRestaurateurOnStates})
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         form_data = {}
         form_name = request.POST.get('form-name')
+        nothingMoreToDoRestaurateurOnStates = ['READY', 'DELIVERING', 'DELIVERED']
         
         #
         # Client actions
@@ -167,9 +170,25 @@ class OrderDetailView(View):
                         
                     else:
                         messages.error(self.request, _("Cannot create PayPal payment object : ") + unicode(payment.error))
+                        
+        #
+        # Restaurateur actions
+        #
+        if request.user_details.is_a_restaurateur():
+            
+            if form_name == 'changestate-preparing' and self.order.state == 'AWAITING':
+                self.order.state = 'PREPARING'
+                self.order.save()
+                messages.success(self.request, _("The order state has changed to : PREPARING"))
+                
+            if form_name == 'changestate-ready' and self.order.state == 'PREPARING':
+                self.order.state = 'READY'
+                self.order.save()
+                messages.success(self.request, _("The order state has changed to : READY"))
         
         return TemplateResponse(request, self.template_name, {'order':self.order,
-                                                              'form_data':form_data})
+                                                              'form_data':form_data,
+                                                              'nothingMoreToDoRestaurateurOnStates':nothingMoreToDoRestaurateurOnStates})
 
 class OrderCreatorView(View):
     template_name = 'orders/create.html'

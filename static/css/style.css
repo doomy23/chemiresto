@@ -308,7 +308,9 @@ input#id_consent_cp{
 }
 
 #restaurants .restaurant{
-	margin-bottom:20px;
+	
+	margin:0px 0px 20px 0px;
+	
 }
 
 #restaurants .restaurant:last-child{
@@ -316,10 +318,31 @@ input#id_consent_cp{
 }
 
 #restaurants .restaurant .image{
-	float:left;
-	padding:0 15px 15px 0;
+	padding:0px 0px 0px 0px;
+	border:solid #000 1px;
 }
 
+#restaurants .restaurant .boxTexte{
+	border:solid #000 1px;
+	border-top:none;
+	padding:0px 10px 15px 10px
+}
+
+#restaurants .restaurant p{
+	padding:0px;
+	margin:0px;
+}
+
+#restaurants .restaurant h2{
+	font-size:20px;
+	margin-top:0px;
+	padding-top:10px;
+}
+
+#restaurants .restaurant .btn-danger{
+	display:block;
+	margin-top:20px;
+}
 
 #restaurant-details .image{
 	float:left;
@@ -376,7 +399,7 @@ input#id_consent_cp{
 	color:red;
 }
 
-#orderInformation .paid.alert{
+#orderInformation .paid.red{
 	color:red;
 }
 
@@ -462,28 +485,6 @@ input#id_consent_cp{
 .accountMenu .dropdown-menu{
 	background-color:#000000;
 }
-
-/* **** Existe deja dans bootstrap3 : http://getbootstrap.com/css/#helper-classes-clearfix
-
-.clearfix:after {
-     visibility: hidden;
-     display: block;
-     font-size: 0;
-     content: " ";
-     clear: both;
-     height: 0;
-     }
-.clearfix { display: inline-block; }
-/* start commented backslash hack \*/
-/** html .clearfix { height: 1%; }
-.clearfix { display: block; }*/
-/* close commented backslash hack */
-
-/* faut pas trop g�n�raliser... le mettre seulement si nessessaire sur un #formQuelqueconte
-.form-group{
-	width:100%;
-}
-*/
 
 .boxInfo{
 	display:none;
