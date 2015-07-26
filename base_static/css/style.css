@@ -139,6 +139,10 @@ header .navbar-collapse{
 	margin-right:-15px;
 }
 
+.font22{
+	font-size:22px !important;
+}
+
 /* Design style */
 
 #page-header{
@@ -377,8 +381,9 @@ input#id_consent_cp{
 }
 
 #restaurant-menu .meal .image{
-	float:left;
-	padding:0 10px 15px;
+	border:solid 1px #000;
+	width:100%;
+	height:auto;
 }
 
 #restaurant-menu .meal h5{
@@ -389,6 +394,10 @@ input#id_consent_cp{
 #restaurant-menu .meal .meal-form input[name=qte]{
 	width:50px;
 	text-align:center;
+}
+
+#restaurant-menu .meal .meal-form .btn{
+	margin-top:10px;
 }
 
 #my-order h3{

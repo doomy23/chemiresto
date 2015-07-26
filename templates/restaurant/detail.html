@@ -7,12 +7,15 @@
 <div id="restaurant" class="{% if not request.user_details or request.user_details.is_a_client %}col-md-8{% else %}col-md-12{% endif %}">
 	<div id="restaurant-details" class="clearfix">
 		<h2 class="page-title">{{ restaurant.name }}</h2>
+		
 		{% if restaurant.image %}
-		{% thumbnail restaurant.image 400x300 crop as thumb %}
-        <img class="image" src="{{thumb.url}}"/>
+			{% thumbnail restaurant.image 400x300 crop as thumb %}
+	        <img class="image" src="{{thumb.url}}"/>
 		{% endif %}
+		
 		<div id="map-canvas" style="width:{% if restaurant.image %}60%{% else %}100%{% endif %};height:300px;"></div>
 	</div>
+	
 	{% if restaurant.menus %}
 	<div id="restaurant-menu" class="panel-group" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default">
@@ -24,34 +27,44 @@
 	        		</a>
 	      		</h4>
 	    	</div>
+	    	
 	    	<div id="menu-{{menu.id}}" class="panel-collapse {% if forloop.counter == 1 %}in{% else %}collapse{% endif %}" role="tabpanel" aria-labelledby="heading-menu-{{menu.id}}">
 	      		<div class="panel-body clearfix">
 	      		{% for meal in menu.meals %}
 	      			<div class="meal clearfix">
-						{% if meal.image %}
-						{% thumbnail meal.image 200x150 crop as thumb %}
-        				<img class="image" src="{{thumb.url}}"/>
-				        {% else %}
-				        <img class="image" src="{{ STATIC_URL }}img/placeholder-200x150.png"/>
-						{% endif %}
-	      				<h5>{{ meal }}</h5>
-	      				<p class="description">{{meal.description}}</p>
-	      				<p class="price">{{meal.price}}$</p>
+	      				<div class="col-md-3">
+							{% if meal.image %}
+								{% thumbnail meal.image 200x150 crop as thumb %}
+		        				<img class="image" src="{{thumb.url}}" style="width:100%; height:auto;"/>
+					        {% else %}
+					        	<img class="image" src="{{ STATIC_URL }}img/placeholder-200x150.png" style="width:100%; height:auto;"/>
+							{% endif %}
+	      				</div>
 	      				
-	      				{% if not request.user_details or request.user_details.is_a_client %}
-	      				<form id="meal-form-{{meal.id}}" class="well pull-left form-inline meal-form" onsubmit="return false">
-	      					<div id="div_id_qte-{{meal.id}}" class="form-group">
-								<label class="control-label requiredField" for="id_qte-{{meal.id}}">
-									{% trans "Qte" %}
-									<span class="asteriskField">*</span>
-								</label>
-								<div class="controls">
-									<input id="id_qte-{{meal.id}}" class="textinput textInput form-control" name="qte" value="1">
-								</div>
-							</div>
-							<input onclick="addMeal({{meal.id}})" id="add-meal-{{meal.id}}" class="btn btn-primary" type="button" value="{% trans "Add to order" %}" name="add">
-	      				</form>
-	      				{% endif %}
+	      				<div class="col-md-6">
+		      				<h5>{{ meal }}</h5>
+		      				<p class="description">{{meal.description}}</p>
+		      				<p class="price"><strong>{{meal.price}}$</strong></p>
+	      				</div>
+	      				
+	      				<div class="col-md-3">
+		      				{% if not request.user_details or request.user_details.is_a_client %}
+			      				<form id="meal-form-{{meal.id}}" class="well meal-form" onsubmit="return false">
+			      					<div id="div_id_qte-{{meal.id}}" class="clearfix">
+										<label class="control-label requiredField pull-left font22" for="id_qte-{{meal.id}}">
+											{% trans "Qte" %}
+											<span class="asteriskField">*</span>
+										</label>
+										
+										<div class="controls pull-right">
+											<input id="id_qte-{{meal.id}}" class="textinput textInput form-control" name="qte" value="1">
+										</div>
+									</div>
+									
+									<input onclick="addMeal({{meal.id}})" id="add-meal-{{meal.id}}" class="btn btn-success" type="button" value="{% trans "Add to order" %}" name="add">
+			      				</form>
+		      				{% endif %}
+	      				</div>
 	      			</div>
 	      		{% endfor %}
 	      		</div>
