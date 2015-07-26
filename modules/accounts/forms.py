@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import get_language, ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Layout, Submit
+from crispy_forms.layout import HTML, Layout, Submit, Button
 
 from models import UserAddress, UserDetails
 from restaurant.models import Restaurant
@@ -223,9 +223,9 @@ class CreateRestaurateurForm(AbstractUserCreationForm):
         super(CreateRestaurateurForm, self).__init__(*args, **kwargs)
         
         self.helper = FormHelper()
-        self.helper.form_tag = False
         self.helper.layout = Layout(
-            'first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'restaurant',
+            'first_name', 'last_name', 'email', 'password1', 'password2', 'restaurant',
+            Submit('save', _("Save"))
         )
         
 class UpdateRestaurateurForm(AbstractUserChangeForm):
@@ -237,8 +237,8 @@ class UpdateRestaurateurForm(AbstractUserChangeForm):
         super(UpdateRestaurateurForm, self).__init__(*args, **kwargs)
         
         self.helper = FormHelper()
-        self.helper.form_tag = False
         self.helper.layout = Layout(
-            'first_name', 'last_name', 'email', 'username', 'restaurant',
+            'first_name', 'last_name', 'email', 'restaurant',
+            Submit('save', _("Save")), Button('delete', _("Delete this restaurateur"), css_class='btn-danger'), 
         )
         

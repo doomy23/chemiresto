@@ -58,6 +58,9 @@ var AppEvent = {
 	showLoginModal: function(event) {
 		event.preventDefault();
 		$('#login-form-modal').modal('show');
+		$('#login-form-modal').on('shown.bs.modal', function() {
+			$('#login-form input[type=text]').focus();
+		});
 	}
 };
 

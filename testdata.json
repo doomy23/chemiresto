@@ -721,7 +721,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": "2015-07-25T01:14:20.484Z",
+    "last_login": "2015-07-26T02:25:08.830Z",
     "groups": [
       1
     ],
@@ -781,7 +781,7 @@
     "is_active": true,
     "is_superuser": false,
     "is_staff": false,
-    "last_login": "2015-07-24T18:46:31.815Z",
+    "last_login": "2015-07-26T02:21:27.430Z",
     "groups": [
       4
     ],
@@ -862,10 +862,10 @@
     "city": "Montreal",
     "zip": "H3C3R9",
     "default": true,
-    "address1": "301 rue Peel",
+    "country": "CA",
     "region": "QC",
     "user": 3,
-    "country": "CA",
+    "address1": "301 rue Peel",
     "address2": ""
   },
   "model": "accounts.useraddress",
@@ -879,7 +879,7 @@
     "zip": "H3C1K3",
     "country": "CA",
     "region": "QC",
-    "restaurateur": 4,
+    "restaurateur": 5,
     "image": "restaurant/restaurants/chat62.jpg",
     "address1": "1100 Rue Notre-Dame Ouest",
     "address2": ""

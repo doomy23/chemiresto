@@ -43,10 +43,12 @@
 						<td colspan="3" class="text-right">{% trans "Total" %}</td>
 						<td class="text-right">{{order_data.total|floatformat:2|intcomma}}$</td>
 					</tr>
+					<tr>
+						<td colspan="3" class="text-right">{% trans "Suggested TIPS" %}</td>
+						<td class="text-right">{{order_data.suggested_tips|floatformat:2|intcomma}}$</td>
+					</tr>
 				</tbody>
 			</table>
-			
-			<h4>{% trans "Suggested TIPS" %} : <span>{{order_data.suggested_tips|floatformat:2|intcomma}}$</span></h4>
 		</div>
 		
 		<form id="order-confirmation-form" class="col-md-4" method="post" action="{{ request.get_full_path }}">

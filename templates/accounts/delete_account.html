@@ -8,7 +8,7 @@
 	<form id="delete-form" method="post" action="">
 		{% csrf_token %}
 		{{form|crispy}}
-        <p>{% trans "Are you sure you want to delete your account?" %}</p>
+        <p>{% trans "Are you sure you want to delete this account?" %}</p>
 		<button type="submit" class="btn btn-primary">
 			<span class="fa fa-check"></span> {% trans "Delete my account" %}
 		</button>
