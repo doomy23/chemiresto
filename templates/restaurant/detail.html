@@ -51,14 +51,14 @@
 	      				
 	      				<div class="col-md-3">
 		      				{% if not request.user_details or request.user_details.is_a_client %}
-			      				<form id="meal-form-{{meal.id}}" class="well meal-form" onsubmit="return false">
+			      				<form id="meal-form-{{meal.id}}" class="well meal-form form-inline" onsubmit="return false">
 			      					<div id="div_id_qte-{{meal.id}}" class="clearfix">
-										<label class="control-label requiredField pull-left font22" for="id_qte-{{meal.id}}">
+										<label class="control-label requiredField font22 pull-left" for="id_qte-{{meal.id}}">
 											{% trans "Qte" %}
-											<span class="asteriskField">*</span>
+											<span class="asteriskField">* </span>
 										</label>
 										
-										<div class="controls pull-left marginLeft10">
+										<div class="controls pull-left">
 											<input id="id_qte-{{meal.id}}" class="textinput textInput form-control" name="qte" value="1">
 										</div>
 									</div>
