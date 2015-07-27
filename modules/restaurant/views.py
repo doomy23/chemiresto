@@ -289,10 +289,11 @@ class MenuListView(AllowedGroupsMixin, ListView):
 
 class MenuUpdateView(CreateView):
     template_name = 'restaurant/menus/create.html'
+    model = Menu
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        if not request.user == self.get_restaurant().restaurateur:
+        if not request.user == self.get_object().restaurant.restaurateur:
             # Seul le restaurateur qui possède le restaurant peut modifier le
             # menu.
             return HttpResponseForbidden()
@@ -309,9 +310,7 @@ class MenuUpdateView(CreateView):
                                   meal_formset=meal_formset,))
         
     def form_valid(self, form, meal_formset):
-        self.object = form.save(commit=False)
-        self.object.restaurant = self.get_restaurant()
-        self.object.save()
+        self.object = form.save()
         meal_formset.instance = self.object
         meal_formset.save()
         return HttpResponseRedirect(self.get_success_url())
@@ -326,13 +325,9 @@ class MenuUpdateView(CreateView):
                                   
     def get_context_data(self, **kwargs):
         context = super(MenuUpdateView, self).get_context_data(**kwargs)
-        context['restaurant'] = self.get_restaurant()
+        context['restaurant'] = self.object.restaurant
         return context
         
-    def get_restaurant(self):
-        pk = self.kwargs['restaurant_pk']
-        return get_object_or_404(Restaurant, pk=pk)
-                                  
     def get_success_url(self):
         return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().pk})
         
