@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     
     # Pour les restaurateurs
     url(r'^(?P<restaurant_pk>\d+)/menus/create/$', MenuCreateView.as_view(), name="menu_create"),
-    url(r'^(?P<pk>\d+)/menus/update/$', MenuUpdateView.as_view(), name="menu_update"),
+    url(r'^/menus/update/(?P<pk>\d+)$', MenuUpdateView.as_view(), name="menu_update"),
     url(r'^menus/list/$', MenuListView.as_view(), name="menu_list"),
     
     # Public

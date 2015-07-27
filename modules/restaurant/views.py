@@ -288,7 +288,7 @@ class MenuListView(AllowedGroupsMixin, ListView):
         
 
 class MenuUpdateView(CreateView):
-    template_name = 'restaurant/menus/create.html'
+    template_name = 'restaurant/menus/update.html'
     model = Menu
     
     @method_decorator(login_required)
@@ -318,7 +318,7 @@ class MenuUpdateView(CreateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = MenuForm(instance=self.object)
-        meal_formset = MealFormset(request=request)
+        meal_formset = MealFormset(instance=self.object, request=request)
         return self.render_to_response(
             self.get_context_data(form=form,
                                   meal_formset=meal_formset,))
