@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 15:50-0400\n"
+"POT-Creation-Date: 2015-07-27 15:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,19 +376,13 @@ msgid "You can search without a city, but the other fields are required."
 msgstr "Vous pouvez chercher sans ville, mais les autres champs sont requis."
 
 #: .\modules\restaurant\views.py:274
-#, fuzzy, python-format
-#| msgid ""
-#| "'%s' has been successfully created but doesn't have an assigned "
-#| "restaurateur"
+#, python-format
 msgid "'%s' has been successfully created but doesn't have a description"
 msgstr ""
 "'%s' a été créé avec succès mais aucun restaurateur ne lui a été assigné."
 
 #: .\modules\restaurant\views.py:298
-#, fuzzy, python-format
-#| msgid ""
-#| "'%s' has been successfully updated but doesn't have an assigned "
-#| "restaurateur"
+#, python-format
 msgid "'%s' has been successfully updated but doesn't have a description"
 msgstr ""
 "'%s' a été créé avec succès mais aucun restaurateur ne lui a été assigné."
@@ -981,8 +975,6 @@ msgid "Edit my menus"
 msgstr "Gérer mes menus"
 
 #: .\templates\restaurant\menus\list.html:8
-#, fuzzy
-#| msgid "Select a menu to edit"
 msgid "Select a menu or a meal to edit"
 msgstr "Sélectionner un menu pour l'édition"
 
@@ -991,8 +983,6 @@ msgid "Add a new menu"
 msgstr "Ajouter un nouveau menu"
 
 #: .\templates\restaurant\menus\list.html:25
-#, fuzzy
-#| msgid "Add a new menu"
 msgid "Add a new meal"
 msgstr "Ajouter un nouveau menu"
 
@@ -1005,26 +995,18 @@ msgstr ""
 "menu."
 
 #: .\templates\restaurant\menus\meal_create.html:4
-#, fuzzy
-#| msgid "Create a menu"
 msgid "Create a meal"
 msgstr "Création d'un menu"
 
 #: .\templates\restaurant\menus\meal_create.html:9
-#, fuzzy
-#| msgid "New Meal"
 msgid "New meal"
 msgstr "Nouveau repas"
 
 #: .\templates\restaurant\menus\meal_update.html:4
-#, fuzzy
-#| msgid "Add a meal"
 msgid "Edit a meal"
 msgstr "Ajouter un repas"
 
 #: .\templates\restaurant\menus\update.html:4
-#, fuzzy
-#| msgid "Edit my menus"
 msgid "Edit a menu"
 msgstr "Gérer mes menus"
 
