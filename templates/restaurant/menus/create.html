@@ -51,6 +51,9 @@ $(document).ready(function() {
             }
         });
         
+        $fs.find('.has-error').removeClass('has-error');
+        $fs.find('input[type=text], input[type=number]').attr('value', '');
+        
         $('#mForm').append($fs.html());
         $('#id_meal_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
     });

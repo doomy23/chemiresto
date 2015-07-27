@@ -205,6 +205,8 @@ class RestaurantListView(AllowedGroupsMixin, ListView):
 #
 class MenuCreateView(CreateView):
     template_name = 'restaurant/menus/create.html'
+    form_class = MenuForm
+    model = Menu
     
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -260,7 +262,14 @@ class MenuCreateView(CreateView):
         
             name = self.get_restaurant().name
             messages.success(self.request, _("The new menu for '%s' has been successfully created" % name))
+            
+            for form in meal_formset:
+                name = form.cleaned_data.get("name")
+                description = form.cleaned_data.get("description")
                 
+                if not description:
+                    messages.success(self.request, _("'%s' doesn't have a description" % name))
+            
             return self.form_valid(form, meal_formset)
         else:
             return self.form_invalid(form, meal_formset)
