@@ -611,8 +611,8 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: templates/accounts/login.html:20
-msgid "Vous n'avez pas de compte?"
-msgstr ""
+msgid "You don't have an account?"
+msgstr "Vous n'avez pas de compte?"
 
 #: templates/accounts/manage_restaurateur.html:4
 #: templates/accounts/manage_restaurateur.html:8
