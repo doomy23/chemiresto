@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^restaurant/', include('restaurant.urls', namespace="restaurant")),
     url(r'^select_language/(?P<lang_code>\w+)/$', views.SelectLanguageView.as_view(), name="select_language"),
     url(r'^about/', views.TemplateView.as_view(template_name="about.html"), name="about"),
+    url(r'^webservice/', include('webservice.urls', namespace="webservice")),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

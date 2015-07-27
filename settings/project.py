@@ -37,12 +37,14 @@ INSTALLED_APPS += (
     # 3rd parties
     "crispy_forms",
     "django_countries",
+    "rest_framework",
     
     # Modules
     "extras",
     "accounts",
     "restaurant",
     "orders",
+    "webservice",
 )
 
 MIDDLEWARE_CLASSES += (
