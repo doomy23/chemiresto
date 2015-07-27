@@ -8,121 +8,109 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-26 17:20-0400\n"
+"POT-Creation-Date: 2015-07-26 19:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\modules\accounts\forms.py:24
-#: .\templates\accounts\restaurateur_list.html:14
-#, fuzzy
-#| msgid "primary address"
+#: modules/accounts/forms.py:24 templates/accounts/restaurateur_list.html:14
 msgid "Email address"
-msgstr "adresse principale"
+msgstr "Adresse courriel"
 
-#: .\modules\accounts\forms.py:36
-#, fuzzy
-#| msgid "primary address"
+#: modules/accounts/forms.py:36
 msgid "Invalid email address"
-msgstr "adresse principale"
+msgstr "Adresse courriel invalide"
 
-#: .\modules\accounts\forms.py:63
-#, fuzzy
-#| msgid "This email address is already in use"
+#: modules/accounts/forms.py:63
 msgid "The email address you entered is already in use on another account"
 msgstr "Cette adresse email est déjà en cours d'utilisation"
 
-#: .\modules\accounts\forms.py:140
+#: modules/accounts/forms.py:140
 msgid "Unable to load the license at this time."
-msgstr ""
+msgstr "Incapable de charger la license en ce moment."
 
-#: .\modules\accounts\forms.py:156 .\modules\accounts\models.py:19
+#: modules/accounts/forms.py:156 modules/accounts/models.py:19
 msgid "I agree to the Terms of Use, EULA and Privacy Policy"
 msgstr "J'accepte les Conditions d'utilisation"
 
-#: .\modules\accounts\forms.py:218 .\modules\accounts\forms.py:232
-#: .\templates\orders\detail.html:63
-#, fuzzy
-#| msgid "Restaurants"
+#: modules/accounts/forms.py:218 modules/accounts/forms.py:232
+#: templates/orders/detail.html:63
 msgid "Restaurant"
-msgstr "Restaurants"
+msgstr "Restaurant"
 
-#: .\modules\accounts\forms.py:226 .\modules\accounts\forms.py:240
-#: .\templates\accounts\manager.html:35 .\templates\accounts\manager.html:58
-#: .\templates\accounts\manager.html:121 .\templates\restaurant\create.html:13
-#: .\templates\restaurant\menus\create.html:17
-#: .\templates\restaurant\update.html:13
+#: modules/accounts/forms.py:226 modules/accounts/forms.py:240
+#: templates/accounts/manager.html:35 templates/accounts/manager.html.py:58
+#: templates/accounts/manager.html:121 templates/restaurant/create.html:13
+#: templates/restaurant/menus/create.html:17
+#: templates/restaurant/update.html:13
 msgid "Save"
 msgstr "Enregistrer"
 
-#: .\modules\accounts\forms.py:240
-#, fuzzy
-#| msgid "Create the restaurateur"
+#: modules/accounts/forms.py:240
 msgid "Delete this restaurateur"
 msgstr "Créer le restaurateur"
 
-#: .\modules\accounts\models.py:10 .\modules\accounts\models.py:61
-#: .\modules\orders\models.py:27
+#: modules/accounts/models.py:10 modules/accounts/models.py:61
+#: modules/orders/models.py:27
 msgid "user"
 msgstr "utilisateur"
 
-#: .\modules\accounts\models.py:11
+#: modules/accounts/models.py:11
 msgid "birth date"
-msgstr ""
+msgstr "date de naissance"
 
-#: .\modules\accounts\models.py:12 .\modules\restaurant\models.py:15
+#: modules/accounts/models.py:12 modules/restaurant/models.py:15
 msgid "telephone"
 msgstr "téléphone"
 
-#: .\modules\accounts\models.py:13 .\modules\accounts\models.py:63
-#: .\modules\restaurant\forms.py:28 .\modules\restaurant\forms.py:42
-#: .\modules\restaurant\models.py:18
+#: modules/accounts/models.py:13 modules/accounts/models.py:63
+#: modules/restaurant/forms.py:28 modules/restaurant/forms.py:42
+#: modules/restaurant/models.py:18
 msgid "country"
 msgstr "pays"
 
-#: .\modules\accounts\models.py:14 .\modules\accounts\models.py:64
-#: .\modules\restaurant\models.py:17
+#: modules/accounts/models.py:14 modules/accounts/models.py:64
+#: modules/restaurant/models.py:17
 msgid "province/state/region"
 msgstr "province/état/région"
 
-#: .\modules\accounts\models.py:15 .\modules\accounts\models.py:65
-#: .\modules\restaurant\forms.py:26 .\modules\restaurant\forms.py:40
-#: .\modules\restaurant\models.py:16
+#: modules/accounts/models.py:15 modules/accounts/models.py:65
+#: modules/restaurant/forms.py:26 modules/restaurant/forms.py:40
+#: modules/restaurant/models.py:16
 msgid "city"
 msgstr "ville"
 
-#: .\modules\accounts\models.py:16 .\modules\accounts\models.py:66
-#: .\modules\restaurant\models.py:19
+#: modules/accounts/models.py:16 modules/accounts/models.py:66
+#: modules/restaurant/models.py:19
 msgid "address 1"
 msgstr "adresse 1"
 
-#: .\modules\accounts\models.py:17 .\modules\accounts\models.py:67
-#: .\modules\restaurant\models.py:20
+#: modules/accounts/models.py:17 modules/accounts/models.py:67
+#: modules/restaurant/models.py:20
 msgid "address 2"
 msgstr "adresse 2"
 
-#: .\modules\accounts\models.py:18 .\modules\accounts\models.py:68
-#: .\modules\restaurant\models.py:21
+#: modules/accounts/models.py:18 modules/accounts/models.py:68
+#: modules/restaurant/models.py:21
 msgid "zip code"
 msgstr "code postal"
 
-#: .\modules\accounts\models.py:62
-#, fuzzy
-#| msgid "Save as delivery address"
+#: modules/accounts/models.py:62
 msgid "default delivery Address"
 msgstr "Enregistrer comme adresse de livraison"
 
-#: .\modules\accounts\restaurateur_views.py:54
+#: modules/accounts/restaurateur_views.py:54
 msgid ""
 "The restaurateur was successfully created its restaurant has been assigned."
 msgstr ""
 "Le restaurateur a été créé avec succès un restaurant lui a été assigné."
 
-#: .\modules\accounts\restaurateur_views.py:58
+#: modules/accounts/restaurateur_views.py:58
 msgid ""
 "The restaurateur was successfully created but he doesn't have any associated "
 "restaurant."
@@ -130,1019 +118,875 @@ msgstr ""
 "Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été "
 "assigné."
 
-#: .\modules\accounts\views.py:203
+#: modules/accounts/views.py:203
 msgid "You have to select one order before beginning."
-msgstr ""
+msgstr "Vous devez sélectionner une commande avant de commencer."
 
-#: .\modules\accounts\views.py:210
+#: modules/accounts/views.py:210
 msgid "The selected order is no longer available."
-msgstr ""
+msgstr "La commande sélectionnée n'est plus disponible"
 
-#: .\modules\accounts\views.py:227
+#: modules/accounts/views.py:227
 msgid "The order state is now : DELIVERING"
-msgstr ""
+msgstr "L'état de la commande est maintenant : LIVRAISON"
 
-#: .\modules\accounts\views.py:250
+#: modules/accounts/views.py:250
 msgid "You have completed a delivery successfully."
-msgstr ""
+msgstr "Vous avez completé une livraison avec succès."
 
-#: .\modules\accounts\views.py:313
+#: modules/accounts/views.py:313
 msgid "Your account information has been successfully updated."
 msgstr "Les informations de votre compte a été mis à jour avec succès."
 
-#: .\modules\accounts\views.py:329
+#: modules/accounts/views.py:329
 msgid "Your password has been successfully updated."
 msgstr "Votre mot de passe a été mis à jour avec succès."
 
-#: .\modules\accounts\views.py:360
+#: modules/accounts/views.py:360
 msgid "The delivery address has been successfully created."
 msgstr "L'adresse de livraison a été créé avec succès."
 
-#: .\modules\accounts\views.py:379
+#: modules/accounts/views.py:379
 msgid "The delivery address has been successfully updated."
 msgstr "L'adresse de livraison a été mis à jour avec succès."
 
-#: .\modules\accounts\views.py:386 .\modules\accounts\views.py:407
+#: modules/accounts/views.py:386 modules/accounts/views.py:407
 msgid "An unfinished command is associated with the delivery address."
 msgstr "Une commande inachevée est associé à l'adresse de livraison."
 
-#: .\modules\accounts\views.py:402
+#: modules/accounts/views.py:402
 msgid "The delivery address has been successfully deleted."
 msgstr "L'adresse de livraison a été supprimé avec succès."
 
-#: .\modules\accounts\views.py:413
+#: modules/accounts/views.py:413
 msgid "The delivery address specified does not exist."
 msgstr "L'adresse de livraison spécifié n'existe pas."
 
-#: .\modules\orders\models.py:18
+#: modules/orders/models.py:18
 msgid "awaiting"
 msgstr "en attente"
 
-#: .\modules\orders\models.py:19
+#: modules/orders/models.py:19
 msgid "preparing"
-msgstr ""
+msgstr "en préparation"
 
-#: .\modules\orders\models.py:20
+#: modules/orders/models.py:20
 msgid "ready"
-msgstr ""
+msgstr "prêt"
 
-#: .\modules\orders\models.py:21
-#, fuzzy
-#| msgid "delivered"
+#: modules/orders/models.py:21
 msgid "delivering"
-msgstr "livré"
+msgstr "livraison"
 
-#: .\modules\orders\models.py:22
+#: modules/orders/models.py:22
 msgid "delivered"
 msgstr "livré"
 
-#: .\modules\orders\models.py:28
-#, fuzzy
-#| msgid "delivered"
+#: modules/orders/models.py:28
 msgid "delivery man"
-msgstr "livré"
+msgstr "livreur"
 
-#: .\modules\orders\models.py:29
+#: modules/orders/models.py:29
 msgid "restaurant"
 msgstr "restaurant"
 
-#: .\modules\orders\models.py:31 .\modules\orders\models.py:81
+#: modules/orders/models.py:31 modules/orders/models.py:81
 msgid "cost before tax"
-msgstr "coûts avant impôts"
+msgstr "coûts avant taxes"
 
-#: .\modules\orders\models.py:32
-#, fuzzy
-#| msgid "cost before tax"
+#: modules/orders/models.py:32
 msgid "cost after tax"
-msgstr "coûts avant impôts"
+msgstr "coûts après taxes"
 
-#: .\modules\orders\models.py:33
+#: modules/orders/models.py:33
 msgid "tips"
-msgstr "tips"
+msgstr "pourboir"
 
-#: .\modules\orders\models.py:35
-#, fuzzy
-#| msgid "rate"
+#: modules/orders/models.py:35
 msgid "state"
-msgstr "taux"
+msgstr "état"
 
-#: .\modules\orders\models.py:37
-#, fuzzy
-#| msgid "delivery address"
+#: modules/orders/models.py:37
 msgid "delivery datetime"
-msgstr "adresse de livraison"
+msgstr "date de livraison"
 
-#: .\modules\orders\models.py:38
+#: modules/orders/models.py:38
 msgid "delivery address"
 msgstr "adresse de livraison"
 
-#: .\modules\orders\models.py:39
-#, fuzzy
-#| msgid "delivery address"
+#: modules/orders/models.py:39
 msgid "delivery start"
-msgstr "adresse de livraison"
+msgstr "début de livraison"
 
-#: .\modules\orders\models.py:40
-#, fuzzy
-#| msgid "delivered"
+#: modules/orders/models.py:40
 msgid "delivery end"
-msgstr "livré"
+msgstr "fin de livraison"
 
-#: .\modules\orders\models.py:46
+#: modules/orders/models.py:46
 msgid "paid"
-msgstr ""
+msgstr "payé"
 
-#: .\modules\orders\models.py:47
+#: modules/orders/models.py:47
 msgid "paid datetime"
-msgstr ""
+msgstr "heure du paiement"
 
-#: .\modules\orders\models.py:79 .\modules\orders\models.py:93
-#: .\templates\accounts\dashboard.html:30
-#: .\templates\accounts\dashboard.html:32 .\templates\orders\detail.html:5
-#: .\templates\orders\new_order_email.html:23
-#, fuzzy
-#| msgid "Manage restaurants"
+#: modules/orders/models.py:79 modules/orders/models.py:93
+#: templates/accounts/dashboard.html:30 templates/accounts/dashboard.html:32
+#: templates/orders/detail.html:5 templates/orders/new_order_email.html:23
 msgid "order"
-msgstr "Gérer les restaurants"
+msgstr "Commander"
 
-#: .\modules\orders\models.py:80
-#, fuzzy
-#| msgid "meals"
+#: modules/orders/models.py:80
 msgid "meal"
 msgstr "repas"
 
-#: .\modules\orders\models.py:82
+#: modules/orders/models.py:82
 msgid "qte"
 msgstr "qté"
 
-#: .\modules\orders\models.py:83 .\modules\restaurant\models.py:67
+#: modules/orders/models.py:83 modules/restaurant/models.py:67
 msgid "taxable"
 msgstr "imposable"
 
-#: .\modules\orders\models.py:94
+#: modules/orders/models.py:94
 msgid "tax"
 msgstr "impôt"
 
-#: .\modules\orders\models.py:95
+#: modules/orders/models.py:95
 msgid "rate"
 msgstr "taux"
 
-#: .\modules\orders\models.py:96 .\modules\restaurant\models.py:66
+#: modules/orders/models.py:96 modules/restaurant/models.py:66
 msgid "price"
 msgstr "prix"
 
-#: .\modules\orders\views.py:59
+#: modules/orders/views.py:59
 msgid "Thank you! You have paid your order successfully with PayPal."
-msgstr ""
+msgstr "Merci! Vous avez payé votre commande par PayPal avec succès."
 
-#: .\modules\orders\views.py:62
+#: modules/orders/views.py:62
 msgid "Impossible to proceed payment with PayPal : "
-msgstr ""
+msgstr "Impossible de procéder au paiement avec PayPal : "
 
-#: .\modules\orders\views.py:178
+#: modules/orders/views.py:178
 msgid "Cannot create PayPal payment object : "
-msgstr ""
+msgstr "Impossible de créer l'objet de paiement PayPal : "
 
-#: .\modules\orders\views.py:188
+#: modules/orders/views.py:188
 msgid "The order state has changed to : PREPARING"
-msgstr ""
+msgstr "L'état de la commande est maintenant : EN PREPARATION"
 
-#: .\modules\orders\views.py:193
+#: modules/orders/views.py:193
 msgid "The order state has changed to : READY"
-msgstr ""
+msgstr "L'état de la commande est maintenant : PRÊT"
 
-#: .\modules\orders\views.py:235
+#: modules/orders/views.py:235
 msgid ""
 "Two or more selected meals are from different restaurants, this is "
 "technically impossible."
 msgstr ""
+"Deux repas sélectionnés ou plus sont de restaurants différents, "
+"c'est techniquement impossible."
 
-#: .\modules\orders\views.py:274 .\modules\orders\views.py:354
-#: .\modules\orders\views.py:416
+#: modules/orders/views.py:274 modules/orders/views.py:354
+#: modules/orders/views.py:416
 msgid "Cannot create order: "
-msgstr ""
+msgstr "Impossible de créer la commande : "
 
-#: .\modules\orders\views.py:347
-#, fuzzy
-#| msgid "delivery address"
+#: modules/orders/views.py:347
 msgid "Missing delivery address"
-msgstr "adresse de livraison"
+msgstr "Adresse de livraison manquante"
 
-#: .\modules\orders\views.py:365
+#: modules/orders/views.py:365
 msgid "Invalid datetime format"
-msgstr ""
+msgstr "Format de date et heure invalide"
 
-#: .\modules\orders\views.py:405 .\templates\orders\new_order_email.html:7
+#: modules/orders/views.py:405 templates/orders/new_order_email.html:7
 msgid "New order creation"
-msgstr ""
+msgstr "Nouvelle commande"
 
-#: .\modules\orders\views.py:412
+#: modules/orders/views.py:412
 msgid ""
 "Your order has been created and you will be noticed as it changes state. You "
 "can pay on delivery or immediatly with Paypal. Your order number is : "
 msgstr ""
+"Votre commande a été créée et vous allez recevoir un courriel. Vous "
+"pouvez payer à la livraison ou immédiatement avec PayPal : "
 
-#: .\modules\restaurant\forms.py:27 .\modules\restaurant\forms.py:41
+#: modules/restaurant/forms.py:27 modules/restaurant/forms.py:41
 msgid "state/province"
 msgstr "état/province"
 
-#: .\modules\restaurant\forms.py:36 .\modules\restaurant\forms.py:50
+#: modules/restaurant/forms.py:36 modules/restaurant/forms.py:50
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
-#: .\modules\restaurant\models.py:13
+#: modules/restaurant/models.py:13
 msgid "restaurateur"
 msgstr "restaurateur"
 
-#: .\modules\restaurant\models.py:14 .\modules\restaurant\models.py:48
-#: .\modules\restaurant\models.py:64
+#: modules/restaurant/models.py:14 modules/restaurant/models.py:48
+#: modules/restaurant/models.py:64
 msgid "name"
 msgstr "nom"
 
-#: .\modules\restaurant\models.py:22 .\modules\restaurant\models.py:68
+#: modules/restaurant/models.py:22 modules/restaurant/models.py:68
 msgid "image"
 msgstr "image"
 
-#: .\modules\restaurant\models.py:28
+#: modules/restaurant/models.py:28
 #, python-format
 msgid "%(address1)s %(address2)s, %(city)s, %(region)s (%(country)s) %(zip)s"
 msgstr ""
 
-#: .\modules\restaurant\models.py:65
-#, fuzzy
-#| msgid "Inscription"
+#: modules/restaurant/models.py:65
 msgid "description"
-msgstr "Inscription"
+msgstr "description"
 
-#: .\modules\restaurant\views.py:128
-#, fuzzy, python-format
-#| msgid "The delivery address has been successfully created."
+#: modules/restaurant/views.py:128
+#, python-format
 msgid "'%s' has been successfully created"
-msgstr "L'adresse de livraison a été créé avec succès."
+msgstr "'%s' a été créé avec succès."
 
-#: .\modules\restaurant\views.py:130
-#, fuzzy, python-format
-#| msgid ""
-#| "The restaurateur was successfully created but he doesn't have any "
-#| "associated restaurant."
+#: modules/restaurant/views.py:130
+#, python-format
 msgid ""
 "'%s' has been successfully created but doesn't have an assigned restaurateur"
 msgstr ""
-"Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été "
+"'%s' a été créé avec succès mais aucun restaurateur ne lui a été "
 "assigné."
 
-#: .\modules\restaurant\views.py:153
-#, fuzzy, python-format
-#| msgid "Your password has been successfully updated."
+#: modules/restaurant/views.py:153
+#, python-format
 msgid "'%s' has been successfully updated"
-msgstr "Votre mot de passe a été mis à jour avec succès."
+msgstr "'%s' a été mis à jour avec succès."
 
-#: .\modules\restaurant\views.py:155
-#, fuzzy, python-format
-#| msgid ""
-#| "The restaurateur was successfully created but he doesn't have any "
-#| "associated restaurant."
+#: modules/restaurant/views.py:155
+#, python-format
 msgid ""
 "'%s' has been successfully updated but doesn't have an assigned restaurateur"
 msgstr ""
-"Le restaurateur a été créé avec succès mais aucun restaurant ne lui a été "
+"'%s' a été créé avec succès mais aucun restaurateur ne lui a été "
 "assigné."
 
-#: .\modules\restaurant\views.py:198
+#: modules/restaurant/views.py:198
 msgid "You can search without a city, but the other fields are required."
-msgstr ""
+msgstr "Vous pouvez chercher sans ville, mais les autres champs sont requis."
 
-#: .\modules\restaurant\views.py:262
-#, fuzzy, python-format
-#| msgid "The delivery address has been successfully created."
+#: modules/restaurant/views.py:262
+#, python-format
 msgid "The new menu for '%s' has been successfully created"
-msgstr "L'adresse de livraison a été créé avec succès."
+msgstr "Le nouveau menu pour '%s' a été créé avec succès."
 
-#: .\templates\about.html:4 .\templates\base.html:98
+#: templates/about.html:4 templates/base.html:93
 msgid "About"
 msgstr "À propos"
 
-#: .\templates\about.html:9
+#: templates/about.html:9
 msgid "LOG210 Laboratory - TEAM #5 - GROUP 3"
 msgstr "LOG210 Laboratoire - ÉQUIPE #5 - GROUPE 3"
 
-#: .\templates\about.html:9
+#: templates/about.html:9
 msgid "SUMMER 2015"
 msgstr "ÉTÉ 2015"
 
-#: .\templates\about.html:20
+#: templates/about.html:20
 msgid "André Koolen"
 msgstr "André Koolen"
 
-#: .\templates\about.html:21
+#: templates/about.html:21
 msgid "Anthony Martin Coallier"
 msgstr "Anthony Martin Coallier"
 
-#: .\templates\about.html:22
+#: templates/about.html:22
 msgid "Dominic Roberge"
 msgstr "Dominic Roberge"
 
-#: .\templates\about.html:35
+#: templates/about.html:35
 msgid "École de technologie supérieure"
 msgstr "École de technologie supérieure"
 
-#: .\templates\about.html:36
+#: templates/about.html:36
 msgid "Department of Software Engineering and IT"
 msgstr "Département de génie logiciel et des TI"
 
-#: .\templates\about.html:37
+#: templates/about.html:37
 msgid "Classe : LOG210 - Analysis and software design"
 msgstr "Cours : LOG210 - Analyse et conception de logiciels"
 
-#: .\templates\about.html:38
+#: templates/about.html:38
 msgid "Delivery date : 2015-07-27"
 msgstr "Date de remise : 2015-07-27"
 
-#: .\templates\accounts\create_restaurateur.html:4
+#: templates/accounts/create_restaurateur.html:4
 msgid "Creating a restaurateur"
 msgstr "Création d'un restaurateur"
 
-#: .\templates\accounts\create_restaurateur.html:8
-#: .\templates\accounts\dashboard.html:12
+#: templates/accounts/create_restaurateur.html:8
+#: templates/accounts/dashboard.html:12
 msgid "Create a restaurateur"
 msgstr "Créer un restaurateur"
 
-#: .\templates\accounts\dashboard.html:4 .\templates\base.html:46
+#: templates/accounts/dashboard.html:4 templates/base.html:41
 msgid "My dashboard"
 msgstr "Mon tableau de bord"
 
-#: .\templates\accounts\dashboard.html:9 .\templates\accounts\manager.html:8
-#, fuzzy
-#| msgid "My account"
+#: templates/accounts/dashboard.html:9 templates/accounts/manager.html:8
 msgid "Manage my account"
-msgstr "Mon compte"
+msgstr "Gérer mon compte"
 
-#: .\templates\accounts\dashboard.html:13
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/accounts/dashboard.html:13
 msgid "Manage the restaurateurs"
-msgstr "Gérer les restaurants"
+msgstr "Gérer les restaurateurs"
 
-#: .\templates\accounts\dashboard.html:14
-#, fuzzy
-#| msgid "Assign a restaurant"
+#: templates/accounts/dashboard.html:14
 msgid "Add a restaurant"
-msgstr "Assigner un restaurant"
+msgstr "Ajouter un restaurant"
 
-#: .\templates\accounts\dashboard.html:15
-#, fuzzy
-#| msgid "Assign a restaurant"
+#: templates/accounts/dashboard.html:15
 msgid "Edit a restaurant"
-msgstr "Assigner un restaurant"
+msgstr "Édition d'un restaurant"
 
-#: .\templates\accounts\dashboard.html:19
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/accounts/dashboard.html:19
 msgid "Manage my menus"
-msgstr "Gérer les restaurants"
+msgstr "Gérer mes menus"
 
-#: .\templates\accounts\dashboard.html:22
-#: .\templates\accounts\header_login.html:13
+#: templates/accounts/dashboard.html:22
+#: templates/accounts/header_login.html:13
 msgid "Sign out"
 msgstr "Déconnexion"
 
-#: .\templates\accounts\dashboard.html:34
-#, fuzzy
-#| msgid " - Chemiresto"
+#: templates/accounts/dashboard.html:34
 msgid "Welcome in Chemiresto"
-msgstr " - Chemiresto"
+msgstr "Bienvenue dans Chemiresto"
 
-#: .\templates\accounts\dashboard.html:43
-#: .\templates\accounts\dashboard.html:97
+#: templates/accounts/dashboard.html:43 templates/accounts/dashboard.html:97
 msgid "Current orders"
-msgstr ""
+msgstr "Commandes courrantes"
 
-#: .\templates\accounts\dashboard.html:51
-#: .\templates\accounts\dashboard.html:75
-#: .\templates\accounts\dashboard.html:105
-#: .\templates\accounts\dashboard.html:130
-#: .\templates\accounts\dashboard.html:155
-#: .\templates\accounts\dashboard.html:189
+#: templates/accounts/dashboard.html:51 templates/accounts/dashboard.html:75
+#: templates/accounts/dashboard.html:105 templates/accounts/dashboard.html:130
+#: templates/accounts/dashboard.html:155 templates/accounts/dashboard.html:189
 msgid "For the"
-msgstr ""
+msgstr "Pour le"
 
-#: .\templates\accounts\dashboard.html:52
-#: .\templates\accounts\dashboard.html:76
-#: .\templates\accounts\dashboard.html:106
-#: .\templates\accounts\dashboard.html:131
-#: .\templates\accounts\dashboard.html:156
-#: .\templates\accounts\dashboard.html:190 .\templates\orders\detail.html:64
-#, fuzzy
-#| msgid "rate"
+#: templates/accounts/dashboard.html:52 templates/accounts/dashboard.html:76
+#: templates/accounts/dashboard.html:106 templates/accounts/dashboard.html:131
+#: templates/accounts/dashboard.html:156 templates/accounts/dashboard.html:190
+#: templates/orders/detail.html:64
 msgid "Order state"
-msgstr "taux"
+msgstr "État"
 
-#: .\templates\accounts\dashboard.html:53
-#: .\templates\accounts\dashboard.html:78
-#: .\templates\accounts\dashboard.html:133
-#: .\templates\accounts\dashboard.html:159
-#: .\templates\accounts\dashboard.html:196
+#: templates/accounts/dashboard.html:53 templates/accounts/dashboard.html:78
+#: templates/accounts/dashboard.html:133 templates/accounts/dashboard.html:159
+#: templates/accounts/dashboard.html:196
 msgid "More details"
-msgstr ""
+msgstr "Plus de détails"
 
-#: .\templates\accounts\dashboard.html:58
-#: .\templates\accounts\dashboard.html:84
-#: .\templates\accounts\dashboard.html:113
-#: .\templates\accounts\dashboard.html:138
-#: .\templates\accounts\dashboard.html:164
-#: .\templates\accounts\dashboard.html:201 .\templates\orders\detail.html:71
-#: .\templates\restaurant\detail.html:93
-#, fuzzy
-#| msgid "done"
+#: templates/accounts/dashboard.html:58 templates/accounts/dashboard.html:84
+#: templates/accounts/dashboard.html:113 templates/accounts/dashboard.html:138
+#: templates/accounts/dashboard.html:164 templates/accounts/dashboard.html:201
+#: templates/orders/detail.html:71 templates/restaurant/detail.html:93
 msgid "None"
-msgstr "terminé"
+msgstr "Aucun(e)"
 
-#: .\templates\accounts\dashboard.html:67
-#: .\templates\accounts\dashboard.html:147
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/accounts/dashboard.html:67 templates/accounts/dashboard.html:147
 msgid "Unpaid orders"
-msgstr "Gérer les restaurants"
+msgstr "Commandes non-payées"
 
-#: .\templates\accounts\dashboard.html:77
-#: .\templates\accounts\dashboard.html:158
-#: .\templates\accounts\dashboard.html:192
-#, fuzzy
-#| msgid "About"
+#: templates/accounts/dashboard.html:77 templates/accounts/dashboard.html:158
+#: templates/accounts/dashboard.html:192
 msgid "Amount"
-msgstr "À propos"
+msgstr "Montant"
 
-#: .\templates\accounts\dashboard.html:82
+#: templates/accounts/dashboard.html:82
 msgid "You can pay on delivery or pay now in the order details."
 msgstr ""
+"Vous pouvez payer à la livraison ou dès maintenant dans le détail de "
+"la commande"
 
-#: .\templates\accounts\dashboard.html:107
-#: .\templates\accounts\dashboard.html:132
-#: .\templates\accounts\dashboard.html:157
-#: .\templates\accounts\dashboard.html:191 .\templates\orders\detail.html:65
-#, fuzzy
-#| msgid "city"
+#: templates/accounts/dashboard.html:107 templates/accounts/dashboard.html:132
+#: templates/accounts/dashboard.html:157 templates/accounts/dashboard.html:191
+#: templates/orders/detail.html:65
 msgid "Client"
-msgstr "ville"
+msgstr "Client"
 
-#: .\templates\accounts\dashboard.html:108
+#: templates/accounts/dashboard.html:108
 msgid "Prepare order"
-msgstr ""
+msgstr "Préparer la commande"
 
-#: .\templates\accounts\dashboard.html:122
-#, fuzzy
-#| msgid "Delivery addresses"
+#: templates/accounts/dashboard.html:122
 msgid "Delivery orders"
-msgstr "Adresses de livraison"
+msgstr "Commande en livraison"
 
-#: .\templates\accounts\dashboard.html:181
+#: templates/accounts/dashboard.html:181
 msgid "Ready to deliver"
-msgstr ""
+msgstr "Prêt à livrer"
 
-#: .\templates\accounts\dashboard.html:210
+#: templates/accounts/dashboard.html:210
 msgid "Start a delivery"
-msgstr ""
+msgstr "Commencer une livraison"
 
-#: .\templates\accounts\dashboard.html:213
+#: templates/accounts/dashboard.html:213
 msgid ""
 "First, you have to select one order on the left then enter your actual "
 "coordinates if it's not already done by the navigator geolocalisation."
 msgstr ""
+"Premièrement, vous devez sélectionner une commande à gauche puis entrer "
+"vos coordonées si ce n'est pas déjà fait par le navigateur."
 
-#: .\templates\accounts\dashboard.html:215
+#: templates/accounts/dashboard.html:215
 msgid "Latitude"
-msgstr ""
+msgstr "Latitude"
 
-#: .\templates\accounts\dashboard.html:221
+#: templates/accounts/dashboard.html:221
 msgid "Longitude"
-msgstr ""
+msgstr "Longitude"
 
-#: .\templates\accounts\dashboard.html:226
+#: templates/accounts/dashboard.html:226
 msgid "Start !"
-msgstr ""
+msgstr "Commencer !"
 
-#: .\templates\accounts\dashboard.html:238
+#: templates/accounts/dashboard.html:238
 msgid "Accept this delivery"
-msgstr ""
+msgstr "Accepter cette livraison"
 
-#: .\templates\accounts\dashboard.html:241
-#: .\templates\accounts\header_login.html:71
+#: templates/accounts/dashboard.html:241
+#: templates/accounts/header_login.html:71
 msgid "Cancel"
 msgstr "Annuler"
 
-#: .\templates\accounts\dashboard.html:257
+#: templates/accounts/dashboard.html:257
 msgid "Mark as 'paid'"
-msgstr ""
+msgstr "Marquer comme 'payé'"
 
-#: .\templates\accounts\dashboard.html:263 .\templates\orders\detail.html:47
+#: templates/accounts/dashboard.html:263 templates/orders/detail.html:47
 msgid "TIPS given"
-msgstr ""
+msgstr "Pourboir donné"
 
-#: .\templates\accounts\dashboard.html:269
-#, fuzzy
-#| msgid "delivered"
+#: templates/accounts/dashboard.html:269
 msgid "Mark as 'delivered'"
-msgstr "livré"
+msgstr "Marquer comme 'livré'"
 
-#: .\templates\accounts\delete_account.html:4
-#: .\templates\accounts\delete_account.html:13
-#: .\templates\accounts\manager.html:132 .\templates\accounts\manager.html:138
+#: templates/accounts/delete_account.html:4
+#: templates/accounts/delete_account.html:13
+#: templates/accounts/manager.html:132 templates/accounts/manager.html:138
 msgid "Delete my account"
 msgstr "Supprimer mon compte"
 
-#: .\templates\accounts\delete_account.html:11
-#, fuzzy
-#| msgid "Are you sure you want to delete your account?"
+#: templates/accounts/delete_account.html:11
 msgid "Are you sure you want to delete this account?"
 msgstr "Êtes-vous sûr de vouloir supprimer votre compte ?"
 
-#: .\templates\accounts\header_login.html:10
-#: .\templates\accounts\manager.html:4
+#: templates/accounts/header_login.html:10 templates/accounts/manager.html:4
 msgid "My account"
 msgstr "Mon compte"
 
-#: .\templates\accounts\header_login.html:18
-#: .\templates\accounts\header_login.html:41
-#, fuzzy
-#| msgid "Language"
+#: templates/accounts/header_login.html:18
+#: templates/accounts/header_login.html:41
 msgid "Select language"
 msgstr "Langue"
 
-#: .\templates\accounts\header_login.html:33
-#: .\templates\accounts\header_login.html:72
-#: .\templates\accounts\login.html:16
+#: templates/accounts/header_login.html:33
+#: templates/accounts/header_login.html:72 templates/accounts/login.html:16
 msgid "Sign in"
 msgstr "Connexion"
 
-#: .\templates\accounts\header_login.html:36
-#: .\templates\accounts\register.html:4 .\templates\accounts\register.html:9
+#: templates/accounts/header_login.html:36 templates/accounts/register.html:4
+#: templates/accounts/register.html.py:9
 msgid "Inscription"
 msgstr "Inscription"
 
-#: .\templates\accounts\header_login.html:59 .\templates\accounts\login.html:4
-#: .\templates\accounts\login.html.py:11
+#: templates/accounts/header_login.html:59 templates/accounts/login.html:4
+#: templates/accounts/login.html.py:11
 msgid "Identification"
 msgstr "Identification"
 
-#: .\templates\accounts\header_login.html:64
-#, fuzzy
-#| msgid "meals"
+#: templates/accounts/header_login.html:64
 msgid "Email"
-msgstr "repas"
+msgstr "Courriel"
 
-#: .\templates\accounts\header_login.html:67
-#: .\templates\accounts\manager.html:46
+#: templates/accounts/header_login.html:67 templates/accounts/manager.html:46
 msgid "Password"
 msgstr "Mot de passe"
 
-#: .\templates\accounts\login.html:20
+#: templates/accounts/login.html:20
 msgid "Vous n'avez pas de compte?"
 msgstr ""
 
-#: .\templates\accounts\manage_restaurateur.html:4
-#: .\templates\accounts\manage_restaurateur.html:8
-#, fuzzy
-#| msgid "Create a restaurateur"
+#: templates/accounts/manage_restaurateur.html:4
+#: templates/accounts/manage_restaurateur.html:8
 msgid "Update a restaurateur"
-msgstr "Créer un restaurateur"
+msgstr "Édition d'un restaurateur"
 
-#: .\templates\accounts\manager.html:15
+#: templates/accounts/manager.html:15
 msgid "Account informations"
 msgstr "Informations du compte"
 
-#: .\templates\accounts\manager.html:71
+#: templates/accounts/manager.html:71
 msgid "Delivery addresses"
 msgstr "Adresses de livraison"
 
-#: .\templates\accounts\manager.html:86
+#: templates/accounts/manager.html:86
 msgid "Saved addresses"
 msgstr "Adresses enregistrées"
 
-#: .\templates\accounts\manager.html:91
+#: templates/accounts/manager.html:91
 msgid "Actions"
 msgstr "Actions"
 
-#: .\templates\accounts\manager.html:92
+#: templates/accounts/manager.html:92
 msgid "address"
 msgstr "adresse"
 
-#: .\templates\accounts\manager.html:93
+#: templates/accounts/manager.html:93
 msgid "By default"
 msgstr "Par défaut"
 
-#: .\templates\accounts\manager.html:110
+#: templates/accounts/manager.html:110
 msgid "- None -"
 msgstr "- Acune -"
 
-#: .\templates\accounts\manager.html:115 .\templates\orders\create.html:73
+#: templates/accounts/manager.html:115 templates/orders/create.html:73
 msgid "New address"
 msgstr "Nouvelle adresse"
 
-#: .\templates\accounts\manager.html:117
+#: templates/accounts/manager.html:117
 msgid "Editing an Address"
 msgstr "Modification d'une adresse"
 
-#: .\templates\accounts\manager.html:123
+#: templates/accounts/manager.html:123
 msgid "Erase"
 msgstr "Effacer"
 
-#: .\templates\accounts\manager.html:151
+#: templates/accounts/manager.html:151
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#: .\templates\accounts\manager.html:154
+#: templates/accounts/manager.html:154
 msgid "Do you really want to delete this address?"
 msgstr "Voulez-vous vraiment supprimer cette adresse ?"
 
-#: .\templates\accounts\manager.html:158
+#: templates/accounts/manager.html:158
 msgid "cancel"
 msgstr "annuler"
 
-#: .\templates\accounts\manager.html:159
-#: .\templates\restaurant\edit_list.html:39
+#: templates/accounts/manager.html:159 templates/restaurant/edit_list.html:39
 msgid "Delete"
 msgstr "Supprimer"
 
-#: .\templates\accounts\register.html:14
+#: templates/accounts/register.html:14
 msgid "Your customer account has been created, you can now sign in!"
 msgstr ""
 "Votre compte client a été créé , vous pouvez maintenant vous connecter !"
 
-#: .\templates\accounts\register.html:30
+#: templates/accounts/register.html:30
 msgid "Register"
 msgstr "Enregistrer"
 
-#: .\templates\accounts\restaurateur_list.html:4
-#, fuzzy
-#| msgid "Creating a restaurateur"
-msgid "Creating a restaurateur - "
-msgstr "Création d'un restaurateur"
-
-#: .\templates\accounts\restaurateur_list.html:8
-#, fuzzy
-#| msgid "Creating a restaurateur"
+#: templates/accounts/restaurateur_list.html:8
 msgid "Select a restaurateur to edit"
-msgstr "Création d'un restaurateur"
+msgstr "Sélectionner un restaurateur pour l'éditer"
 
-#: .\templates\accounts\restaurateur_list.html:13
-#: .\templates\restaurant\edit_list.html:21
-#, fuzzy
-#| msgid "name"
+#: templates/accounts/restaurateur_list.html:13
+#: templates/restaurant/edit_list.html:21
 msgid "Name"
 msgstr "nom"
 
-#: .\templates\base.html:7
+#: templates/base.html:7
 msgid " - Chemiresto"
 msgstr " - Chemiresto"
 
-#: .\templates\base.html:24 .\templates\base.html.py:36
-#: .\templates\base.html:95
+#: templates/base.html:24 templates/base.html.py:31 templates/base.html:90
 msgid "Chemiresto"
 msgstr "Chemiresto"
 
-#: .\templates\base.html:31
-msgid "Navigation"
-msgstr "Navigation"
-
-#: .\templates\base.html:42 .\templates\restaurant\detail.html:4
-#: .\templates\restaurant\list.html:4
+#: templates/base.html:37 templates/restaurant/detail.html:4
+#: templates/restaurant/list.html:4
 msgid "Restaurants"
 msgstr "Restaurants"
 
-#: .\templates\base.html:62
+#: templates/base.html:57
 msgid "You are logged as"
 msgstr "Vous êtes connecté en tant que"
 
-#: .\templates\base.html:101
-#, fuzzy
-#| msgid " - Chemiresto"
+#: templates/base.html:96
 msgid "Copyright Chemiresto"
-msgstr " - Chemiresto"
+msgstr "Copyright Chemiresto"
 
-#: .\templates\base.html:101
+#: templates/base.html:96
 msgid "all rights reserved"
 msgstr "Tous droits réservés"
 
-#: .\templates\orders\create.html:4 .\templates\orders\create.html.py:9
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/orders/create.html:4 templates/orders/create.html.py:9
 msgid "New order"
-msgstr "Gérer les restaurants"
+msgstr "Nouvelle commande"
 
-#: .\templates\orders\create.html:13 .\templates\orders\detail.html:9
+#: templates/orders/create.html:13 templates/orders/detail.html:9
 msgid "Billing"
-msgstr ""
+msgstr "Paiement"
 
-#: .\templates\orders\create.html:17 .\templates\orders\detail.html:13
-#: .\templates\orders\new_order_email.html:37
-#: .\templates\restaurant\detail.html:86
+#: templates/orders/create.html:17 templates/orders/detail.html:13
+#: templates/orders/new_order_email.html:37
+#: templates/restaurant/detail.html:86
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
-#: .\templates\orders\create.html:18 .\templates\orders\detail.html:14
-#: .\templates\orders\new_order_email.html:40
-#: .\templates\restaurant\detail.html:57 .\templates\restaurant\detail.html:87
-#, fuzzy
-#| msgid "qte"
+#: templates/orders/create.html:18 templates/orders/detail.html:14
+#: templates/orders/new_order_email.html:40
+#: templates/restaurant/detail.html:57 templates/restaurant/detail.html:87
 msgid "Qte"
 msgstr "qté"
 
-#: .\templates\orders\create.html:19 .\templates\orders\detail.html:15
-#: .\templates\orders\new_order_email.html:43
-#: .\templates\restaurant\detail.html:88
-#, fuzzy
-#| msgid "price"
+#: templates/orders/create.html:19 templates/orders/detail.html:15
+#: templates/orders/new_order_email.html:43
+#: templates/restaurant/detail.html:88
 msgid "Price"
 msgstr "prix"
 
-#: .\templates\orders\create.html:20 .\templates\orders\create.html.py:43
-#: .\templates\orders\detail.html:16 .\templates\orders\detail.html.py:39
-#: .\templates\orders\new_order_email.html:46
-#: .\templates\orders\new_order_email.html:103
+#: templates/orders/create.html:20 templates/orders/create.html.py:43
+#: templates/orders/detail.html:16 templates/orders/detail.html.py:39
+#: templates/orders/new_order_email.html:46
+#: templates/orders/new_order_email.html:103
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
-#: .\templates\orders\create.html:33 .\templates\orders\detail.html:29
-#: .\templates\orders\new_order_email.html:75
-#: .\templates\restaurant\detail.html:106
+#: templates/orders/create.html:33 templates/orders/detail.html:29
+#: templates/orders/new_order_email.html:75
+#: templates/restaurant/detail.html:106
 msgid "Subtotal"
-msgstr ""
+msgstr "Sous-total"
 
-#: .\templates\orders\create.html:47 .\templates\orders\detail.html:43
-#: .\templates\orders\new_order_email.html:116
+#: templates/orders/create.html:47 templates/orders/detail.html:43
+#: templates/orders/new_order_email.html:116
 msgid "Suggested TIPS"
-msgstr ""
+msgstr "Pourboir suggéré"
 
-#: .\templates\orders\create.html:56
-#, fuzzy
-#| msgid "delivered"
+#: templates/orders/create.html:56
 msgid "Delivery"
-msgstr "livré"
+msgstr "Livraison"
 
-#: .\templates\orders\create.html:58
-#, fuzzy
-#| msgid "Delivery addresses"
+#: templates/orders/create.html:58
 msgid "Delivery Address"
-msgstr "Adresses de livraison"
+msgstr "Adresse de livraison"
 
-#: .\templates\orders\create.html:73
+#: templates/orders/create.html:73
 msgid "Or"
-msgstr ""
+msgstr "Ou"
 
-#: .\templates\orders\create.html:80
-#, fuzzy
-#| msgid "Delivery addresses"
+#: templates/orders/create.html:80
 msgid "Delivery time"
-msgstr "Adresses de livraison"
+msgstr "Adresse de livraison"
 
-#: .\templates\orders\create.html:91
+#: templates/orders/create.html:91
 msgid "Confirm and send order"
-msgstr ""
+msgstr "Confirmer et envoyer"
 
-#: .\templates\orders\create.html:95
-#, fuzzy
-#| msgid "Cancel"
+#: templates/orders/create.html:95
 msgid "Cancel order"
 msgstr "Annuler"
 
-#: .\templates\orders\detail.html:59
-#, fuzzy
-#| msgid "Confirmation"
+#: templates/orders/detail.html:59
 msgid "Informations"
-msgstr "Confirmation"
+msgstr "Informations"
 
-#: .\templates\orders\detail.html:66
-#, fuzzy
-#| msgid "Delivery addresses"
+#: templates/orders/detail.html:66
 msgid "Delivery address"
-msgstr "Adresses de livraison"
+msgstr "Adresse de livraison"
 
-#: .\templates\orders\detail.html:71
-#, fuzzy
-#| msgid "Delivery addresses"
+#: templates/orders/detail.html:71
 msgid "Delivery man"
-msgstr "Adresses de livraison"
+msgstr "Livreur"
 
-#: .\templates\orders\detail.html:72
+#: templates/orders/detail.html:72
 msgid "Paid"
-msgstr ""
+msgstr "Payé"
 
-#: .\templates\orders\detail.html:73
+#: templates/orders/detail.html:73
 msgid "You can pay on delivery or pay now in the form bellow."
 msgstr ""
+"Vous pouvez payer à la livraison ou maintenant avec "
+"le formulaire ci-dessous."
 
-#: .\templates\orders\detail.html:82
+#: templates/orders/detail.html:82
 msgid "Pay with PayPal"
-msgstr ""
+msgstr "Payer avec PayPal"
 
-#: .\templates\orders\detail.html:89
+#: templates/orders/detail.html:89
 msgid "TIPS"
-msgstr ""
+msgstr "Pourboir"
 
-#: .\templates\orders\detail.html:95
+#: templates/orders/detail.html:95
 msgid "Checkout with PayPal"
-msgstr ""
+msgstr "Payer avec PayPal"
 
-#: .\templates\orders\detail.html:110
+#: templates/orders/detail.html:110
 msgid "Order state changes"
-msgstr ""
+msgstr "Changement d'état de commande"
 
-#: .\templates\orders\detail.html:116
+#: templates/orders/detail.html:116
 msgid ""
 "Before starting to cook this order, please change its state by pressing the "
 "following button..."
 msgstr ""
+"Avant de commencer la préparation, veuillez changer l'état en appuyant sur "
+"le bouton suivant..."
 
-#: .\templates\orders\detail.html:119
+#: templates/orders/detail.html:119
 msgid "Mark as 'Preparing'"
-msgstr ""
+msgstr "Marquer commer 'En préparation'"
 
-#: .\templates\orders\detail.html:124
+#: templates/orders/detail.html:124
 msgid ""
 "Before the delivery man comes, you have to mark the order as ready, to do so "
 "press the following..."
 msgstr ""
+"Avant que le livreur n'arrive, vous devez marquer la commande comme prête, pour "
+"se faire appuyez sur..."
 
-#: .\templates\orders\detail.html:127
+#: templates/orders/detail.html:127
 msgid "Mark as 'Ready'"
-msgstr ""
+msgstr "Marquer comme 'Prêt'"
 
-#: .\templates\orders\new_order_email.html:19
+#: templates/orders/new_order_email.html:19
 msgid "We inform you that a new order has been created."
-msgstr ""
+msgstr "Nous vous informons qu'une nouvelle commande a été créée."
 
-#: .\templates\restaurant\create.html:4
-#, fuzzy
-#| msgid "Create a restaurateur"
-msgid "Create a restaurant - "
-msgstr "Créer un restaurateur"
+#: templates/restaurant/create.html:4
+msgid "Create a restaurant"
+msgstr "Créer un restaurant"
 
-#: .\templates\restaurant\create.html:9
-#, fuzzy
-#| msgid "New restaurateur"
+#: templates/restaurant/create.html:9
 msgid "New restaurant"
-msgstr "Nouveau restaurateur"
+msgstr "Nouveau restaurant"
 
-#: .\templates\restaurant\delete.html:4
-#, fuzzy
-#| msgid "Create a restaurateur"
+#: templates/restaurant/delete.html:4
 msgid "Delete a restaurant"
-msgstr "Créer un restaurateur"
+msgstr "Supprimer un restaurateur"
 
-#: .\templates\restaurant\delete.html:8
+#: templates/restaurant/delete.html:8
 #, python-format
 msgid "Delete %(name)s ?"
-msgstr ""
+msgstr "Supprimer %(name)s ?"
 
-#: .\templates\restaurant\delete.html:12
+#: templates/restaurant/delete.html:12
 msgid "Click this button to confirm your choice"
-msgstr ""
+msgstr "Cliquer sur ce bouton pour confirmer"
 
-#: .\templates\restaurant\detail.html:66
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/restaurant/detail.html:66
 msgid "Add to order"
-msgstr "Gérer les restaurants"
+msgstr "Ajouter"
 
-#: .\templates\restaurant\detail.html:81
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/restaurant/detail.html:81
 msgid "My order"
-msgstr "Gérer les restaurants"
+msgstr "Ma commande"
 
-#: .\templates\restaurant\detail.html:113
+#: templates/restaurant/detail.html:113
 msgid "Order now!"
-msgstr ""
+msgstr "Commander maintenant!"
 
-#: .\templates\restaurant\edit_list.html:4
-#, fuzzy
-#| msgid "Creating a restaurateur"
-msgid "Edit a restaurant - "
-msgstr "Création d'un restaurateur"
-
-#: .\templates\restaurant\edit_list.html:8
-#, fuzzy
-#| msgid "Creating a restaurateur"
+#: templates/restaurant/edit_list.html:8
 msgid "Select a restaurant to edit"
-msgstr "Création d'un restaurateur"
+msgstr "Sélectionner un restaurant pour l'édition"
 
-#: .\templates\restaurant\edit_list.html:22
-#, fuzzy
-#| msgid "address"
+#: templates/restaurant/edit_list.html:22
 msgid "Address"
 msgstr "adresse"
 
-#: .\templates\restaurant\edit_list.html:23
-#, fuzzy
-#| msgid "city"
+#: templates/restaurant/edit_list.html:23
 msgid "City"
 msgstr "ville"
 
-#: .\templates\restaurant\edit_list.html:24
+#: templates/restaurant/edit_list.html:24
 msgid "Region"
 msgstr ""
 
-#: .\templates\restaurant\edit_list.html:25
-#, fuzzy
-#| msgid "country"
+#: templates/restaurant/edit_list.html:25
 msgid "Country"
 msgstr "pays"
 
-#: .\templates\restaurant\edit_list.html:38
-#, fuzzy
-#| msgid "rate"
+#: templates/restaurant/edit_list.html:38
 msgid "Update"
-msgstr "taux"
+msgstr "Modifier"
 
-#: .\templates\restaurant\list.html:38
+#: templates/restaurant/list.html:38
 msgid "View the menu"
-msgstr ""
+msgstr "Voir le menu"
 
-#: .\templates\restaurant\list.html:45
+#: templates/restaurant/list.html:45
 msgid "Sorry no restaurant found in your area :("
 msgstr "Désolé, aucun restaurant trouvé dans votre région :("
 
-#: .\templates\restaurant\list.html:66
-#, fuzzy
-#| msgid "Visit"
+#: templates/restaurant/list.html:66
 msgid "First"
-msgstr "Visiter"
+msgstr "Première"
 
-#: .\templates\restaurant\list.html:67
+#: templates/restaurant/list.html:67
 msgid "Before"
-msgstr ""
+msgstr "Précédante"
 
-#: .\templates\restaurant\list.html:68
+#: templates/restaurant/list.html:68
 msgid "Next"
-msgstr ""
+msgstr "Suivante"
 
-#: .\templates\restaurant\list.html:69
+#: templates/restaurant/list.html:69
 msgid "Last"
-msgstr ""
+msgstr "Dernière"
 
-#: .\templates\restaurant\menus\create.html:4
-#, fuzzy
-#| msgid "Creating a restaurateur"
-msgid "Create a menu - "
-msgstr "Création d'un restaurateur"
+#: templates/restaurant/menus/create.html:4
+msgid "Create a menu"
+msgstr "Création d'un menu"
 
-#: .\templates\restaurant\menus\create.html:9
+#: templates/restaurant/menus/create.html:9
 msgid "New menu"
-msgstr ""
+msgstr "Nouveau menu"
 
-#: .\templates\restaurant\menus\create.html:12
-#, fuzzy
-#| msgid "Account informations"
+#: templates/restaurant/menus/create.html:12
 msgid "Menu information"
-msgstr "Informations du compte"
+msgstr "Information du menu"
 
-#: .\templates\restaurant\menus\create.html:20
-#, fuzzy
-#| msgid "Assign a restaurant"
+#: templates/restaurant/menus/create.html:20
 msgid "Add a meal"
-msgstr "Assigner un restaurant"
+msgstr "Ajouter un repas"
 
-#: .\templates\restaurant\menus\create.html:28
+#: templates/restaurant/menus/create.html:28
 msgid "New Meal"
-msgstr ""
+msgstr "Nouveau repas"
 
-#: .\templates\restaurant\menus\list.html:4
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/restaurant/menus/list.html:4
 msgid "Edit my menus"
-msgstr "Gérer les restaurants"
+msgstr "Gérer mes menus"
 
-#: .\templates\restaurant\menus\list.html:8
-#, fuzzy
-#| msgid "Creating a restaurateur"
+#: templates/restaurant/menus/list.html:8
 msgid "Select a menu to edit"
-msgstr "Création d'un restaurateur"
+msgstr "Sélectionner un menu pour l'édition"
 
-#: .\templates\restaurant\menus\list.html:18
+#: templates/restaurant/menus/list.html:18
 msgid "Add a new menu"
-msgstr ""
+msgstr "Ajouter un nouveau menu"
 
-#: .\templates\restaurant\menus\list.html:23
+#: templates/restaurant/menus/list.html:23
 msgid ""
 "You don't have any restaurant. You need to own at least one restaurant to "
 "create a menu."
 msgstr ""
+"Vous n'avez aucun restaurant. Vous devez en avoir au moins un pour créer "
+"un menu."
 
-#: .\templates\restaurant\update.html:4
-#, fuzzy
-#| msgid "Creating a restaurateur"
-msgid "Update a restaurant - "
-msgstr "Création d'un restaurateur"
+#: templates/restaurant/update.html:4
+msgid "Update a restaurant"
+msgstr "Édition d'un restaurant"
 
-#: .\templates\restaurant\update.html:9
-#, fuzzy
-#| msgid "Manage restaurants"
+#: templates/restaurant/update.html:9
 msgid "Update the restaurant"
 msgstr "Gérer les restaurants"
 
-#: .\templates\select_language.html:4 .\templates\select_language.html.py:9
+#: templates/select_language.html:4 templates/select_language.html.py:9
 msgid "Select your language"
 msgstr "Choisissez votre langue"
+
+#~ msgid "Navigation"
+#~ msgstr "Navigation"
 
 #~ msgid "You must accept"
 #~ msgstr "Vous devez accepter"
@@ -1153,44 +997,26 @@ msgstr "Choisissez votre langue"
 #~ msgid "Create the restaurateur"
 #~ msgstr "Créer le restaurateur"
 
-#, fuzzy
-#~| msgid "Create the restaurateur"
 #~ msgid "Update the restaurateur"
 #~ msgstr "Créer le restaurateur"
 
 #~ msgid "unfinished"
 #~ msgstr "inachevé"
 
-#, fuzzy
-#~| msgid "%(name)s was created successfully"
 #~ msgid "'%s' was created successfully"
-#~ msgstr "%(name)s a été créé avec succès"
+#~ msgstr "'%s' a été créé avec succès"
 
 #~ msgid "Purchase history"
 #~ msgstr "Historique des achats"
 
-#, fuzzy
-#~| msgid "Creating a restaurateur"
-#~ msgid "Creating a restaurant - "
+#~ msgid "Creating a restaurant"
 #~ msgstr "Création d'un restaurateur"
 
-#, fuzzy
-#~| msgid "Creating a restaurateur"
-#~ msgid "Delete a restaurant - "
-#~ msgstr "Création d'un restaurateur"
-
-#, fuzzy
-#~| msgid "Delete"
 #~ msgid "delete"
 #~ msgstr "Supprimer"
 
-#, fuzzy
-#~| msgid "Create a restaurateur"
 #~ msgid "You don't have any restaurant."
-#~ msgstr "Créer un restaurateur"
-
-#~ msgid "Email address or username"
-#~ msgstr "Adresse courriel ou nom d'utilisateur"
+#~ msgstr "Vous n'avez aucun restaurant"
 
 #~ msgid "This email is already in use"
 #~ msgstr "Cette adresse email est déjà en cours d'utilisation"
