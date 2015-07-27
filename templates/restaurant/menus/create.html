@@ -5,58 +5,10 @@
 
 {% block content-pane %}
 <div class="col-md-12">
-    <form method="post" id="mForm" action="{% url 'restaurant:menu_create' restaurant.pk %}"> {% csrf_token %}
+    <form method="post" id="mForm" action="{% url 'restaurant:menu_create' %}"> {% csrf_token %}
         <h2 class="page-title">{% trans "New menu" %}</h2>
-        
-        <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Menu information" %}</div>
-            <div class="panel-body">
-                {% crispy form %}
-        
-                <button type="submit"class="btn btn-primary">
-                    <span class="fa fa-check"></span> {% trans "Save" %}
-                </button>
-                
-                <button type="button"class="btn btn-default" id="ajouterPlat">{% trans "Add a meal" %}</button>
-            </div>
-        </div>
-        
-        {{ meal_formset.management_form }}
-            {% for form in meal_formset %}
-            <div id="premierFormset">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{% trans "New Meal" %}</div>
-                    <div class="panel-body">
-                        {% crispy form %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+
+        {% crispy form %}
     </form>
 </div>
-{% endblock %}
-
-{% block page-scripts %}
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#ajouterPlat').click(function() {
-        var form_idx = $('#id_meal_set-TOTAL_FORMS').val();
-        var $fs = $('#premierFormset').clone();
-        
-        $fs.find( "*" ).each(function(i,elem){
-            if(typeof $(elem).attr("id") !== "undefined") {
-                var oldId = $(elem).attr("id");
-                var newId = oldId.replace(form_idx-1, form_idx);
-                $(elem).attr("id", newId);
-            }
-        });
-        
-        $fs.find('.has-error').removeClass('has-error');
-        $fs.find('input[type=text], input[type=number]').attr('value', '');
-        
-        $('#mForm').append($fs.html());
-        $('#id_meal_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-    });
-});
-</script>
 {% endblock %}

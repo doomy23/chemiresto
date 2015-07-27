@@ -1,11 +1,11 @@
 {% extends "accounts/dashboard.html" %}
 {% load crispy_forms_tags i18n %}
 
-{% block title %}{% trans "Edit a menu" %}{% endblock %}
+{% block title %}{% trans "Edit a meal" %}{% endblock %}
 
 {% block content-pane %}
 <div class="col-md-12">
-    <form method="post" id="mForm" action="{% url 'restaurant:menu_update' object.pk %}"> {% csrf_token %}
+    <form method="post" id="mForm" action="{% url 'restaurant:meal_update' object.pk %}"> {% csrf_token %}
         <h2 class="page-title">{{ object.name }}</h2>
 
         {% crispy form %}

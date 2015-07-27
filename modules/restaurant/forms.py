@@ -67,35 +67,26 @@ class MenuForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(MenuForm, self).__init__(*args, **kwargs)
+        
         self.helper = FormHelper()
-        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            'name', 'restaurant', Submit('save', _("Save"))
+        )
         
     class Meta:
         model = Menu
-        fields = ['name',]
+        fields = ['name', 'restaurant']
         
 class MealForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(MealForm, self).__init__(*args, **kwargs)
+        
         self.helper = FormHelper()
-        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            'name', 'description', 'price', 'taxable', 'image', 'menu', Submit('save', _("Save"))
+        )
         
     class Meta:
         model = Meal
-        fields = '__all__'
-        
-class MealBaseFormSet(BaseInlineFormSet):
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(MealBaseFormSet, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-                    
-MealFormset = inlineformset_factory(Menu, Meal,
-    form=MealForm,
-    formset=MealBaseFormSet,
-    extra=1,
-    can_delete=False,
-)
+        fields = ['name', 'description', 'price', 'taxable', 'image', 'menu', ]

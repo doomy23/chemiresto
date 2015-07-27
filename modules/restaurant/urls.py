@@ -11,9 +11,12 @@ urlpatterns = patterns('',
     url(r'^list/$', RestaurantListView.as_view(), name="restaurant_list"),
     
     # Pour les restaurateurs
-    url(r'^(?P<restaurant_pk>\d+)/menus/create/$', MenuCreateView.as_view(), name="menu_create"),
-    url(r'^/menus/update/(?P<pk>\d+)$', MenuUpdateView.as_view(), name="menu_update"),
+    url(r'^menus/create/$', MenuCreateView.as_view(), name="menu_create"),
+    url(r'^menus/update/(?P<pk>\d+)$', MenuUpdateView.as_view(), name="menu_update"),
     url(r'^menus/list/$', MenuListView.as_view(), name="menu_list"),
+    
+    url(r'^meals/create/$', MealCreateView.as_view(), name="meal_create"),
+    url(r'^meals/update/(?P<pk>\d+)$', MealUpdateView.as_view(), name="meal_update"),
     
     # Public
     url(r'^(?P<pk>\d+)/$', RestaurantDetailView.as_view(), name="restaurant_detail"),

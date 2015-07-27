@@ -19,7 +19,7 @@ try: from django.contrib.gis.geoip import GeoIP
 except: GeoIP = None
 
 from models import Meal, Menu, Restaurant
-from forms import MealFormset, MenuForm, RestaurantFilterForm, RestaurantForm, RestaurantEditFilterForm
+from forms import MealForm, MenuForm, RestaurantFilterForm, RestaurantForm, RestaurantEditFilterForm
 
 from accounts.mixins import AllowedGroupsMixin
 from accounts.models import UserAddress
@@ -209,72 +209,7 @@ class MenuCreateView(CreateView):
     template_name = 'restaurant/menus/create.html'
     form_class = MenuForm
     model = Menu
-    
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user == self.get_restaurant().restaurateur:
-            # Seul le restaurateur qui possède le restaurant peut modifier le
-            # menu.
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
-
-    def form_invalid(self, form, meal_formset):
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  meal_formset=meal_formset,))
-        
-    def form_valid(self, form, meal_formset):
-        self.object = form.save(commit=False)
-        self.object.restaurant = self.get_restaurant()
-        self.object.save()
-        meal_formset.instance = self.object
-        meal_formset.save()
-        return HttpResponseRedirect(self.get_success_url())
-        
-    def get(self, request, *args, **kwargs):
-        self.object = None
-        form = MenuForm()
-        meal_formset = MealFormset(request=request)
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  meal_formset=meal_formset,))
-                                  
-    def get_context_data(self, **kwargs):
-        context = super(MenuCreateView, self).get_context_data(**kwargs)
-        context['restaurant'] = self.get_restaurant()
-        return context
-        
-    def get_restaurant(self):
-        pk = self.kwargs['restaurant_pk']
-        return get_object_or_404(Restaurant, pk=pk)
-                                  
-    def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().id})
-        
-    def post(self, request, *args, **kwargs):
-        self.object = None
-        form = MenuForm(self.request.POST)
-        meal_formset = MealFormset(self.request.POST, request=request)
-        if (form.is_valid() and meal_formset.is_valid()):
-        
-            name = self.get_restaurant().name
-            messages.success(self.request, _("The new menu for '%s' has been successfully created" % name))
-            
-            for form in meal_formset:
-                name = form.cleaned_data.get("name")
-                description = form.cleaned_data.get("description")
-                
-                if not description:
-                    messages.success(self.request, _("'%s' doesn't have a description" % name))
-            
-            return self.form_valid(form, meal_formset)
-        else:
-            return self.form_invalid(form, meal_formset)
+    success_url = reverse_lazy('restaurant:menu_list')
     
 class MenuListView(AllowedGroupsMixin, ListView):
     allowed_groups = ['Restaurateur', ]
@@ -285,57 +220,21 @@ class MenuListView(AllowedGroupsMixin, ListView):
         context = super(MenuListView, self).get_context_data(**kwargs)
         context['restaurants'] = Restaurant.objects.filter(restaurateur=self.request.user)
         return context
-        
 
-class MenuUpdateView(CreateView):
+class MenuUpdateView(UpdateView):
     template_name = 'restaurant/menus/update.html'
+    form_class = MenuForm
     model = Menu
+    success_url = reverse_lazy('restaurant:menu_list')
     
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user == self.get_object().restaurant.restaurateur:
-            # Seul le restaurateur qui possède le restaurant peut modifier le
-            # menu.
-            return HttpResponseForbidden()
-            
-        if request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
-
-    def form_invalid(self, form, meal_formset):
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  meal_formset=meal_formset,))
-        
-    def form_valid(self, form, meal_formset):
-        self.object = form.save()
-        meal_formset.instance = self.object
-        meal_formset.save()
-        return HttpResponseRedirect(self.get_success_url())
-        
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = MenuForm(instance=self.object)
-        meal_formset = MealFormset(instance=self.object, request=request)
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  meal_formset=meal_formset,))
-                                  
-    def get_context_data(self, **kwargs):
-        context = super(MenuUpdateView, self).get_context_data(**kwargs)
-        context['restaurant'] = self.object.restaurant
-        return context
-        
-    def get_success_url(self):
-        return reverse('restaurant:restaurant_detail', kwargs={'pk': self.get_restaurant().pk})
-        
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = MenuForm(self.request.POST, instance=self.object)
-        meal_formset = MealFormset(self.request.POST, request=request)
-        if (form.is_valid() and meal_formset.is_valid()):
-            return self.form_valid(form, meal_formset)
-        else:
-            return self.form_invalid(form, meal_formset)
+class MealCreateView(CreateView):
+    template_name = 'restaurant/menus/meal_create.html'
+    form_class = MealForm
+    model = Meal
+    success_url = reverse_lazy('restaurant:menu_list')
+    
+class MealUpdateView(UpdateView):
+    template_name = 'restaurant/menus/meal_update.html'
+    form_class = MealForm
+    model = Meal
+    success_url = reverse_lazy('restaurant:menu_list')

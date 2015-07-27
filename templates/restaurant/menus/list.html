@@ -5,7 +5,7 @@
 
 {% block content-pane %}
 <div class="col-md-12">
-    <h2>{% trans "Select a menu to edit" %}</h2>
+    <h2>{% trans "Select a menu or a meal to edit" %}</h2>
     
     {% for r in restaurants %}
     <div class="panel panel-default">
@@ -13,9 +13,16 @@
             <div class="panel-body">
                 <ul>
                     {% for m in r.menus %}
-                        <li><a href="{% url 'restaurant:menu_update' m.pk %}">{{ m.name }}</a></li>
+                        <li><a href="{% url 'restaurant:menu_update' m.pk %}">{{ m.name }}</a>
+                            <ul>
+                                {% for p in m.meals %}
+                                    <li><a href="{% url 'restaurant:meal_update' p.pk %}">{{ p.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
-                        <li><a href="{% url 'restaurant:menu_create' r.pk %}">{% trans "Add a new menu" %}</a></li>
+                        <li><a href="{% url 'restaurant:menu_create' %}">{% trans "Add a new menu" %}</a></li>
+                        <li><a href="{% url 'restaurant:meal_create' %}">{% trans "Add a new meal" %}</a></li>
                 </ul>
             </div>
     </div>
